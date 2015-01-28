@@ -1,0 +1,55 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/common/include/head.jsp"%>
+
+<%-- 此页做为统一错误提示页面；此页可直接展示，同时此页的数据也可以被界面js分解获取 --%>
+<c:set var="cssType" value="success" />
+
+<c:if test="${_MSG_TYPE == 'info'}">
+	<c:set var="cssType" value="success" />
+</c:if>
+
+<c:if test="${_MSG_TYPE == 'warn'}">
+	<c:set var="cssType" value="warning" />
+</c:if>
+
+<c:if test="${_MSG_TYPE == 'error'}">
+	<c:set var="cssType" value="fail" />
+</c:if>
+
+<c:if test="${_MSG_TYPE == 'systemmaintain'}">
+	<c:set var="cssType" value="systemmaintain" />
+</c:if>
+
+<c:set var="_htmlTitle" value="系统提示" />
+<c:set var="_quickAddCode" value="${_MSG_TYPE == 'error' ? 'fail' : (_MSG_TYPE == 'info' ? 'success' : (_MSG_TYPE == 'warn' ? 'confirm' : ''))}" />
+<%@ include file="/common/include/html_head.jsp"%>
+
+<div class="msg_frame" msgType="${_MSG_TYPE}">
+	<div class="${cssType}_img"></div>
+	<div class="${cssType}_text" id="_MSG">
+		${_MSG}
+	</div>
+</div>
+
+<%-- 业务区域刷新成功时展示"重新办理"按钮 --%>
+<c:if
+	test="${_MSG_TYPE == 'info' && fn:indexOf(_zoneId,'errzone')==-1 && (_zoneId == 'busimain' ||
+    fn:indexOf(_zoneId,'zone')>-1 || fn:indexOf(_zoneId,'step')>-1  )}">
+	<div class="btn_frame">
+		<button class="btn" id="back_toindex"
+			onclick="window.location.reload();">
+			返 回
+		</button>
+	</div>
+</c:if>
+
+<%-- 弹出窗口成功时展示"关闭"按钮 --%>
+<c:if test="${_MSG_TYPE == 'info' && _zoneId == 'ai_ui_pop_body'}">
+	<div class="btn_frame">
+		<button class="btn" id="back_close" onclick="AI.Ui.closeAll();">
+			关 闭
+		</button>
+	</div>
+</c:if>
+
+<%@ include file="/common/include/html_bottom.jsp"%>
