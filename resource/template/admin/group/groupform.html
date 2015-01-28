@@ -1,0 +1,69 @@
+<#include "admin/common/include/sysparam.html">
+ 
+
+<div id="navModel" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div class="modal-header green">
+	 
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 id="myModalLabel">
+			<strong>导航栏新增</strong>
+		</h4>
+	</div>
+	<div class="alert alert-error " id="errtip" style="display: none;"></div>
+
+	<div class="modal-body" style="max-height: 450px;">
+		<!-- BEGIN FORM-->
+		<form action="${contextPath}/Admin-Group-save.action"
+			id="groupAddForm" class="form-horizontal" method="post">
+			<input type="hidden" name="id" value="${(bean.id)?if_exists}" />
+			<div class="control-group">
+				<label class="control-label">类型<span class="required">*</span></label>
+				<div class="controls"><@select paramCode=groupType
+					value=(bean.groupType)?if_exists item=' name="groupType" require="true"
+					datatype="require" msg="类型不能为空"'/></div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label">组名称<span class="required">*</span></label>
+				<div class="controls">
+					<input type="text" name="name" id="name" require="true"
+						datatype="require"  msg="组名称不能为空"
+						class="span3 m-wrap" value="${(bean.name)?if_exists}" />
+				</div>
+			</div> 
+			<div class="control-group">
+				<label class="control-label">key<span class="required">*</span></label>
+				<div class="controls">
+					<input type="text" name="groupKey" id="groupKey" require="true"
+						datatype="require|limit" min="1" max="20" msg="key不能为空"
+						class="span3 m-wrap" value="${(bean.groupKey)?if_exists}" />
+				</div>
+			</div> 
+		  
+			<div class="control-group">
+				<label class="control-label">是否有效<span class="required">*</span></label>
+				<div class="controls"><@select paramCode=iseffCode
+					value=(bean.iseff)?if_exists item=' name="iseff" require="true"
+					datatype="require" msg="是否有效不能为空"'/></div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" id="group_save_btn" class="btn green">保存</button>
+				<button class="btn " data-dismiss="modal" aria-hidden="true">关闭</button>
+			</div>
+		</form>
+		<!-- END FORM-->
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function() {
+		tableAction.initSaveAction({
+			formId : 'groupAddForm',
+			queryUrl : '${contextPath}/Admin-Group-show.action',
+			saveUrl : '${contextPath}/Admin-Group-save.action',
+			saveBtnId : 'group_save_btn'
+		});
+	});
+</script>

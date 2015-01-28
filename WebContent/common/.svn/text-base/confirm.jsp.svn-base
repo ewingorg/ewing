@@ -1,0 +1,27 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/common/include/head.jsp"%>
+
+<c:set var="_htmlTitle" value="测试的标题" />
+<c:set var="_quickAddCode" value="confirm" />
+<%@ include file="/common/include/html_head.jsp"%>
+
+<div class="btn_frame">
+	<div class="warning_img"></div>
+	<div class="warning_text">
+		${_MSG}
+	</div>
+</div>
+
+<div class="btn_frame">
+	<div class="btn_box">
+		<button class="btn_left" id="confirm_goon"
+			onclick="AI.Ajax.post('${_cp}${_NEXT_ACTION}','${_zoneId}',this);">
+			继 续
+		</button>
+		<button class="btn_right" id="confirm_cancel">
+			取 消
+		</button>
+	</div>
+</div>
+
+<%@ include file="/common/include/html_bottom.jsp"%>

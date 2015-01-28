@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+	<description>自定义jstl函数库</description>
+	<display-name>aiFn</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>aiFn</short-name>
+	<uri>/WEB-INF/ai-fn</uri>
+	<function>
+		<description>用于连接两个字符串</description>
+		<name>append</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String append(java.lang.Object,java.lang.Object)
+		</function-signature>
+		<example>${aiFn:append(str1, str2)}</example>
+	</function>
+	<function>
+		<description>格式化日期成字符串（yyyy-mm-dd）</description>
+		<name>formateDate</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String formateDate(java.util.Date)
+		</function-signature>
+		<example>${aiFn:formateDate(date)}</example>
+	</function>
+	<function>
+		<description>格式化日期成字符串（yyyy-MM-dd HH:mm:ss）</description>
+		<name>formateDatetime</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String formateDatetime(java.util.Date)
+		</function-signature>
+		<example>${aiFn:formateDatetime(date)}</example>
+	</function>
+	<function>
+		<description>格式化日期成自定义字符串</description>
+		<name>formateDateSelf</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String formateDateSelf(java.util.Date,java.lang.String)
+		</function-signature>
+		<example>${aiFn:formateDateSelf(date,pattern)}</example>
+	</function>
+	<function>
+		<description>获取配置文件sysconfig.properties的参数</description>
+		<name>getParam</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String getChineseParam(java.lang.String)
+		</function-signature>
+		<example>${aiFn:getParam(key)}</example>
+	</function>
+	<function>
+		<description>格式化金额,将以"分"计算的金额格式化成以"元"计算</description>
+		<name>formatFee</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String formatFee(java.lang.Long)
+		</function-signature>
+		<example>${aiFn:formatFee(num)}</example>
+	</function>
+	<function>
+		<description>字符串选择方法,用于配置字符串与默认字符串之间的选择</description>
+		<name>showValue</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String showValue(java.lang.String,java.lang.String)
+		</function-signature>
+		<example>${aiFn:showValue(_paramMap.query_puk,'查 询')}</example>
+	</function>
+	<function>
+		<description>查询南研配置系统参数</description>
+		<name>getSysParam</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String getSysParam(java.lang.String,java.lang.String)
+		</function-signature>
+		<example>${aiFn:getSysParam(key,'def')}</example>
+	</function>
+	<function>
+		<description>Date类型适配</description>
+		<name>getSafeDate</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.util.Date getSafeDate(java.lang.Object)
+		</function-signature>
+		<example>${aiFn:getSafeDate("2011-1-19")}</example>
+	</function>
+	<function>
+		<description>获取location绑定的css</description>
+		<name>getLocationCssFile</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String getLocationCssFile(java.lang.String)
+		</function-signature>
+		<example>${aiFn:getLocationCssFile(sessionScope.LOCATION_KEY)}</example>
+	</function>
+	<function>
+		<description>获取菜单配置真实地址</description>
+		<name>getRealMenuUrl</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String getRealMenuUrl(java.lang.String,java.lang.String)
+		</function-signature>
+		<example>${aiFn:getRealMenuUrl(menu.getUrl)}</example>
+	</function>
+	<function>
+		<description>根据品牌获取css key</description>
+		<name>getBrandCssKey</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String getBrandCssKey(java.lang.Integer)
+		</function-signature>
+		<example>${aiFn:getBrandCssKey(brand)}</example>
+	</function>
+	<function>
+		<description>界面替换变量</description>
+		<name>getReplaceValue</name>
+		<function-class>
+			com.asiainfo.commons.business.busifunc.ELFunctionHelper
+		</function-class>
+		<function-signature>
+			java.lang.String getReplaceValue(java.lang.String,java.lang.String,java.lang.String)
+		</function-signature>
+		<example>${aiFn:getReplaceValue(value,varKey,varValue)}</example>
+	</function>
+</taglib>

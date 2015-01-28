@@ -1,0 +1,43 @@
+package com.asiainfo.commons.util.json.config;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
+
+import com.asiainfo.boss.inter.boss30.common.valuebean.ServiceParam;
+
+/**
+ * ServiceParam对象转换处理：释放对象ServiceParam中的Map，便于创建测试数据
+ * 
+ * @author hesw
+ * @date Mar 24, 2011
+ * @version RCS: $Id$
+ */
+public class ServiceParamProcessor implements JsonValueProcessor {
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.sf.json.processors.JsonValueProcessor#processArrayValue(java.lang.Object,
+	 *      net.sf.json.JsonConfig)
+	 */
+	public Object processArrayValue(Object value, JsonConfig config) {
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.putAll(((ServiceParam)value).getMap(), config);
+		return jsonObj;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.sf.json.processors.JsonValueProcessor#processObjectValue(java.lang.String,
+	 *      java.lang.Object, net.sf.json.JsonConfig)
+	 */
+	public Object processObjectValue(String name, Object obj, JsonConfig config) {
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.putAll(((ServiceParam)obj).getMap(), config);
+		return jsonObj;
+	}
+
+}

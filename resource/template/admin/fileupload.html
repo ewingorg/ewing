@@ -1,0 +1,95 @@
+<#include "admin/common/include/html_head.html">
+ 
+
+<script type="text/javascript">
+	function showImg() {
+		$('#imgShow')
+				.attr("src",
+						'http://localhost/vinsterest/fileupload/2012062916591528271419840153850.png');
+	}
+
+	function upload1() { 
+		 
+		 ajax.upload({
+			fileEleId : 'upfile1',
+			filePathId : 'upfile1Path',
+			successFn:function(data){
+				alert(data.result.webfilePath);
+				var isImg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(data.result.webfilePath);
+				alert(isImg);
+				if(isImg)
+					$('#imgShow').attr("src",data.result.webfilePath );
+			},
+			errFn:function(){
+				alert('出错了');
+			}
+		})
+ 
+	}
+	
+	function upload2() {
+		ajax.upload({
+			fileEleId : 'upfile2',
+			filePathId : 'upfile2Path',
+			successFn:function(data){
+				alert(data.result.fileName);
+			},
+			errFn:function(){
+				alert('出错了');
+			}
+		})
+
+	}
+</script>
+<strong>文件上传:</strong>
+<br>
+<span class="btn  fileinput-button"> <i
+	class="icon-plus icon-white"></i> <span>Add files...</span> <input
+	type="file" id="upfile1" name="upfile1" />
+</span>
+<input type="hidden" id="upfile1Path" name="upfile1Path" />
+<button type="submit" class="btn start" onclick="upload1()">
+	<i class="icon-upload icon-white"></i> <span>Start upload</span>
+</button>
+<br>
+<span class="alert alert-error" id="upfile1_error_tip"
+	style="display: none;"></span>
+<div class="alert alert-success" id="upfile1_detail"
+	style="display: none;">
+	<div class="fileName">
+		文件名称:<span></span>
+	</div>
+	<div class="fileSize">
+		文件大小:<span>31MB</span>
+	</div>
+</div>
+
+<br>
+
+<span class="btn  fileinput-button"> <i
+	class="icon-plus icon-white"></i> <span>Add files...</span> <input
+	type="file" id="upfile2" name="upfile2" />
+</span>
+<input type="hidden" id="upfile2Path" name="upfile2Path" />
+<button type="submit" class="btn start"
+	 onclick="upload2()">
+	<i class="icon-upload icon-white"></i> <span>Start upload</span>
+</button>
+<br>
+<span class="alert alert-error" id="upfile2_error_tip"
+	style="display: none;"></span>
+<div class="alert alert-success" id="upfile2_detail"
+	style="display: none;">
+	<div class="fileName">
+		文件名称:<span></span>
+	</div>
+	<div class="fileSize">
+		文件大小:<span>31MB</span>
+	</div>
+</div>
+<br>
+
+
+
+<img src="" width="200" height="200" id="imgShow" />
+<#include "admin/common/include/html_bottom.html">

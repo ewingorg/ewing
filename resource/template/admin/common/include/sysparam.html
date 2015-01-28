@@ -1,0 +1,24 @@
+ <#macro select paramCode value item>
+		<select class="span4 m-wrap"
+		    <#if item ?? >
+				 	${item}
+			 </#if> 
+		>
+			<option value="">选择</option> 
+			<#list paramCode as code> 
+				<option value="${code.paramValue}" 
+				 <#if value =  code.paramValue>
+				 	selected="selected"
+				 </#if> 
+				>${code.paramName}</option> 
+			</#list> 
+		</select>
+</#macro>
+
+<#macro translate paramCode value> 
+			<#list paramCode as code>  
+				 <#if value =  code.paramValue>
+				 	${code.paramName}
+				 </#if>  
+			</#list> 
+</#macro>

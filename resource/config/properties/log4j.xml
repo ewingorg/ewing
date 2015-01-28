@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss:SSS}-[%C{1}(%L)]-%m%n" />
+		</layout>
+	</appender>
+	<appender name="FILE_LOG_ALL" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${LOG4J_FILE_PATH}aincs.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss}-[%C{1}(%L)]-%m%n" />
+		</layout>
+	</appender>
+
+	<!-- 开发模式下的日志打印 -->
+	<category name="com">
+		<priority value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE_LOG_ALL" />
+	</category>
+
+
+	<root>
+		<priority value="FATAL" />
+	</root>
+
+</log4j:configuration>

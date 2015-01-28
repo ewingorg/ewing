@@ -1,0 +1,123 @@
+<#include "admin/common/include/sysparam.html">
+<script type="text/javascript">
+	function uploadNavPic() { 
+		ajax.upload({
+			fileEleId : 'upfile1',
+			filePathId : 'imageUrl',
+			successFn : function(data) {
+				var isImg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/
+						.test(data.result.webfilePath);
+				if (isImg)
+					$('#imgShow').attr("src", data.result.webfilePath);
+			}
+		})
+
+	}
+</script>
+
+<div id="navModel" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div class="modal-header green">
+	 
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 id="myModalLabel">
+			<strong>导航栏新增</strong>
+		</h4>
+	</div>
+	<div class="alert alert-error " id="errtip" style="display: none;"></div>
+
+	<div class="modal-body" style="max-height: 550px;">
+		<!-- BEGIN FORM-->
+		<form action="${contextPath}/Admin-Nav-save.action"
+			id="navAddForm" class="form-horizontal" method="post">
+			<input type="hidden" name="id" value="${(bean.id)?if_exists}" />
+			<div class="control-group">
+				<label class="control-label">组key<span class="required">*</span></label>
+				<div class="controls"><@select paramCode=groupKeyCode
+					value=(bean.groupKey)?if_exists item=' name="groupKey" require="true"
+					datatype="require" msg="组key不能为空"'/></div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">导航名称<span class="required">*</span></label>
+				<div class="controls">
+					<input type="text" name="name" id="name" require="true"
+						datatype="require|limit" min="1" max="10" msg="导航名称不能为空"
+						class="span3 m-wrap" value="${(bean.name)?if_exists}" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">导航图片</label>
+				<div class="controls">
+				  <#if bean?? && bean.imageUrl ?? >
+				  <img src="${contextPath}${(bean.imageUrl)?if_exists}" width="80" height="80"
+						id="imgShow" />
+				<#else> 
+					 <img src="${contextPath}/common/image/default-pic.png" width="80" height="80"
+						id="imgShow" />
+				 </#if>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+					<span class="btn  fileinput-button"> <i
+						class="icon-plus icon-white"></i> <span>选择文件...</span> <input
+						type="file" id="upfile1" name="upfile1" />
+					</span> <input type="hidden" id="imageUrl" name="imageUrl" /> <a
+						class="btn start" onclick="uploadNavPic();"> <i
+						class="icon-upload icon-white"></i> <span>上传</span>
+					</a> <br> <span class="alert alert-error" id="upfile1_error_tip"
+						style="display: none;"></span>
+					<div class="alert alert-success" id="upfile1_detail"
+						style="display: none;">
+						<div class="fileName">
+							文件名称:<span></span>
+						</div>
+						<div class="fileSize">
+							文件大小:<span></span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">外链接&nbsp;&nbsp;</label>
+				<div class="controls">
+					<input name="linkUrl" type="text" class="span3 m-wrap"
+						value="${(bean.linkUrl)?if_exists}" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">排位&nbsp;&nbsp;</label>
+				<div class="controls">
+					<input name="rank" type="text" class="span2 m-wrap"
+						value="${(bean.rank)?if_exists}" require="true" datatype="require"
+						msg="排位不能为空" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">是否有效<span class="required">*</span></label>
+				<div class="controls"><@select paramCode=iseffCode
+					value=(bean.iseff)?if_exists item=' name="iseff" require="true"
+					datatype="require" msg="是否有效不能为空"'/></div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" id="nav_save_btn" class="btn green">保存</button>
+				<button class="btn " data-dismiss="modal" aria-hidden="true">关闭</button>
+			</div>
+		</form>
+		<!-- END FORM-->
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function() {
+		tableAction.initSaveAction({
+			formId : 'navAddForm',
+			queryUrl : '${contextPath}/Admin-Nav-show.action',
+			saveUrl : '${contextPath}/Admin-Nav-save.action',
+			saveBtnId : 'nav_save_btn'
+		});
+	});
+</script>

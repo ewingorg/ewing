@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process key="orderProcess" name="orderProcess" xmlns="http://jbpm.org/4.4/jpdl">
+	<start g="-2,55,45,23" name="开始">
+		<transition g="-19,-19" name="新签单" to="签约" />
+	</start>
+	<task assignee="#{userid}" g="113,56,89,40" name="签约">
+		<transition g="-37,-14" name="待审批" to="销售主管审批" />
+	</task>
+	<task assignee="#{userid}" g="107,135,96,40" name="销售主管审批">
+		<transition g="156,189:-33,-14" name="通过" to="教务部处理" />
+		<transition g="244,142;247,105;248,79;223,77:-18,7" name="不通过"
+			to="签约" />
+	</task>
+	<task assignee="#{userid}" g="110,214,89,40" name="教务部处理">
+		<transition name="分配任务" to="待班主任确认" g="-22,-13" />
+	</task>
+	<task assignee="#{userid}" g="279,216,100,40" name="待班主任确认">
+		<transition g="-12,-12" name="确认" to="班主任处理中" />
+		<transition g="330,166;251,166:-23,-19" name="拒绝" to="教务部处理" />
+	</task>
+	<task assignee="#{userid}" g="274,308,112,40" name="班主任处理中">
+		<transition g="-28,-15" name="待审批" to="教务部审批" />
+	</task>
+	<task assignee="#{userid}" g="100,386,89,40" name="教务部审批">
+		<transition g="145,328:-18,9" name="不通过" to="班主任处理中" />
+		<transition name="通过" to="授课中" g="-11,-13" />
+	</task> 
+	<task assignee="#{userid}" g="295,549,89,40" name="授课中">
+		<transition g="4,-11" name="判断授课时间" to="结束" />
+	</task>
+	<end g="318,653,28,23" name="结束" />
+</process>

@@ -1,0 +1,45 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 设置开发模式变量，开发环境中，设置为true，帮助调试；在生产环境中，请设置为false，提高性能； -->
+	<constant name="struts.devMode" value="false" />
+
+	<!-- 将Struts2的内部对象的生命周期管理交给Spring； -->
+	<constant name="struts.objectFactory"
+		value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+
+	<!-- 当spring接管struts内部对象生命周期管理时，设置bean属性的注入方式 -->
+	<constant name="struts.objectFactory.spring.autoWire" value="name" />
+
+	<!-- 启用spring的类缓存功能； -->
+	<constant name="struts.objectFactory.spring.useClassCache"
+		value="true" />
+
+	<!-- 当struts.xml配置文件修改后，系统将自动加载该文件； -->
+	<constant name="struts.configuration.xml.reload" value="false" />
+
+	<!-- 指定web应用默认的本地化信息Locale； -->
+	<!--  constant name="struts.locale" value="zh_CN" /-->
+
+	<!-- 指定web应用的默认编码集； -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<!--   页面文字常量 -->
+	<constant name="struts.custom.i18n.resources" value="applicationMessage" />
+	<!-- 文件临时存放目录 -->
+	<constant name="struts.multipart.saveDir" value="temp" />
+	<constant name="struts.multipart.parser" value="jakarta" />
+	<!--   上传文件的最大值 -->
+	<constant name="struts.multipart.maxSize" value="100000000" />
+
+
+	<!-- Struts2的主配置文件，所有直接子配置文件将在此进行配置；-->
+	<!-- 引入Struts2的默认的配置文件； -->
+	<include file="struts-default.xml" />
+	<include file="struts-plugin.xml" />
+
+	<include file="config/struts/struts-system.xml" />
+</struts>
+
+

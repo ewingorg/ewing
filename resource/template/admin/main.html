@@ -1,0 +1,41 @@
+<#include "admin/common/include/html_head.html">
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed">
+
+	<!-- BEGIN HEADER-->
+	<div class="navbar-inner">
+
+		<div class="container-fluid">
+
+			<!-- BEGIN LOGO -->
+			<a class="brand"> <img
+				src="${contextPath}/admin/media/image/logo.png" alt="logo" />
+			</a>
+			<!-- END LOGO -->
+		</div>
+
+	</div>
+
+	<!-- END HEADER -->
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN SIDEBAR -->
+		<#include "admin/menu.html">
+		<!-- END SIDEBAR -->
+		<!-- BEGIN PAGE -->
+		<div class="page-content">
+			<!-- BEGIN PAGE CONTAINER-->
+			<div class="container-fluid" id="main-container"></div>
+			<!-- END PAGE CONTAINER-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	<!-- BEGIN FOOTER -->
+	<div class="footer">
+		<div class="footer-inner">2015 &copy; weboss by ewing company.</div>
+	</div>
+</body>
+ 
+<#include "admin/common/include/html_bottom.html">

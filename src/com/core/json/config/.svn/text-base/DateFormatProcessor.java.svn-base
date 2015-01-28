@@ -1,0 +1,82 @@
+package com.asiainfo.commons.util.json.config;
+
+import org.apache.log4j.Logger;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
+
+/**
+ * 通用日期轉換
+ * 
+ * @author wangwz
+ * @date Mar 24, 2010
+ */
+public class DateFormatProcessor implements JsonValueProcessor {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger
+			.getLogger(DateFormatProcessor.class);
+
+	private DateFormat format;
+
+	public DateFormatProcessor(String format) {
+		this.format = new SimpleDateFormat(format);
+	}
+
+	public DateFormatProcessor() {
+		this.format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	}
+
+	public Object processArrayValue(Object value, JsonConfig jsonConfig) {
+		String[] obj = {};
+		if (value instanceof Date[]) {
+			Date[] dates = (Date[]) value;
+			obj = new String[dates.length];
+			for (int i = 0; i < dates.length; i++) {
+				obj[i] = format.format(dates[i]);
+			}
+		}
+
+		if (value instanceof Calendar[]) {
+			Calendar[] dates = (Calendar[]) value;
+			obj = new String[dates.length];
+			for (int i = 0; i < dates.length; i++) {
+				obj[i] = format.format(dates[i].getTime());
+			}
+		}
+
+		return obj;
+	}
+
+	public Object processObjectValue(String key, Object value,
+			JsonConfig jsonConfig) {
+
+		if (value == null) {
+			return "";
+		}
+
+		if (value instanceof java.util.Date
+				|| value.getClass() == java.util.Date.class) {
+			String str = format.format(value);
+			return str;
+		}
+
+		if (value instanceof java.util.Calendar
+				|| value.getClass() == java.util.Calendar.class
+				|| value instanceof java.util.GregorianCalendar
+				|| value.getClass() == java.util.GregorianCalendar.class) {
+			java.util.Calendar realValue = (java.util.Calendar) value;
+			String str = format.format(realValue.getTime());
+			return str;
+		}
+
+		return value.toString();
+	}
+
+}

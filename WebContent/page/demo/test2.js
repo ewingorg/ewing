@@ -1,0 +1,3 @@
+ function hide(){
+	     $("#content").hide() ;
+	 }
