@@ -11,7 +11,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.util.DateUtils;
 
-import com.core.jdbc.annotation.Field;
+import com.core.jdbc.annotation.Column;
 import com.core.jdbc.annotation.Table;
 import com.core.log.LogHelper;
 
@@ -42,10 +42,10 @@ public class GenericsUtil {
 			if (p.getName().equals("des")) {
 				System.out.println();
 			}
-			if ((method == null) || (!method.isAnnotationPresent(Field.class))
+			if ((method == null) || (!method.isAnnotationPresent(Column.class))
 					|| (method.invoke(o, new Object[0]) == null))
 				continue;
-			Field f = (Field) method.getAnnotation(Field.class);
+			Column f = (Column) method.getAnnotation(Column.class);
 			if (f.autoIncrement())
 				continue;
 			String type = method.getReturnType().getName();
@@ -78,10 +78,10 @@ public class GenericsUtil {
 		for (PropertyDescriptor p : ps) {
 			Method method = p.getReadMethod();
 
-			if ((method == null) || (!method.isAnnotationPresent(Field.class))
+			if ((method == null) || (!method.isAnnotationPresent(Column.class))
 					|| (method.invoke(o, new Object[0]) == null))
 				continue;
-			Field f = (Field) method.getAnnotation(Field.class);
+			Column f = (Column) method.getAnnotation(Column.class);
 			String type = method.getReturnType().getName();
 
 			if (type.equals("java.lang.String")) {
@@ -116,8 +116,8 @@ public class GenericsUtil {
 			if ("getId".equals(method.getName())) {
 				where = where + method.invoke(o, new Object[0]);
 			} else if ((method != null)
-					&& (method.isAnnotationPresent(Field.class))) {
-				Field f = (Field) method.getAnnotation(Field.class);
+					&& (method.isAnnotationPresent(Column.class))) {
+				Column f = (Column) method.getAnnotation(Column.class);
 				String type = method.getReturnType().getName();
 				if (type.equals("java.lang.String")) {
 					if (method.invoke(o, new Object[0]) != null)
@@ -154,10 +154,10 @@ public class GenericsUtil {
 		for (PropertyDescriptor p : ps) {
 			Method method = p.getReadMethod();
 
-			if ((method == null) || (!method.isAnnotationPresent(Field.class))
+			if ((method == null) || (!method.isAnnotationPresent(Column.class))
 					|| (method.invoke(o, new Object[0]) == null))
 				continue;
-			Field f = (Field) method.getAnnotation(Field.class);
+			Column f = (Column) method.getAnnotation(Column.class);
 			String type = method.getReturnType().getName();
 			if (f.primaryKey()) {
 
@@ -187,10 +187,10 @@ public class GenericsUtil {
 		for (PropertyDescriptor p : ps) {
 			Method method = p.getReadMethod();
 
-			if ((method == null) || (!method.isAnnotationPresent(Field.class))
+			if ((method == null) || (!method.isAnnotationPresent(Column.class))
 					|| (method.invoke(o, new Object[0]) == null))
 				continue;
-			Field f = (Field) method.getAnnotation(Field.class);
+			Column f = (Column) method.getAnnotation(Column.class);
 			String type = method.getReturnType().getName();
 			if (f.primaryKey())
 				hasPrimaryKey = true;
@@ -205,10 +205,10 @@ public class GenericsUtil {
 		String where = "";
 		for (PropertyDescriptor p : ps) {
 			Method method = p.getReadMethod();
-			if ((method == null) || (!method.isAnnotationPresent(Field.class))
+			if ((method == null) || (!method.isAnnotationPresent(Column.class))
 					|| (method.invoke(o, new Object[0]) == null))
 				continue;
-			Field f = (Field) method.getAnnotation(Field.class);
+			Column f = (Column) method.getAnnotation(Column.class);
 			String type = method.getReturnType().getName();
 			if (type.equals("java.lang.String")) {
 				where = where + " and " + f.fieldName() + "='"
@@ -237,11 +237,11 @@ public class GenericsUtil {
 			for (PropertyDescriptor p : ps) {
 				Method method = p.getReadMethod();
 				if ((method != null)
-						&& (method.isAnnotationPresent(Field.class))) {
+						&& (method.isAnnotationPresent(Column.class))) {
 					String sMethod = method.getName().replaceFirst("g", "s");
 					Method seter = clazz.getMethod(sMethod,
 							new Class[] { method.getReturnType() });
-					Field f = (Field) method.getAnnotation(Field.class);
+					Column f = (Column) method.getAnnotation(Column.class);
 					Object value = map.get(f.fieldName());
 					String type = method.getReturnType().getName();
 					if (value != null)

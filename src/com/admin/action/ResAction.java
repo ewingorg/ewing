@@ -16,7 +16,7 @@ import com.core.app.action.base.ResponseUtils;
 import com.core.jdbc.util.PageBean;
 
 /**
- * 网站资源
+ * 网站资源展示类
  * 
  * @author tanson lam
  * @creation 2015年1月18日

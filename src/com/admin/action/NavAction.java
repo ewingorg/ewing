@@ -20,7 +20,7 @@ import com.core.app.action.base.ResponseUtils;
 import com.core.jdbc.util.PageBean;
 
 /**
- * 导航栏
+ * 导航栏展示类
  * 
  * @author tanson lam 
  * @creation 2015年1月10日

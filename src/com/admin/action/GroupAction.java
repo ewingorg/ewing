@@ -18,7 +18,7 @@ import com.core.app.action.base.ResponseUtils;
 import com.core.jdbc.util.PageBean;
 
 /**
- * 网站资源分組
+ * 网站资源分組展示类
  * 
  * @author tanson lam
  * 

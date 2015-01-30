@@ -14,14 +14,16 @@ import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
 import com.admin.model.WebCategory;
 import com.admin.service.GroupService;
+import com.admin.service.RelResService;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
 import com.core.app.action.base.ResponseUtils;
 import com.core.jdbc.util.PageBean;
 
 /**
- * 网站栏目
- * @author tanson lam 
+ * 网站栏目展示类
+ * 
+ * @author tanson lam
  * @creation 2015年1月10日
  */
 public class BannerAction extends BaseAction {
@@ -29,8 +31,11 @@ public class BannerAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(MainAction.class);
 	private static final String LIST_PAGE = "/admin/banner/bannerlist.html";
 	private static final String EDIT_FORM = "/admin/banner/bannerform.html";
+	private static final String BINDRES_PAGE = "/admin/banner/bindreslist.html";
 	@Resource
 	private GroupService groupService;
+	@Resource
+	private RelResService relResService;
 
 	/**
 	 * 查詢列表
@@ -44,8 +49,8 @@ public class BannerAction extends BaseAction {
 					.valueOf(pageStr);
 			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
 					: Integer.valueOf(pageSizeStr);
-			String condition = "groupType ='" + GroupType.BANNER.getCode() + "'"
-					+ bulidConditionSql();
+			String condition = "groupType ='" + GroupType.BANNER.getCode()
+					+ "'" + bulidConditionSql();
 			PageBean pageBean = baseModelService.pageQuery(condition,
 					bulidOrderBySql(), pageSize, page, WebCategory.class);
 			List<SysParam> iseffCode = sysParamService
@@ -56,7 +61,7 @@ public class BannerAction extends BaseAction {
 			dataModel.put("groupKeyCode", groupCode);
 			dataModel.put("pageBean", pageBean);
 			dataModel.put("pageUrl",
-					getPaginationUrl("/Admin-Group-show.action"));
+					getPaginationUrl("/Admin-Banner-show.action"));
 
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
@@ -89,6 +94,36 @@ public class BannerAction extends BaseAction {
 	}
 
 	/**
+	 * 显示绑定资源的列表
+	 */
+	public void showResList() {
+		try {
+			Map<String, Object> dataModel = new HashMap<String, Object>();
+			String categoryIdStr = request.getParameter("categoryId");
+			String pageStr = request.getParameter("page");
+			String pageSizeStr = request.getParameter("pageSize");
+			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
+					.valueOf(pageStr);
+			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
+					: Integer.valueOf(pageSizeStr);
+			Integer categoryId = StringUtils.isEmpty(categoryIdStr) ? null
+					: Integer.valueOf(categoryIdStr);
+			PageBean pageBean = relResService.listRelResourceByCategory(
+					categoryId, pageSize, page);
+			List<SysParam> iseffCode = sysParamService
+					.getSysParam(SysParamCode.ISEFF);
+			dataModel.put("iseffCode", iseffCode);
+			dataModel.put("pageBean", pageBean);
+			dataModel.put("pageUrl",
+					getPaginationUrl("/Admin-Banner-showResList.action"));
+
+			render(BINDRES_PAGE, dataModel);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+	}
+
+	/**
 	 * 保存导航栏
 	 */
 	public void save() {
@@ -97,7 +132,7 @@ public class BannerAction extends BaseAction {
 			String id = request.getParameter("id");
 			WebCategory webCategory = new WebCategory();
 			this.buildPageData(webCategory);
-			webCategory.setParentId(0);  
+			webCategory.setParentId(0);
 			webCategory.setGroupType(GroupType.BANNER.getCode().toString());
 			if (!StringUtils.isEmpty(id)) {
 				webCategory.setId(Integer.valueOf(id));
@@ -139,4 +174,5 @@ public class BannerAction extends BaseAction {
 		}
 		this.outResult(responseData);
 	}
+
 }

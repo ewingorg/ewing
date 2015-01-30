@@ -11,7 +11,7 @@ package com.admin.constant;
  * 
  */
 public enum GroupType {
-    NAV(0, "导航栏"), BANNER(1, "栏目"), PRODUCT(2, "产品");
+    NAV(0, "导航栏"), BANNER(1, "栏目");
 
     private Integer code;
     private String msg;

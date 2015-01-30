@@ -22,6 +22,10 @@ public class BaseModelService {
 	@Resource
 	public BaseDao baseDao;
 
+	public void executeSql(String sql) throws DaoException {
+		baseDao.executeSql(sql);
+	}
+
 	public void save(Object entity) throws DaoException {
 		baseDao.save(entity);
 	}
@@ -40,6 +44,13 @@ public class BaseModelService {
 		Integer startIndex = PageUtil.getOffset(page, pageSize);
 		return baseDao.pageQuery(condition, orderBy, limit, startIndex,
 				entityClass);
+	}
+
+	public <T> PageBean executePageQuery(String sql, Integer pageSize,
+			Integer page, Class<T> entityClass) throws DaoException {
+		Integer limit = PageUtil.getLimit(page, pageSize);
+		Integer startIndex = PageUtil.getOffset(page, pageSize);
+		return baseDao.executePageQuery(sql, limit, startIndex, entityClass);
 	}
 
 	public <T> List<T> find(String queryString, Class<T> entityClass)

@@ -25,6 +25,15 @@ public class WebCategory {
 	private Integer parentId;
 	private Integer rank;
 	private String groupType;
+	private String tempalte;
+
+	public String getTempalte() {
+		return tempalte;
+	}
+
+	public void setTempalte(String tempalte) {
+		this.tempalte = tempalte;
+	}
 
 	public String getGroupType() {
 		return groupType;

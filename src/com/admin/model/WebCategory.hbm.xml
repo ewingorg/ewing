@@ -27,6 +27,9 @@
 		<property name="linkUrl" type="java.lang.String">
 			<column name="link_url" length="200" />
 		</property>
+		<property name="tempalte" type="java.lang.String">
+			<column name="tempalte" length="100" />
+		</property> 
 		<property name="rank" type="java.lang.Integer">
 			<column name="rank" not-null="true" />
 		</property>

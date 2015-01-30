@@ -16,7 +16,7 @@ import com.core.app.bean.TreeObject;
 import com.core.jdbc.DaoException;
 
 /**
- * 后台管理主頁
+ * 后台管理主頁展示类
  * 
  * @author tanson lam 
  * @creation 2015年1月10日 

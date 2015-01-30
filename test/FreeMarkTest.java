@@ -10,12 +10,13 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 public class FreeMarkTest {
-	 @Test
+	@Test
 	public void getName() throws Exception {
 		try {
 			FreeMarkerConfigurer freeMarkerConfigurer = (FreeMarkerConfigurer) SpringCtx
 					.getByBeanName("freeMarkerConfigurer");
-			Configuration configuration = freeMarkerConfigurer.getConfiguration();
+			Configuration configuration = freeMarkerConfigurer
+					.getConfiguration();
 			Template t = configuration.getTemplate("test.ftl");
 			HashMap<String, Object> parammap = new HashMap<String, Object>();
 			HashMap<String, String> usermap = new HashMap<String, String>();
@@ -23,8 +24,8 @@ public class FreeMarkTest {
 			usermap.put("password", "11111");
 			parammap.put("user", usermap);
 			parammap.put("contextPath", "wwww");
-			String result = FreeMarkerTemplateUtils.processTemplateIntoString(t,
-					parammap);
+			String result = FreeMarkerTemplateUtils.processTemplateIntoString(
+					t, parammap);
 			System.out.println(result);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -32,5 +33,4 @@ public class FreeMarkTest {
 		}
 	}
 
-	 
 }

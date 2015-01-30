@@ -8,7 +8,7 @@ import java.util.HashMap;
 import com.core.app.action.base.BaseAction;
 
 /**
- * 模板重定向
+ * 模板重定向展示类
  * 
  * @author tanson lam 
  * @creation 2015年1月10日

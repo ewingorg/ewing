@@ -17,6 +17,9 @@
         <property name="resourceId" type="java.lang.Integer">
             <column name="resource_id" />
         </property> 
+        <property name="tempalte" type="java.lang.String">
+			<column name="tempalte" length="100" />
+		</property> 
         <property name="iseff" type="java.lang.String">
             <column name="iseff" length="1" />
         </property>

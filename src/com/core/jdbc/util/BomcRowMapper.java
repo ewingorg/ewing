@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.core.jdbc.annotation.Field;
+import com.core.jdbc.annotation.Column;
 import com.core.log.LogHelper;
 
 public class BomcRowMapper<T> implements RowMapper {
@@ -37,11 +37,11 @@ public class BomcRowMapper<T> implements RowMapper {
 			for (PropertyDescriptor p : ps) {
 				Method method = p.getReadMethod();
 				if ((method != null)
-						&& (method.isAnnotationPresent(Field.class))) {
+						&& (method.isAnnotationPresent(Column.class))) {
 					String sMethod = method.getName().replaceFirst("g", "s");
 					Method seter = o.getClass().getMethod(sMethod,
 							new Class[] { method.getReturnType() });
-					Field f = (Field) method.getAnnotation(Field.class);
+					Column f = (Column) method.getAnnotation(Column.class);
 					String type = method.getReturnType().getName();
 					// log.info(f.fieldName());
 					if ((type.equals("java.lang.Integer"))

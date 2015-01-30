@@ -14,59 +14,68 @@ import java.sql.Timestamp;
  * 
  */
 public class WebRelResource implements Serializable {
-    private Integer categoryId;
-    private Timestamp createTime; 
-    private Integer id; 
-    private String iseff;
-    private Timestamp lastUpdate;
-    private Integer resourceId;
+	private Integer categoryId;
+	private Timestamp createTime;
+	private Integer id;
+	private String iseff;
+	private Timestamp lastUpdate;
+	private Integer resourceId;
+	private String tempalte;
 
-    public Integer getCategoryId() {
-        return categoryId;
-    }
+	public String getTempalte() {
+		return tempalte;
+	}
 
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
+	public void setTempalte(String tempalte) {
+		this.tempalte = tempalte;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getCategoryId() {
+		return categoryId;
+	}
 
-    public String getIseff() {
-        return iseff;
-    }
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
 
-    public Timestamp getLastUpdate() {
-        return lastUpdate;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getResourceId() {
-        return resourceId;
-    }
+	public String getIseff() {
+		return iseff;
+	}
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
+	public Timestamp getLastUpdate() {
+		return lastUpdate;
+	}
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
+	public Integer getResourceId() {
+		return resourceId;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
 
-    public void setIseff(String iseff) {
-        this.iseff = iseff;
-    }
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setLastUpdate(Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setResourceId(Integer resourceId) {
-        this.resourceId = resourceId;
-    }
+	public void setIseff(String iseff) {
+		this.iseff = iseff;
+	}
+
+	public void setLastUpdate(Timestamp lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public void setResourceId(Integer resourceId) {
+		this.resourceId = resourceId;
+	}
 
 }
