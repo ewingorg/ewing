@@ -1,9 +1,8 @@
 /*
-SQLyog Professional v10.42 
+SQLyog v10.2 
 MySQL - 5.1.30-community : Database - ewing
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -34,6 +33,10 @@ CREATE TABLE `sys_department` (
 
 /*Data for the table `sys_department` */
 
+LOCK TABLES `sys_department` WRITE;
+
+UNLOCK TABLES;
+
 /*Table structure for table `sys_log_trace` */
 
 DROP TABLE IF EXISTS `sys_log_trace`;
@@ -47,6 +50,10 @@ CREATE TABLE `sys_log_trace` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_log_trace` */
+
+LOCK TABLES `sys_log_trace` WRITE;
+
+UNLOCK TABLES;
 
 /*Table structure for table `sys_menu` */
 
@@ -71,7 +78,11 @@ CREATE TABLE `sys_menu` (
 
 /*Data for the table `sys_menu` */
 
-insert  into `sys_menu`(`id`,`name`,`url`,`level`,`parentid`,`iseff`,`isleaf`,`des`,`create_time`,`last_update`,`icon`,`sort`,`createtime`) values (1,'控制面板',NULL,'1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-21 19:43:26','icon-dashboard',1,NULL),(2,'分组管理','Admin-Group-show.action','1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:03:10','icon-list',2,NULL),(3,'导航栏','Admin-Nav-show.action','1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:03:10','icon-globe',3,NULL),(4,'栏目管理','Admin-Banner-show.action','1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:03:11','icon-bitcoin',4,NULL),(5,'资源管理','Admin-Res-show.action','1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:05:50','icon-archive',5,NULL);
+LOCK TABLES `sys_menu` WRITE;
+
+insert  into `sys_menu`(`id`,`name`,`url`,`level`,`parentid`,`iseff`,`isleaf`,`des`,`create_time`,`last_update`,`icon`,`sort`,`createtime`) values (1,'控制面板',NULL,'1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:03:09','icon-dashboard',1,NULL),(2,'分组管理','Admin-Group-show.action','1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:03:10','icon-list',2,NULL),(3,'导航栏','Admin-Nav-show.action','1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:03:10','icon-globe',3,NULL),(4,'栏目管理','Admin-Banner-show.action','1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:03:11','icon-bitcoin',4,NULL),(5,'资源管理','Admin-Res-show.action','1',0,'1','0',NULL,'2015-01-10 17:05:35','2015-01-18 16:05:50','icon-archive',5,NULL);
+
+UNLOCK TABLES;
 
 /*Table structure for table `sys_param` */
 
@@ -92,7 +103,11 @@ CREATE TABLE `sys_param` (
 
 /*Data for the table `sys_param` */
 
+LOCK TABLES `sys_param` WRITE;
+
 insert  into `sys_param`(`param_code`,`param_name`,`param_value`,`root_code`,`des`,`seq`,`iseff`,`create_time`,`last_update`) values ('BANNER','栏目','1','GROUP_TYPE',NULL,'1','1','2014-12-18 17:40:24','2015-01-10 16:37:02'),('EFF','有效','1','IS_EFF',NULL,'1','1','2014-12-18 17:40:27','2014-12-18 17:40:30'),('NAV','导航栏','0','GROUP_TYPE',NULL,'0','1','2014-12-18 17:40:24','2015-01-10 16:37:02'),('NOTEFF','无效','0','IS_EFF',NULL,'0','1','2014-12-18 17:40:24','2014-12-18 17:40:26'),('PRODUCT','产品分类','2','GROUP_TYPE',NULL,'2','1','2014-12-18 17:40:24','2015-01-10 16:37:04');
+
+UNLOCK TABLES;
 
 /*Table structure for table `sys_right_rel` */
 
@@ -110,6 +125,10 @@ CREATE TABLE `sys_right_rel` (
 
 /*Data for the table `sys_right_rel` */
 
+LOCK TABLES `sys_right_rel` WRITE;
+
+UNLOCK TABLES;
+
 /*Table structure for table `sys_role` */
 
 DROP TABLE IF EXISTS `sys_role`;
@@ -124,6 +143,10 @@ CREATE TABLE `sys_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_role` */
+
+LOCK TABLES `sys_role` WRITE;
+
+UNLOCK TABLES;
 
 /*Table structure for table `sys_user` */
 
@@ -149,6 +172,10 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
+LOCK TABLES `sys_user` WRITE;
+
+UNLOCK TABLES;
+
 /*Table structure for table `web_attr_conf` */
 
 DROP TABLE IF EXISTS `web_attr_conf`;
@@ -165,6 +192,10 @@ CREATE TABLE `web_attr_conf` (
 
 /*Data for the table `web_attr_conf` */
 
+LOCK TABLES `web_attr_conf` WRITE;
+
+UNLOCK TABLES;
+
 /*Table structure for table `web_category` */
 
 DROP TABLE IF EXISTS `web_category`;
@@ -172,24 +203,26 @@ DROP TABLE IF EXISTS `web_category`;
 CREATE TABLE `web_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT '父id',
-  `group_type` char(2) NOT NULL COMMENT '0:导航分类 1:分类链接',
+  `group_type` char(2) NOT NULL COMMENT '0:导航分类 1:分类链接 2:产品分类',
   `group_key` varchar(50) NOT NULL COMMENT '组key',
-  `type` varchar(2) DEFAULT NULL,
   `name` varchar(50) NOT NULL COMMENT '菜单名称',
   `image_url` varchar(200) DEFAULT NULL COMMENT '菜单图片链接',
-  `template` varchar(100) DEFAULT NULL COMMENT '页面模板',
   `link_url` varchar(200) DEFAULT NULL COMMENT '外链接',
   `rank` int(3) NOT NULL DEFAULT '0' COMMENT '排序',
   `iseff` char(1) NOT NULL DEFAULT '0' COMMENT '是否生效 0:没生效 1:生效',
   `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `tempalte` varchar(100) DEFAULT NULL,
+  `type` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='分类配置';
 
 /*Data for the table `web_category` */
 
-insert  into `web_category`(`id`,`parent_id`,`group_type`,`group_key`,`type`,`name`,`image_url`,`template`,`link_url`,`rank`,`iseff`,`create_time`,`last_update`,`tempalte`) values (1,0,'0','SITE_NAV',NULL,'首页',NULL,NULL,NULL,0,'1','2014-12-17 14:36:20','2015-01-12 17:37:09',NULL),(2,0,'0','SITE_NAV',NULL,'产品列表',NULL,NULL,NULL,1,'1','2014-12-17 14:36:20','2015-01-12 17:37:10',NULL),(3,0,'0','SITE_NAV',NULL,'投书建议',NULL,NULL,NULL,2,'1','2014-12-17 14:36:20','2015-01-12 17:37:11',NULL),(4,0,'0','SITE_NAV',NULL,'关于我们',NULL,NULL,NULL,3,'0','2014-12-17 14:36:20','2015-01-12 17:37:12',NULL),(7,0,'1','HELP_BANNER',NULL,'公司历史',NULL,NULL,NULL,12,'1','2015-01-12 17:32:30','2015-01-12 17:32:30',NULL);
+LOCK TABLES `web_category` WRITE;
+
+insert  into `web_category`(`id`,`parent_id`,`group_type`,`group_key`,`name`,`image_url`,`link_url`,`rank`,`iseff`,`create_time`,`last_update`,`type`) values (1,0,'0','SITE_NAV','首页',NULL,NULL,0,'1','2014-12-17 14:36:20','2015-01-12 17:37:09',NULL),(2,0,'0','SITE_NAV','产品列表',NULL,NULL,1,'1','2014-12-17 14:36:20','2015-01-12 17:37:10',NULL),(3,0,'0','SITE_NAV','投书建议',NULL,NULL,2,'1','2014-12-17 14:36:20','2015-01-12 17:37:11',NULL),(4,0,'0','SITE_NAV','关于我们',NULL,NULL,3,'0','2014-12-17 14:36:20','2015-01-12 17:37:12',NULL),(5,0,'0','SITE_NAV','2121','11','1',1,'1','2014-12-18 22:55:57','2015-01-12 17:37:14',NULL),(7,0,'1','HELP_BANNER','公司历史',NULL,NULL,12,'1','2015-01-12 17:32:30','2015-01-12 17:32:30',NULL);
+
+UNLOCK TABLES;
 
 /*Table structure for table `web_group` */
 
@@ -209,7 +242,11 @@ CREATE TABLE `web_group` (
 
 /*Data for the table `web_group` */
 
+LOCK TABLES `web_group` WRITE;
+
 insert  into `web_group`(`id`,`name`,`group_key`,`group_type`,`iseff`,`create_time`,`last_update`,`type`) values (1,'网站导航栏','SITE_NAV','0','1','2015-01-10 17:32:30','2015-01-10 17:32:30',NULL),(2,'帮助栏目','HELP_BANNER','1','1','2015-01-10 17:33:31','2015-01-10 17:33:31',NULL);
+
+UNLOCK TABLES;
 
 /*Table structure for table `web_rel_resource` */
 
@@ -219,17 +256,17 @@ CREATE TABLE `web_rel_resource` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_id` int(11) NOT NULL COMMENT '分类id',
   `resource_id` int(11) NOT NULL COMMENT '资源id',
-  `template` varchar(100) DEFAULT NULL COMMENT '页面模板',
   `iseff` char(1) NOT NULL DEFAULT '0' COMMENT '是否生效 0:没生效 1:生效',
   `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `tempalte` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='分类和资源关系表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分类和资源关系表';
 
 /*Data for the table `web_rel_resource` */
 
-insert  into `web_rel_resource`(`id`,`category_id`,`resource_id`,`template`,`iseff`,`create_time`,`last_update`,`tempalte`) values (1,7,2,NULL,'1','2015-01-30 14:54:37','2015-01-30 14:54:39',NULL);
+LOCK TABLES `web_rel_resource` WRITE;
+
+UNLOCK TABLES;
 
 /*Table structure for table `web_resource` */
 
@@ -249,7 +286,11 @@ CREATE TABLE `web_resource` (
 
 /*Data for the table `web_resource` */
 
-insert  into `web_resource`(`id`,`name`,`image_url`,`short_desc`,`long_desc`,`iseff`,`create_time`,`last_update`) values (2,'1','/fileupload/avatar11421591522067.jpg','你好啊','<p>我是神人么？？？</p>\r\n','1','2015-01-18 22:33:19','2015-01-18 22:50:11');
+LOCK TABLES `web_resource` WRITE;
+
+insert  into `web_resource`(`id`,`name`,`image_url`,`short_desc`,`long_desc`,`iseff`,`create_time`,`last_update`) values (1,'1','/fileupload/91421591868087.jpg','vvvvvvvvvvzzzzzzzzz','<p>ddddvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</p>\r\n','1','2015-01-18 21:42:42','2015-01-18 22:38:09'),(2,'1','/fileupload/avatar11421591522067.jpg','你好啊','<p>我是神人么？？？</p>\r\n','1','2015-01-18 22:33:19','2015-01-18 22:50:11');
+
+UNLOCK TABLES;
 
 /*Table structure for table `web_resource_attr` */
 
@@ -268,6 +309,10 @@ CREATE TABLE `web_resource_attr` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资源属性表';
 
 /*Data for the table `web_resource_attr` */
+
+LOCK TABLES `web_resource_attr` WRITE;
+
+UNLOCK TABLES;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
