@@ -1,0 +1,73 @@
+<#include "admin/common/include/sysparam.html">
+
+
+<div id="navModel" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header blue">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true"></button>
+		<h4 id="myModalLabel">
+			<strong>导航栏新增</strong>
+		</h4>
+	</div>
+	<div class="alert alert-error " id="errtip" style="display: none;"></div>
+
+	<div class="modal-body" style="max-height: 550px;">
+
+		<div class="alert alert-error " id="errTip" style="display: none;"></div>
+		<div class="alert alert-success " id="sucTip" style="display: none;"></div>
+		<div class="tab-pane active" id="tab_1">
+			<div class="portlet-body">
+				<div class="clearfix">
+					<button id="banner_query_btn" class="btn blue">
+						<i class="icon-search"></i>&nbsp;&nbsp;查询
+					</button>
+					<button id="banner_add_btn" class="btn blue">
+						<i class="icon-plus"></i>&nbsp;&nbsp;新增
+					</button>
+					<button id="banner_del_btn" class="btn blue">
+						<i class="icon-trash"></i>&nbsp;&nbsp;删除
+					</button>
+				</div>
+				<br>
+				<form action="${_contextPath}/Admin-Banner-show.action"
+					id="QueryForm">
+					<table class="table table-striped table-bordered table-hover"
+						id="bannerTable">
+						<thead>
+							<tr>
+								<th style="width: 8px;"><input type="checkbox"
+									class="group-checkable" data-set="#bannerTable .checkboxes" /></th>
+								<th>名称</th>
+								<th>链接</th>
+								<th>图标</th>
+								<th>模板</th>
+								<th>排位</th>
+								<th>是否有效</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#list pageBean.result as nav >
+							<tr class="odd gradeX">
+								<td><input type="checkbox" class="checkboxes"
+									value="${nav.id}" /></td>
+								<td>${nav.name}</td>
+								<td>${nav.linkUrl}</td>
+								<td>${nav.imageUrl}</td>
+								<td>${nav.template}</td>
+								<td>${nav.rank}</td>
+								<td><@translate paramCode=iseffCode
+									value=(nav.iseff)?if_exists /></td>
+								<td><a href='#' name="edit_action" value="${nav.id}"><i
+										class="icon-edit"></i></a></td>
+							<tr></#list>
+						</tbody>
+					</table>
+				</form>
+				<@pagination searchFormId='bannerSearchForm' />
+			</div>
+		</div>
+	</div>
+</div>
+
