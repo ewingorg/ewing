@@ -8,7 +8,7 @@
 
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="icon-reorder"></i>导航栏列表
+					<i class="icon-reorder"></i>栏目列表
 				</div>
 			</div>
 			<div class="portlet-body form">
@@ -58,7 +58,7 @@
 							<button id="banner_bindres_btn" class="btn blue">
 								<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;绑定资源
 							</button>
-							
+
 						</div>
 						<br>
 						<form action="${_contextPath}/Admin-Banner-show.action"
@@ -91,13 +91,12 @@
 										<td><@translate paramCode=iseffCode
 											value=(nav.iseff)?if_exists /></td>
 										<td><a href='#' name="edit_action" value="${nav.id}"><i
-												class="icon-edit"></i></a>
-											</td>
+												class="icon-edit"></i></a></td>
 									<tr></#list>
 								</tbody>
 							</table>
 						</form>
-						<@pagination searchFormId='bannerSearchForm' />
+						<@pagination searchFormId='bannerSearchForm' pBean=pageBean />
 					</div>
 				</div>
 
@@ -109,29 +108,38 @@
 </div>
 
 <script>
-	jQuery(document).ready(function() {
-		tableAction.init({
-			tableId : 'bannerTable',
-			queryUrl : '${contextPath}/Admin-Banner-show.action',
-			deleteUrl : '${contextPath}/Admin-Banner-delete.action',
-			editUrl : '${contextPath}/Admin-Banner-showEditForm.action',
-			queryBtnId : 'banner_query_btn',
-			deleteBtnId : 'banner_del_btn',
-			editBtnId : 'banner_add_btn',
-			searchFormId : 'bannerSearchForm'
-		});
-		
-		//绑定资源按钮事件
-		$('#banner_bindres_btn').bind('click', function() {
-			var selectItems = tableMng.selectItem(tableId);
-			if (selectItems.length == 0) {
-				common.alert({
-					content : '请选中需要操作的项！'
-				});
-				return;
-			}
-			var url = '${contextPath}/Admin-Banner-showResList.action?categoryId='+selectItems;
-			common.popHtml(url, 'navModel');
-		});
-	});
+	jQuery(document)
+			.ready(
+					function() {
+						tableAction
+								.init({
+									tableId : 'bannerTable',
+									queryUrl : '${contextPath}/Admin-Banner-show.action',
+									deleteUrl : '${contextPath}/Admin-Banner-delete.action',
+									editUrl : '${contextPath}/Admin-Banner-showEditForm.action',
+									queryBtnId : 'banner_query_btn',
+									deleteBtnId : 'banner_del_btn',
+									editBtnId : 'banner_add_btn',
+									searchFormId : 'bannerSearchForm'
+								});
+
+						//绑定资源按钮事件
+						$('#banner_bindres_btn')
+								.bind(
+										'click',
+										function() {
+											var selectItems = tableMng
+													.selectItem('bannerTable');
+											if (selectItems.length == 0) {
+												common.alert({
+													content : '请选中需要操作的项！'
+												});
+												return;
+											}
+											var url = '${contextPath}/Admin-Banner-showResList.action?categoryId='
+													+ selectItems;
+											main.addContainer(url);
+											//common.popHtml(url, 'navModel');
+										});
+					});
 </script>

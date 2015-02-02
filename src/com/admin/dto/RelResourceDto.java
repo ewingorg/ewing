@@ -16,9 +16,18 @@ public class RelResourceDto {
 	private Integer resourceId;
 	private String resourceName;
 	private String resourceIseff;
+	private String resourceShortdesc;
 	private String template;
 	private Timestamp createTime;
 	private Timestamp lastUpdate;
+
+	public String getResourceShortdesc() {
+		return resourceShortdesc;
+	}
+
+	public void setResourceShortdesc(String resourceShortdesc) {
+		this.resourceShortdesc = resourceShortdesc;
+	}
 
 	public String getResourceIseff() {
 		return resourceIseff;

@@ -1,29 +1,29 @@
- <#macro pagination searchFormId >
+ <#macro pagination searchFormId pBean>
 <div class="pagination pagination-right">
-   <#if pageBean.totalPageCount gte 1>
+   <#if pBean.totalPageCount gte 1>
 	<ul>
-	 	<#if pageBean.currentPageNo = '1'>  
+	 	<#if pBean.currentPageNo = '1'>  
 			<li class="disabled"><a href="#">&laquo;</a> 
 		<#else> 
-			<li><a href="#" onclick="main.addContainer('${pageUrl}&page=${pageBean.currentPageNo-1}&pageSize=${pageBean.pageSize}','${searchFormId}')">&laquo;</a>
+			<li><a href="#" onclick="main.addContainer('${pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${searchFormId}')">&laquo;</a>
 		</#if> 
-		<#list 1..pageBean.totalPageCount as i> 
+		<#list 1..pBean.totalPageCount as i> 
 			<#if (10 >= i) >
-				<#if pageBean.currentPageNo = i>  
+				<#if pBean.currentPageNo = i>  
 					<li class="active">
 				<#else>  
 					<li>
 				</#if> 
 				<a href="#"
-				onclick="main.addContainer('${pageUrl}&page=${i}&pageSize=${pageBean.pageSize}','${searchFormId}')">${i}</a>
+				onclick="main.addContainer('${pageUrl}&page=${i}&pageSize=${pBean.pageSize}','${searchFormId}')">${i}</a>
 				</li> 
 			</#if>
 		</#list>   
-		<#if pageBean.totalPageCount == pageBean.currentPageNo>  
+		<#if pBean.totalPageCount == pBean.currentPageNo>  
 			<li class="disabled"><a href="#">&raquo;</a></li>
 		<#else>  
 			<li><a
-				href="#" onclick="main.addContainer('${pageUrl}&page=${pageBean.currentPageNo+1}&pageSize=${pageBean.pageSize}','${searchFormId}')">&raquo;</a>
+				href="#" onclick="main.addContainer('${pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${searchFormId}')">&raquo;</a>
 			</li>
 		</#if>  
 	</ul>

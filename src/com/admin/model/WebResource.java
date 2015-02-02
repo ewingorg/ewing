@@ -6,6 +6,8 @@ package com.admin.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import com.core.jdbc.annotation.Column;
+
 /**
  * 类/接口注释
  * 
@@ -14,84 +16,84 @@ import java.sql.Timestamp;
  * 
  */
 public class WebResource implements Serializable {
+	@Column(fieldName = "create_time")
+	private Timestamp createTime;
+	@Column(fieldName = "id")
+	private Integer id;
+	@Column(fieldName = "image_url")
+	private String imageUrl;
+	@Column(fieldName = "iseff")
+	private String iseff;
+	@Column(fieldName = "last_update")
+	private Timestamp lastUpdate;
+	@Column(fieldName = "long_desc")
+	private String longDesc;
+	@Column(fieldName = "name")
+	private String name;
+	@Column(fieldName = "short_desc")
+	private String shortDesc;
 
-    private Timestamp createTime;
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
 
-    private Integer id;
+	public Integer getId() {
+		return id;
+	}
 
-    private String imageUrl;
+	public String getImageUrl() {
+		return imageUrl;
+	}
 
-    private String iseff;
+	public String getIseff() {
+		return iseff;
+	}
 
-    private Timestamp lastUpdate;
+	public Timestamp getLastUpdate() {
+		return lastUpdate;
+	}
 
-    private String longDesc;
+	public String getLongDesc() {
+		return longDesc;
+	}
 
-    private String name;
+	public String getName() {
+		return name;
+	}
 
-    private String shortDesc;
+	public String getShortDesc() {
+		return shortDesc;
+	}
 
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
-    public String getIseff() {
-        return iseff;
-    }
+	public void setIseff(String iseff) {
+		this.iseff = iseff;
+	}
 
-    public Timestamp getLastUpdate() {
-        return lastUpdate;
-    }
+	public void setLastUpdate(Timestamp lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 
-    public String getLongDesc() {
-        return longDesc;
-    }
+	public void setLongDesc(String longDesc) {
+		this.longDesc = longDesc;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getShortDesc() {
-        return shortDesc;
-    }
-
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public void setIseff(String iseff) {
-        this.iseff = iseff;
-    }
-
-    public void setLastUpdate(Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public void setLongDesc(String longDesc) {
-        this.longDesc = longDesc;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setShortDesc(String shortDesc) {
-        this.shortDesc = shortDesc;
-    }
+	public void setShortDesc(String shortDesc) {
+		this.shortDesc = shortDesc;
+	}
 }

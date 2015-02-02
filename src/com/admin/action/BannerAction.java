@@ -31,7 +31,7 @@ public class BannerAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(MainAction.class);
 	private static final String LIST_PAGE = "/admin/banner/bannerlist.html";
 	private static final String EDIT_FORM = "/admin/banner/bannerform.html";
-	private static final String BINDRES_PAGE = "/admin/banner/bindreslist.html";
+	private static final String BINDRES_PAGE = "/admin/banner/resmng.html";
 	@Resource
 	private GroupService groupService;
 	@Resource
@@ -108,12 +108,15 @@ public class BannerAction extends BaseAction {
 					: Integer.valueOf(pageSizeStr);
 			Integer categoryId = StringUtils.isEmpty(categoryIdStr) ? null
 					: Integer.valueOf(categoryIdStr);
-			PageBean pageBean = relResService.listRelResourceByCategory(
+			PageBean bindPageBean = relResService.listRelResourceByCategory(
 					categoryId, pageSize, page);
+			PageBean unbindPageBean = relResService
+					.listNotRelResourceByCategory(categoryId, pageSize, page);
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
-			dataModel.put("pageBean", pageBean);
+			dataModel.put("bindPageBean", bindPageBean);
+			dataModel.put("unbindPageBean", unbindPageBean);
 			dataModel.put("pageUrl",
 					getPaginationUrl("/Admin-Banner-showResList.action"));
 

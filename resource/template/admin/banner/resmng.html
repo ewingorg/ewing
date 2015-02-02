@@ -1,0 +1,88 @@
+<#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+<script src="${contextPath}/ckeditor/ckeditor.js"></script>
+<script src="${contextPath}/ckeditor/adapters/jquery.js"></script>
+<style>
+#editable {
+	padding: 10px;
+	float: left;
+}
+</style>
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN EXTRAS PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>栏目资源关联管理
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="alert alert-error " id="errTip" style="display: none;"></div>
+				<div class="alert alert-success " id="sucTip" style="display: none;"></div>
+
+				<div class="row-fluid">
+					<div class="span5">
+						<!-- BEGIN SAMPLE TABLE PORTLET-->
+						<#include "admin/banner/unbindreslist.html">
+						<!-- END SAMPLE TABLE PORTLET-->
+					</div>
+					<div class="span1">
+						<br> <br>
+						<button id="banner_bindres_btn" class="btn blue">
+							<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;绑定
+						</button>
+						<br> <br>
+						<button id="banner_unbindres_btn" class="btn blue">
+							<i class="icon-long-arrow-left"></i>&nbsp;&nbsp;解除
+						</button>
+
+					</div>
+					<div class="span5">
+						<!-- BEGIN CONDENSED TABLE PORTLET-->
+						<#include "admin/banner/bindreslist.html">
+						<!-- END CONDENSED TABLE PORTLET-->
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="button ;la" id="res_return_btn" class="btn ">返回</button>
+				</div>
+			</div>
+			<!-- END FORM-->
+		</div>
+	</div>
+	<!-- END EXTRAS PORTLET-->
+</div>
+</div>
+<script>
+	$(document).ready(function() {
+		$("#res_return_btn").bind("click", function() {
+			var url = '${contextPath}/Admin-Banner-show.action';
+			main.addContainer(url);
+		});
+		//绑定资源按钮事件
+		$('#banner_bindres_btn').bind('click', function() {
+			var selectItems = tableMng.selectItem('unbindResTable');
+			if (selectItems.length == 0) {
+				common.alert({
+					content : '请选中未绑定的资源项！'
+				});
+				return;
+			}
+			alert(selectItems);
+
+		});
+		$('#banner_unbindres_btn').bind('click', function() {
+			var selectItems = tableMng.selectItem('bindResTable');
+			if (selectItems.length == 0) {
+				common.alert({
+					content : '请选中已经绑定的资源项！'
+				});
+				return;
+			}
+			alert(selectItems);
+
+		});
+	});
+</script>
