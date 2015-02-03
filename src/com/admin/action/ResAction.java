@@ -45,9 +45,8 @@ public class ResAction extends BaseAction {
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
+			pageBean.setPageUrl(getPaginationUrl("/Admin-Res-show.action"));
 			dataModel.put("pageBean", pageBean);
-			dataModel
-					.put("pageUrl", getPaginationUrl("/Admin-Res-show.action"));
 
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {

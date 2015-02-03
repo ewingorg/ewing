@@ -50,9 +50,8 @@ public class GroupAction extends BaseAction {
 					.getSysParam(SysParamCode.GROUP_TYPE);
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("groupType", groupType);
-			dataModel.put("pageBean", pageBean);
-			dataModel.put("pageUrl",
-					getPaginationUrl("/Admin-Group-show.action"));
+			pageBean.setPageUrl(getPaginationUrl("/Admin-Group-show.action"));
+			dataModel.put("pageBean", pageBean); 
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

@@ -11,6 +11,15 @@ public class PageBean implements Serializable {
 	private long start;
 	private Object result;
 	private int totalPageCount;
+	private String pageUrl;
+
+	public String getPageUrl() {
+		return pageUrl;
+	}
+
+	public void setPageUrl(String pageUrl) {
+		this.pageUrl = pageUrl;
+	}
 
 	public PageBean(long start, int totalCount, int pageSize, Object data) {
 		this.start = start;
@@ -44,7 +53,7 @@ public class PageBean implements Serializable {
 
 	public void setResult(Object data) {
 		this.result = data;
-	} 
+	}
 
 	public long getCurrentPageNo() {
 		return this.start / this.pageSize + 1L;

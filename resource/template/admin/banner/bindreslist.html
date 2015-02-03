@@ -9,14 +9,17 @@
 	</div>
 	<div class="portlet-body">
 		<div class="row-fluid">
-			<div class="span6">
-				<div class="dataTables_filter" id="sample_1_filter">
-					<label>标题: <input type="text" aria-controls="sample_1"
-						value="${_QUERY_s_eq_name}" class="span1 m-wrap medium"
-						name="_QUERY_s_eq_name" id="_QUERY_s_eq_name"></label>
-				</div>
+			<form id="bindSearchForm">
+				<input type="hidden" id="categoryId" name="categoryId" value="${categoryId}" />
+				<div class="span6">
+					<div class="dataTables_filter" id="sample_1_filter">
+						<label>标题: <input type="text" aria-controls="sample_1"
+							value="${_QUERY_s_eq_name}" class="span1 m-wrap medium"
+							name="_QUERY_s_eq_name" id="_QUERY_s_eq_name"></label>
+					</div>
 
-			</div>
+				</div>
+			</form>
 			<div class="span6">
 				<button id="banner_query_btn" class="btn blue">
 					<i class="icon-search"></i>&nbsp;&nbsp;查询
@@ -31,7 +34,7 @@
 					<tr>
 						<th style="width: 8px;"><input type="checkbox"
 							class="group-checkable" data-set="#bindResTable .checkboxes" /></th>
-						<th>标题11</th>
+						<th>标题</th>
 						<th>简单描述</th>
 						<th>是否有效</th>
 					</tr>
@@ -49,6 +52,13 @@
 				</tbody>
 			</table>
 		</form>
-		<@pagination searchFormId='resSearchForm' pBean=bindPageBean />
+		<@areaapagination searchFormId='bindSearchForm' pBean=bindPageBean
+		areaId='bindreslist' />
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+		//初始化table
+		tableAction.initTable('bindResTable');
+	});
+</script>

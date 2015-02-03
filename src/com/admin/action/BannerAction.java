@@ -31,7 +31,9 @@ public class BannerAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(MainAction.class);
 	private static final String LIST_PAGE = "/admin/banner/bannerlist.html";
 	private static final String EDIT_FORM = "/admin/banner/bannerform.html";
-	private static final String BINDRES_PAGE = "/admin/banner/resmng.html";
+	private static final String RESMNG_PAGE = "/admin/banner/resmng.html";
+	private static final String BINDRESLIST_PAGE = "/admin/banner/bindreslist.html";
+	private static final String UNBINDRESLIST_PAGE = "/admin/banner/unbindreslist.html";
 	@Resource
 	private GroupService groupService;
 	@Resource
@@ -94,7 +96,7 @@ public class BannerAction extends BaseAction {
 	}
 
 	/**
-	 * 显示绑定资源的列表
+	 * 显示分类与资源关系管理列表
 	 */
 	public void showResList() {
 		try {
@@ -115,12 +117,75 @@ public class BannerAction extends BaseAction {
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
+			dataModel.put("categoryId", categoryId);
+			bindPageBean
+					.setPageUrl(getPaginationUrl("/Admin-Banner-showRelResourceByCategory.action"));
 			dataModel.put("bindPageBean", bindPageBean);
+			unbindPageBean
+					.setPageUrl(getPaginationUrl("/Admin-Banner-showNotRelResourceByCategory.action"));
 			dataModel.put("unbindPageBean", unbindPageBean);
-			dataModel.put("pageUrl",
-					getPaginationUrl("/Admin-Banner-showResList.action"));
 
-			render(BINDRES_PAGE, dataModel);
+			render(RESMNG_PAGE, dataModel);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * 显示绑定资源的列表
+	 */
+	public void showRelResourceByCategory() {
+		try {
+			Map<String, Object> dataModel = new HashMap<String, Object>();
+			String categoryIdStr = request.getParameter("categoryId");
+			String pageStr = request.getParameter("page");
+			String pageSizeStr = request.getParameter("pageSize");
+			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
+					.valueOf(pageStr);
+			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
+					: Integer.valueOf(pageSizeStr);
+			Integer categoryId = StringUtils.isEmpty(categoryIdStr) ? null
+					: Integer.valueOf(categoryIdStr);
+			PageBean bindPageBean = relResService.listRelResourceByCategory(
+					categoryId, pageSize, page);
+			List<SysParam> iseffCode = sysParamService
+					.getSysParam(SysParamCode.ISEFF);
+			dataModel.put("iseffCode", iseffCode);
+			dataModel.put("categoryId", categoryId);
+			bindPageBean
+					.setPageUrl(getPaginationUrl("/Admin-Banner-showRelResourceByCategory.action"));
+			dataModel.put("bindPageBean", bindPageBean);
+			render(BINDRESLIST_PAGE, dataModel);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * 显示未绑定资源的列表
+	 */
+	public void showNotRelResourceByCategory() {
+		try {
+			Map<String, Object> dataModel = new HashMap<String, Object>();
+			String categoryIdStr = request.getParameter("categoryId");
+			String pageStr = request.getParameter("page");
+			String pageSizeStr = request.getParameter("pageSize");
+			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
+					.valueOf(pageStr);
+			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
+					: Integer.valueOf(pageSizeStr);
+			Integer categoryId = StringUtils.isEmpty(categoryIdStr) ? null
+					: Integer.valueOf(categoryIdStr);
+			PageBean unbindPageBean = relResService
+					.listNotRelResourceByCategory(categoryId, pageSize, page);
+			List<SysParam> iseffCode = sysParamService
+					.getSysParam(SysParamCode.ISEFF);
+			dataModel.put("iseffCode", iseffCode);
+			dataModel.put("categoryId", categoryId);
+			unbindPageBean
+					.setPageUrl(getPaginationUrl("/Admin-Banner-showNotRelResourceByCategory.action"));
+			dataModel.put("unbindPageBean", unbindPageBean);
+			render(UNBINDRESLIST_PAGE, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}

@@ -22,7 +22,7 @@ import com.core.jdbc.util.PageBean;
 /**
  * 导航栏展示类
  * 
- * @author tanson lam 
+ * @author tanson lam
  * @creation 2015年1月10日
  */
 public class NavAction extends BaseAction {
@@ -54,10 +54,9 @@ public class NavAction extends BaseAction {
 			List<SysParam> groupCode = groupService
 					.getGroupParamList(GroupType.NAV);
 			dataModel.put("iseffCode", iseffCode);
-			dataModel.put("groupKeyCode", groupCode); 
+			dataModel.put("groupKeyCode", groupCode);
+			pageBean.setPageUrl(getPaginationUrl("/Admin-Nav-show.action"));
 			dataModel.put("pageBean", pageBean);
-			dataModel
-					.put("pageUrl", getPaginationUrl("/Admin-Nav-show.action"));
 
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {

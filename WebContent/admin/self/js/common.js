@@ -3,7 +3,9 @@ if (!this.common) {
 }
 
 common.writeHtml=function(htmlhref,targetdiv){   
+	alert(targetdiv);
 	var containerId = $('#'+targetdiv).attr('id');
+	alert(containerId);
 	var container ; 
 	if(!containerId){
 		container = $(document.body); 

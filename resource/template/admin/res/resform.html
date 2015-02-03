@@ -114,13 +114,13 @@
 			formId : 'resAddForm',
 			saveUrl : '${contextPath}/Admin-Res-save.action',
 			saveBtnId : 'res_save_btn',
+			queryUrl : '${contextPath}/Admin-Res-show.action',
 			beforeSaveFn : function() {
 				var editor = CKEDITOR.instances.longDescEdit;
 				$("#longDesc").val(editor.getData());
 			}
 		});
-		$('#longDescEdit').ckeditor();
-
+		$('#longDescEdit').ckeditor(); 
 	});
 
 	function uploadNavPic() {

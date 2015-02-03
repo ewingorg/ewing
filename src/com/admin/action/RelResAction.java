@@ -13,12 +13,13 @@ import org.apache.log4j.Logger;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
 import com.admin.model.WebRelResource;
-import com.admin.model.WebResource;
 import com.admin.service.RelResService;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
 import com.core.app.action.base.ResponseUtils;
+import com.core.app.constant.IsEff;
 import com.core.jdbc.util.PageBean;
+import com.util.CommonUtil;
 
 /**
  * 分类和资源关系展示类
@@ -53,9 +54,8 @@ public class RelResAction extends BaseAction {
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
-			dataModel.put("pageBean", pageBean);
-			dataModel.put("pageUrl",
-					getPaginationUrl("/Admin-RelRes-show.action"));
+			pageBean.setPageUrl(getPaginationUrl("/Admin-RelRes-show.action"));
+			dataModel.put("pageBean", pageBean); 
 
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
@@ -144,11 +144,11 @@ public class RelResAction extends BaseAction {
 			Integer[] resourceIds = null;
 			if (!StringUtils.isEmpty(resourceIdsStr)) {
 				String[] resourceIdArr = resourceIdsStr.split(",");
-				resourceIds = Arrays.asList(resourceIdArr).toArray(
-						new Integer[resourceIdArr.length]);
+				resourceIds = CommonUtil.strArray2InArray(resourceIdArr);
 			}
 			WebRelResource relResource = new WebRelResource();
 			this.buildPageData(relResource);
+			relResource.setIseff(IsEff.EFFECTIVE);
 			relResService.bindRelResource(relResource.getCategoryId(),
 					resourceIds, relResource.getTempalte(),
 					relResource.getIseff());
@@ -172,8 +172,7 @@ public class RelResAction extends BaseAction {
 			Integer categoryId = null;
 			if (!StringUtils.isEmpty(resourceIdsStr)) {
 				String[] resourceIdArr = resourceIdsStr.split(",");
-				resourceIds = Arrays.asList(resourceIdArr).toArray(
-						new Integer[resourceIdArr.length]);
+				resourceIds = CommonUtil.strArray2InArray(resourceIdArr);
 			}
 			if (!StringUtils.isEmpty(categoryIdStr))
 				categoryId = Integer.valueOf(categoryIdStr);

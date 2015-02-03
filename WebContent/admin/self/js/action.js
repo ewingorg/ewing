@@ -18,7 +18,7 @@ var tableAction = {
 				main.addContainer(url);
 		});
 	},
-	bindNewAction : function(editBtnId, editUrl, isPopEditForm) { 
+	bindNewAction : function(editBtnId, editUrl, isPopEditForm) {
 		$("#" + editBtnId).bind("click", function() {
 			var url = editUrl;
 			if (isPopEditForm)
@@ -115,7 +115,7 @@ tableAction.option = {
 	isPopEditForm : true
 }
 
-tableAction.init = function(opt) { 
+tableAction.init = function(opt) {
 	var option = $.extend(true, {}, tableAction.option, opt);
 	if (option.tableId)
 		tableMng.init(option.tableId);
@@ -137,9 +137,19 @@ tableAction.init = function(opt) {
 				option.deleteUrl, option.queryUrl);
 }
 
+/**
+ * 初始化保存逻辑
+ */
 tableAction.initSaveAction = function(option) {
 	if (option.saveBtnId && option.formId && option.saveUrl) {
 		tableAction.bindSaveAction(option.saveBtnId, option.formId,
 				option.saveUrl, option.queryUrl, option.beforeSaveFn);
 	}
+}
+
+/**
+ * 初始化查询table
+ */
+tableAction.initTable = function(tableId) {
+	tableMng.init(tableId);
 }

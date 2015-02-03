@@ -21,9 +21,9 @@
 			<div class="portlet-body form">
 				<div class="alert alert-error " id="errTip" style="display: none;"></div>
 				<div class="alert alert-success " id="sucTip" style="display: none;"></div>
-
+				<input type="hidden" id="categoryId" value="${categoryId}" />
 				<div class="row-fluid">
-					<div class="span5">
+					<div class="span5" id="unbindreslist">
 						<!-- BEGIN SAMPLE TABLE PORTLET-->
 						<#include "admin/banner/unbindreslist.html">
 						<!-- END SAMPLE TABLE PORTLET-->
@@ -36,17 +36,16 @@
 						<br> <br>
 						<button id="banner_unbindres_btn" class="btn blue">
 							<i class="icon-long-arrow-left"></i>&nbsp;&nbsp;解除
-						</button>
-
+						</button> 
 					</div>
-					<div class="span5">
+					<div class="span5" id="bindreslist">
 						<!-- BEGIN CONDENSED TABLE PORTLET-->
 						<#include "admin/banner/bindreslist.html">
 						<!-- END CONDENSED TABLE PORTLET-->
 					</div>
 				</div>
 				<div class="form-actions">
-					<button type="button ;la" id="res_return_btn" class="btn ">返回</button>
+					<button type="button" id="res_return_btn" class="btn ">返回</button>
 				</div>
 			</div>
 			<!-- END FORM-->
@@ -62,27 +61,82 @@
 			main.addContainer(url);
 		});
 		//绑定资源按钮事件
+		var categoryId= $('#categoryId').val();
 		$('#banner_bindres_btn').bind('click', function() {
-			var selectItems = tableMng.selectItem('unbindResTable');
-			if (selectItems.length == 0) {
+			var selectItems = tableMng.selectItem('unbindResTable'); 
+			var bindUrl = '${contextPath}/Admin-RelRes-bindRelResource.action?resourceIds='+selectItems+'&categoryId='+categoryId;
+			var queryUrl = '${contextPath}/Admin-Banner-showResList.action?categoryId='+categoryId; 
+			if (selectItems.length == 0) { 
 				common.alert({
 					content : '请选中未绑定的资源项！'
 				});
 				return;
-			}
-			alert(selectItems);
-
+			} 
+			common.alert({
+				content : '是否绑定选中项？',
+				showAction : true,
+				actionContent : '绑定',
+				actionFn : function() { 
+					ajax.syncJsonRequest({
+						url : bindUrl,
+						success : function(data) {
+							if (!data || !data.success) { 
+								common.alert({
+									content : data.retinfo
+								});
+							} 
+							if (data.success) {
+								common.alert({
+									content : data.retinfo,
+									closeFn : function() {
+										if (queryUrl != ''){   
+										     main.addContainer(queryUrl);
+										}
+									}
+								});
+							}
+						}
+					});
+				}
+			});
 		});
 		$('#banner_unbindres_btn').bind('click', function() {
-			var selectItems = tableMng.selectItem('bindResTable');
-			if (selectItems.length == 0) {
+			var selectItems = tableMng.selectItem('bindResTable'); 
+			var unbindUrl = '${contextPath}/Admin-RelRes-unBindRelResource.action?resourceIds='+selectItems+'&categoryId='+categoryId;
+			var queryUrl = '${contextPath}/Admin-Banner-showResList.action?categoryId='+$('#categoryId').val(); 
+			if (selectItems.length == 0) { 
 				common.alert({
 					content : '请选中已经绑定的资源项！'
 				});
 				return;
-			}
-			alert(selectItems);
-
+			} 
+			common.alert({
+				content : '是否解除选中项的绑定？',
+				showAction : true,
+				actionContent : '解除绑定',
+				actionFn : function() { 
+					ajax.syncJsonRequest({
+						url : unbindUrl,
+						success : function(data) {
+							if (!data || !data.success) {
+								common.alert({
+									content : data.retinfo
+								});
+							}
+							if (data.success) {
+								common.alert({
+									content : data.retinfo,
+									closeFn : function() {
+										if (queryUrl != ''){   
+										     main.addContainer(queryUrl);
+										}
+									}
+								});
+							}
+						}
+					});
+				}
+			}); 
 		});
 	});
 </script>

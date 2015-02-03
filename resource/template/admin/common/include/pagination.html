@@ -1,11 +1,15 @@
- <#macro pagination searchFormId pBean>
+<!-- 定义单页分页
+searchFormId：查询条件form id.
+pBean:返回结果集 
+ -->
+<#macro pagination searchFormId pBean>
 <div class="pagination pagination-right">
    <#if pBean.totalPageCount gte 1>
 	<ul>
 	 	<#if pBean.currentPageNo = '1'>  
 			<li class="disabled"><a href="#">&laquo;</a> 
 		<#else> 
-			<li><a href="#" onclick="main.addContainer('${pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${searchFormId}')">&laquo;</a>
+			<li><a href="#" onclick="main.addContainer('${pBean.pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${searchFormId}')">&laquo;</a>
 		</#if> 
 		<#list 1..pBean.totalPageCount as i> 
 			<#if (10 >= i) >
@@ -15,7 +19,7 @@
 					<li>
 				</#if> 
 				<a href="#"
-				onclick="main.addContainer('${pageUrl}&page=${i}&pageSize=${pBean.pageSize}','${searchFormId}')">${i}</a>
+				onclick="main.addContainer('${pBean.pageUrl}&page=${i}&pageSize=${pBean.pageSize}','${searchFormId}')">${i}</a>
 				</li> 
 			</#if>
 		</#list>   
@@ -23,7 +27,46 @@
 			<li class="disabled"><a href="#">&raquo;</a></li>
 		<#else>  
 			<li><a
-				href="#" onclick="main.addContainer('${pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${searchFormId}')">&raquo;</a>
+				href="#" onclick="main.addContainer('${pBean.pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${searchFormId}')">&raquo;</a>
+			</li>
+		</#if>  
+	</ul>
+	</#if>
+</div>
+</#macro>
+
+<!-- 定义局部分页
+searchFormId：查询条件form id.
+pBean:返回结果集
+areaId:显示分页的区域id,一般指定div id. 
+ -->
+
+ <#macro areaapagination searchFormId pBean areaId>
+<div class="pagination pagination-right">
+   <#if pBean.totalPageCount gte 1>
+	<ul>
+	 	<#if pBean.currentPageNo = '1'>  
+			<li class="disabled"><a href="#">&laquo;</a> 
+		<#else> 
+			<li><a href="#" onclick="main.addArea('${pBean.pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&laquo;</a>
+		</#if> 
+		<#list 1..pBean.totalPageCount as i> 
+			<#if (10 >= i) >
+				<#if pBean.currentPageNo = i>  
+					<li class="active">
+				<#else>  
+					<li>
+				</#if> 
+				<a href="#"
+				onclick="main.addArea('${pBean.pageUrl}&page=${i}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">${i}</a>
+				</li> 
+			</#if>
+		</#list>   
+		<#if pBean.totalPageCount == pBean.currentPageNo>  
+			<li class="disabled"><a href="#">&raquo;</a></li>
+		<#else>  
+			<li><a
+				href="#" onclick="main.addArea('${pBean.pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&raquo;</a>
 			</li>
 		</#if>  
 	</ul>
