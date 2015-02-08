@@ -111,9 +111,10 @@ public class BannerAction extends BaseAction {
 			Integer categoryId = StringUtils.isEmpty(categoryIdStr) ? null
 					: Integer.valueOf(categoryIdStr);
 			PageBean bindPageBean = relResService.listRelResourceByCategory(
-					categoryId, pageSize, page);
+					categoryId, null, pageSize, page);
 			PageBean unbindPageBean = relResService
-					.listNotRelResourceByCategory(categoryId, pageSize, page);
+					.listNotRelResourceByCategory(categoryId, null, pageSize,
+							page);
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
@@ -138,6 +139,7 @@ public class BannerAction extends BaseAction {
 		try {
 			Map<String, Object> dataModel = new HashMap<String, Object>();
 			String categoryIdStr = request.getParameter("categoryId");
+			String resourceName = request.getParameter("resourceName");
 			String pageStr = request.getParameter("page");
 			String pageSizeStr = request.getParameter("pageSize");
 			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
@@ -147,7 +149,7 @@ public class BannerAction extends BaseAction {
 			Integer categoryId = StringUtils.isEmpty(categoryIdStr) ? null
 					: Integer.valueOf(categoryIdStr);
 			PageBean bindPageBean = relResService.listRelResourceByCategory(
-					categoryId, pageSize, page);
+					categoryId, resourceName, pageSize, page);
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
@@ -170,6 +172,7 @@ public class BannerAction extends BaseAction {
 			String categoryIdStr = request.getParameter("categoryId");
 			String pageStr = request.getParameter("page");
 			String pageSizeStr = request.getParameter("pageSize");
+			String resourceName = request.getParameter("resourceName");
 			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
 					.valueOf(pageStr);
 			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
@@ -177,7 +180,8 @@ public class BannerAction extends BaseAction {
 			Integer categoryId = StringUtils.isEmpty(categoryIdStr) ? null
 					: Integer.valueOf(categoryIdStr);
 			PageBean unbindPageBean = relResService
-					.listNotRelResourceByCategory(categoryId, pageSize, page);
+					.listNotRelResourceByCategory(categoryId, resourceName,
+							pageSize, page);
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);

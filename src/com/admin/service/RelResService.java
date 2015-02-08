@@ -2,6 +2,7 @@ package com.admin.service;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.admin.dto.RelResourceDto;
@@ -27,13 +28,15 @@ public class RelResService {
 	 * 查询某一分类的关联资源
 	 * 
 	 * @param categoryId
+	 * @param resourceName
 	 * @param pageSize
 	 * @param page
 	 * @return
 	 * @throws DaoException
 	 */
 	public PageBean listRelResourceByCategory(Integer categoryId,
-			Integer pageSize, Integer page) throws DaoException {
+			String resourceName, Integer pageSize, Integer page)
+			throws DaoException {
 		String sql = "SELECT "
 				+ " r.`category_id` AS categoryId, c.name  AS categoryName ,"
 				+ " r.`resource_id` AS resourceId, s.`name` AS resourceName,"
@@ -43,6 +46,8 @@ public class RelResService {
 				+ " WHERE "
 				+ " r.`category_id` = c.`id` AND r.`resource_id`=s.`id` AND "
 				+ " r.`category_id`=" + categoryId;
+		if (StringUtils.isNotEmpty(resourceName))
+			sql += " AND s.name like '%" + resourceName + "%'";
 		return baseModelService.executePageQuery(sql, pageSize, page,
 				RelResourceDto.class);
 	}
@@ -51,16 +56,20 @@ public class RelResService {
 	 * 查询某一分类的还没有关联的资源
 	 * 
 	 * @param categoryId
+	 * @param resourceName
 	 * @param pageSize
 	 * @param page
 	 * @return
 	 * @throws DaoException
 	 */
 	public PageBean listNotRelResourceByCategory(Integer categoryId,
-			Integer pageSize, Integer page) throws DaoException {
+			String resourceName, Integer pageSize, Integer page)
+			throws DaoException {
 		String sql = "SELECT r.* FROM web_resource r WHERE NOT EXISTS"
 				+ " (SELECT id FROM web_rel_resource c WHERE c.`resource_id` = r.`id` AND c.`category_id`="
 				+ categoryId + ")";
+		if (StringUtils.isNotEmpty(resourceName))
+			sql += " AND r.name like '%" + resourceName + "%'";
 		return baseModelService.executePageQuery(sql, pageSize, page,
 				WebResource.class);
 	}

@@ -14,14 +14,14 @@
 				<div class="span6">
 					<div class="dataTables_filter" id="sample_1_filter">
 						<label>标题: <input type="text" aria-controls="sample_1"
-							value="${_QUERY_s_eq_name}" class="span1 m-wrap medium"
-							name="_QUERY_s_eq_name" id="_QUERY_s_eq_name"></label>
+							value="${resourceName}" class="span1 m-wrap medium"
+							name="resourceName" id="resourceName"></label>
 					</div>
 
 				</div>
 			</form>
 			<div class="span6">
-				<button id="banner_query_btn" class="btn blue">
+				<button id="bindreslist_query_btn" class="btn blue">
 					<i class="icon-search"></i>&nbsp;&nbsp;查询
 				</button>
 			</div>
@@ -60,5 +60,13 @@
 	$(document).ready(function() {
 		//初始化table
 		tableAction.initTable('bindResTable');
+		var categoryId= $('#categoryId').val(); 
+		var bindqueryUrl = '${contextPath}/Admin-Banner-showRelResourceByCategory.action'; 
+	 
+		//绑定区域查询按钮事件
+		$('#bindreslist_query_btn').bind('click', function() {   
+			 main.addArea(bindqueryUrl, 'bindreslist', 'bindSearchForm');
+		});
+		 
 	});
 </script>
