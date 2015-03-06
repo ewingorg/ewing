@@ -1,0 +1,86 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html">
+
+<script src="${contextPath}/ckeditor/ckeditor.js"></script>
+<script src="${contextPath}/ckeditor/adapters/jquery.js"></script>
+<style>
+#editable {
+	padding: 10px;
+	float: left;
+}
+</style>
+
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN EXTRAS PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>内容编辑
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="alert alert-error " id="errtip" style="display: none;"></div>
+				<!-- BEGIN FORM-->
+				<form action="${contextPath}/Admin-Template-save.action"
+					id="templateAddForm" class="form-horizontal" method="post">
+					<input type="hidden" name="id" value="${(bean.id)?if_exists}" />
+					<div class="control-group">
+						<label class="control-label">模板名称</label>
+						<div class="controls">
+							<input class="span2 m-wrap" name="name" datatype="require|limit"
+								type="text" min="1" max="10" msg="模板名称不能为空"
+								value="${(bean.name)?if_exists}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">模板路径</label>
+						<div class="controls">
+							<input class="span4 m-wrap" name="templatePath"
+								datatype="require|limit" type="text" min="1" max="200"
+								msg="模板路径不能为空" value="${(bean.templatePath)?if_exists}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">模板关联key</label>
+						<div class="controls">
+							<textarea class="span6  m-wrap" rows="2" id="groupKeys"
+								name="groupKeys" datatype="require|limit" type="text" min="1"
+								max="500" msg="模板路径不能为空">${(bean.groupKeys)?if_exists}</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">是否有效</label>
+						<div class="controls"><@select paramCode=iseffCode
+							value=(bean.iseff)?if_exists item=' name="iseff"
+							datatype="require" msg="是否有效不能为空"'/></div>
+					</div>
+					<div class="form-actions">
+						<button type="button" id="template_save_btn" class="btn green">保存</button>
+						<button type="button" id="template_return_btn" class="btn ">返回</button>
+
+					</div>
+				</form>
+				<!-- END FORM-->
+			</div>
+		</div>
+		<!-- END EXTRAS PORTLET-->
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		tableAction.initSaveAction({
+			formId : 'templateAddForm',
+			queryUrl : '${contextPath}/Admin-Template-show.action',
+			saveUrl : '${contextPath}/Admin-Template-save.action',
+			saveBtnId : 'template_save_btn'
+		});
+
+		$("#template_return_btn").bind("click", function() {
+			var url = '${contextPath}/Admin-Template-show.action';
+			main.addContainer(url);
+		});
+	});
+</script>
+

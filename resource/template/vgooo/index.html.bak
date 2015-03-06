@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> 
+  <title>幻想曲通讯-专业手机导购</title> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"> 
+  <meta http-equiv="Content-Language" content="zh-CN"> 
+  <meta http-equiv="pragma" content="no-cache"> 
+  <meta content="手机,报价,参数,视频,介绍,新闻,评测,维修,售后,专业,导购" name="keywords"> 
+  <meta content="幻想曲通讯于2004年11月创建第一间专卖店，主要从事手机销售、手机产业资讯、手机售后服务。到目前幻想曲在广州、佛山、 深圳市区等繁华地段已拥有41间手机专卖店，11间大型售后服务中心。秉着诚信经营，以客为本的宗旨，在短短8年时间里获得了广大消费者的认可。" name="Description"> 
+  <meta content="MSHTML 6.00.2900.2180" name="GENERATOR"> 
+  <link href="${contextPath}/vgooo/css/vgooo.css" type="text/css" rel="stylesheet"> 
+  <link href="vgooo/css/jquery.autocomplete.css" type="text/css" rel="stylesheet"> 
+  <script type="text/javascript">var website_domain = 'http://www.vgooo.com';var upload_domain = 'http://upload.vgooo.com'; var baseUrl = '/index.php';var shop_server_url = 'http://www.vgooo.com';var userBaseUrl = 'http://www.vgooo.com/user';var news_domain = 'http://news.vgooo.com';var js_cookie_expire = 7;var cookie_path = '/';var cookie_host = 'vgooo.com';var user_server_url = 'http://www.vgooo.com/user';var plug_server_url = 'http://plug.vgooo.com';</script> 
+  <script type="text/javascript">
+            try{
+                if(!getCookie("WWWVGOOO")){
+                    var mobilebrowser_list=new Array('iphone','ipad','ipod','android','phone','mobile','wap','netfront','java','opera mobi','opera mini','ucweb','windows ce','symbian','series','webos','sony','blackberry','dopod','nokia','samsung','palmsource','xda','pieplus','meizu','midp','cldc','motorola','foma','docomo','up.browser','up.link','blazer','helio','hosin','huawei','novarra','coolpad','webos','techfaith','palmsource','alcatel','amoi','ktouch','nexian','ericsson','philips','sagem','wellcom','bunjalloo','maui','smartphone','iemobile','spice','bird','zte-','longcos','pantech','gionee','portalmmm','jig browser','hiptop','benq','haier','\^lct','320x320','240x320','176x220','800x480','960x540');
+                    var useragent=navigator.userAgent.toLowerCase();
+                    var regexp=new RegExp(mobilebrowser_list.join('|'));
+                    var res=useragent.match(regexp);
+                    delete regexp,mobilebrowser_list;
+                    if(res){
+                        if(res=='ipad'){}
+                        else if(res=='android'){
+                            if(useragent.indexOf('mobile')>-1){
+                                location.href='http://3g.vgooo.com/index';}
+                            else if(window.screen.width+window.screen.height>2000){}}
+                        else{location.href='http://3g.vgooo.com/index';}}
+                    else if(window.screen.width+window.screen.height<1501){
+                        location.href='http://3g.vgooo.com/index';}}
+            }catch(e){}
+            function getCookie(sName){var aCookie=document.cookie.split("; ");var lastMatch=null;for(var i=0;i<aCookie.length;i++){var aCrumb=aCookie[i].split("=");if(sName==aCrumb[0]){lastMatch=aCrumb;break;}}if(lastMatch){var v=lastMatch[1];if(v===undefined)return v;return unescape(v);}return null;}</script> 
+  <script type="text/javascript" src="vgooo/js/jquery.js"></script> 
+  <script src="vgooo/js/jquery.cookie.js" type="text/javascript"></script> 
+  <script src="vgooo/js/vgooo.js" type="text/javascript"></script> 
+  <script src="vgooo/js/vgooo.global.js" type="text/javascript"></script> 
+  <script type="text/javascript" src="vgooo/js/jquery.autocomplete.js"></script> 
+  <style>
+
+		div.editable
+		{
+			border: solid 2px transparent;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		div.editable:hover
+		{
+			border-color: black;
+		}
+
+	</style>
+	
+ </head> 
+ <body> 
+  <div id="bigdiv"> 
+   <div id="head"> 
+    <div class="head_top"> 
+     <div class="logo">
+      <a href="vgooo/"><img alt="幻想曲通讯" src="vgooo/http//upload.vgooo.com/images/2015/02/16/logo/1424053200.jpg"></a>
+     </div> 
+     <div class="login"> 
+      <span class="beforelogin" style="display:none;"><img src="vgooo/images/ui/vgooo.gif"><a onclick="loginpop();">登录</a></span> 
+      <span class="afterlogin" style="display:none;"><img src="vgooo/images/ui/vgooo.gif">Hi，<a href="vgooo/user442278717"><em></em></a>&nbsp;<ins>|</ins>&nbsp;<a href="vgooo/userlogout105433778">退出</a></span> 
+      <dl class="tool_dd"> 
+       <dt> 
+        <span><img src="vgooo/images/ui/tools_icon.gif"><a>网站工具</a></span> 
+       </dt> 
+       <dd> 
+        <div>
+         <span></span>
+        </div> 
+        <table> 
+         <tbody> 
+          <tr> 
+           <td><p><a href="vgooo/ereport" target="_blank" rel="nofollow"><img src="vgooo/images/ui/tool_icon1.gif"></a><br><a href="vgooo/ereport1595740379" target="_blank" rel="nofollow">错误举报</a></p></td> 
+           <td><p><a rel="nofollow" href="vgooo/userintegration" target="_blank"><img src="vgooo/images/ui/tool_icon3.gif"></a><br><a rel="nofollow" href="vgooo/userintegration1592776242" target="_blank">基金任务</a></p></td> 
+           <td><p><a href="vgooo/introhelpindex.html" target="_blank" rel="nofollow"><img src="vgooo/images/ui/tool_icon4.gif"></a><br><a href="vgooo/introhelpindex.html" target="_blank" rel="nofollow">帮助中心</a></p></td> 
+          </tr> 
+          <tr> 
+           <td><p><a rel="nofollow" href="vgooo/vip" target="_blank"><img src="vgooo/images/ui/tool_icon5.gif"></a><br><a rel="nofollow" href="vgooo/vip445720670" target="_blank">VIP查询</a></p></td> 
+           <td><p><a rel="nofollow" href="vgooo/httpzt.vgooo.com20110610" target="_blank"><img src="vgooo/images/ui/tool_icon7.gif"></a><br><a rel="nofollow" href="vgooo/httpzt.vgooo.com20110610" target="_blank">MODEL招聘</a></p></td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </dd> 
+      </dl> 
+      <div class="login_tips user_notice" style="display:none;"> 
+       <ul style="margin-top: 0px;" id="user_notice"> 
+       </ul> 
+       <p><a><img class="notice_close" src="vgooo/images/ui/close2.gif"></a></p> 
+      </div> 
+     </div> 
+    </div>  
+    <div class="nav" class="editable" > 
+     <ul> 
+     	<#list categoryRender.data.SITE_NAV as nav >
+     	      <li><a title="${nav.name}" href="vgooo/categorysai-0-0-0-0-0-0-1.html">${nav.name}</a></li> 
+     	</#list>
+      <!--  li><a class="crumb" title="首页" href="vgooo/">首页</a></li> 
+      <li><a title="手机中心" href="vgooo/categorysai-0-0-0-0-0-0-1.html">手机中心</a></li> 
+      <li><a title="优惠券" href="vgooo/httpplug.vgooo.comcoupon">优惠券<img src="vgooo/images/ui/arrow_coupon.png"></a></li> 
+      <li><a title="V频道" href="vgooo/httpnews.vgooo.com">V频道</a></li> 
+      <li><a title="售后服务" href="vgooo/httpsh.vgooo.com">售后服务</a></li> 
+      <li><a title="VIP/基金" href="vgooo/httpvip.vgooo.com">VIP/基金</a></li> 
+      <li><a title="联通4G" href="vgooo/httpplug.vgooo.comwcdma2">联通4G</a></li --> 
+     </ul> 
+     <p> <span class="l"></span> <span class="c"><a rel="nofollow" href="vgooo/cartconfirm1644567799">购物车(<em id="loadCartInfo">0</em>)件</a></span> <span class="r"></span> </p> 
+    </div> 
+ 
+    <div id="search"> 
+     <dl class="search"> 
+      <form id="Vgooo_Form_top" name="Vgooo_Form_top" action="http://www.vgooo.com/search/all" method="get"> 
+       <input type="hidden" name="r" value="2022492282"> 
+       <dt> 
+        <input class="search_txt" type="text" onkeypress="var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;if(keyCode==13){quicksearch();return false;}" id="keyword" onclick="if(this.value=='输入品牌 或 手机型号'){this.value=''}" value="输入品牌 或 手机型号" name="keyword"> 
+        <input class="search_bnt" title="点击进行搜索" type="button" onclick="quicksearch();"> 
+       </dt> 
+      </form> 
+      <dd> 
+       <p>热门机型: <a href="vgooo/productxiaomi_MI4.html" title="小米4" target="_blank">小米4</a> <a href="vgooo/productHUAWEI_mate7_TD.html" title="华为Mate7" target="_blank">华为Mate7</a> <a href="vgooo/productsony_L55u.html" title="索尼Z3" target="_blank">索尼Z3</a> <a href="vgooo/" title="" target="_blank"></a> </p> 
+       <span><a href="vgooo/categorysai-0-0-0-0-0-0-1.html">快速选机</a><a href="vgooo/mobilehotestprice">最新调价</a></span> 
+      </dd> 
+     </dl> 
+     <dl class="brand"> 
+      <dt> 
+       <strong>全部商品</strong> 
+       <div class="all"> 
+        <div class="all_div"> 
+         <div class="all_bg"></div> 
+         <div class="all_txt"> 
+          <p><strong>产品：</strong><small><a href="vgooo/categorysai-106-0-0-0-0-0-1.html">苹果</a><a href="vgooo/categorysai-103-0-0-0-0-0-1.html">三星</a><a href="vgooo/categorysai-105-0-0-0-0-0-1.html">HTC</a><a href="vgooo/categorysai-121-0-0-0-0-0-1.html">索尼</a><a href="vgooo/categorysai-101-0-0-0-0-0-1.html">诺基亚</a><a href="vgooo/categorysai-154-0-0-0-0-0-1.html">小米</a><a href="vgooo/categorysai-115-0-0-0-0-0-1.html">魅族</a><a href="vgooo/categorysai-131-0-0-0-0-0-1.html">华为</a><a href="vgooo/categorysai-162-0-0-0-0-0-1.html">酷派</a><a href="vgooo/categorysai-158-0-0-0-0-0-1.html">联想</a><a href="vgooo/categorysai-160-0-0-0-0-0-1.html">OPPO</a><a href="vgooo/categorysai-169-0-0-0-0-0-1.html">vivo</a><a href="vgooo/categorysai-182-0-0-0-0-0-1.html">TCL</a><a href="vgooo/categorysai-159-0-0-0-0-0-1.html">中兴</a><a href="vgooo/categorysai-186-0-0-0-0-0-1.html">卓普</a><a href="vgooo/categorysai-187-0-0-0-0-0-1.html">唯米</a><a href="vgooo/categorysai-188-0-0-0-0-0-1.html">优购</a><a href="vgooo/categorysai-189-0-0-0-0-0-1.html">凯利通</a><a href="vgooo/categorysai-184-0-0-0-0-0-1.html">美图</a><a href="vgooo/categorysai-104-0-0-0-0-0-1.html">LG</a><a href="vgooo/categorysai-157-0-0-0-0-0-1.html">谷歌</a><a href="vgooo/categorysai-180-0-0-0-0-0-1.html">Nubia</a><a href="vgooo/categorysai-102-0-0-0-0-0-1.html">索爱</a><a href="vgooo/categorysai-107-0-0-0-0-0-1.html">夏普</a><a href="vgooo/categorysai-113-0-0-0-0-0-1.html">摩拉</a><a href="vgooo/categorysai-178-0-0-0-0-0-1.html">金立</a><a href="vgooo/categorysai-185-0-0-0-0-0-1.html">博瑞</a></small></p> 
+          <p><strong>配件：</strong><small><a href="vgooo/peijian20.html">手机保护套</a><a href="vgooo/peijian13.html">屏幕保护膜</a><a href="vgooo/peijian15.html">蓝牙耳机</a><a href="vgooo/peijian17.html">手机电池</a><a href="vgooo/peijian16.html">内存卡</a><a href="vgooo/peijian18.html">其他配件</a></small></p> 
+         </div> 
+        </div> 
+       </div> 
+      </dt> 
+      <dd> 
+       <ul> 
+        <li><a href="vgooo/categorysai-106-0-0-0-0-0-1.html"><img alt="苹果" src="vgooo/http//upload.vgooo.com/images/old_dir/mobilebrand//20110414/1214043020110839.gif"></a></li> 
+        <li><a href="vgooo/categorysai-103-0-0-0-0-0-1.html"><img alt="三星" src="vgooo/http//upload.vgooo.com/images/old_dir/mobilebrand//20110301/0401034820112059.gif"></a></li> 
+        <li><a href="vgooo/categorysai-105-0-0-0-0-0-1.html"><img alt="HTC" src="vgooo/http//upload.vgooo.com/images/2013/04/07/mobilebrand//1365327254.png"></a></li> 
+        <li><a href="vgooo/categorysai-121-0-0-0-0-0-1.html"><img alt="索尼" src="vgooo/http//upload.vgooo.com/images/old_dir/mobilebrand//20110504/1504052420114227.gif"></a></li> 
+        <li><a href="vgooo/categorysai-101-0-0-0-0-0-1.html"><img alt="诺基亚" src="vgooo/http//upload.vgooo.com/images/old_dir/mobilebrand//20110301/0401033020111979.gif"></a></li> 
+        <li><a href="vgooo/categorysai-154-0-0-0-0-0-1.html"><img alt="小米" src="vgooo/http//upload.vgooo.com/images/2013/01/23/mobilebrand//1358934404.jpg"></a></li> 
+        <li><a href="vgooo/categorysai-115-0-0-0-0-0-1.html"><img alt="魅族" src="vgooo/http//upload.vgooo.com/images/2013/01/23/mobilebrand//1358934392.jpg"></a></li> 
+        <li><a href="vgooo/categorysai-131-0-0-0-0-0-1.html"><img alt="华为" src="vgooo/http//upload.vgooo.com/images/2012/12/26/mobilebrand//1356495868.jpg"></a></li> 
+       </ul> 
+       <p><a href="vgooo/categorysai-0-0-0-0-0-0-1.html">更多品牌</a></p> 
+      </dd> 
+     </dl> 
+    </div> 
+   </div> 
+   <div id="content"> 
+    <div class="layoutdiv"> 
+     <script type="text/javascript" src="vgooo/js/v2.js"></script> 
+     <dl class="news_flash"> 
+      <dd>
+       <a target="_blank" href="vgooo/introabouttext-306.html"><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/16/ggg//1424072611.jpg"></a> 
+      </dd>
+      <dd>
+       <a target="_blank" href="vgooo/introabouttext-305.html"><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/16/ggg//1424064238.jpg"></a> 
+      </dd>
+      <dd>
+       <a target="_blank" href="vgooo/httpwww.vgooo.cnvideo295.html" rel="nofollow"><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/17/ggg//1424146064.jpg"></a> 
+      </dd>
+      <dd>
+       <a target="_blank" href="vgooo/httpwww.vgooo.cnvideo294.html" rel="nofollow"><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/16/ggg//1424079710.jpg"></a> 
+      </dd>
+      <dd>
+       <a target="_blank" href="vgooo/httpwww.vgooo.cnvideo293.html" rel="nofollow"><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/15/ggg//1423981880.jpg"></a> 
+      </dd>
+      <dd>
+       <a target="_blank" href="vgooo/httpwww.vgooo.cnvideo292.html" rel="nofollow"><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/14/ggg//1423906184.jpg"></a> 
+      </dd>
+      <dd>
+       <a target="_blank" href="vgooo/httpwww.vgooo.cnvideo285.html" rel="nofollow"><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/09/ggg//1423480994.jpg"></a> 
+      </dd>
+      <dd>
+       <a target="_blank" href="vgooo/httpplug.vgooo.comwxbaoxiu" rel="nofollow"><img alt="" src="vgooo/http//upload.vgooo.com/images/2014/09/01/ggg//1409546267.jpg"></a> 
+      </dd>
+      <dt> 
+       <div class="flash_u"> 
+        <ul> 
+         <li><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/16/ggg//1424072651.jpg"></li> 
+         <li><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/16/ggg//1424064266.jpg"></li> 
+         <li><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/17/ggg//1424146075.jpg"></li> 
+         <li><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/16/ggg//1424079720.jpg"></li> 
+         <li><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/15/ggg//1423981901.jpg"></li> 
+         <li><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/14/ggg//1423906194.jpg"></li> 
+         <li><img alt="" src="vgooo/http//upload.vgooo.com/images/2015/02/09/ggg//1423481005.jpg"></li> 
+         <li><img alt="" src="vgooo/http//upload.vgooo.com/images/2014/09/01/ggg//1409546277.jpg"></li> 
+        </ul> 
+       </div> 
+       <div> 
+        <div class="flash_l">
+         <a><img src="vgooo/images/ui/flash_l.png"></a>
+        </div> 
+        <div class="flash_r">
+         <a><img src="vgooo/images/ui/flash_r.png"></a>
+        </div> 
+       </div> 
+      </dt> 
+     </dl> 
+    </div> 
+    <div class="layoutdiv"> 
+     <h6><a href="vgooo/httpnews.vgooo.com"></a><img src="vgooo/images/ui/hot_title12.png"><span class="h6_l"></span><span class="h6_r"></span></h6> 
+     <div class="bor3"> 
+      <dl class="dtnav phone"> 
+       <dd> 
+        <ul class="list1"> 
+        <#list categoryRender.data.HOT_PHONE_LIST as hotphonelist > 
+   	        <li> <p><a href="vgooo/productApple_iPhone_6.html" title="${hotphonelist.name}" target="_blank"><img src="${contextPath}${hotphonelist.imageUrl}" alt="${hotphonelist.name}"></a></p> <p><a href="vgooo/productApple_iPhone_6.html" title="${hotphonelist.name}" target="_blank">${hotphonelist.name}</a></p> <p> <em> ${hotphonelist.shortDesc} </em> </p> </li>
+     	</#list>
+     	<!--  
+         <li> <p><a href="vgooo/productApple_iPhone_6.html" title="苹果 iPhone 6" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2014/09/17/prodthumbnail/1410938825.jpg" alt="苹果 iPhone 6"></a></p> <p><a href="vgooo/productApple_iPhone_6.html" title="苹果 iPhone 6" target="_blank">苹果 iPhone 6 </a></p> <p> <em> ¥4680 </em> </p> </li> 
+         <li> <p><a href="vgooo/productApple_iPhone_6_plus.html" title="苹果 iPhone 6 Plus" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2014/09/17/prodthumbnail/1410942884.jpg" alt="苹果 iPhone 6 Plus"></a></p> <p><a href="vgooo/productApple_iPhone_6_plus.html" title="苹果 iPhone 6 Plus" target="_blank">苹果 iPhone 6 Plus </a></p> <p> <em> ¥5250 </em> </p> </li> 
+         <li> <p><a href="vgooo/productHUAWEI_rongyao6_plus.html" title="华为 荣耀6 Plus" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/13/prodthumbnail/1423810552.jpg" alt="华为 荣耀6 Plus"></a></p> <p><a href="vgooo/productHUAWEI_rongyao6_plus.html" title="华为 荣耀6 Plus" target="_blank">华为 荣耀6 Plus</a></p> <p> <em> ¥2600 </em> </p> </li> 
+         <li> <p><a href="vgooo/productvivo_Y29l.html" title="vivo Y29L" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/06/prodthumbnail/1423207879.jpg" alt="vivo Y29L"></a></p> <p><a href="vgooo/productvivo_Y29l.html" title="vivo Y29L" target="_blank">vivo Y29L</a></p> <p> <em> ¥1998 </em> </p> </li> 
+         <li> <p><a href="vgooo/productSamsung_Galaxy_A7.html" title="三星 Galaxy A7" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/01/21/prodthumbnail/1421813548.jpg" alt="三星 Galaxy A7"></a></p> <p><a href="vgooo/productSamsung_Galaxy_A7.html" title="三星 Galaxy A7" target="_blank">三星 Galaxy A7</a></p> <p> <em> ¥3050 </em> </p> </li> 
+         <li> <p><a href="vgooo/productSamsung_Galaxy_A5.html" title="三星 Galaxy A5" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2014/12/06/prodthumbnail/1417849254.jpg" alt="三星 Galaxy A5"></a></p> <p><a href="vgooo/productSamsung_Galaxy_A5.html" title="三星 Galaxy A5" target="_blank">三星 Galaxy A5</a></p> <p> <em> ¥2550 </em> </p> </li> 
+         <li> <p><a href="vgooo/productHUAWEI_play4x.html" title="华为 荣耀畅玩4X" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/01/20/prodthumbnail/1421736718.jpg" alt="华为 荣耀畅玩4X"></a></p> <p><a href="vgooo/productHUAWEI_play4x.html" title="华为 荣耀畅玩4X" target="_blank">华为 荣耀畅玩4X</a></p> <p> <em> ¥1199 </em> </p> </li> 
+         <li> <p><a href="vgooo/productvivo_X5_Max.html" title="vivo X5 Max" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/01/15/prodthumbnail/1421295359.jpg" alt="vivo X5 Max"></a></p> <p><a href="vgooo/productvivo_X5_Max.html" title="vivo X5 Max" target="_blank">vivo X5 Max</a></p> <p> <em> ¥2998 </em> </p> </li> 
+         <li> <p><a href="vgooo/productOPPO_N3.html" title="OPPO N3" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2014/12/22/prodthumbnail/1419220776.jpg" alt="OPPO N3"></a></p> <p><a href="vgooo/productOPPO_N3.html" title="OPPO N3" target="_blank">OPPO N3</a></p> <p> <em> ¥3999 </em> </p> </li> 
+         <li> <p><a href="vgooo/productOPPO_R5.html" title="OPPO R5" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2014/12/22/prodthumbnail/1419216638.jpg" alt="OPPO R5"></a></p> <p><a href="vgooo/productOPPO_R5.html" title="OPPO R5" target="_blank">OPPO R5</a></p> <p> <em> ¥2999 </em> </p> </li> 
+         <li> <p><a href="vgooo/productApple_iPad_Air_2.html" title="苹果 iPad Air 2" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2014/10/23/prodthumbnail/1414060436.jpg" alt="苹果 iPad Air 2"></a></p> <p><a href="vgooo/productApple_iPad_Air_2.html" title="苹果 iPad Air 2" target="_blank">苹果 iPad Air 2 </a></p> <p> <em> ¥3350 </em> </p> </li> 
+         <li> <p><a href="vgooo/productApple_iPad_mini_3.html" title="苹果 iPad mini 3" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2014/10/24/prodthumbnail/1414122460.jpg" alt="苹果 iPad mini 3"></a></p> <p><a href="vgooo/productApple_iPad_mini_3.html" title="苹果 iPad mini 3" target="_blank">苹果 iPad mini 3 </a></p> <p> <em> ¥2880 </em> </p> </li> 
+         <li> <p><a href="vgooo/productSamsung_N9100.html" title="三星 Galaxy Note 4" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2014/09/25/prodthumbnail/1411619099.jpg" alt="三星 Galaxy Note 4"></a></p> <p><a href="vgooo/productSamsung_N9100.html" title="三星 Galaxy Note 4" target="_blank">三星 Galaxy Note 4</a></p> <p> <em> ¥4680 </em> </p> </li> 
+         <li> <p><a href="vgooo/productApple_iPhone_5s.html" title="苹果 iPhone 5s" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2013/09/11/prodthumbnail/1378839318.jpg" alt="苹果 iPhone 5s"></a></p> <p><a href="vgooo/productApple_iPhone_5s.html" title="苹果 iPhone 5s" target="_blank">苹果 iPhone 5s </a></p> <p> <em> ¥3830 </em> </p> </li> 
+        -->
+        </ul> 
+       </dd> 
+      </dl> 
+     </div> 
+     <div class="bot3">
+      <span class="bot3_l"></span>
+      <span class="bot3_r"></span>
+     </div> 
+    </div> 
+    <div class="layoutdiv"> 
+     <h6><a href="vgooo/httpnews.vgooo.com"></a><img src="vgooo/images/ui/news_title12.png"><span class="h6_l"></span><span class="h6_r"></span></h6> 
+     <div class="bor3"> 
+      <ul class="news_list"> 
+       <li class="video" style="width: 224px;height:203px;padding:20px 0 0 17px;"> <p class="pic"><a href="vgooo/httpwww.vgooo.cnvideo296.html" title="骁龙810短板已修复 国内市场老大位置易主 资讯每日评0217" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/17/newsthumbnail/1424157350.jpg" alt="骁龙810短板已修复 国内市场老大位置易主 资讯每日评0217" style="width: 220px;height:156px; "><span style="background: url(&quot;../images/ui/new_video.png&quot;) no-repeat scroll 0 0 transparent !important;height: 52px;width: 52px;top:100px;"></span></a></p> <p class="name"><a href="vgooo/httpwww.vgooo.cnvideo296.html" title="骁龙810短板已修复 国内市场老大位置易主 资讯每日评0217" target="_blank" style="font-size: 14px;font-family: '微软雅黑','宋体';color:#666666;font-weight:bold; ">骁龙810短板已修复 国内市场老大位置易主 资讯每日评0217</a></p> </li> 
+       <li style="width: 224px;height:203px;padding:20px 0 0 17px;"> <p class="pic"><a href="vgooo/httpnews.vgooo.com2015021718535.html" title="微软上线Cortana小娜专题，Siri蒙羞" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/17/newsthumbnail/1424151597.jpg" alt="微软上线Cortana小娜专题，Siri蒙羞" style="width: 220px;height:156px; "><span></span></a></p> <p class="name"><a href="vgooo/httpnews.vgooo.com2015021718535.html" title="微软上线Cortana小娜专题，Siri蒙羞" target="_blank" style="font-size: 14px;font-family: '微软雅黑','宋体';color:#666666;font-weight:bold; ">微软上线Cortana小娜专题，Siri蒙羞</a></p> </li> 
+       <li style="width: 224px;height:203px;padding:20px 0 0 17px;"> <p class="pic"><a href="vgooo/httpnews.vgooo.com2015021718534.html" title="Wi-Fi已经过时 更高速度的Li-Fi即将到来" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/17/newsthumbnail/1424151422.jpg" alt="Wi-Fi已经过时 更高速度的Li-Fi即将到来" style="width: 220px;height:156px; "><span></span></a></p> <p class="name"><a href="vgooo/httpnews.vgooo.com2015021718534.html" title="Wi-Fi已经过时 更高速度的Li-Fi即将到来" target="_blank" style="font-size: 14px;font-family: '微软雅黑','宋体';color:#666666;font-weight:bold; ">Wi-Fi已经过时 更高速度的Li-Fi即将到来</a></p> </li> 
+       <li style="width: 224px;height:203px;padding:20px 0 0 17px;"> <p class="pic"><a href="vgooo/httpnews.vgooo.com2015021718533.html" title="三星GALAXY J1增强版发布 三大功能升级" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/17/newsthumbnail/1424151213.jpg" alt="三星GALAXY J1增强版发布 三大功能升级" style="width: 220px;height:156px; "><span></span></a></p> <p class="name"><a href="vgooo/httpnews.vgooo.com2015021718533.html" title="三星GALAXY J1增强版发布 三大功能升级" target="_blank" style="font-size: 14px;font-family: '微软雅黑','宋体';color:#666666;font-weight:bold; ">三星GALAXY J1增强版发布 三大功能升级</a></p> </li> 
+       <li style="width: 224px;height:203px;padding:20px 0 0 17px;"> <p class="pic"><a href="vgooo/httpnews.vgooo.com2015021718532.html" title="三星GALAXY S6电池容量曝光 支持无线充电" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/17/newsthumbnail/1424151002.jpg" alt="三星GALAXY S6电池容量曝光 支持无线充电" style="width: 220px;height:156px; "><span></span></a></p> <p class="name"><a href="vgooo/httpnews.vgooo.com2015021718532.html" title="三星GALAXY S6电池容量曝光 支持无线充电" target="_blank" style="font-size: 14px;font-family: '微软雅黑','宋体';color:#666666;font-weight:bold; ">三星GALAXY S6电池容量曝光 支持无线充电</a></p> </li> 
+       <li style="width: 224px;height:203px;padding:20px 0 0 17px;"> <p class="pic"><a href="vgooo/httpnews.vgooo.com2015021718531.html" title="Lumia 532正式发布：真便宜" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/17/newsthumbnail/1424150764.jpg" alt="Lumia 532正式发布：真便宜" style="width: 220px;height:156px; "><span></span></a></p> <p class="name"><a href="vgooo/httpnews.vgooo.com2015021718531.html" title="Lumia 532正式发布：真便宜" target="_blank" style="font-size: 14px;font-family: '微软雅黑','宋体';color:#666666;font-weight:bold; ">Lumia 532正式发布：真便宜</a></p> </li> 
+       <li style="width: 224px;height:203px;padding:20px 0 0 17px;"> <p class="pic"><a href="vgooo/httpnews.vgooo.com2015021718530.html" title="小米难入美国市场 运营商补贴成头等难题" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/17/newsthumbnail/1424150267.jpg" alt="小米难入美国市场 运营商补贴成头等难题" style="width: 220px;height:156px; "><span></span></a></p> <p class="name"><a href="vgooo/httpnews.vgooo.com2015021718530.html" title="小米难入美国市场 运营商补贴成头等难题" target="_blank" style="font-size: 14px;font-family: '微软雅黑','宋体';color:#666666;font-weight:bold; ">小米难入美国市场 运营商补贴成头等难题</a></p> </li> 
+       <li class="video" style="width: 224px;height:203px;padding:20px 0 0 17px;"> <p class="pic"><a href="vgooo/httpnews.vgooo.comvideoother_other_1990.html" title="指纹解锁拉链神设计 中国移动4G满载而归 资讯每日评0216" target="_blank"><img src="vgooo/http//upload.vgooo.com/images/2015/02/16/newsthumbnail/1424083858.jpg" alt="指纹解锁拉链神设计 中国移动4G满载而归 资讯每日评0216" style="width: 220px;height:156px; "><span style="background: url(&quot;../images/ui/new_video.png&quot;) no-repeat scroll 0 0 transparent !important;height: 52px;width: 52px;top:100px;"></span></a></p> <p class="name"><a href="vgooo/httpnews.vgooo.comvideoother_other_1990.html" title="指纹解锁拉链神设计 中国移动4G满载而归 资讯每日评0216" target="_blank" style="font-size: 14px;font-family: '微软雅黑','宋体';color:#666666;font-weight:bold; ">指纹解锁拉链神设计 中国移动4G满载而归 资讯每日评0216</a></p> </li> 
+      </ul> 
+     </div> 
+     <div class="bot3">
+      <span class="bot3_l"></span>
+      <span class="bot3_r"></span>
+     </div> 
+    </div> 
+    <div class="layoutdiv"> 
+     <div class="ad_l">
+      <a href="vgooo/productOPPO_N3.html" target="_blank"><img border="0" src="vgooo/http//upload.vgooo.com/images/2015/01/14/ggg//1421218215.jpg"></a>
+     </div> 
+     <div class="ad_r">
+      <a href="vgooo/productApple_iPhone_6_plus.html" target="_blank"><img border="0" src="vgooo/http//upload.vgooo.com/images/2015/01/14/ggg//1421218002.jpg"></a>
+     </div> 
+    </div> 
+    <div class="layout"> 
+     <div class="index_bot"> 
+      <dl class="bot_1"> 
+       <dd>
+        <img src="vgooo/images/ui/bot_icon1.gif">
+       </dd> 
+      </dl> 
+      <dl class="bot_2"> 
+       <dt>
+        <img src="vgooo/images/ui/bot_icon2.gif">
+       </dt> 
+       <dd> 
+        <p><img src="vgooo/images/ui/bot_icon5.gif"></p> 
+        <p> <a href="vgooo/booking663143724" rel="nofollow">预约购机</a> <a href="vgooo/introhelpviewtext-40.html" rel="nofollow">分期付款</a> <a href="vgooo/introhelpviewtext-152.html" rel="nofollow">货到付款</a> <a href="vgooo/mobileorderqueryindex.html">发货查询</a> </p> 
+       </dd> 
+      </dl> 
+      <dl class="bot_3"> 
+       <dt>
+        <img src="vgooo/images/ui/bot_icon3.gif">
+       </dt> 
+       <dd> 
+        <p> <a target="_blank" href="vgooo/introsubbranchview-1001.html">越秀区</a> <a target="_blank" href="vgooo/introsubbranchview-1039.html">荔湾区</a> <a target="_blank" href="vgooo/introsubbranchview-1016.html">天河区</a> <a target="_blank" href="vgooo/introsubbranchview-1005.html">佛山禅城区</a> <a target="_blank" href="vgooo/introsubbranchview-1034.html">佛山南海区</a> <a target="_blank" href="vgooo/introsubbranchview-1030.html">黄埔区</a> <a target="_blank" href="vgooo/introsubbranchview-1044.html">白云区</a> <a target="_blank" href="vgooo/introsubbranchview-1004.html">海珠区</a> <a target="_blank" href="vgooo/introsubbranchview-1065.html">佛山顺德区</a> <a target="_blank" href="vgooo/introsubbranchview-1082.html">佛山三水区</a> </p> 
+       </dd> 
+      </dl> 
+      <dl class="bot_4"> 
+       <dd>
+        <img src="vgooo/images/ui/bot_icon4.gif">
+       </dd> 
+      </dl> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="new_zx" style="top:760px;">
+    <a href="vgooo/kefu.htm" target="_blank"><img src="vgooo/images/ui/new_zx.gif"></a>
+   </div> 
+   <script type="text/javascript">
+    $().ready(function() {
+        jQuery.ajax({
+            url: '/index.php/indexstatic/index/',
+            data: 'time=1424179338',
+            type: 'GET',
+            beforeSend: function() {},
+            error: function(request) {},
+            success: function(data) {}
+        });
+        
+        $('.roll_top').html("");
+        newzx();
+    });
+    
+    $(window).resize(function(){ newzx(); });
+    $(window).scroll(function() {
+            newzx();
+	});
+        
+	$(".phone dd:first").addClass("block");
+	$(".phone dt > span").each(function(index){
+        $(this).click(function(){
+            if (index==0) $('#phone_url').attr("href","/category/sai-0-0-0-0-0-0-1.html");
+            else $('#phone_url').attr("href","/category/more.html");
+                
+            $(".phone dd").removeClass("block");
+            $(".phone dt span").removeClass("crumb");
+            $(".phone dd").eq(index).addClass("block");
+            $(this).addClass("crumb");
+        });
+    });
+    
+    function newzx()
+    {
+         $(".new_zx").css("top",$(document).scrollTop()+$(window).height() * 0.75);
+    }
+</script> 
+   <div id="footer"> 
+    <dl> 
+     <dt style="width:170px;"></dt> 
+     <dd class="about" style="width:245px;"> 
+      <p>
+    <#list categoryRender.data.HELP_NAV as nav ><a rel="nofollow" title="${nav.name}" href="vgooo/introabouttext-3.html" target="_blank">${nav.name}</a>|</#list>  
+  <!--  <a rel="nofollow" title="关于我们" href="vgooo/introabouttext-3.html" target="_blank">关于我们</a>|<a title="公司动态" href="vgooo/introaboutlist-1.html" target="_blank">公司动态</a>|<a rel="nofollow" title="活动专题" href="vgooo/introaboutplug-167.html" target="_blank">活动专题</a>|<a title="网站公告" href="vgooo/introaboutlist-72.html" target="_blank">网站公告</a><a rel="nofollow" title="联系我们" href="vgooo/introabouttext-9.html" target="_blank">联系我们</a>|<a rel="nofollow" title="合作伙伴" href="vgooo/introabouttext-4.html" target="_blank">合作伙伴</a>|<a title="友情链接" href="vgooo/introabouttext-195.html" target="_blank">友情链接</a>|<a rel="nofollow" title="高薪诚聘" href="vgooo/introaboutjslist-8.html" target="_blank">高薪诚聘</a> 
+   -->    </p> 
+     </dd> 
+     <dd class="copyright"> 
+      <p>版权所有：2004-2014幻想曲通讯 </p> 
+      <p><span>通信管理局粤ICP备10088497</span>www.vgooo.com</p> 
+     </dd> 
+     <dd class="hours"> 
+      <p><a href="vgooo/introsubbranchview-1001.html">幻想曲通讯实体店营业时间</a></p> 
+      <p><a href="vgooo/httpweibo.comd015" target="_blank"><img src="vgooo/images/ui/sina.gif" alt="关注幻想曲通讯">关注幻想曲通讯</a></p> 
+     </dd> 
+    </dl> 
+   </div> 
+   <div class="roll_top_div"> 
+    <div class="roll_top" style="display:none;">
+     <a onclick="window.scrollTo(0,0);"><img src="vgooo/images/ui/top.gif"></a>
+    </div> 
+   </div> 
+  </div> 
+  <div class="mask" style="display:none;"></div> 
+  <div class="login_pop"> 
+   <div class="login_popbg"></div> 
+   <div class="login_popdiv"> 
+    <div class="login_pop_title">
+     <img src="vgooo/images/ui/login_title1.gif">
+     <span><a><img class="close_gif" src="vgooo/images/ui/close3.gif"></a></span>
+    </div> 
+    <div class="login_pop_l"> 
+     <div class="pop_l_title">
+      <img src="vgooo/images/ui/login_pop_title2.gif">
+     </div> 
+     <dl> 
+      <dt>
+       E-MAIL：
+      </dt> 
+      <dd class="crumb"> 
+       <p class="inputbg1"><input type="text" name="user_name_quick" id="user_name_quick" onblur="quick();" value=""></p> 
+       <i id="user_name_tips"></i> 
+      </dd> 
+     </dl> 
+     <dl> 
+      <dt>
+       密码：
+      </dt> 
+      <dd> 
+       <p class="inputbg1"><input type="password" name="password_quick" id="password_quick" onblur="quick();" value=""></p> 
+       <i id="pass_tips"></i> 
+      </dd> 
+     </dl> 
+     <dl> 
+      <dd> 
+       <label><input name="is_remember" type="checkbox" value="1" id="is_remember">记住我</label> 
+       <a href="vgooo/userforget">找回密码</a> 
+       <a style="margin-left:20px;" href="vgooo/userregister">注册账号</a> 
+      </dd> 
+     </dl> 
+     <dl> 
+      <dd>
+       <input class="login_bnt1" name="" type="button" value="" onclick="submitLogin();">
+      </dd> 
+     </dl> 
+    </div> 
+    <div class="login_pop_r"> 
+     <p><img src="vgooo/images/ui/login_pop_title1.gif"></p> 
+     <p><a href="vgooo/userloginsina"><img alt="新浪微博登陆" src="vgooo/images/ui/pop_sina.gif"></a></p> 
+     <p><a href="vgooo/userloginqq"><img alt="QQ登陆" src="vgooo/images/ui/pop_tx.gif"></a></p> 
+    </div> 
+   </div> 
+  </div> 
+  <div style="display:none">
+   <script src="vgooo/https96.cnzz.comstat.phpid=1551812&amp;web_id=1551812" language="JavaScript"></script>
+  </div> 
+  <div class="compop" style="top:40%;left:40%;display: none;z-index: 1000;" id="msg"> 
+   <span class="compop_l"></span> 
+   <span class="compop_u" id="msg_1"></span> 
+   <span class="compop_r"></span> 
+  </div>  
+   
+ </body>
+  
+</html>
