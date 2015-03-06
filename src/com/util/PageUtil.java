@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class PageUtil {
 
-    private static final int DEFAULT_PAGE_SIZE = 2;
+    private static final int DEFAULT_PAGE_SIZE = 10;
 
     /**
      * 获取 offset

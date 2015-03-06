@@ -196,7 +196,7 @@ public class BannerAction extends BaseAction {
 	}
 
 	/**
-	 * 保存导航栏
+	 * 保存
 	 */
 	public void save() {
 		ResponseData responseData = null;
@@ -221,7 +221,7 @@ public class BannerAction extends BaseAction {
 	}
 
 	/**
-	 * 删除导航栏
+	 * 删除
 	 */
 	public void delete() {
 		ResponseData responseData = null;

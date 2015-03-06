@@ -41,7 +41,7 @@
 				<label class="control-label">导航名称<span class="required">*</span></label>
 				<div class="controls">
 					<input type="text" name="name" id="name" require="true"
-						datatype="require|limit" min="1" max="10" msg="导航名称不能为空"
+						datatype="require"  msg="导航名称不能为空"
 						class="span3 m-wrap" value="${(bean.name)?if_exists}" />
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 					<span class="btn  fileinput-button"> <i
 						class="icon-plus icon-white"></i> <span>选择文件...</span> <input
 						type="file" id="upfile1" name="upfile1" />
-					</span> <input type="hidden" id="imageUrl" name="imageUrl" /> <a
+					</span> <input type="hidden" id="imageUrl" name="imageUrl" value="${(bean.imageUrl)?if_exists}"  /> <a
 						class="btn start" onclick="uploadNavPic();"> <i
 						class="icon-upload icon-white"></i> <span>上传</span>
 					</a> <br> <span class="alert alert-error" id="upfile1_error_tip"

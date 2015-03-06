@@ -69,6 +69,7 @@
 									<tr>
 										<th style="width: 8px;"><input type="checkbox"
 											class="group-checkable" data-set="#bannerTable .checkboxes" /></th>
+										<th>分组</th> 
 										<th>名称</th>
 										<th>链接</th>
 										<th>图标</th>
@@ -83,6 +84,7 @@
 									<tr class="odd gradeX">
 										<td><input type="checkbox" class="checkboxes"
 											value="${nav.id}" /></td>
+										<td>${nav.groupKey}</td>
 										<td>${nav.name}</td>
 										<td>${nav.linkUrl}</td>
 										<td>${nav.imageUrl}</td>
@@ -119,7 +121,8 @@
 									editUrl : '${contextPath}/Admin-Banner-showEditForm.action',
 									queryBtnId : 'banner_query_btn',
 									deleteBtnId : 'banner_del_btn',
-									editBtnId : 'banner_add_btn',
+									editBtnId : 'banner_add_btn', 
+									isPopEditForm: false,
 									searchFormId : 'bannerSearchForm'
 								});
 

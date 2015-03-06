@@ -33,9 +33,26 @@ public class GroupService {
 	 */
 	public List<SysParam> getGroupParamList(GroupType groupType)
 			throws DaoException {
-		List<WebGroup> grouplist = baseDao.find("groupType='" + groupType.getCode()
-				+ "' and iseff=" + IsEff.EFFECTIVE + " order by id",
-				WebGroup.class);
+		List<WebGroup> grouplist = baseDao.find(
+				"groupType='" + groupType.getCode() + "' and iseff="
+						+ IsEff.EFFECTIVE + " order by id", WebGroup.class);
+		List<SysParam> sysParamList = new ArrayList<SysParam>();
+		for (WebGroup g : grouplist) {
+			SysParam p = new SysParam();
+			p.setParamValue(g.getGroupKey());
+			p.setParamName(g.getName());
+			sysParamList.add(p);
+		}
+
+		return sysParamList;
+	}
+
+	/**
+	 *获取所有分组列表，并封装到{@link #SysParam}对象列表返回。
+	 */
+	public List<SysParam> getGroupParamList() throws DaoException {
+		List<WebGroup> grouplist = baseDao.find("iseff=" + IsEff.EFFECTIVE
+				+ " order by id", WebGroup.class);
 		List<SysParam> sysParamList = new ArrayList<SysParam>();
 		for (WebGroup g : grouplist) {
 			SysParam p = new SysParam();

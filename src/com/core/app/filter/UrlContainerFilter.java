@@ -38,17 +38,11 @@ public class UrlContainerFilter implements Filter {
 		String menuUrl = reqUrl.substring(reqUrl.indexOf(contextPath)
 				+ contextPath.length());
 		String container = request.getParameter("container");
-		/*
-		 * if (menuUrl.endsWith(".jsp")) { String actionUrl =
-		 * "/Public_JspForward_forward.action?jumpPage=" + menuUrl;
-		 * System.out.println(actionUrl);
-		 * request.getRequestDispatcher(actionUrl).forward(request, response); }
-		 * else
-		 */if (!StringUtils.isEmpty(container)) {
-			request.setAttribute("includejsp", menuUrl);
-			String actionUrl = "/" + container;
-			request.getRequestDispatcher(actionUrl).forward(request, response);
-
+		 if (menuUrl.startsWith("/vgooo")) { 
+			//Busi-Html-redirect.action?page=vgooo/index.html
+			 
+			String actionUrl = "Busi-Html-redirect.action?page="+menuUrl;
+			request.getRequestDispatcher(actionUrl).forward(request, response); 
 		} 
 		filterChain.doFilter(request, response);
 	}

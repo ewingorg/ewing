@@ -26,6 +26,15 @@ public class WebCategory {
 	private Integer rank;
 	private String groupType;
 	private String tempalte;
+	private String shortDesc;
+
+	public String getShortDesc() {
+		return shortDesc;
+	}
+
+	public void setShortDesc(String shortDesc) {
+		this.shortDesc = shortDesc;
+	}
 
 	public String getTempalte() {
 		return tempalte;

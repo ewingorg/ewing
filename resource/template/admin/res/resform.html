@@ -49,7 +49,7 @@
 							<span class="btn  fileinput-button"> <i
 								class="icon-plus icon-white"></i> <span>选择文件...</span> <input
 								type="file" id="upfile1" name="upfile1" />
-							</span> <input type="hidden" id="imageUrl" name="imageUrl" /> <a
+							</span> <input type="hidden" id="imageUrl" name="imageUrl" value="${(bean.imageUrl)?if_exists}" /> <a
 								class="btn start" onclick="uploadNavPic();"> <i
 								class="icon-upload icon-white"></i> <span>上传</span>
 							</a> <br> <span class="alert alert-error" id="upfile1_error_tip"
