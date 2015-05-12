@@ -29,6 +29,7 @@ import com.core.json.JsonUtil;
 import com.core.template.FreeMarkerTool;
 import com.opensymphony.xwork2.ActionSupport;
 import com.util.DataFormat;
+import com.util.StringUtil;
 
 /**
  * @author tanson lin
@@ -37,8 +38,10 @@ import com.util.DataFormat;
  * @description: action的父类，实现了构造器传入的Dao的增删改查的基本操作。
  */
 
-public class BaseAction extends ActionSupport implements ServletRequestAware,
-		ServletResponseAware {
+public class BaseAction extends ActionSupport
+		implements
+			ServletRequestAware,
+			ServletResponseAware {
 	private static Logger logger = Logger.getLogger(BaseAction.class);
 	private static final long serialVersionUID = 1L;
 	public HttpServletRequest request;
@@ -477,4 +480,15 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 						+ paginationUrl);
 		return url.indexOf("?") > -1 ? url : url + "?aqwertyu=123";
 	}
+
+	public String getUTFParameter(String key) {
+		String value = request.getParameter(key);
+		try {
+			return StringUtil.iso2Utf8(value);
+		} catch (UnsupportedEncodingException e) {
+			logger.error(e);
+		}
+		return null;
+	}
+
 }

@@ -50,7 +50,7 @@ public class BaseModelService {
 			Integer page, Class<T> entityClass) throws DaoException {
 		Integer limit = PageUtil.getLimit(page, pageSize);
 		Integer startIndex = PageUtil.getOffset(page, pageSize);
-		return baseDao.executePageQuery(sql, limit, startIndex, entityClass);
+		return baseDao.pageQuery(sql, limit, startIndex, entityClass);
 	}
 
 	public <T> List<T> find(String queryString, Class<T> entityClass)

@@ -18,7 +18,7 @@ public class BaseDaoTest {
 		try {
 			String sql = "select * from sys_menu";
 			BaseDao baseDao = (BaseDao) SpringCtx.getByBeanName("baseDao");
-			PageBean page = baseDao.executePageQuery(sql, 2, 0, SysMenu.class);
+			PageBean page = baseDao.pageQuery(sql, 2, 0, SysMenu.class);
 			System.out.println(page.getTotalCount());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

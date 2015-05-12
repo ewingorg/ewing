@@ -19,6 +19,7 @@ import net.sf.jasperreports.j2ee.servlets.ImageServlet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Session;
 
 import com.core.app.action.base.ActionException;
 import com.core.app.action.base.BaseAction;
@@ -48,21 +49,16 @@ public class JasperReportAction extends BaseAction {
 
 	public JasperPrint query(JasperReport jasperReport,
 			Map<String, Object> parameters) throws Exception {
+		Session session = null;
 		Connection conn = null;
 		try {
-			conn = baseDao.getConnection();
+			session = baseDao.getConnectionSession();
+			conn = session.connection();
 			return JasperFillManager.fillReport(jasperReport, parameters, conn);
 		} catch (Exception ex) {
 			throw ex;
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-					conn = null;
-				} catch (Exception ex) {
-					throw ex;
-				}
-			}
+			baseDao.releaseConnectionSession(session);
 		}
 	}
 
@@ -106,9 +102,9 @@ public class JasperReportAction extends BaseAction {
 			 */
 			// dynamic report.
 			String sql = request.getParameter("sql");
-			String title = request.getParameter("title");
-			String headersStr = request.getParameter("headers");
-			String aliasStr = request.getParameter("alias");
+			String title = getUTFParameter("title");
+			String headersStr = getUTFParameter("headers");
+			String aliasStr = getUTFParameter("alias");
 			String[] headers = headersStr.split(",");
 			String[] alias = aliasStr.split(",");
 			JasperFacttory jFactory = new JasperFacttory();
@@ -116,13 +112,12 @@ public class JasperReportAction extends BaseAction {
 					request.getParameterMap());
 			lastPageIndex = jasperPrint.getPages().size();
 
-			exporter
-					.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			exporter.setParameter(JRExporterParameter.OUTPUT_STRING_BUFFER,
 					reportBuf);
-			exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, request
-					.getContextPath()
-					+ "/jasperreports/commons/image?image=");
+			exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI,
+					request.getContextPath()
+							+ "/jasperreports/commons/image?image=");
 			exporter.setParameter(JRExporterParameter.PAGE_INDEX, new Integer(
 					pageIndex - 1));
 			exporter.setParameter(JRHtmlExporterParameter.HTML_HEADER, "");
@@ -130,8 +125,7 @@ public class JasperReportAction extends BaseAction {
 					"");
 			exporter.setParameter(JRHtmlExporterParameter.HTML_FOOTER, "");
 			long imageKey = System.currentTimeMillis();
-			request
-					.getSession()
+			request.getSession()
 					.setAttribute(
 							imageKey
 									+ ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE,
@@ -169,8 +163,8 @@ public class JasperReportAction extends BaseAction {
 				continue;
 			} else {
 				// reportParams.put(key, request.getParameter(key));
-				reportParams.put(key, java.net.URLDecoder.decode(request
-						.getParameter(key), "UTF-8"));
+				reportParams.put(key, java.net.URLDecoder.decode(
+						request.getParameter(key), "UTF-8"));
 				// reportParams.put(key, new String(request.getParameter(key)
 				// .getBytes("ISO-8859-1"), "GBK"));
 			}
