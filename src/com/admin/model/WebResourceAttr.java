@@ -15,84 +15,104 @@ import java.sql.Timestamp;
  */
 public class WebResourceAttr implements Serializable {
 
-    private Timestamp createTime;
+	private Timestamp createTime;
 
-    private Integer id;
+	private Integer id;
 
-    private String iseff;
+	private String iseff;
 
-    private String key;
+	private String attrKey;
 
-    private Timestamp lastUpdate;
+	private String attrName;
 
-    private Integer rank;
+	private String attrValue;
 
-    private Integer resourceId;
+	private Timestamp lastUpdate;
 
-    private String value;
+	private Integer rank;
 
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
+	private Integer resourceId;
 
-    public Integer getId() {
-        return id;
-    }
+	private String value;
 
-    public String getIseff() {
-        return iseff;
-    }
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
 
-    public String getKey() {
-        return key;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Timestamp getLastUpdate() {
-        return lastUpdate;
-    }
+	public String getIseff() {
+		return iseff;
+	}
 
-    public Integer getRank() {
-        return rank;
-    }
+	public Timestamp getLastUpdate() {
+		return lastUpdate;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public Integer getRank() {
+		return rank;
+	}
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setIseff(String iseff) {
-        this.iseff = iseff;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+	public void setIseff(String iseff) {
+		this.iseff = iseff;
+	}
 
-    public void setLastUpdate(Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
+	public String getAttrKey() {
+		return attrKey;
+	}
 
-    public void setRank(Integer rank) {
-        this.rank = rank;
-    }
+	public void setAttrKey(String attrKey) {
+		this.attrKey = attrKey;
+	}
 
-    public Integer getResourceId() {
-        return resourceId;
-    }
+	public String getAttrName() {
+		return attrName;
+	}
 
-    public void setResourceId(Integer resourceId) {
-        this.resourceId = resourceId;
-    }
+	public void setAttrName(String attrName) {
+		this.attrName = attrName;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public String getAttrValue() {
+		return attrValue;
+	}
+
+	public void setAttrValue(String attrValue) {
+		this.attrValue = attrValue;
+	}
+
+	public void setLastUpdate(Timestamp lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+
+	public Integer getResourceId() {
+		return resourceId;
+	}
+
+	public void setResourceId(Integer resourceId) {
+		this.resourceId = resourceId;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 
 }

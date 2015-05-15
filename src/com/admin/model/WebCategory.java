@@ -27,7 +27,7 @@ public class WebCategory {
 	private String groupType;
 	private String tempalte;
 	private String shortDesc;
-
+	
 	public String getShortDesc() {
 		return shortDesc;
 	}

@@ -1,0 +1,172 @@
+<#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>资源管理
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<script>
+					var zTree;
+					var demoIframe;
+					function addHoverDom(treeId, treeNode) {
+						var sObj = $("#" + treeNode.tId + "_span");
+						if (treeNode.editNameFlag
+								|| $("#addBtn_" + treeNode.tId).length > 0)
+							return;
+						var addStr = "<span class='button remove' id='removeBtn_"
+								+ treeNode.tId
+								+ "' title='add node' onfocus='this.blur();' onclick='deleteCategory("
+								+ treeNode.id + ")'></span>"; 
+						addStr += "<span class='button add' id='addBtn_"
+								+ treeNode.tId + "' onclick='addCategory("
+								+ treeNode.id + ")' ></span>";
+						addStr += "<span class='button edit' id='editBtn_" + treeNode.tId + "' onclick='editCategory("
+						+ treeNode.id + ")'></span>";
+						sObj.after(addStr);
+					};
+
+					function removeHoverDom(treeId, treeNode) {
+						$("#addBtn_" + treeNode.tId).unbind().remove();
+						$("#removeBtn_" + treeNode.tId).unbind().remove();
+						$("#editBtn_" + treeNode.tId).unbind().remove();
+					};
+
+					var setting = {
+						check : {
+							enable : true
+						},
+						view : {
+							addHoverDom : addHoverDom,
+							removeHoverDom : removeHoverDom,
+							dblClickExpand : false,
+							showLine : true,
+							selectedMulti : false
+						},
+						data : {
+							simpleData : {
+								enable : true,
+								idKey : "id",
+								pIdKey : "pId",
+								rootPId : ""
+							}
+						},
+						callback : {
+							beforeClick : function(treeId, treeNode) {
+								var zTree = $.fn.zTree.getZTreeObj("tree");
+								if (treeNode.isParent) {
+									zTree.expandNode(treeNode);
+									return false;
+								} else {
+									demoIframe.attr("src", treeNode.file
+											+ ".html");
+									return true;
+								}
+							}
+						}
+					}; 
+
+					$(document).ready(function() {
+						initTree();
+					});
+
+					function initTree() {
+						var t = $("#tree");
+						var categoryTreeJson;
+						ajax
+								.syncJsonRequest({
+									url : '${contextPath}/Admin-ResCategory-queryCatagoryTree.action',
+									success : function(data) {
+										categoryTreeJson = data.result;
+									}
+								});
+						t = $.fn.zTree.init(t, setting, categoryTreeJson);
+						demoIframe = $("#testIframe");
+						demoIframe.bind("load", loadReady);
+						var zTree = $.fn.zTree.getZTreeObj("tree");
+						zTree.selectNode(zTree.getNodeByParam("id", 101));
+					}
+
+					function loadReady() {
+						var bodyH = demoIframe.contents().find("body").get(0).scrollHeight, htmlH = demoIframe
+								.contents().find("html").get(0).scrollHeight, maxH = Math
+								.max(bodyH, htmlH), minH = Math.min(bodyH,
+								htmlH), h = demoIframe.height() >= maxH ? minH
+								: maxH;
+						if (h < 530)
+							h = 530;
+						demoIframe.height(h);
+					}
+
+					function addCategory(nodeId) { 
+						var url = '${contextPath}/Admin-ResCategory-showNewForm.action?parentid='
+								+ nodeId;
+						common.popHtml(url, 'navModel');
+					}
+					
+					function editCategory(nodeId) { 
+						var url = '${contextPath}/Admin-ResCategory-showEditForm.action?id='
+								+ nodeId;
+						common.popHtml(url, 'navModel');
+					}
+					
+					function deleteCategory(nodeId) { 
+						var queryUrl = '${contextPath}/Admin-ResCategory-show.action';
+						var url = '${contextPath}/Admin-ResCategory-delete.action?selectItems='
+								+ nodeId;
+						common.alert({
+							content : '是否删除选中项？',
+							showAction : true,
+							actionContent : '删除',
+							actionFn : function() { 
+								ajax.syncJsonRequest({
+									url : url,
+									success : function(data) {
+										if (!data || !data.success) {
+											$('#errtip').html(data.retinfo);
+											$('#errtip').show();
+										}
+										if (data.success) {
+											common.alert({
+												content : data.retinfo,
+												closeFn : function() {
+													if (queryUrl != '')
+														main.addContainer(queryUrl);
+												}
+											});
+										}
+									}
+								});
+							}
+						}); 
+					}
+				</script>
+				<ul id="tree" class="ztree" style="width: 560px; overflow: auto;"></ul>
+
+			</div>
+			<!-- END EXAMPLE TABLE PORTLET-->
+		</div>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function() {
+		tableAction.init({
+			tableId : 'resTable',
+			queryUrl : '${contextPath}/Admin-Res-show.action',
+			deleteUrl : '${contextPath}/Admin-Res-delete.action',
+			editUrl : '${contextPath}/Admin-Res-showEditForm.action',
+			queryBtnId : 'res_query_btn',
+			deleteBtnId : 'res_del_btn',
+			searchFormId : 'resSearchForm',
+			isPopEditForm : false,
+			editBtnId : 'res_add_btn'
+		});
+
+	});
+</script>

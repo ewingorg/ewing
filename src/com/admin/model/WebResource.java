@@ -32,6 +32,26 @@ public class WebResource implements Serializable {
 	private String name;
 	@Column(fieldName = "short_desc")
 	private String shortDesc;
+	@Column(fieldName = "category_id")
+	private Integer categoryId;
+	@Column(fieldName = "tag_id")
+	private String tagId;
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getTagId() {
+		return tagId;
+	}
+
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
+	}
 
 	public Timestamp getCreateTime() {
 		return createTime;

@@ -2,26 +2,41 @@ package com.admin.model;
 
 import java.sql.Timestamp;
 
+import com.core.app.anno.IgnoreField;
+
 /**
- * SysMenu entity. @author MyEclipse Persistence Tools
+ * WebResourceCategory entity. @author MyEclipse Persistence Tools
  */
 
-public class SysMenu implements java.io.Serializable {
+public class WebResourceCategory implements java.io.Serializable {
 
 	// Fields
 
 	private Integer id;
+
 	private String name;
-	private String url;
+
 	private String level;
+
 	private Integer parentid;
+
 	private String iseff;
-	private String isleaf;
-	private String des;
+
 	private Timestamp createTime;
+
 	private Timestamp lastUpdate;
-	private String icon;
+
 	private Integer sort;
+	@IgnoreField
+	private String parentName;
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
 
 	public Integer getId() {
 		return id;
@@ -37,14 +52,6 @@ public class SysMenu implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public String getLevel() {
@@ -71,22 +78,6 @@ public class SysMenu implements java.io.Serializable {
 		this.iseff = iseff;
 	}
 
-	public String getIsleaf() {
-		return isleaf;
-	}
-
-	public void setIsleaf(String isleaf) {
-		this.isleaf = isleaf;
-	}
-
-	public String getDes() {
-		return des;
-	}
-
-	public void setDes(String des) {
-		this.des = des;
-	}
-
 	public Timestamp getCreateTime() {
 		return createTime;
 	}
@@ -101,14 +92,6 @@ public class SysMenu implements java.io.Serializable {
 
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
 	}
 
 	public Integer getSort() {
