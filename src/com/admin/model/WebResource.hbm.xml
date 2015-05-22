@@ -17,6 +17,9 @@
          <property name="categoryId" type="java.lang.Integer">
             <column name="category_id" length="11"   />
         </property>
+        <property name="templateId" type="java.lang.Integer">
+            <column name="template_id" length="11"   />
+        </property> 
         <property name="tagId" type="java.lang.String">
             <column name="tag_id" length="100"   />
         </property>

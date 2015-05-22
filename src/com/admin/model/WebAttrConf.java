@@ -5,6 +5,9 @@ package com.admin.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
+
+import com.core.app.anno.IgnoreField;
 
 /**
  * 类/接口注释
@@ -23,6 +26,14 @@ public class WebAttrConf implements Serializable {
 
 	private String attrKey;
 
+	private String require;
+
+	private String attrType;
+
+	private String paramCode;
+
+	private Integer sort;
+
 	private String attrName;
 
 	private Integer templateId;
@@ -30,6 +41,58 @@ public class WebAttrConf implements Serializable {
 	private String longDesc;
 
 	private Timestamp lastUpdate;
+	@IgnoreField
+	private List<SysParam> paramCodeList;
+	@IgnoreField
+	private String attrValue;
+
+	public String getAttrValue() {
+		return attrValue;
+	}
+
+	public void setAttrValue(String attrValue) {
+		this.attrValue = attrValue;
+	}
+
+	public List<SysParam> getParamCodeList() {
+		return paramCodeList;
+	}
+
+	public void setParamCodeList(List<SysParam> paramCodeList) {
+		this.paramCodeList = paramCodeList;
+	}
+
+	public String getRequire() {
+		return require;
+	}
+
+	public void setRequire(String require) {
+		this.require = require;
+	}
+
+	public String getAttrType() {
+		return attrType;
+	}
+
+	public void setAttrType(String attrType) {
+		this.attrType = attrType;
+	}
+
+	public String getParamCode() {
+		return paramCode;
+	}
+
+	public void setParamCode(String paramCode) {
+		this.paramCode = paramCode;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
 
 	public Integer getTemplateId() {
 		return templateId;

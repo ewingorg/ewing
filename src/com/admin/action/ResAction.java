@@ -1,15 +1,23 @@
 package com.admin.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.admin.constant.AttrConstant;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
 import com.admin.model.WebResource;
+import com.admin.model.WebResourceAttr;
+import com.admin.service.TemplateService;
+import com.admin.service.WebResourceService;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
 import com.core.app.action.base.ResponseUtils;
@@ -26,6 +34,10 @@ public class ResAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(ResAction.class);
 	private static final String LIST_PAGE = "/admin/res/reslist.html";
 	private static final String EDIT_FORM = "/admin/res/resform.html";
+	@Resource
+	private TemplateService templateService;
+	@Resource
+	private WebResourceService webResourceService;
 
 	/**
 	 * 查詢列表
@@ -66,8 +78,10 @@ public class ResAction extends BaseAction {
 						WebResource.class);
 				dataModel.put("bean", webResource);
 			}
+			List<SysParam> templateType = templateService.getResTemplates();
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
+			dataModel.put("templateType", templateType);
 			dataModel.put("iseffCode", iseffCode);
 			render(EDIT_FORM, dataModel);
 		} catch (Exception e) {
@@ -84,11 +98,36 @@ public class ResAction extends BaseAction {
 			String id = request.getParameter("id");
 			WebResource webResource = new WebResource();
 			this.buildPageData(webResource);
+
+			List<WebResourceAttr> attrList = new ArrayList<WebResourceAttr>();
+
+			Map paramMap = request.getParameterMap();
+			for (Iterator itor = paramMap.keySet().iterator(); itor.hasNext();) {
+				Object key = itor.next();
+				Object object = paramMap.get(key);
+
+				if (key instanceof String
+						&& key.toString().startsWith(
+								AttrConstant.ATTRKEY_PREFIX) && object != null) {
+					if (object.getClass().isArray()) {
+						Object[] sValue = (Object[]) object;
+						String value = sValue[0].toString();
+						if (value.trim().isEmpty())
+							continue;
+						WebResourceAttr attr = new WebResourceAttr();
+						attr.setAttrKey(key.toString().replace(
+								AttrConstant.ATTRKEY_PREFIX, ""));
+						attr.setAttrValue(value);
+						attrList.add(attr);
+					}
+				}
+			}
+
 			if (!StringUtils.isEmpty(id)) {
 				webResource.setId(Integer.valueOf(id));
-				baseModelService.update(webResource);
+				webResourceService.editResource(webResource, attrList);
 			} else {
-				baseModelService.save(webResource);
+				webResourceService.saveResource(webResource, attrList);
 			}
 			responseData = ResponseUtils.success("保存成功！");
 		} catch (Exception e) {

@@ -18,8 +18,20 @@
 		<property name="attrName" type="java.lang.String">
 			<column name="attr_name" length="50" not-null="true" />
 		</property>
+		<property name="attrType" type="java.lang.String">
+			<column name="attr_type" not-null="true" />
+		</property>
+		<property name="paramCode" type="java.lang.String">
+			<column name="param_code" />
+		</property>
+		<property name="sort" type="java.lang.Integer">
+			<column name="sort" length="20" not-null="true" />
+		</property>
+		<property name="require" type="java.lang.String">
+			<column name="require" not-null="true" />
+		</property>
 		<property name="longDesc" type="java.lang.String">
-			<column name="long_desc"   not-null="true" />
+			<column name="long_desc" not-null="true" />
 		</property>
 		<property name="iseff" type="java.lang.String">
 			<column name="iseff" length="1" />

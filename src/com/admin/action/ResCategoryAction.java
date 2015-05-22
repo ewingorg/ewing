@@ -31,9 +31,12 @@ public class ResCategoryAction extends BaseAction {
 	private static Logger logger = Logger.getLogger(ResCategoryAction.class);
 	private static final String LIST_PAGE = "/admin/rescategory/categorylist.html";
 	private static final String EDIT_FORM = "/admin/rescategory/categoryform.html";
+	private static final String SELECT_FORM = "/admin/rescategory/selectcategory.html";
 	@Resource
 	private ResCategoryService resCategoryService;
-
+	/**
+	 * 获取分类的树结构
+	 */
 	public void queryCatagoryTree() {
 		ResponseData responseData = null;
 		try {
@@ -53,26 +56,22 @@ public class ResCategoryAction extends BaseAction {
 	 */
 	public void show() {
 		try {
+			String categoryId = request.getParameter("categoryId");
+			String categoryName = request.getParameter("categoryName");
 			Map<String, Object> dataModel = new HashMap<String, Object>();
-			String pageStr = request.getParameter("page");
-			String pageSizeStr = request.getParameter("pageSize");
-			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
-					.valueOf(pageStr);
-			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
-					: Integer.valueOf(pageSizeStr);
-			String condition = bulidConditionSql();
-			PageBean pageBean = baseModelService.pageQuery(condition,
-					bulidOrderBySql(), pageSize, page, WebResource.class);
-			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
-			dataModel.put("iseffCode", iseffCode);
-			pageBean.setPageUrl(getPaginationUrl("/Admin-Res-show.action"));
-			dataModel.put("pageBean", pageBean);
-
+			dataModel.put("categoryId", categoryId);
+			dataModel.put("categoryName", categoryName);
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+
+	/**
+	 * 显示选择资源分类的页面
+	 */
+	public void selectCategory() {
+		render(SELECT_FORM, null);
 	}
 
 	/**

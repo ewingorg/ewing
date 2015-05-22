@@ -1,0 +1,23 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html">
+
+ 
+<#list attrList as attr >
+<div class="control-group">
+	<label class="control-label">${attr.attrName}</label> <#if
+	attr.attrType = '0'>
+	<div class="controls">
+		<input class="span3 m-wrap" name="${attr.attrKey}"
+			name="${attr.attrKey}" datatype="require" type="text"
+			msg="${attr.attrName}不能为空" value="${(attr.attrValue)?if_exists}" />
+	</div>
+	</#if> <#if attr.attrType = '2'>
+	<div class="controls"><@select paramCode=attr.paramCodeList
+		value='' item=' name="attr.key" require="true" datatype="require"
+		msg="attr.key不能为空"'/></div>
+	</#if>
+</div>
+</#list>
+
+ 
+

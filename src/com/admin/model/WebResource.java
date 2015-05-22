@@ -6,6 +6,7 @@ package com.admin.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import com.core.app.anno.IgnoreField;
 import com.core.jdbc.annotation.Column;
 
 /**
@@ -36,6 +37,16 @@ public class WebResource implements Serializable {
 	private Integer categoryId;
 	@Column(fieldName = "tag_id")
 	private String tagId;
+	@Column(fieldName = "template_id")
+	private Integer templateId;
+
+	public Integer getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
+	}
 
 	public Integer getCategoryId() {
 		return categoryId;

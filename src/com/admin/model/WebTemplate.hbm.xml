@@ -18,6 +18,10 @@
 		<property name="groupKeys" type="java.lang.String">
 			<column name="group_keys" length="500" />
 		</property> 
+		<property name="templateType" type="java.lang.String">
+			<column name="template_type" />
+		</property> 
+		
 		<property name="iseff" type="java.lang.String">
 			<column name="iseff" length="1" />
 		</property>
