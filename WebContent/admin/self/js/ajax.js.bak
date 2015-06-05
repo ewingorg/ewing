@@ -141,8 +141,8 @@ ajax.upload.settings = {
 							url : "/notice/create",
 							data : opts.param,
 							type : 'POST', 
-						  async : false, 
-						  dataType : 'html',
+						    async : false, 
+						    dataType : 'html',
 							success :  success : function(data) {
 								alert(data);
 								 

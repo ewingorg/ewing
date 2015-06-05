@@ -4,3 +4,5 @@
 /.settings
 /WebContent/ckeditor/samples
 /WebContent/ckeditor/plugins
+/.classpath
+/.settings
