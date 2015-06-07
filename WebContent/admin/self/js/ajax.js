@@ -131,23 +131,4 @@ ajax.upload.settings = {
 		errFn:'',
 		sunccessFn:''
 };
-
-
- function createNotice() {  
- 	      var form = document.getElementById("noticeEditForm");
-	      if(confirm("确定提交吗?")){ 
-	      	var param = $("#" + formId).serialize(); 
-						$.ajax({
-							url : "/notice/create",
-							data : opts.param,
-							type : 'POST', 
-						  async : false, 
-						  dataType : 'html',
-							success :  success : function(data) {
-								alert(data);
-								 
-								} 
-							});
-	      } 
-	    } 
-	  
+ 

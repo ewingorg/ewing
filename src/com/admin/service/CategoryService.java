@@ -50,7 +50,7 @@ public class CategoryService {
 		WebCategoryRender categoryRender = new WebCategoryRender();
 		for (String groupKey : groupKeyList) {
 			try {
-				List<WebCategory> categoryList = cacheModelService.find(
+				List<WebCategory> categoryList = baseDao.find(
 						"groupKey='" + groupKey + "' and iseff="
 								+ IsEff.EFFECTIVE + " order by rank asc",
 						WebCategory.class);

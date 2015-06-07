@@ -8,6 +8,7 @@ import org.apache.axis.utils.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.admin.model.SysUser;
+import com.core.app.constant.IsEff;
 import com.core.jdbc.BaseDao;
 import com.core.jdbc.DaoException;
 
@@ -30,7 +31,7 @@ public class SysUserService {
 	public List<SysUser> findUser(String userName) throws DaoException {
 		if (StringUtils.isEmpty(userName))
 			throw new IllegalArgumentException("userName should not be null");
-		return baseDao.find(" user_name='" + userName + "'", SysUser.class);
+		return baseDao.find(" user_name='" + userName + "' and iseff='"+IsEff.EFFECTIVE+"'", SysUser.class);
 	}
 	
 	public List<SysUser> findUserByRole(int roleId) throws DaoException { 
