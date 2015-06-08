@@ -55,7 +55,7 @@ public class CategoryService {
 								+ IsEff.EFFECTIVE + " order by rank asc",
 						WebCategory.class);
 				categoryRender.addCategoryList(groupKey, categoryList);
-			} catch (DaoException e) {
+			} catch (Exception e) {
 				throw new DaoException("failure to find groupKey[" + groupKey
 						+ "]'s category list", e);
 			}
