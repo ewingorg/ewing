@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//resource/template=UTF-8
 encoding//resource/template/admin=UTF-8
 encoding//resource/template/admin/attr/dynamicform.html=UTF-8
 encoding//resource/template/admin/banner/bannerform.html=UTF-8
@@ -9,9 +10,11 @@ encoding//resource/template/admin/banner/unbindreslist.html=UTF-8
 encoding//resource/template/admin/busitemplate/templateform.html=UTF-8
 encoding//resource/template/admin/busitemplate/templatelist.html=UTF-8
 encoding//resource/template/admin/common/include/sysparam.html=UTF-8
+encoding//resource/template/admin/dashboard.html=UTF-8
 encoding//resource/template/admin/group/groupform.html=UTF-8
 encoding//resource/template/admin/group/grouplist.html=UTF-8
 encoding//resource/template/admin/login.html=UTF-8
+encoding//resource/template/admin/main.html=UTF-8
 encoding//resource/template/admin/nav/navform.html=UTF-8
 encoding//resource/template/admin/nav/navlist.html=UTF-8
 encoding//resource/template/admin/res/resform.html=UTF-8

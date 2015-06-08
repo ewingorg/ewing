@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-  <title>TGVISON双晖传媒品牌机构官方网站 | 移动应用解决方案专家，APP交互设计，APP视觉设计，APP产品研发</title> 
+  <title>东壹仓</title> 
   <meta name="keywords" content="北京双晖文化传播有限公司,双晖传媒,北京知名设计公司,移动应用,android,ios,win8,APP制作团队,网页,企业整站,icon,界面,交互,视觉,设计,开发,移动端,手机,平板,iphone,ipad"> 
   <meta name="description" content="北京双晖文化传播有限公司，作为国内知名专业设计公司，TGVISION双晖传媒聚集了从事界面设计多年的专业人士，拥有多年与国内外知名公司丰富的成功合作经验。为客户提供品牌化、一站式的解决方案。服务涵盖了互联网，掌上移动设备、桌面平台以及电子消费类产品等。为客户提供从品牌设计、概念设计、交互设计、图形界面视觉设计、功能开发到最终的产品实现。多年积累的各领域多平台设计经验为客户提供真正具有前瞻性及独创性的产品体验。"> 
   <link rel="apple-touch-icon-precomposed" href="${contextPath}/d1box/skin/tg2013/images/icon.png"> 
   <link href="${contextPath}/d1box/skin/tg2013/css/tg_style.css" rel="stylesheet" type="text/css"> 
   <link href="${contextPath}/d1box/skin/tg2013/css/tg_index.css" rel="stylesheet" type="text/css"> 
-  <link href="${contextPath}/d1box/skin/tg2013/css/news.css" rel="stylesheet" type="text/css"> 
+  <link href="${contextPath}/d1box/skin/tg2013/css/news.css" rel="stylesheet" type="text/css">
+  <link href="${contextPath}/d1box/skin/tg2013/css/jquery-ui.min.css" rel="stylesheet" type="text/css">  
   <!--[if IE 6]>
 <script src="/skin/tg2013/js/DD_belatedPNG_0.0.8a-min.js"></script>
 <script>
@@ -19,6 +20,7 @@ DD_belatedPNG.fix('a.arrL,a.arrR');
   <script type="text/javascript" src="${contextPath}/d1box/skin/tg2013/js/jquery.easing.1.3.js"></script> 
   <script type="text/javascript" src="${contextPath}/d1box/skin/tg2013/js/scrolltopcontrol.js"></script> 
   <script type="text/javascript" src="${contextPath}/d1box/skin/tg2013/js/jquery.mousewheel.min.js"></script> 
+  <script type="text/javascript" src="${contextPath}/d1box/skin/tg2013/js/jquery-ui.min.js"></script> 
   <script type="text/javascript" src="${contextPath}/d1box/httpapi.map.baidu.comapiv=1.4"></script> 
   <style type="text/css">
 .mypng img {
@@ -41,6 +43,8 @@ azimuth: expression( this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && thi
     
      <script type="text/javascript">
 $(function() {
+	
+	 $( "#tabs" ).tabs();
 	$(".searchBt").toggle(
 	  function () {
 		  $(".searchInput").slideDown("fast");
@@ -68,7 +72,7 @@ $(function() {
        <div class="navBg" style="display:block;" id="navBgOn"></div> </a>
       <a href="#Portfolio">案例 
        <div class="navBg"></div> </a>
-      <a href="#services">服务 
+      <a href="#Services">服务 
        <div class="navBg"></div> </a>
       <a href="#about">关于 
        <div class="navBg"></div> </a>
@@ -94,23 +98,38 @@ $(function() {
    </div> 
    <!--page5end--> 
    <!--作品end--> 
-   <!--services--> 
-   <div class="colTitBar" id="services">  
+   <!--Services--> 
+   <div class="colTitBar" id="Services">  
    </div> 
     <div id="focusBar">  
         <#list categoryRender.data.INDEX_STAR as star >  
    	     <img src="${contextPath}${star.imageUrl}"  width="100%" /> 
      	</#list> 
    </div> 
+   <div class="colTitBar" id="HotPro">  
+   </div> 
+    <div id="focusBar">  
+        <#list categoryRender.data.INDEX_HOTPRO as hotpro >  
+   	     <img src="${contextPath}${hotpro.imageUrl}"  width="100%" /> 
+     	</#list> 
+   </div> 
+   <div class="colTitBar" id="Join">  
+   </div> 
+    <div id="focusBar">  
+        <#list categoryRender.data.INDEX_JOIN as join >  
+   	     <img src="${contextPath}${join.imageUrl}"  width="100%" /> 
+     	</#list> 
+   </div> 
+   
    <!--about--> 
-   <div class="colTitBar" id="about">  
-   </div>  
+   <div class="colTitBar" id="About">  
+   </div>   
+     
    <div class="aboutTab">  
     <div class="main tc"> 
      <span class="tab1" id="box11" onclick="showPagei(1,4,1)">关于我们</span>
-     <span class="tab2" id="box12" onclick="showPagei(2,4,1)">荣誉奖项</span>
-     <span class="tab2" id="box13" onclick="showPagei(3,4,1)">最新动态</span>
-     <span class="tab2" id="box14" onclick="showPagei(4,4,1)">加入我们</span>
+     <span class="tab2" id="box12" onclick="showPagei(2,4,1)">幕后团队</span>
+     <span class="tab2" id="box13" onclick="showPagei(3,4,1)">商城动态</span> 
     </div> 
    </div> 
    <div class="aboutMain"> 
@@ -257,73 +276,12 @@ $(function() {
     </div> 
     <!--page4 end--> 
     <div class="cl"></div> 
-   </div> 
-   <!--contact--> 
-   <div class="colTitBar" id="contact"> 
-    <h2 class="tit4" title="Contact us"></h2> 
-   </div> 
-   <div class="main"> 
-    <div class="contactL"> 
-     <ul> 
-      <li class="tit">告诉我们您的需求</li> 
-      <li style="height:38px;"> <input name="contact_tel" id="contact_tel" type="text" class="input1 fr" value="联系电话" title="contactForm" onfocus="if(value == '联系电话'){value=''}" onblur="if(!value){value=defaultValue;}"> <input name="contact_name" id="contact_name" type="text" class="input1 fl" value="填写姓名" title="contactForm" onfocus="if(value == '填写姓名'){value=''}" onblur="if(!value){value=defaultValue;}"> </li> 
-      <li> <input name="contact_mail" id="contact_mail" type="text" class="input2" value="电子邮箱" title="contactForm" onfocus="if(value == '电子邮箱'){value=''}" onblur="if(!value){value=defaultValue;}"> </li> 
-      <li> <input name="contact_com" id="contact_com" type="text" class="input2" value="您的公司" title="contactForm" onfocus="if(value == '您的公司'){value=''}" onblur="if(!value){value=defaultValue;}"> </li> 
-      <li style="height:253px; overflow:hidden;"> <textarea name="contact_con" id="contact_con" cols="" title="contactForm" class="input3" onfocus="if(value == '填写详细需求'){value=''}" onblur="if(!value){value=defaultValue;}">填写详细需求</textarea> </li> 
-      <li style="height:32px;"><a href="" class="submitBt white" id="sendBtn">发送</a> 
-       <div class="fl" style=" line-height:32px;">
-        &nbsp;&nbsp;
-        <span class="gray" id="sendInfo">我们将在1个工作日内回复，资料会保密处理。</span>
-       </div> </li> 
-     </ul> 
-    </div> 
-    <div class="contactR"> 
-     <p class="tit">与我们在线洽谈</p> 
-     <div>
-      <a target="_blank" href="${contextPath}/d1box/httpwpa.qq.commsgrdv=3&amp;uin=623326742&amp;site=qq&amp;menu=yes" class="qqBt fl white">点击咨询</a>
-      <a target="_blank" href="${contextPath}/d1box/httpwpa.qq.commsgrdv=3&amp;uin=5629313&amp;site=qq&amp;menu=yes" class="qqBt fr white">点击咨询</a>
-     </div> 
-     <div class="contactTxt">
-      商务 : +86 18511834188&nbsp;&nbsp;
-      <span class="gray">[产品/视觉设计咨询]</span>
-      <br> 座机 : 010-84874449&nbsp;&nbsp;
-      <span class="gray">[周一至周五 10:00-18:00]</span>
-      <br> 微信/QQ : 623326742 或 5629313
-      <br> 邮箱 : sh@tg-vision.com
-     </div> 
-     <div id="baidumapBox" class="mapBox">
-      <img src="${contextPath}/d1box/skin/tg2013/images/temp_map.jpg" width="320" height="250">
-     </div> 
-    </div> 
-    <div class="cl"></div> 
-   </div> 
-   <div class="footer"> 
-    <div class="main"> 
-     <div id="footerLogo">
-      <img src="${contextPath}/d1box/skin/tg2013/images/footer_logo.jpg" width="180" height="110">
-     </div> 
-     <div class="footerLinks">
-      <span class="tit"></span> 
-      <div class="linksList"> 
-       <ul> 
-        <li><a href="${contextPath}/d1box/httpbaike.baidu.comview7852061.htm" target="_blank">TGVISION双晖传媒百度百科</a></li> 
-        <li><a href="${contextPath}/d1box/httpe.weibo.comtgvisionstudio" target="_blank">TGVISION双晖传媒新浪官方微博</a></li> 
-        <li><a href="${contextPath}/d1box/http2011.tg-vision.com" target="_blank">TGVISION 2011官网</a></li> 
-       </ul> 
-      </div> 
-     </div> 
-     <div class="footerContact">
-      <span class="tit">&nbsp;</span>
-      <span class="add">北京市朝阳区大屯里317号金泉时代C座1119室</span> 
-      <span class="tel">&nbsp;</span> 
-      <span class="yellow">sh@tg-vision.com</span>
-     </div> 
-    </div> 
-   </div> 
+   </div>  
+  
+     
    <div id="Copyright"> 
-    <div class="main">
-     <a href="${contextPath}/d1box/copyright" target="_blank">© 2006-2015 TGVISION双晖传媒. All Right Reserved.</a> 京ICP备12043438号 
-     <script src="${contextPath}/d1box/https19.cnzz.comstat.phpid=2885255&amp;web_id=2885255&amp;show=pic" language="JavaScript"></script> 
+    <div class="main" style="text-align: center;">
+     <a href="${contextPath}/d1box/copyright" target="_blank">© 2006-2015 东壹仓电子商务. All Right Reserved.</a> 京ICP备12043438号  
     </div> 
    </div> 
   </div> 

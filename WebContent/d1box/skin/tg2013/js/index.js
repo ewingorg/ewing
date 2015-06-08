@@ -53,11 +53,15 @@ $(function() {
 	var navObjId = "";
 	if(window.location.href.indexOf("#Portfolio") > 0 )
 	{navObjId = "#Portfolio";}
-	if(window.location.href.indexOf("#services") > 0 )
-	{navObjId = "#services";}
-	if(window.location.href.indexOf("#about") > 0 ) {
-		navObjId = "#about";
-		if(window.location.href.indexOf("#aboutjob") > 0 )
+	if(window.location.href.indexOf("#Services") > 0 )
+	{navObjId = "#Services";}
+	if(window.location.href.indexOf("#Join") > 0 )
+	{navObjId = "#Join";}
+	if(window.location.href.indexOf("#HotPro") > 0 )
+	{navObjId = "#HotPro";}
+	if(window.location.href.indexOf("#About") > 0 ) {
+		navObjId = "#About";
+	if(window.location.href.indexOf("#aboutjob") > 0 )
 		{showPagei(4,4,1);}
 	}
 	if(window.location.href.indexOf("#contact") > 0 )

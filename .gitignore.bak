@@ -1,5 +1,8 @@
 /build
 /WebContent/fileupload
 /WebContent/vgooo
-/WebContent/ckeditor/plugins
+/.settings
 /WebContent/ckeditor/samples
+/WebContent/ckeditor/plugins
+/.classpath
+/.settings

@@ -450,7 +450,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 
 			}
 			String result = FreeMarkerTool.getSingleton().getTemplateResult(
-					template, dataModel);
+					template, dataModel); 
 			response.getWriter().write(result);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
