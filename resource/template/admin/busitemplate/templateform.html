@@ -24,8 +24,8 @@
 				<!-- BEGIN FORM-->
 				<form action="${contextPath}/Admin-Template-save.action"
 					id="templateAddForm" class="form-horizontal" method="post">
-					<input type="hidden" name="id" value="${(bean.id)?if_exists}" />
-					<input type="hidden" name="templateType" value="0" />
+					<input type="hidden" name="id" value="${(bean.id)?if_exists}" /> <input
+						type="hidden" name="templateType" value="0" />
 					<div class="control-group">
 						<label class="control-label">模板名称</label>
 						<div class="controls">
@@ -42,9 +42,18 @@
 								msg="模板路径不能为空" value="${(bean.templatePath)?if_exists}" />
 						</div>
 					</div>
+
+
 					<div class="control-group">
 						<label class="control-label">模板关联key</label>
 						<div class="controls">
+							<textarea class="span6  m-wrap" rows="2" readonly="readonly">${(bean.groupKeysTranslate)?if_exists}</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"> </label>
+						<div class="controls">
+
 							<textarea class="span6  m-wrap" rows="2" id="groupKeys"
 								name="groupKeys" datatype="require|limit" type="text" min="1"
 								max="500" msg="模板路径不能为空">${(bean.groupKeys)?if_exists}</textarea>

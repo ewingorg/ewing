@@ -4,8 +4,10 @@
 package com.admin.action;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -14,6 +16,7 @@ import org.apache.log4j.Logger;
 
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
+import com.admin.model.WebGroup;
 import com.admin.model.WebTemplate;
 import com.admin.service.GroupService;
 import com.admin.service.RelResService;
@@ -59,6 +62,8 @@ public class TemplateAction extends BaseAction {
 					+ bulidConditionSql();
 			PageBean pageBean = baseModelService.pageQuery(condition,
 					bulidOrderBySql(), pageSize, page, WebTemplate.class);
+			groupService.translateGroupName(
+					(List<WebTemplate>) pageBean.getResult(), false);
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			List<SysParam> groupCode = groupService.getGroupParamList();
@@ -73,7 +78,6 @@ public class TemplateAction extends BaseAction {
 			logger.error(e.getMessage(), e);
 		}
 	}
-
 	/**
 	 * 显示编辑表单
 	 */
@@ -84,6 +88,7 @@ public class TemplateAction extends BaseAction {
 			if (!StringUtils.isEmpty(id)) {
 				WebTemplate webTemplate = findOne(Integer.valueOf(id),
 						WebTemplate.class);
+				webTemplate = groupService.translateGroupName(webTemplate);
 				dataModel.put("bean", webTemplate);
 			}
 			List<SysParam> iseffCode = sysParamService

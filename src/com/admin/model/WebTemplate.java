@@ -2,6 +2,8 @@ package com.admin.model;
 
 import java.sql.Timestamp;
 
+import com.core.app.anno.IgnoreField;
+
 /**
  * WebTemplate entity. @author MyEclipse Persistence Tools
  */
@@ -17,6 +19,16 @@ public class WebTemplate implements java.io.Serializable {
 	private String iseff;
 	private Timestamp createTime;
 	private String templateType;
+	@IgnoreField
+	private String groupKeysTranslate;
+
+	public String getGroupKeysTranslate() {
+		return groupKeysTranslate;
+	}
+
+	public void setGroupKeysTranslate(String groupKeysTranslate) {
+		this.groupKeysTranslate = groupKeysTranslate;
+	}
 
 	public String getTemplateType() {
 		return templateType;
