@@ -27,9 +27,7 @@ import com.core.jdbc.DaoException;
 public class ResCategoryService {
 
 	@Resource
-	private BaseDao baseDao;
-	@Resource
-	private CacheModelService cacheModelService;
+	private BaseDao baseDao; 
 
 	/**
 	 * 查询分类树结构

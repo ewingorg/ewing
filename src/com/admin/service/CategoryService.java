@@ -28,8 +28,6 @@ public class CategoryService {
 
 	@Resource
 	private BaseDao baseDao;
-	@Resource
-	private CacheModelService cacheModelService;
 
 	/**
 	 * 根据分组key获取分类列表
@@ -50,10 +48,9 @@ public class CategoryService {
 		WebCategoryRender categoryRender = new WebCategoryRender();
 		for (String groupKey : groupKeyList) {
 			try {
-				List<WebCategory> categoryList = baseDao.find(
-						"groupKey='" + groupKey + "' and iseff="
-								+ IsEff.EFFECTIVE + " order by rank asc",
-						WebCategory.class);
+				List<WebCategory> categoryList = baseDao.find("groupKey='"
+						+ groupKey + "' and iseff=" + IsEff.EFFECTIVE
+						+ " order by rank asc", WebCategory.class);
 				categoryRender.addCategoryList(groupKey, categoryList);
 			} catch (Exception e) {
 				throw new DaoException("failure to find groupKey[" + groupKey

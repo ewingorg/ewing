@@ -30,9 +30,7 @@ import com.util.SqlUtil;
 public class GroupService {
 
 	@Resource
-	private BaseDao baseDao;
-	@Resource
-	private CacheModelService cacheModelService;
+	private BaseDao baseDao; 
 	/**
 	 * 翻译模板的分组名称
 	 * 
@@ -65,7 +63,9 @@ public class GroupService {
 		Map<String, WebGroup> groupKeyMap = findWebGroupByName(groupKeySet
 				.toArray(new String[groupKeySet.size()]));
 		StringBuffer translate = new StringBuffer();
+
 		for (WebTemplate webTemplate : templateList) {
+
 			String[] groupKeys = webTemplate.getGroupKeys().split(",");
 
 			for (String key : groupKeys) {
@@ -76,9 +76,11 @@ public class GroupService {
 			}
 			webTemplate.setGroupKeysTranslate(translate.toString().substring(0,
 					translate.toString().length() - 1));
+			translate.delete(0, translate.toString().length());
 		}
 		return templateList;
 	}
+
 	/**
 	 * 根据分组KEY查询分组列表
 	 * 

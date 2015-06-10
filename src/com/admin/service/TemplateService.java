@@ -28,9 +28,7 @@ import com.core.jdbc.DaoException;
  * @creation 2015年3月2日
  */
 @Repository("templateService")
-public class TemplateService {
-	@Resource
-	private CacheModelService cacheModelService;
+public class TemplateService { 
 	@Resource
 	private BaseDao baseDao;
 
@@ -43,7 +41,7 @@ public class TemplateService {
 	 */
 	public List<String> getTemplateRelGroupKeys(String templatePath)
 			throws DaoException {
-		List<WebTemplate> list = cacheModelService.find(" templatePath ='"
+		List<WebTemplate> list = baseDao.find(" templatePath ='"
 				+ templatePath + "' and iseff='1' ", WebTemplate.class);
 		if (list != null && !list.isEmpty()) {
 			WebTemplate template = list.get(0);
@@ -69,7 +67,7 @@ public class TemplateService {
 		String sql = " templatePath ='" + templatePath + "' ";
 		if (templateId != null)
 			sql += " and id !=" + templateId;
-		List<WebTemplate> list = cacheModelService.find(sql, WebTemplate.class);
+		List<WebTemplate> list = baseDao.find(sql, WebTemplate.class);
 		if (list != null && !list.isEmpty()) {
 			return true;
 		}

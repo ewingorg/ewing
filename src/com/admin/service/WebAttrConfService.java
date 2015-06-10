@@ -19,9 +19,7 @@ import com.core.jdbc.BaseDao;
  */
 @Repository("webAttrConfService")
 public class WebAttrConfService {
-
-	@Resource
-	private CacheModelService cacheModelService;
+ 
 	@Resource
 	private BaseDao baseDao;
 

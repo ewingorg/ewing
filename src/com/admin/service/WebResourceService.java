@@ -21,9 +21,7 @@ import com.core.jdbc.BaseDao;
  * @creation 2015年5月20日
  */
 @Repository("webResourceService")
-public class WebResourceService {
-	@Resource
-	private CacheModelService cacheModelService;
+public class WebResourceService { 
 	@Resource
 	private BaseDao baseDao;
 	@Resource
