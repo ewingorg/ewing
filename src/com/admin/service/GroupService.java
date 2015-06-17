@@ -30,7 +30,7 @@ import com.util.SqlUtil;
 public class GroupService {
 
 	@Resource
-	private BaseDao baseDao; 
+	private BaseDao baseDao;
 	/**
 	 * 翻译模板的分组名称
 	 * 
@@ -55,6 +55,8 @@ public class GroupService {
 			Boolean isDetail) {
 		Set<String> groupKeySet = new HashSet<String>();
 		for (WebTemplate webTemplate : templateList) {
+			if (webTemplate.getGroupKeys() == null)
+				continue;
 			String[] groupKeys = webTemplate.getGroupKeys().split(",");
 			for (String key : groupKeys) {
 				groupKeySet.add(key);
@@ -65,9 +67,9 @@ public class GroupService {
 		StringBuffer translate = new StringBuffer();
 
 		for (WebTemplate webTemplate : templateList) {
-
+			if (webTemplate.getGroupKeys() == null)
+				continue;
 			String[] groupKeys = webTemplate.getGroupKeys().split(",");
-
 			for (String key : groupKeys) {
 				translate.append(groupKeyMap.get(key).getName());
 				if (isDetail)
@@ -80,7 +82,6 @@ public class GroupService {
 		}
 		return templateList;
 	}
-
 	/**
 	 * 根据分组KEY查询分组列表
 	 * 

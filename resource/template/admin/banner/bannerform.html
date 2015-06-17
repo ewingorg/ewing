@@ -33,12 +33,23 @@
 
 					<div class="control-group">
 						<label class="control-label">栏目图片</label>
-						<div class="controls">
-							<#if bean?? && bean.imageUrl ?? > <img
-								src="${contextPath}${(bean.imageUrl)?if_exists}" width="80"
-								height="80" id="imgShow" /> <#else> <img
-								src="${contextPath}/common/image/default-pic.png" width="80"
-								height="80" id="imgShow" /> </#if>
+						<div class="span1">
+						<div class="item"> 
+								<a class="fancybox-button" data-rel="fancybox-button"
+									title="Photo"  
+									href="${contextPath}${(bean.imageUrl)?if_exists}"
+									 > 
+									<div class="zoom">
+										<#if bean?? && bean.imageUrl ?? > <img
+											src="${contextPath}${(bean.imageUrl)?if_exists}" width="100"
+											height="80" id="imgShow" alt="Photo" /> <#else> <img
+											src="${contextPath}/common/image/default-pic.png" width="100"
+											height="80" id="imgShow" /> </#if> 
+										<div class="zoom-icon"></div>
+
+									</div>
+								</a>
+							 </div>
 						</div>
 					</div>
 					<div class="control-group">
@@ -48,9 +59,9 @@
 								class="icon-plus icon-white"></i> <span>选择文件...</span> <input
 								type="file" id="upfile1" name="upfile1" />
 							</span> <input type="hidden" id="imageUrl" name="imageUrl"
-								value="${(bean.imageUrl)?if_exists}" /> <a
-								class="btn start" onclick="uploadNavPic();"> <i
-								class="icon-upload icon-white"></i> <span>上传</span>
+								value="${(bean.imageUrl)?if_exists}" /> <a class="btn start"
+								onclick="uploadNavPic();"> <i class="icon-upload icon-white"></i>
+								<span>上传</span>
 							</a> <br> <span class="alert alert-error" id="upfile1_error_tip"
 								style="display: none;"></span>
 							<div class="alert alert-success" id="upfile1_detail"
@@ -91,7 +102,7 @@
 						<label class="control-label">简单描述&nbsp;&nbsp;</label>
 						<div class="controls">
 							<textarea class="span6  m-wrap" rows="2" id="shortDesc"
-								name="shortDesc" >${(bean.shortDesc)?if_exists}</textarea>
+								name="shortDesc">${(bean.shortDesc)?if_exists}</textarea>
 						</div>
 					</div>
 					<div class="control-group">
@@ -139,5 +150,23 @@
 			var url = '${contextPath}/Admin-Banner-show.action';
 			main.addContainer(url);
 		});
+
+		if (!jQuery.fancybox) {
+			return;
+		}
+
+		if (jQuery(".fancybox-button").size() > 0) {
+			jQuery(".fancybox-button").fancybox({
+				groupAttr : 'data-rel',
+				prevEffect : 'none',
+				nextEffect : 'none',
+				closeBtn : true,
+				helpers : {
+					title : {
+						type : 'inside'
+					}
+				}
+			});
+		}
 	});
 </script>
