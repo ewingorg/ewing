@@ -58,7 +58,7 @@
 	$(document).ready(function() {
 		$("#res_return_btn").bind("click", function() {
 			var url = '${contextPath}/Admin-Banner-show.action';
-			main.addContainer(url);
+			mainFrame.addContainer(url);
 		});
 		//绑定资源按钮事件
 		var categoryId= $('#categoryId').val();
@@ -90,7 +90,7 @@
 									content : data.retinfo,
 									closeFn : function() {
 										if (queryUrl != ''){   
-										     main.addContainer(queryUrl);
+										     mainFrame.addContainer(queryUrl);
 										}
 									}
 								});
@@ -128,7 +128,7 @@
 									content : data.retinfo,
 									closeFn : function() {
 										if (queryUrl != ''){   
-										     main.addContainer(queryUrl);
+										     mainFrame.addContainer(queryUrl);
 										}
 									}
 								});

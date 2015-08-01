@@ -1,5 +1,5 @@
-if (!this.main) {
-	var main = {};
+if (!this.mainFrame) {
+	var mainFrame = {};
 }
 
 /**
@@ -8,7 +8,7 @@ if (!this.main) {
  * @param htmlhref
  *            页面链接
  */
-main.addContainer = function(htmlhref) {
+mainFrame.addContainer = function(htmlhref) {
 	common.writeHtml(htmlhref, 'main-container');
 };
 
@@ -20,7 +20,7 @@ main.addContainer = function(htmlhref) {
  * @param searchFormId
  *            搜索表单id
  */
-main.addContainer = function(htmlhref, searchFormId) {
+mainFrame.addContainer = function(htmlhref, searchFormId) {
 	var param = '';
 	if (searchFormId && searchFormId != '')
 		param = $("#" + searchFormId).serialize();
@@ -50,7 +50,7 @@ main.addContainer = function(htmlhref, searchFormId) {
  * @param areaId
  *            区域id
  */
-main.addArea = function(htmlhref, areaId, searchFormId) {
+mainFrame.addArea = function(htmlhref, areaId, searchFormId) {
 	var param = '';
 	if (searchFormId && searchFormId != '')
 		param = $("#" + searchFormId).serialize();
@@ -67,7 +67,7 @@ main.addArea = function(htmlhref, areaId, searchFormId) {
 /**
  * 点击菜单时候变高亮
  */
-main.clickMenu = function(obj) {
+mainFrame.clickMenu = function(obj) {
 	$(".sub-menu li").each(function(index, element) {
 		$(element).removeClass("active");
 	});

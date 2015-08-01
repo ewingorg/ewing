@@ -9,7 +9,7 @@ pBean:返回结果集
 	 	<#if pBean.currentPageNo = '1'>  
 			<li class="disabled"><a href="#">&laquo;</a> 
 		<#else> 
-			<li><a href="#" onclick="main.addContainer('${pBean.pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${searchFormId}')">&laquo;</a>
+			<li><a href="#" onclick="mainFrame.addContainer('${pBean.pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${searchFormId}')">&laquo;</a>
 		</#if> 
 		<#list 1..pBean.totalPageCount as i> 
 			<#if (10 >= i) >
@@ -19,7 +19,7 @@ pBean:返回结果集
 					<li>
 				</#if> 
 				<a href="#"
-				onclick="main.addContainer('${pBean.pageUrl}&page=${i}&pageSize=${pBean.pageSize}','${searchFormId}')">${i}</a>
+				onclick="mainFrame.addContainer('${pBean.pageUrl}&page=${i}&pageSize=${pBean.pageSize}','${searchFormId}')">${i}</a>
 				</li> 
 			</#if>
 		</#list>   
@@ -27,7 +27,7 @@ pBean:返回结果集
 			<li class="disabled"><a href="#">&raquo;</a></li>
 		<#else>  
 			<li><a
-				href="#" onclick="main.addContainer('${pBean.pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${searchFormId}')">&raquo;</a>
+				href="#" onclick="mainFrame.addContainer('${pBean.pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${searchFormId}')">&raquo;</a>
 			</li>
 		</#if>  
 	</ul>
@@ -48,7 +48,7 @@ areaId:显示分页的区域id,一般指定div id.
 	 	<#if pBean.currentPageNo = '1'>  
 			<li class="disabled"><a href="#">&laquo;</a> 
 		<#else> 
-			<li><a href="#" onclick="main.addArea('${pBean.pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&laquo;</a>
+			<li><a href="#" onclick="mainFrame.addArea('${pBean.pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&laquo;</a>
 		</#if> 
 		<#list 1..pBean.totalPageCount as i> 
 			<#if (10 >= i) >
@@ -58,7 +58,7 @@ areaId:显示分页的区域id,一般指定div id.
 					<li>
 				</#if> 
 				<a href="#"
-				onclick="main.addArea('${pBean.pageUrl}&page=${i}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">${i}</a>
+				onclick="mainFrame.addArea('${pBean.pageUrl}&page=${i}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">${i}</a>
 				</li> 
 			</#if>
 		</#list>   
@@ -66,7 +66,7 @@ areaId:显示分页的区域id,一般指定div id.
 			<li class="disabled"><a href="#">&raquo;</a></li>
 		<#else>  
 			<li><a
-				href="#" onclick="main.addArea('${pBean.pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&raquo;</a>
+				href="#" onclick="mainFrame.addArea('${pBean.pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&raquo;</a>
 			</li>
 		</#if>  
 	</ul>

@@ -2,7 +2,7 @@ var tableAction = {
 
 	bindQueryAction : function(queryBtnId, queryUrl, searchFormId) {
 		$('#' + queryBtnId).bind('click', function() {
-			main.addContainer(queryUrl, searchFormId);
+			mainFrame.addContainer(queryUrl, searchFormId);
 		});
 	},
 
@@ -15,7 +15,7 @@ var tableAction = {
 			if (isPopEditForm)
 				common.popHtml(url, 'navModel');
 			else
-				main.addContainer(url);
+				mainFrame.addContainer(url);
 		});
 	},
 	bindNewAction : function(editBtnId, editUrl, isPopEditForm) {
@@ -24,7 +24,7 @@ var tableAction = {
 			if (isPopEditForm)
 				common.popHtml(url, 'navModel');
 			else
-				main.addContainer(url);
+				mainFrame.addContainer(url);
 		});
 	},
 	bindSaveAction : function(saveBtnId, formId, saveUrl, queryUrl,
@@ -52,7 +52,7 @@ var tableAction = {
 							content : '保存成功！',
 							closeFn : function() {
 								if (queryUrl != '')
-									main.addContainer(queryUrl);
+									mainFrame.addContainer(queryUrl);
 							}
 						});
 					}
@@ -87,7 +87,7 @@ var tableAction = {
 									content : data.retinfo,
 									closeFn : function() {
 										if (queryUrl != '')
-											main.addContainer(queryUrl);
+											mainFrame.addContainer(queryUrl);
 									}
 								});
 							}

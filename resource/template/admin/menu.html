@@ -8,7 +8,7 @@
         		<li class="notactive"> 
        			<a href="#"
         			<#if menu.hrefTarget ?? >
-        			onclick="main.addContainer('${menu.hrefTarget}');"
+        			onclick="mainFrame.addContainer('${menu.hrefTarget}');"
         			</#if> > 
         			<i class="${menu.iconCls}"></i> 
         			<span class="title">${menu.text}</span> <span
@@ -16,8 +16,8 @@
 				<#if menu.children?size gt 0 >
 				<ul class="sub-menu"   > 
 					<#list  menu.children as childMenu >  
-			         <li class="notactive" onclick="main.clickMenu(this);"> 
-        			     <a href="#" onclick="main.addContainer('${childMenu.hrefTarget}');" >${childMenu.text}</a>
+			         <li class="notactive" onclick="mainFrame.clickMenu(this);"> 
+        			     <a href="#" onclick="mainFrame.addContainer('${childMenu.hrefTarget}');" >${childMenu.text}</a>
        			     </li> 
 					</#list> 
 					</ul>
