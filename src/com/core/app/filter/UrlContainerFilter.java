@@ -38,7 +38,8 @@ public class UrlContainerFilter implements Filter {
 		String menuUrl = reqUrl.substring(reqUrl.indexOf(contextPath)
 				+ contextPath.length());
 		String container = request.getParameter("container");
-		 if (menuUrl.startsWith("/vgooo") || menuUrl.startsWith("/d1box") ) { 
+		 if (menuUrl.startsWith("/vgooo") || menuUrl.startsWith("/d1box") 
+				 || menuUrl.startsWith("/shopxx") ) { 
 			//Busi-Html-redirect.action?page=vgooo/index.html
 			 
 			String actionUrl = "Busi-Html-redirect.action?page="+menuUrl;

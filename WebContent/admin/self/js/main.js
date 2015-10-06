@@ -67,9 +67,27 @@ mainFrame.addArea = function(htmlhref, areaId, searchFormId) {
 /**
  * 点击菜单时候变高亮
  */
-mainFrame.clickMenu = function(obj) {
-	$(".sub-menu li").each(function(index, element) {
+mainFrame.clickMenu = function(obj) { 
+	$(".page-sidebar-menu li").each(function(index, element) {  
 		$(element).removeClass("active");
+		$(element).addClass("notactive");
 	});
 	$(obj).addClass("active");
+};
+
+/**
+ * 点击置顶菜单时候变高亮
+ */
+mainFrame.clickTopMenu = function(obj) {
+	$(".topnav a").each(function(index, element) {  
+		$(element).removeClass("blue");
+	});  
+	var curMenuId = $(obj).attr("menuId");
+	$(".page-sidebar-menu li").each(function(index, element) {  
+		if($(element).attr("parentMenuId") == curMenuId) 
+			$(element).show();
+		else
+			$(element).hide(); 
+	});
+	$(obj).addClass("blue");
 };

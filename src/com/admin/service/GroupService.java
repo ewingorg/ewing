@@ -62,6 +62,9 @@ public class GroupService {
 				groupKeySet.add(key);
 			}
 		}
+		if (groupKeySet.isEmpty())
+			return templateList;
+		
 		Map<String, WebGroup> groupKeyMap = findWebGroupByName(groupKeySet
 				.toArray(new String[groupKeySet.size()]));
 		StringBuffer translate = new StringBuffer();

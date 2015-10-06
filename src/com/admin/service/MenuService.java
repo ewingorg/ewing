@@ -63,20 +63,36 @@ public class MenuService {
 		}
 		return moduleList;
 	}
-	 
+	
+	/**
+	 * 获取导航菜单第一位菜单设置
+	 * @return
+	 * @throws DaoException
+	 */
+	public SysMenu queryFirstTopMenu() throws DaoException {
+		List<SysMenu> menuList = cacheModelService.find(
+				" level=1 and iseff='1' order by sort", SysMenu.class);
+		if (!menuList.isEmpty()) {
+			return menuList.get(0);
+		}
+		return null;
+	}
 
 	private TreeObject copy2TreeObject(SysMenu sysMenu) {
 		TreeObject treeObject = new TreeObject();
 		treeObject.setId(sysMenu.getId());
 		treeObject.setText(sysMenu.getName());
 		String url = null;
-		Integer parentId = sysMenu.getParentid() == 0 ? sysMenu.getId()
+		Integer parentId = sysMenu.getParentid() == 0
+				? sysMenu.getId()
 				: sysMenu.getParentid();
 		if (sysMenu.getUrl() != null) {
 			if (sysMenu.getUrl().indexOf("?") != -1)
-				url = sysMenu.getUrl() + "&parentMenuId=" + parentId+"&menuId="+sysMenu.getId();
+				url = sysMenu.getUrl() + "&parentMenuId=" + parentId
+						+ "&menuId=" + sysMenu.getId();
 			else
-				url = sysMenu.getUrl() + "?parentMenuId=" + parentId+"&menuId="+sysMenu.getId();
+				url = sysMenu.getUrl() + "?parentMenuId=" + parentId
+						+ "&menuId=" + sysMenu.getId();
 		}
 		treeObject.setHrefTarget(url);
 		treeObject.setIconCls(sysMenu.getIcon());

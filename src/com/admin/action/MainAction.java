@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
+import com.admin.model.SysMenu;
 import com.admin.service.MenuService;
 import com.core.app.action.base.BaseAction;
 import com.core.app.bean.TreeObject;
@@ -18,8 +19,8 @@ import com.core.jdbc.DaoException;
 /**
  * 后台管理主頁展示类
  * 
- * @author tanson lam 
- * @creation 2015年1月10日 
+ * @author tanson lam
+ * @creation 2015年1月10日
  */
 
 public class MainAction extends BaseAction {
@@ -33,6 +34,7 @@ public class MainAction extends BaseAction {
 			InvocationTargetException {
 		Map<String, Object> dataModel = new HashMap<String, Object>();
 		List<TreeObject> menuList = menuService.queryModuleTree(null);
+		SysMenu firstTopmenu = menuService.queryFirstTopMenu();
 		TreeObject parentMenu = new TreeObject();
 		TreeObject menu = new TreeObject();
 		String parentMenuId = request.getParameter("parentMenuId");
@@ -47,9 +49,12 @@ public class MainAction extends BaseAction {
 
 		request.getSession().setAttribute("parentMenu", parentMenu);
 		request.getSession().setAttribute("curMenu", menu);
-
+		dataModel.put("htmlheadload", true);
 		dataModel.put("menuList", menuList);
+		dataModel.put("firstTopmenuId",
+				firstTopmenu != null ? firstTopmenu.getId() : 0);
 		render(page, dataModel);
-		
+
 	}
+
 }

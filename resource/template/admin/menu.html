@@ -1,11 +1,13 @@
  
 <div class="page-sidebar nav-collapse collapse">
 	<!-- BEGIN SIDEBAR MENU -->
-	<ul class="page-sidebar-menu" >
- 
+	<ul class="page-sidebar-menu" > 
 		<#list menuList as menu> 
-		   <#if menu.level = '1'>  
-        		<li class="notactive"> 
+		   <#if menu.level = '2'>  
+        		<li class="notactive" onclick="mainFrame.clickMenu(this);"  parentMenuId="${menu.parentId}"
+        		 <#if menu.parentId != firstTopmenuId>
+        		     style="display: none"
+        		 </#if>> 
        			<a href="#"
         			<#if menu.hrefTarget ?? >
         			onclick="mainFrame.addContainer('${menu.hrefTarget}');"
@@ -13,15 +15,7 @@
         			<i class="${menu.iconCls}"></i> 
         			<span class="title">${menu.text}</span> <span
 				class="selected"></span></a>
-				<#if menu.children?size gt 0 >
-				<ul class="sub-menu"   > 
-					<#list  menu.children as childMenu >  
-			         <li class="notactive" onclick="mainFrame.clickMenu(this);"> 
-        			     <a href="#" onclick="mainFrame.addContainer('${childMenu.hrefTarget}');" >${childMenu.text}</a>
-       			     </li> 
-					</#list> 
-					</ul>
-				</#if> 
+			 
 			</a></li>
 			</#if>
 		</#list>
