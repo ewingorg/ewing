@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.admin.model.WebCategory;
+import com.admin.model.WebBlock;
 
 /**
  * 用于业务网站模板页，包裹模板需要的各种分类数据。
@@ -17,17 +17,17 @@ import com.admin.model.WebCategory;
  */
 public class WebCategoryRender {
 
-	public Map<String, List<WebCategory>> data = new HashMap<String, List<WebCategory>>();
+	public Map<String, List<WebBlock>> data = new HashMap<String, List<WebBlock>>();
 
-	public void addCategoryList(String groupKey, List<WebCategory> categoryList) {
+	public void addCategoryList(String groupKey, List<WebBlock> categoryList) {
 		data.put(groupKey, categoryList);
 	}
 
-	public Map<String, List<WebCategory>> getData() {
+	public Map<String, List<WebBlock>> getData() {
 		return data;
 	}
 
-	public void setData(Map<String, List<WebCategory>> data) {
+	public void setData(Map<String, List<WebBlock>> data) {
 		this.data = data;
 	}
 }

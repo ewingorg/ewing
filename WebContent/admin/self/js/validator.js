@@ -505,11 +505,11 @@ AI.Validator.valid = function(form, elements) {
  * @return {}
  */
 AI.Validator.validForm = function(opts, type, errzone, errmsg) {
-	var form = jQuery.AI$OBJ(opts);
+	var form = jQuery.AI$OBJ(opts); 
 	var elements = form.find(":input[require='true']");
 	if (type == undefined) {
 		AI.Validator.aloneForm(elements);
-	} else if (type == 1) {
+	} else if (type == 1) { 
 		AI.Validator.submitBox(form, 'select');
 		if (errzone) {
 			AI.Validator.errzone = errzone;

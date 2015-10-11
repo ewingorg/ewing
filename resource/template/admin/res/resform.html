@@ -16,170 +16,50 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="icon-reorder"></i>内容编辑
+					<i class="icon-reorder"></i>资源编辑
 				</div>
 			</div>
-			<div class="portlet-body form">
-				<div class="alert alert-error " id="errtip" style="display: none;"></div>
-				<!-- BEGIN FORM-->
-				<form action="${contextPath}/Admin-Res-save.action" id="resAddForm"
-					class="form-horizontal" method="post">
-					<input type="hidden" name="id" value="${(bean.id)?if_exists}" />
-					<div class="control-group">
-						<label class="control-label">资源模板<span class="required">*</span></label>
-						<div class="controls"><@select paramCode=templateType
-							value=(bean.templateId)?if_exists item=' name="templateId" require="true"
-							datatype="require" msg="资源模板不能为空"'/></div>
-					</div> 
-					<div class="control-group">
-						<label class="control-label">分类</label>
-						<div class="controls">
-						   <input type="hidden" name="categoryId" id="categoryId"  
-								value="${(bean.categoryId)?if_exists}" /> 
-							<input class="m-wrap medium" name="categoryName" id="categoryName" datatype="require|limit"
-								type="text" min="1" max="10" msg="分类不能为空" readonly="readonly"
-								value="${(bean.categoryId)?if_exists}" /> 
-								<button type="button" id="chooseCategoryBtn" class="btn" >选择分类</button>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">标题</label>
-						<div class="controls">
-							<input class="m-wrap medium" name="name" datatype="require|limit"
-								type="text" min="1" max="10" msg="标题不能为空"
-								value="${(bean.name)?if_exists}" />
-						</div>
-					</div>
-					<div id="attrDiv">
-					
-					</div>
-					<div class="control-group">
-						<label class="control-label">图片</label>
-						<div class="controls">
-							<#if bean?? && bean.imageUrl ?? > <img
-								src="${contextPath}${(bean.imageUrl)?if_exists}" width="80"
-								height="80" id="imgShow" /> <#else> <img
-								src="${contextPath}/common/image/default-pic.png" width="80"
-								height="80" id="imgShow" /> </#if>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label"></label>
-						<div class="controls">
-							<span class="btn  fileinput-button"> <i
-								class="icon-plus icon-white"></i> <span>选择文件...</span> <input
-								type="file" id="upfile1" name="upfile1" />
-							</span> <input type="hidden" id="imageUrl" name="imageUrl" value="${(bean.imageUrl)?if_exists}" /> <a
-								class="btn start" onclick="uploadNavPic();"> <i
-								class="icon-upload icon-white"></i> <span>上传</span>
-							</a> <br> <span class="alert alert-error" id="upfile1_error_tip"
-								style="display: none;"></span>
-							<div class="alert alert-success" id="upfile1_detail"
-								style="display: none;">
-								<div class="fileName">
-									文件名称:<span></span>
-								</div>
-								<div class="fileSize">
-									文件大小:<span></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">简单描述</label>
-						<div class="controls">
-							<textarea class="span6  m-wrap" rows="2" id="shortDesc"
-								name="shortDesc" datatype="require|limit" type="text" min="1"
-								max="50" msg="简单描述不能为空">${(bean.shortDesc)?if_exists}</textarea>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">内容</label>
-						<div class="controls">
-							<textarea class="span12 m-wrap" name="longDescEdit" rows="6"
-								id="longDescEdit">${(bean.longDesc)?if_exists}</textarea>
-							<input type="hidden" id="longDesc" name="longDesc"
-								value="${(bean.longDesc)?if_exists}" require="true"
-								datatype="require|limit" type="text" min="1" max="2000"
-								msg="内容不能为空" />
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">是否有效</label>
-						<div class="controls"><@select paramCode=iseffCode
-							value=(bean.iseff)?if_exists item=' name="iseff"
-							datatype="require" msg="是否有效不能为空"'/></div>
-					</div>
-					<div class="form-actions">
-						<button type="button" id="res_save_btn" class="btn green">保存</button>
-						<button type="button" id="res_return_btn" class="btn ">返回</button>
+			<div class="portlet-body form"> 
+			 <form action="${contextPath}/Admin-Res-save.action" id="resAddForm"
+									class="form-horizontal" method="post">
+			 	<div class="tabbable tabbable-custom boxless">
 
-					</div>
-				</form>
-				<!-- END FORM-->
+							<ul class="nav nav-tabs">
+
+								<li class="active"><a href="#tab_1" data-toggle="tab">基本信息</a></li>
+
+								<li><a class="" href="#tab_2" data-toggle="tab">资源图片</a></li>
+
+							 	<li><a class="" href="#tab_3" data-toggle="tab">资源介绍</a></li>
+
+								<li><a class="" href="#tab_4" data-toggle="tab">资源属性</a></li>
+								
+								<li><a class="" href="#tab_5" data-toggle="tab">资源参数</a></li>
+								
+								<li><a class="" href="#tab_6" data-toggle="tab">资源规格</a></li>
+							</ul>
+  
+							<div class="tab-content">
+						 
+								<div class="tab-pane active" id="tab_1">
+									<#include "admin/res/resbase.html">
+			 					</div>
+		 						<div class="tab-pane" id="tab_2">
+									<#include "admin/res/resscreenshot.html">
+			 					</div>
+		 						<div class="tab-pane" id="tab_3">
+									<#include "admin/res/resdetail.html">
+			 					</div>
+			 					
+			 				</div>
+			 				 
+	 				</div>
+	 				</form>
+			 				
 			</div>
 		</div>
 		<!-- END EXTRAS PORTLET-->
 	</div>
 </div>
-
-<script>
-	$(document).ready(function() {
-		 initAttr();
-		$("#res_return_btn").bind("click", function() {
-			var url = '${contextPath}/Admin-Res-show.action';
-			mainFrame.addContainer(url);
-		});
-
-		
-		$("#chooseCategoryBtn").bind("click", function() {
-			var url = '${contextPath}/Admin-ResCategory-selectCategory.action?categoryId=categoryId&categoryName=categoryName';
-			common.popHtml(url, 'navModel');
-		});
-		
-		$("[name='templateId']").bind("change", function() {
-			  var templateId = $(this).val();
-			  if(templateId =='')
-				  return;  
-			  var url = '${contextPath}/Admin-AttrConf-showDynamicForm.action?templateId='+templateId;
-			  common.writeHtml(url,'attrDiv');
-		});
-		 
-		
-		tableAction.initSaveAction({
-			formId : 'resAddForm',
-			saveUrl : '${contextPath}/Admin-Res-save.action',
-			saveBtnId : 'res_save_btn',
-			queryUrl : '${contextPath}/Admin-Res-show.action',
-			beforeSaveFn : function() {
-				var editor = CKEDITOR.instances.longDescEdit;
-				$("#longDesc").val(editor.getData());
-			}
-		});
-		$('#longDescEdit').ckeditor(); 
-	
-	});
-	
-	function initAttr(){ 
-		  var templateId = $("[name='templateId']").val();
-		  var resourceId = $("[name='id']").val(); 
-		  if(templateId =='' || resourceId == '')
-			  return;  
-		  var url = '${contextPath}/Admin-AttrConf-showDynamicForm.action?templateId='+templateId+"&resourceId="+resourceId;
-		  common.writeHtml(url,'attrDiv'); 
-	}
-	
-	function uploadNavPic() {
-		ajax.upload({
-			fileEleId : 'upfile1',
-			filePathId : 'imageUrl',
-			successFn : function(data) {
-				var isImg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/
-						.test(data.result.webfilePath);
-				if (isImg)
-					$('#imgShow').attr("src", data.result.webfilePath);
-			}
-		})
-	}
-</script>
+ 
 

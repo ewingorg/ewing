@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import com.admin.constant.GroupType;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
-import com.admin.model.WebCategory;
+import com.admin.model.WebBlock;
 import com.admin.service.GroupService;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
@@ -48,7 +48,7 @@ public class NavAction extends BaseAction {
 			String condition = "groupType ='" + GroupType.NAV.getCode() + "'"
 					+ bulidConditionSql();
 			PageBean pageBean = baseModelService.pageQuery(condition,
-					bulidOrderBySql(), pageSize, page, WebCategory.class);
+					bulidOrderBySql(), pageSize, page, WebBlock.class);
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			List<SysParam> groupCode = groupService
@@ -72,8 +72,8 @@ public class NavAction extends BaseAction {
 		try {
 			String id = request.getParameter("id");
 			if (!StringUtils.isEmpty(id)) {
-				WebCategory webCategory = findOne(Integer.valueOf(id),
-						WebCategory.class);
+				WebBlock webCategory = findOne(Integer.valueOf(id),
+						WebBlock.class);
 				dataModel.put("bean", webCategory);
 			}
 			List<SysParam> iseffCode = sysParamService
@@ -95,7 +95,7 @@ public class NavAction extends BaseAction {
 		ResponseData responseData = null;
 		try {
 			String id = request.getParameter("id");
-			WebCategory webCategory = new WebCategory();
+			WebBlock webCategory = new WebBlock();
 			this.buildPageData(webCategory);
 			webCategory.setParentId(0);
 			webCategory.setGroupType(GroupType.NAV.getCode().toString());
@@ -127,8 +127,8 @@ public class NavAction extends BaseAction {
 			}
 			String[] selectArr = selectItems.split(",");
 			for (String id : selectArr) {
-				WebCategory webCategory = baseModelService.findOne(
-						Integer.valueOf(id), WebCategory.class);
+				WebBlock webCategory = baseModelService.findOne(
+						Integer.valueOf(id), WebBlock.class);
 				if (webCategory != null)
 					baseModelService.delete(webCategory);
 			}

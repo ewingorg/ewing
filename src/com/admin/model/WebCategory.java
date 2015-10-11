@@ -1,135 +1,105 @@
-/**
- * 
- */
 package com.admin.model;
 
 import java.sql.Timestamp;
 
+import com.core.app.anno.IgnoreField;
+
 /**
- * 类/接口注释
- * 
- * @author tanson lam
- * @createDate 2014年12月2日
- * 
+ * WebResourceCategory entity. @author MyEclipse Persistence Tools
  */
-public class WebCategory {
+
+public class WebCategory implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+
+	private String name;
+
+	private String level;
+
+	private Integer parentid;
+
+	private String iseff;
 
 	private Timestamp createTime;
-	private String groupKey;
-	private Integer id;
-	private String imageUrl;
-	private String iseff;
+
 	private Timestamp lastUpdate;
-	private String linkUrl;
-	private String name;
-	private Integer parentId;
-	private Integer rank;
-	private String groupType;
-	private String tempalte;
-	private String shortDesc;
-	
-	public String getShortDesc() {
-		return shortDesc;
+
+	private Integer sort;
+	@IgnoreField
+	private String parentName;
+
+	public String getParentName() {
+		return parentName;
 	}
 
-	public void setShortDesc(String shortDesc) {
-		this.shortDesc = shortDesc;
-	}
-
-	public String getTempalte() {
-		return tempalte;
-	}
-
-	public void setTempalte(String tempalte) {
-		this.tempalte = tempalte;
-	}
-
-	public String getGroupType() {
-		return groupType;
-	}
-
-	public void setGroupType(String groupType) {
-		this.groupType = groupType;
-	}
-
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-
-	public String getGroupKey() {
-		return groupKey;
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public String getIseff() {
-		return iseff;
-	}
-
-	public Timestamp getLastUpdate() {
-		return lastUpdate;
-	}
-
-	public String getLinkUrl() {
-		return linkUrl;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public Integer getParentId() {
-		return parentId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Integer getRank() {
-		return rank;
+	public String getLevel() {
+		return level;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
-	public void setGroupKey(String groupKey) {
-		this.groupKey = groupKey;
+	public Integer getParentid() {
+		return parentid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setParentid(Integer parentid) {
+		this.parentid = parentid;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public String getIseff() {
+		return iseff;
 	}
 
 	public void setIseff(String iseff) {
 		this.iseff = iseff;
 	}
 
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+	public Timestamp getLastUpdate() {
+		return lastUpdate;
+	}
+
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public void setLinkUrl(String linkUrl) {
-		this.linkUrl = linkUrl;
+	public Integer getSort() {
+		return sort;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
-
-	public void setRank(Integer rank) {
-		this.rank = rank;
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 
 }

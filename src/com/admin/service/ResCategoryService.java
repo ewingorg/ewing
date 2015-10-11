@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.admin.dto.ResCategoryTreeDto;
 import com.admin.model.SysMenu;
-import com.admin.model.WebResourceCategory;
+import com.admin.model.WebCategory;
 import com.core.app.bean.TreeObject;
 import com.core.app.bean.UserInfo;
 import com.core.app.constant.IsEff;
@@ -36,11 +36,11 @@ public class ResCategoryService {
 	 * @throws DaoException
 	 */
 	public List<ResCategoryTreeDto> queryCatagoryTree() throws DaoException {
-		List<WebResourceCategory> categoryList = baseDao.find(" iseff='"
+		List<WebCategory> categoryList = baseDao.find(" iseff='"
 				+ IsEff.EFFECTIVE + "' order by sort",
-				WebResourceCategory.class);
+				WebCategory.class);
 		List<ResCategoryTreeDto> moduleList = new ArrayList<ResCategoryTreeDto>();
-		for (WebResourceCategory category : categoryList) {
+		for (WebCategory category : categoryList) {
 			boolean expand = false;
 			if(category.getParentid()==-1)
 				expand = true;

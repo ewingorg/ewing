@@ -51,8 +51,9 @@ var tableAction = {
 						common.alert({
 							content : '保存成功！',
 							closeFn : function() {
-								if (queryUrl != '')
+								if (queryUrl != '' && queryUrl)
 									mainFrame.addContainer(queryUrl);
+								
 							}
 						});
 					}
@@ -86,7 +87,7 @@ var tableAction = {
 								common.alert({
 									content : data.retinfo,
 									closeFn : function() {
-										if (queryUrl != '')
+										if (queryUrl != '' && queryUrl)
 											mainFrame.addContainer(queryUrl);
 									}
 								});

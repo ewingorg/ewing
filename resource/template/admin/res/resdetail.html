@@ -1,0 +1,31 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html">
+ 
+<script src="${contextPath}/ckeditor/ckeditor.js"></script>
+<script src="${contextPath}/ckeditor/adapters/jquery.js"></script>
+<style>
+#editable {
+	padding: 10px;
+	float: left;
+}
+</style>
+
+<!-- BEGIN FORM-->
+ 
+	<div class="control-group">
+		<label class="control-label">详细描述</label>
+		<div class="controls">
+			<textarea class="span12 m-wrap" name="longDescEdit" rows="6"
+				id="longDescEdit">${(bean.longDesc)?if_exists}</textarea>
+			<input type="hidden" id="longDesc" name="longDesc"
+				value="${(bean.longDesc)?if_exists}" require="true"
+				datatype="require" type="text"   msg="详细描述不能为空" />
+		</div>
+	</div>
+	  
+<script>
+	$(document).ready(function() { 
+		$('#longDescEdit').ckeditor(); 
+	});
+</script>
+

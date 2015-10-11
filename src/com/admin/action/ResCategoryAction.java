@@ -13,7 +13,7 @@ import com.admin.constant.SysParamCode;
 import com.admin.dto.ResCategoryTreeDto;
 import com.admin.model.SysParam;
 import com.admin.model.WebResource;
-import com.admin.model.WebResourceCategory;
+import com.admin.model.WebCategory;
 import com.admin.service.ResCategoryService;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
@@ -82,11 +82,11 @@ public class ResCategoryAction extends BaseAction {
 		try {
 			String id = request.getParameter("id");
 			if (!StringUtils.isEmpty(id)) {
-				WebResourceCategory webResource = findOne(Integer.valueOf(id),
-						WebResourceCategory.class);
-				WebResourceCategory parentNode = findOne(
+				WebCategory webResource = findOne(Integer.valueOf(id),
+						WebCategory.class);
+				WebCategory parentNode = findOne(
 						Integer.valueOf(webResource.getParentid()),
-						WebResourceCategory.class);
+						WebCategory.class);
 				webResource.setParentName(parentNode.getName());
 				dataModel.put("bean", webResource);
 			}
@@ -107,10 +107,10 @@ public class ResCategoryAction extends BaseAction {
 		try {
 			String parentid = request.getParameter("parentid");
 			if (!StringUtils.isEmpty(parentid)) {
-				WebResourceCategory parentNode = findOne(
-						Integer.valueOf(parentid), WebResourceCategory.class);
+				WebCategory parentNode = findOne(
+						Integer.valueOf(parentid), WebCategory.class);
 				Integer nextLevel = Integer.valueOf(parentNode.getLevel()) + 1;
-				WebResourceCategory newNode = new WebResourceCategory();
+				WebCategory newNode = new WebCategory();
 				newNode.setParentid(parentNode.getId());
 				newNode.setLevel(nextLevel.toString());
 				newNode.setParentName(parentNode.getName());
@@ -132,7 +132,7 @@ public class ResCategoryAction extends BaseAction {
 		ResponseData responseData = null;
 		try {
 			String id = request.getParameter("id");
-			WebResourceCategory webResource = new WebResourceCategory();
+			WebCategory webResource = new WebCategory();
 			this.buildPageData(webResource);
 			if (!StringUtils.isEmpty(id)) {
 				webResource.setId(Integer.valueOf(id));
@@ -162,8 +162,8 @@ public class ResCategoryAction extends BaseAction {
 			}
 			String[] selectArr = selectItems.split(",");
 			for (String id : selectArr) {
-				WebResourceCategory webResource = baseModelService.findOne(
-						Integer.valueOf(id), WebResourceCategory.class);
+				WebCategory webResource = baseModelService.findOne(
+						Integer.valueOf(id), WebCategory.class);
 				if (webResource != null && webResource.getParentid() != -1)
 					baseModelService.delete(webResource);
 			}

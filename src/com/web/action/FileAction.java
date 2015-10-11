@@ -19,7 +19,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.admin.action.MainAction;
 import com.admin.constant.GroupType;
-import com.admin.model.WebCategory;
+import com.admin.model.WebBlock;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
 import com.core.app.action.base.ResponseUtils;

@@ -1,0 +1,240 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html">
+ 
+<style>
+#editable {
+	padding: 10px;
+	float: left;
+}
+</style>
+<div class="alert alert-error " id="errtip" style="display: none;"></div>
+				<!-- BEGIN FORM--> 
+					<input type="hidden" name="id" value="${(bean.id)?if_exists}" />
+					<div class="control-group">
+						<label class="control-label">资源模板<span class="required">*</span></label>
+						<div class="controls"><@select paramCode=templateType
+							value=(bean.templateId)?if_exists item=' name="templateId" require="true"
+							datatype="require" msg="资源模板不能为空"'/></div>
+					</div> 
+					<div class="control-group">
+						<label class="control-label">分类<span class="required">*</span></label>
+						<div class="controls">
+						   <input type="hidden" name="categoryId" id="categoryId"  
+								value="${(bean.categoryId)?if_exists}" require="true"
+						 		datatype="require" msg="分类不能为空"/> 
+							<input class="m-wrap medium" name="categoryName" id="categoryName"  readonly="readonly"
+								value="${(bean.categoryId)?if_exists}"  type="text"/> 
+								<button type="button" id="chooseCategoryBtn" class="btn" >选择分类</button>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">标题<span class="required">*</span></label>
+						<div class="controls">
+							<input class="m-wrap long span4" name="name" require="true" datatype="require|limit"
+								type="text" min="1" max="50" msg="标题不能为空"
+								value="${(bean.name)?if_exists}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">成本价</label>
+						<div class="controls">
+							<input class="m-wrap medium" name="cost" type="text"  
+								value="${(bean.cost)?if_exists}" />
+								
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">价格<span class="required">*</span></label>
+						<div class="controls">
+							<input class="m-wrap medium" name="price" 
+								value="${(bean.price)?if_exists}" require="true" datatype="require|limit" type="text" min="1"
+								max="10" msg="价格不能为空|价格不能超过10个字符"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">图片<span class="required">*</span></label>
+						<div class="controls">
+							<#if bean?? && bean.imageUrl ?? > <img
+								src="${contextPath}${(bean.imageUrl)?if_exists}" width="180"
+								height="180" id="imgShow" /> <#else> <img
+								src="${contextPath}/common/image/default-pic.png" width="180"
+								height="180" id="imgShow" /> </#if>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"></label>
+						<div class="controls">
+							<span class="btn  fileinput-button"> <i
+								class="icon-plus icon-white"></i> <span>选择文件...</span> <input
+								type="file" id="upfile1" name="upfile1" />
+							</span> <input type="hidden" 
+							 datatype="require"  require="true" msg="图片不能为空" id="imageUrl" name="imageUrl" value="${(bean.imageUrl)?if_exists}" /> <a
+								class="btn start" onclick="uploadNavPic();"> <i
+								class="icon-upload icon-white"></i> <span>上传</span>
+							</a> <br> <span class="alert alert-error" id="upfile1_error_tip"
+								style="display: none;"></span>
+							<div class="alert alert-success" id="upfile1_detail"
+								style="display: none;">
+								<div class="fileName">
+									文件名称:<span></span>
+								</div>
+								<div class="fileSize">
+									文件大小:<span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">简单描述<span class="required">*</span></label>
+						<div class="controls">
+							<textarea class="span6  m-wrap" rows="2" id="shortDesc"
+								name="shortDesc" require="true" datatype="require|limit" type="text" min="1"
+								max="50" msg="简单描述不能为空|简单描述不能超过50个字符">${(bean.shortDesc)?if_exists}</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">单位<span class="required">*</span></label>
+						<div class="controls">
+							<input class="m-wrap medium" name="unit"  require="true" datatype="require|limit" type="text" min="1"
+								max="4" msg="单位不能为空|单位不能超过4个字符"
+								value="${(bean.unit)?if_exists}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">重量</label>
+						<div class="controls">
+							<input class="m-wrap medium" name="weight"   type="text"
+								value="${(bean.weight)?if_exists}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">库存<span class="required">*</span></label>
+						<div class="controls">
+							<input class="m-wrap medium" name="stockNum"   require="true" datatype="require|limit" type="text" min="1"
+								max="4" msg="库存不能为空|库存不能超过10个字符"
+								value="${(bean.stockNum)?if_exists}" />
+						</div>
+					</div>
+					
+					<div id="attrDiv">
+					
+					</div> 
+					<div class="control-group">
+						<label class="control-label">是否上架<span class="required">*</span></label>
+						<div class="controls"><@select paramCode=iseffCode
+							value=(bean.isOnline)?if_exists item=' name="isOnline"
+							require="true" datatype="require" msg="是否上架不能为空"'/></div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">是否有效<span class="required">*</span></label>
+						<div class="controls"><@select paramCode=iseffCode
+							value=(bean.iseff)?if_exists item=' name="iseff"
+							require="true" datatype="require" msg="是否有效不能为空"'/></div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">是否置顶<span class="required">*</span></label>
+						<div class="controls"><@select paramCode=iseffCode
+							value=(bean.isTop)?if_exists item=' name="isTop"
+							datatype="require" msg="是否置顶不能为空"'/></div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">是否需要物流<span class="required">*</span></label>
+						<div class="controls"><@select paramCode=iseffCode
+							value=(bean.needCarry)?if_exists item=' name="needCarry"
+							require="true" datatype="require" msg="是否需要物流不能为空"'/></div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">页面标题</label>
+						<div class="controls">
+							<input class="m-wrap long span4" name="pageTitle"  
+								value="${(bean.pageTitle)?if_exists}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">页面关键词</label>
+						<div class="controls">
+							<input class="m-wrap long span4" name="pageKeyword"  
+								value="${(bean.pageKeyword)?if_exists}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">页面描述</label>
+						<div class="controls">
+							<textarea class="span6  m-wrap" rows="2" id="pageDesc"
+								name="pageDesc" >${(bean.pageDesc)?if_exists}</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">搜索关键词</label>
+						<div class="controls">
+							<input class="m-wrap long span4" name="name"  
+								value="${(bean.name)?if_exists}" />
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="button" id="res_save_btn" class="btn green">保存</button>
+						<button type="button" id="res_return_btn" class="btn ">返回</button>
+
+					</div>
+				
+<script>
+	$(document).ready(function() {
+		 initAttr();
+		$("#res_return_btn").bind("click", function() {
+			var url = '${contextPath}/Admin-Res-show.action';
+			mainFrame.addContainer(url);
+		});
+
+		
+		$("#chooseCategoryBtn").bind("click", function() {
+			var url = '${contextPath}/Admin-ResCategory-selectCategory.action?categoryId=categoryId&categoryName=categoryName';
+			common.popHtml(url, 'navModel');
+		});
+		
+		$("[name='templateId']").bind("change", function() {
+			  var templateId = $(this).val();
+			  if(templateId =='')
+				  return;  
+			  var url = '${contextPath}/Admin-AttrConf-showDynamicForm.action?templateId='+templateId;
+			  common.writeHtml(url,'attrDiv');
+		});
+		 
+		
+		tableAction.initSaveAction({
+			formId : 'resAddForm',
+			saveUrl : '${contextPath}/Admin-Res-save.action',
+			saveBtnId : 'res_save_btn',
+			queryUrl : '${contextPath}/Admin-Res-show.action',
+			beforeSaveFn : function() {
+				var editor = CKEDITOR.instances.longDescEdit;
+				$("#longDesc").val(editor.getData());
+			}
+		});
+		//$('#longDescEdit').ckeditor(); 
+	
+	});
+	
+	function initAttr(){ 
+		  var templateId = $("[name='templateId']").val();
+		  var resourceId = $("[name='id']").val(); 
+		  if(templateId =='' || resourceId == '')
+			  return;  
+		  var url = '${contextPath}/Admin-AttrConf-showDynamicForm.action?templateId='+templateId+"&resourceId="+resourceId;
+		  common.writeHtml(url,'attrDiv'); 
+	}
+	
+	function uploadNavPic() {
+		ajax.upload({
+			fileEleId : 'upfile1',
+			filePathId : 'imageUrl',
+			successFn : function(data) {
+				var isImg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/
+						.test(data.result.webfilePath);
+				if (isImg)
+					$('#imgShow').attr("src", data.result.webfilePath);
+			}
+		})
+	}
+</script>
+

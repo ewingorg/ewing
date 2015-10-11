@@ -38,8 +38,10 @@ import com.util.StringUtil;
  * @description: action的父类，实现了构造器传入的Dao的增删改查的基本操作。
  */
 
-public class BaseAction extends ActionSupport implements ServletRequestAware,
-		ServletResponseAware {
+public class BaseAction extends ActionSupport
+		implements
+			ServletRequestAware,
+			ServletResponseAware {
 	private static Logger logger = Logger.getLogger(BaseAction.class);
 	private static final long serialVersionUID = 1L;
 	public HttpServletRequest request;
@@ -450,7 +452,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 
 			}
 			String result = FreeMarkerTool.getSingleton().getTemplateResult(
-					template, dataModel); 
+					template, dataModel);
 			response.getWriter().write(result);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -483,6 +485,8 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 
 	public String getUTFParameter(String key) {
 		String value = request.getParameter(key);
+		if (StringUtil.isEmpty(value) || (value != null && value.equals("undefined")))
+			return null;
 		try {
 			return StringUtil.iso2Utf8(value);
 		} catch (UnsupportedEncodingException e) {
@@ -490,12 +494,13 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		}
 		return null;
 	}
-
 	public Integer getIntegerParameter(String key) {
-		String value = request.getParameter(key);
-		if (StringUtil.isEmpty(value))
+		String value = request.getParameter(key); 
+		if (StringUtil.isEmpty(value) || (value != null && value.equals("undefined")))
 			return null;
 		return Integer.valueOf(value);
 	}
+	
+	 
 
 }

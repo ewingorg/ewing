@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import com.admin.constant.GroupType;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
-import com.admin.model.WebCategory;
+import com.admin.model.WebBlock;
 import com.admin.model.WebGroup;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;

@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
 import com.admin.dto.WebCategoryRender;
-import com.admin.model.WebCategory;
+import com.admin.model.WebBlock;
 import com.core.app.constant.IsEff;
 import com.core.app.service.CacheModelService;
 import com.core.jdbc.BaseDao;
@@ -37,10 +37,10 @@ public class CategoryService {
 	 * @return
 	 * @throws DaoException
 	 */
-	public List<WebCategory> getCategoryList(String groupKey)
+	public List<WebBlock> getCategoryList(String groupKey)
 			throws DaoException {
 		return baseDao.find("groupKey='" + groupKey + "' and iseff="
-				+ IsEff.EFFECTIVE + " order by rank asc", WebCategory.class);
+				+ IsEff.EFFECTIVE + " order by rank asc", WebBlock.class);
 	}
 
 	public void loadCategoryList(List<String> groupKeyList, Map dataModel)
@@ -48,9 +48,9 @@ public class CategoryService {
 		WebCategoryRender categoryRender = new WebCategoryRender();
 		for (String groupKey : groupKeyList) {
 			try {
-				List<WebCategory> categoryList = baseDao.find("groupKey='"
+				List<WebBlock> categoryList = baseDao.find("groupKey='"
 						+ groupKey + "' and iseff=" + IsEff.EFFECTIVE
-						+ " order by rank asc", WebCategory.class);
+						+ " order by rank asc", WebBlock.class);
 				categoryRender.addCategoryList(groupKey, categoryList);
 			} catch (Exception e) {
 				throw new DaoException("failure to find groupKey[" + groupKey
