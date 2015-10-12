@@ -19,7 +19,7 @@ var tableAction = {
 		});
 	},
 	bindNewAction : function(editBtnId, editUrl, isPopEditForm) {
-		$("#" + editBtnId).bind("click", function() {
+		$("#" + editBtnId).bind("click", function() { 
 			var url = editUrl;
 			if (isPopEditForm)
 				common.popHtml(url, 'navModel');

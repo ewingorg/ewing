@@ -35,6 +35,7 @@ mainFrame.addContainer = function(htmlhref, searchFormId) {
 		url : htmlhref,
 		param : param,
 		success : function(data) {
+			if(data)
 			container.html(data);
 		}
 	});
@@ -59,6 +60,7 @@ mainFrame.addArea = function(htmlhref, areaId, searchFormId) {
 		url : htmlhref,
 		param : param,
 		success : function(data) {
+			if(data)
 			container.html(data);
 		}
 	});
