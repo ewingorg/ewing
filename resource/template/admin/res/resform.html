@@ -1,6 +1,5 @@
  <#include "admin/common/include/html_head.html"> <#include
 "admin/common/include/sysparam.html">
-
 <script src="${contextPath}/ckeditor/ckeditor.js"></script>
 <script src="${contextPath}/ckeditor/adapters/jquery.js"></script>
 <style>
@@ -21,7 +20,7 @@
 			</div>
 			<div class="portlet-body form"> 
 			 <form action="${contextPath}/Admin-Res-save.action" id="resAddForm"
-									class="form-horizontal" method="post">
+									class="form-horizontal" method="post" onSubmit="return false;">
 			 	<div class="tabbable tabbable-custom boxless">
 
 							<ul class="nav nav-tabs">
@@ -45,7 +44,7 @@
 									<#include "admin/res/resbase.html">
 			 					</div>
 		 						<div class="tab-pane" id="tab_2">
-									<#include "admin/res/resscreenshot.html">
+									<#include "admin/res/screenshotlist.html">
 			 					</div>
 		 						<div class="tab-pane" id="tab_3">
 									<#include "admin/res/resdetail.html">
