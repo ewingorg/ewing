@@ -12,11 +12,14 @@ import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.admin.constant.AttrConstant;
+import com.admin.constant.GroupType;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
 import com.admin.model.WebResource;
 import com.admin.model.WebResourceAttr;
+import com.admin.model.WebResourceScreenshot;
 import com.admin.service.TemplateService;
+import com.admin.service.WebResourceScreenService;
 import com.admin.service.WebResourceService;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
@@ -38,7 +41,8 @@ public class ResAction extends BaseAction {
 	private TemplateService templateService;
 	@Resource
 	private WebResourceService webResourceService;
-
+	@Resource
+	private WebResourceScreenService webResourceScreenService;
 	/**
 	 * 查詢列表
 	 */
@@ -49,7 +53,8 @@ public class ResAction extends BaseAction {
 			String pageSizeStr = request.getParameter("pageSize");
 			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
 					.valueOf(pageStr);
-			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
+			Integer pageSize = StringUtils.isEmpty(pageSizeStr)
+					? null
 					: Integer.valueOf(pageSizeStr);
 			String condition = bulidConditionSql();
 			PageBean pageBean = baseModelService.pageQuery(condition,
@@ -75,12 +80,13 @@ public class ResAction extends BaseAction {
 			String id = request.getParameter("id");
 			if (!StringUtils.isEmpty(id)) {
 				WebResource webResource = findOne(Integer.valueOf(id),
-						WebResource.class);
-				dataModel.put("bean", webResource);
+						WebResource.class); 
+				dataModel.put("bean", webResource); 
 			}
 			List<SysParam> templateType = templateService.getResTemplates();
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParam(SysParamCode.ISEFF); 
+			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("templateType", templateType);
 			dataModel.put("iseffCode", iseffCode);
 			render(EDIT_FORM, dataModel);

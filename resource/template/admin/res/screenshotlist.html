@@ -4,69 +4,238 @@
 
 <!-- BEGIN FORM-->
 
+<div id="screenshotShowDiv">
+	<div class="alert alert-error " id="errTip" style="display: none;"></div>
+	<div class="alert alert-success " id="sucTip" style="display: none;"></div>
 
-<div class="alert alert-error " id="errTip" style="display: none;"></div>
-<div class="alert alert-success " id="sucTip" style="display: none;"></div>
-
-<div class="portlet-body">
-	<div class="clearfix"> 
-		<button id="screenshot_add_btn" class="btn blue">
-			<i class="icon-plus"></i>&nbsp;&nbsp;新增
-		</button>
-		<button id="screenshot_del_btn" class="btn blue">
-			<i class="icon-trash"></i>&nbsp;&nbsp;删除
-		</button>
-	</div>
-	<br>
-	<form action="${_contextPath}/Admin-Nav-show.action" id="QueryForm">
-		<table class="table table-striped table-bordered table-hover"
-			id="screenshotTable">
-			<thead>
-				<tr>
-					<th style="width: 8px;"><input type="checkbox"
-						class="group-checkable" data-set="#navTable .checkboxes" /></th>
-					<th>分组</th>
-					<th>名称</th>
-					<th>链接</th>
-					<th>图标</th>
-					<th>排位</th>
-					<th>是否有效</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<#if pageBean??> <#list pageBean.result as nav >
+	<div class="portlet-body">
+		<div class="clearfix">
+			<button id="screenshot_add_btn" class="btn blue">
+				<i class="icon-plus"></i>&nbsp;&nbsp;新增
+			</button>
+			<button id="screenshot_add_btn2" class="btn blue">
+				<i class="icon-plus"></i>&nbsp;&nbsp;新增
+			</button>
+			<button id="screenshot_del_btn" class="btn blue">
+				<i class="icon-trash"></i>&nbsp;&nbsp;删除
+			</button>
+		</div>
+		<br>
+		<form action="${_contextPath}/Admin-Nav-show.action" id="QueryForm">
+			<table class="table table-striped table-bordered table-hover"
+				id="screenshotTable">
+				<thead>
+					<tr>
+						<th style="width: 8px;"><input type="checkbox"
+							class="group-checkable" data-set="#navTable .checkboxes" /></th>
+						<th>分组</th>
+						<th>名称</th>
+						<th>排位</th>
+						<th>是否有效</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
 				<tr class="odd gradeX">
-					<td><input type="checkbox" class="checkboxes"
-						value="${nav.id}" /></td>
-					<td>${nav.groupKey}</td>
-					<td>${nav.name}</td>
-					<td>${nav.linkUrl}</td>
-					<td>${nav.imageUrl}</td>
-					<td>${nav.rank}</td>
-					<td><@translate paramCode=iseffCode
-						value=(nav.iseff)?if_exists /></td>
-					<td><a href='#' name="edit_action" value="${nav.id}"><i
-							class="icon-edit"></i></a></td>
-				<tr></#list> </#if>
-			</tbody>
-		</table>
-	</form>
-	<@pagination searchFormId='' pBean=(pageBean)?if_exists />
+						<td><input type="checkbox" class="checkboxes"
+							value="1" /></td>
+						<td></td>
+						<td>111</td>
+						<td>222</td>
+						<td></td>
+						<td>1111</td>
+						<td> </td>
+						<td><a href='#' name="edit_action" value="222"><i
+								class="icon-edit"></i></a></td>
+					<tr>
+				<!-- 	<#if pageBean??> <#list pageBean.result as nav >
+					<tr class="odd gradeX">
+						<td><input type="checkbox" class="checkboxes"
+							value="${nav.id}" /></td>
+						<td></td>
+						<td>${nav.name}</td>
+						<td>${nav.linkUrl}</td>
+						<td></td>
+						<td>${nav.rank}</td>
+						<td> </td>
+						<td><a href='#' name="edit_action" value="${nav.id}"><i
+								class="icon-edit"></i></a></td>
+					<tr></#list> </#if> -->
+				</tbody>
+			</table>
+		</form>
+		<@pagination searchFormId='' pBean=(pageBean)?if_exists />
+	</div>
+
 </div>
-
-
 <script>
+var TableEditable = function () {
+
+    return {
+
+        //main function to initiate the module
+        init: function (tableName) {
+            function restoreRow(oTable, nRow) {
+                var aData = oTable.fnGetData(nRow);
+                var jqTds = $('>td', nRow);
+
+                for (var i = 0, iLen = jqTds.length; i < iLen; i++) {
+                    oTable.fnUpdate(aData[i], nRow, i, false);
+                }
+
+                oTable.fnDraw();
+            }
+
+            function editRow(oTable, nRow) { 
+                var aData = oTable.fnGetData(nRow); 
+                var jqTds = $('>td', nRow);
+                jqTds[0].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[0] + '">';
+                jqTds[1].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[1] + '">';
+                jqTds[2].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[2] + '">';
+                jqTds[3].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[3] + '">';
+                jqTds[4].innerHTML = '<a class="edit" href="">保存</a>';
+                jqTds[5].innerHTML = '<a class="cancel" href="">取消</a>';
+            }
+
+            function saveRow(oTable, nRow) {
+                var jqInputs = $('input', nRow);
+                oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
+                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
+                oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
+                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
+                oTable.fnUpdate('<a class="edit" href="">编辑</a>', nRow, 4, false);
+                oTable.fnUpdate('<a class="delete" href="">删除</a>', nRow, 5, false);
+                oTable.fnDraw();
+            }
+
+            function cancelEditRow(oTable, nRow) {
+                var jqInputs = $('input', nRow);
+                oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
+                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
+                oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
+                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
+                oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
+                oTable.fnDraw();
+            }
+
+             $('#screenshot_add_btn2').click(function (e) {
+                e.preventDefault();
+                var rows = $('#'+tableName).find("tr").length; 
+                var dataList ="";
+                $("#"+tableName+" tr:gt(0)").each(function(){
+                	   var nRow = $(this);
+                	   var nColLength = nRow.find("td").length-2; 
+                	   var rowData=""; 
+                	   $(this).find("td:lt("+nColLength+")").each(function(){
+                		   var nCol = $(this); 
+                		   rowData += nCol.html() +"@@"; 
+                	   });
+                	   dataList += rowData +"$$"; 
+                });  
+                alert(dataList);
+ 		   });  
+        
+            var oTable = $('#'+tableName).dataTable({
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 5,
+                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ 记录/每页",
+                    "oPaginate": {
+                        "sPrevious": "上一页",
+                        "sNext": "下一页"
+                    }
+                },
+                "aoColumnDefs": [{
+                        'bSortable': false,
+                        'aTargets': [0]
+                    }
+                ]
+            });
+ 		    
+            var nEditing = null;
+
+            $('#screenshot_add_btn').click(function (e) {
+                e.preventDefault();
+                var aiNew = oTable.fnAddData(['', '', '', '',
+                        '<a class="edit" href="">Edit</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
+                ]);
+                var nRow = oTable.fnGetNodes(aiNew[0]);
+                editRow(oTable, nRow);
+                nEditing = nRow;
+            });
+
+            $('#'+tableName+' a.delete').live('click', function (e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure to delete this row ?") == false) {
+                    return;
+                }
+
+                var nRow = $(this).parents('tr')[0];
+                oTable.fnDeleteRow(nRow);
+                alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+            });
+
+            $('#'+tableName+' a.cancel').live('click', function (e) {
+                e.preventDefault();
+                if ($(this).attr("data-mode") == "new") {
+                    var nRow = $(this).parents('tr')[0];
+                    oTable.fnDeleteRow(nRow);
+                } else {
+                    restoreRow(oTable, nEditing);
+                    nEditing = null;
+                }
+            });
+
+            $('#'+tableName+' a.edit').live('click', function (e) {
+                e.preventDefault();
+
+                /* Get the row as a parent of the link that was clicked on */
+                var nRow = $(this).parents('tr')[0];
+                if (nEditing !== null && nEditing != nRow) {
+                    /* Currently editing - but not this row - restore the old before continuing to edit mode */
+                    restoreRow(oTable, nEditing);
+                    editRow(oTable, nRow);
+                    nEditing = nRow;
+                } else if (nEditing == nRow && this.innerHTML == "保存") {
+                    /* Editing this row and want to save it */
+                    saveRow(oTable, nEditing);
+                    nEditing = null;
+                    //alert("Updated! Do not forget to do some ajax to sync with backend :)");
+                } else {
+                    /* No edit in progress - let's start one */
+                    editRow(oTable, nRow);
+                    nEditing = nRow;
+                }
+            });
+         $("#"+tableName+"_length").hide();
+         $("#"+tableName+"_filter").hide();
+         $("#"+tableName+"_info").hide();
+        }
+
+    };
+
+}();
 	jQuery(document).ready(function() {
-		tableAction.init({
+		/*  tableAction.init({
 			tableId : 'screenshotTable',
-			queryUrl : '${contextPath}/Admin-ResScreenShot-show.action',
+			queryUrl : '${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id=1',
 			deleteUrl : '${contextPath}/Admin-ResScreenShot-delete.action',
 			editUrl : '${contextPath}/Admin-ResScreenShot-showEditForm.action', 
 			deleteBtnId : 'screenshot_del_btn',
 			editBtnId : 'screenshot_add_btn' 
-		});
+		}); */
+		
+		// mainFrame.addArea('${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id=1','screenshotShowDiv');	
+		 TableEditable.init("screenshotTable"); 
 	});
+	
 </script>
 
 </script>
