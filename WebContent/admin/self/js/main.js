@@ -56,7 +56,7 @@ mainFrame.addArea = function(htmlhref, areaId, searchFormId) {
 	if (searchFormId && searchFormId != '')
 		param = $("#" + searchFormId).serialize();
 	var container = $('#' + areaId); 
-	ajax.asyncHtmlRequest({
+	ajax.syncHtmlRequest({
 		url : htmlhref,
 		param : param,
 		success : function(data) {

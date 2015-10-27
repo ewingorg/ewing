@@ -90,3 +90,7 @@ common.alert.settings = {
 	closeFn : function() {
 	}
 }
+
+common.showUploadPage =function(imgValueId,imgId){
+	common.popHtml(contextPath + '/Busi-File-showUploadPage.action?imgValueId='+imgValueId+'&imgId='+imgId,'navModel');
+}

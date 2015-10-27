@@ -1,19 +1,4 @@
 <#include "admin/common/include/sysparam.html">
-<script type="text/javascript">
-	function uploadNavPic() {
-		ajax.upload({
-			fileEleId : 'upfile2',
-			filePathId : 'imageUrl2',
-			successFn : function(data) {
-				var isImg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/
-						.test(data.result.webfilePath);
-				if (isImg)
-					$('#imgShow2').attr("src", data.result.webfilePath);
-			}
-		})
-
-	}
-</script>
 
 <div id="navModel" class="modal hide fade" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -22,24 +7,28 @@
 		<button type="button" class="close" data-dismiss="modal"
 			aria-hidden="true"></button>
 		<h4 id="myModalLabel">
-			<strong>资源图片编辑</strong>
+			<strong>图片上传</strong>
 		</h4>
 	</div>
 	<div class="alert alert-error " id="errtip" style="display: none;"></div>
 
 	<div class="modal-body" style="max-height: 550px;">
 		<!-- BEGIN FORM-->
-		<form action="${contextPath}/Admin-ResScreenShot-save.action" id="navAddForm"
-			class="form-horizontal" method="post">
-			 
+		<form action="${contextPath}/Admin-ResScreenShot-save.action"
+			id="navAddForm" class="form-horizontal" method="post">
+
+			<input type="hidden" name="imgValueId" id="imgValueId"
+				value="${imgValueId}" /> <input type="hidden" name="imgId"
+				id="imgId" value="${imgId}" />
+
 			<div class="control-group">
-				<label class="control-label">导航图片</label>
+				<label class="control-label">图片</label>
 				<div class="controls">
 					<#if bean?? && bean.imageUrl ?? > <img
 						src="${contextPath}${(bean.imageUrl)?if_exists}" width="80"
-						height="80" id="imgShow2" /> <#else> <img
+						height="80" id="upload_imgShow" /> <#else> <img
 						src="${contextPath}/common/image/default-pic.png" width="80"
-						height="80" id="imgShow2" /> </#if>
+						height="80" id="upload_imgShow" /> </#if>
 				</div>
 			</div>
 			<div class="control-group">
@@ -47,14 +36,14 @@
 				<div class="controls">
 					<span class="btn  fileinput-button"> <i
 						class="icon-plus icon-white"></i> <span>选择文件...</span> <input
-						type="file" id="upfile2" name="upfile2" />
-					</span> <input type="hidden" id="imageUrl2" name="imageUrl"
+						type="file" id="upload_file" name="upload_file" />
+					</span> <input type="hidden" id="upload_imageUrl" name="upload_imageUrl"
 						value="${(bean.imageUrl)?if_exists}" /> <a class="btn start"
 						onclick="uploadNavPic();"> <i class="icon-upload icon-white"></i>
 						<span>上传</span>
-					</a> <br> <span class="alert alert-error" id="upfile2_error_tip"
+					</a> <br> <span class="alert alert-error" id="upload_file_error_tip"
 						style="display: none;"></span>
-					<div class="alert alert-success" id="upfile2_detail"
+					<div class="alert alert-success" id="upload_file_detail"
 						style="display: none;">
 						<div class="fileName">
 							文件名称:<span></span>
@@ -66,24 +55,43 @@
 
 				</div>
 			</div>
-			 
+
 			<div class="modal-footer">
-				<button type="button" id="nav_save_btn" class="btn green">保存</button>
+				<button type="button" id="file_upload_save_btn" class="btn green">保存</button>
 				<button class="btn " data-dismiss="modal" aria-hidden="true">关闭</button>
 			</div>
 		</form>
 		<!-- END FORM-->
 	</div>
 </div>
-
-<script>
- 
+<script type="text/javascript">
 	jQuery(document).ready(function() {
-		tableAction.initSaveAction({
-			formId : 'navAddForm',
-			queryUrl : '${contextPath}/Admin-Nav-show.action',
-			saveUrl : '${contextPath}/Admin-Nav-save.action',
-			saveBtnId : 'nav_save_btn'
+		$("#file_upload_save_btn").bind("click", function() {
+			$('#navModel').modal('hide');
+			var filePath = $('#upload_imageUrl').val();
+			var webfilePath = $('#upload_imgShow').attr("src");
+			if(!filePath){ 
+				return;
+			}
+			$('#' + $('#imgId').val()).attr("src",webfilePath);
+			$('#' + $('#imgValueId').val()).val(webfilePath);
+			$('#navModel').modal('hide');
 		});
 	});
+	function uploadNavPic() {
+		ajax.upload({
+			fileEleId : 'upload_file',
+			filePathId : 'upload_imageUrl',
+			successFn : function(data) {
+				var isImg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/
+						.test(data.result.webfilePath);
+				if (isImg) {
+					$('#upload_imgShow').attr("src", data.result.webfilePath); 
+				}
+			}
+		})
+
+	}
+</script>
+ 
 </script>

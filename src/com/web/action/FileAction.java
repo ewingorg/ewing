@@ -19,11 +19,14 @@ import org.apache.struts2.ServletActionContext;
 
 import com.admin.action.MainAction;
 import com.admin.constant.GroupType;
+import com.admin.constant.SysParamCode;
+import com.admin.model.SysParam;
 import com.admin.model.WebBlock;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
 import com.core.app.action.base.ResponseUtils;
 import com.core.factory.SysParamFactory;
+import com.core.jdbc.util.PageBean;
 
 public class FileAction extends BaseAction {
 
@@ -62,12 +65,12 @@ public class FileAction extends BaseAction {
 	 * 文件上传
 	 */
 	public void upload() {
-		if(uploadfileFileName ==null){
+		if (uploadfileFileName == null) {
 			ResponseData responseData = null;
-			responseData = ResponseUtils.fail("上传失败！"); 
+			responseData = ResponseUtils.fail("上传失败！");
 			this.outResult(responseData);
 		}
-			
+
 		String attachPath = SysParamFactory.WEB_REAL_PATH + "fileupload"
 				+ File.separator;
 		String savePath = attachPath;
@@ -120,6 +123,17 @@ public class FileAction extends BaseAction {
 		responseData = ResponseUtils.success("保存成功！");
 		responseData.setResult(resultFile);
 		this.outResult(responseData);
+	}
+	
+	/**
+	 * 显示上传公用页面
+	 */
+	public void showUploadPage() {
+		try {
+			render("/admin/file/uploadfile.html", null);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 
 	public InputStream getDownloadFile() throws Exception {

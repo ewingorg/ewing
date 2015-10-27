@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.admin.constant.GroupType;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
 import com.admin.model.WebResourceScreenshot;
@@ -45,6 +46,9 @@ public class ResScreenShotAction extends BaseAction {
 					bulidOrderBySql(), pageSize, page,
 					WebResourceScreenshot.class);
 			pageBean.setPageUrl(getPaginationUrl("/Admin-ResScreenShot-show.action"));
+			List<SysParam> iseffCode = sysParamService
+					.getSysParam(SysParamCode.ISEFF); 
+			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("pageBean", pageBean);
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
