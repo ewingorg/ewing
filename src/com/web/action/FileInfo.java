@@ -68,7 +68,7 @@ public class FileInfo {
 				.replace("\\", "/");
 		if (!this.filePath.startsWith("/"))
 			this.filePath = "/" + this.filePath;
-		webfilePath = SysParamFactory.WEB_CONTEXT_PATH + "/" + this.filePath;
+		webfilePath = SysParamFactory.WEB_CONTEXT_PATH  + this.filePath;
 	}
 
 	public String getFileName() {

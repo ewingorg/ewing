@@ -8,6 +8,8 @@
 }
 </style>
 <div class="alert alert-error " id="errtip" style="display: none;"></div>
+ <form action="${contextPath}/Admin-Res-save.action" id="resAddForm"
+									class="form-horizontal" method="post" onSubmit="return false;">
 				<!-- BEGIN FORM--> 
 					<input type="hidden" name="id" value="${(bean.id)?if_exists}" />
 					<div class="control-group">
@@ -177,7 +179,7 @@
 						<button type="button" id="res_return_btn" class="btn ">返回</button>
 
 					</div>
-				
+</form>				
 <script>
 	$(document).ready(function() {
 		 initAttr();

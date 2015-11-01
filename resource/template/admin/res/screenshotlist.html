@@ -1,7 +1,8 @@
  <#include "admin/common/include/html_head.html"> <#include
 "admin/common/include/sysparam.html"> <#include
 "admin/common/include/pagination.html">
-<form action="${_contextPath}/Admin-Nav-show.action" id="screenshowForm">
+
+<form action="${_contextPath}/Admin-Nav-show.action" id="screenshowForm"  method="post" onSubmit="return false;">
 	<table class="table table-striped table-bordered table-hover"
 		id="screenshotTable">
 		<thead>
@@ -20,14 +21,14 @@
 			<#if pageBean??> <#list pageBean.result as nav >
 			<tr class="">
 
-				<td>${nav.id}</td>
+				<td data="id">${nav.id}</td>
 
-				<td>${nav.name}</td>
+				<td data="name">${nav.name}</td>
 
-				<td>${nav.imageUrl}</td>
+				<td data="imageUrl">${nav.imageUrl}</td>
 
-				<td class="center">${nav.rank}</td>
-				<td><@translate paramCode=(iseffCode)?if_exists 
+				<td class="center" data="rank">${nav.rank}</td>
+				<td data="iseff"><@translate paramCode=(iseffCode)?if_exists 
 											value=(nav.iseff)?if_exists /></td>
 				<td><a class="edit" href="javascript:;">编辑</a></td>
 

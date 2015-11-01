@@ -9,14 +9,7 @@ if (!_mobilePattern) {
 } else {
 	_validator_mobile_regex_str = '|' + _mobilePattern; // 附加整合平台正则
 }
-/**
- * Desc: form Validator lib <br>
- * 
- * Copyright (c) 2010 by Asiainfo-Linkage.COM, Inc. All Rights Reserved. <br>
- * 
- * Date: 2010-09-03 <br>
- * 
- */
+ 
 AI.Validator = {
 	errinput : 'errinput',
 	errzone : '_err_zone',
@@ -397,7 +390,7 @@ AI.Validator.check = function(obj) {
 			// form
 			// element
 			// validate failed
-			obj.addClass(AI.Validator.errorInput);
+			obj.addClass(AI.Validator.errorInput); 
 			AI.Validator.showErr(obj, index);
 			return isValid = false;
 		} else { // validate success

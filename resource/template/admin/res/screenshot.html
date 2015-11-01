@@ -4,9 +4,8 @@
 
 <!-- BEGIN FORM-->
  
-	<div class="alert alert-error " id="errTip" style="display: none;"></div>
-	<div class="alert alert-success " id="sucTip" style="display: none;"></div>
-
+	<div class="alert alert-error " id="screenshoterrTip" style="display: none;"></div> 
+ 
 	<div class="portlet-body">
 		<div class="clearfix">
 			<button id="screenshot_add_btn" class="btn blue">
@@ -19,12 +18,10 @@
 				<i class="icon-trash"></i>&nbsp;&nbsp;删除
 			</button>
 		</div>
-		<br>
-		<form action="${_contextPath}/Admin-Nav-show.action" id="screenshowForm2">
+		<br> 
 		<div id="screenshotShowDiv">
 			<#include "admin/res/screenshotlist.html">
-		</div>
-		</form>
+		</div> 
 	</div>
  
 <script>
@@ -46,21 +43,24 @@ var TableEditable = function () {
             }
             var i = 0;
             var isEdit = false;
-            function editRow(oTable, nRow) { 
+            function editRow(oTable, nRow,isNew) { 
                 var aData = oTable.fnGetData(nRow); 
                 var jqTds = $('>td', nRow); 
                 i++;
-                jqTds[1].innerHTML = '<input type="text"  require="true" datatype="require|limit" min="1" max="20" msg="标题不能为空" class="m-wrap small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="hidden"  id=imgValue'+i+' class="m-wrap small" value="' + aData[2] + '"> <img id=img'+i+' width="80" height="80" id="imgShow2" /><button  class="btn"  onclick="common.showUploadPage(\'imgValue'+i+'\',\'img'+i+'\')" ><i class="icon-picture"></i>选择图片</button>';
-                jqTds[3].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[3] + '">';
-                jqTds[4].innerHTML = '<select class="m-wrap small"> <option value=""></option> <option value="0">无效</option> <option value="1">有效</option></select>';
+                jqTds[1].innerHTML = '<input type="text" require="true" datatype="require"   msg="标题不能为空" class="m-wrap small" value="' + aData[1] + '">';
+                jqTds[2].innerHTML = '<input type="hidden" require="true" datatype="require"   msg="图片不能为空"  id=imgValue'+i+' class="m-wrap small" value="' + aData[2] + '"> <img id=img'+i+' width="80" height="80" id="imgShow2" /><button  class="btn"  onclick="common.showUploadPage(\'imgValue'+i+'\',\'img'+i+'\')" ><i class="icon-picture"></i>选择图片</button>';
+                jqTds[3].innerHTML = '<input type="text" require="true" datatype="require"   msg="排位不能为空" class="m-wrap small" value="' + aData[3] + '">';
+                jqTds[4].innerHTML = '<select class="m-wrap small" require="true" datatype="require"   msg="有效不能为空"> <option value=""></option> <option value="0">无效</option> <option value="1">有效</option></select>';
                 jqTds[5].innerHTML = '<a class="edit" href="">保存</a>';
-                jqTds[6].innerHTML = '<a class="cancel" href="">取消</a>';
+                if(isNew)
+               	 	 jqTds[6].innerHTML = '<a class="delete" href="">删除</a>';
+                else
+                	 jqTds[6].innerHTML = '<a class="cancel" href="">取消</a>';
                 isEdit = true;
             }
 
             function saveRow(oTable, nRow) {
-            	var valResult = AI.Validator.validForm('screenshowForm2', 1, "errtip");
+            	var valResult = AI.Validator.validForm('screenshowForm', 1, "screenshoterrTip"); 
     			if (!valResult)
     				return;
                 var jqInputs = $('input', nRow);
@@ -87,6 +87,7 @@ var TableEditable = function () {
             }
 
              $('#screenshot_add_btn2').click(function (e) {
+            	
                 e.preventDefault(); 
                 if(isEdit){
                 	common.alert({
@@ -99,11 +100,12 @@ var TableEditable = function () {
                 var dataList ="";
                 $("#"+tableName+" tr:gt(0)").each(function(){
                 	   var nRow = $(this);
-                	  var nColLength = nRow.find("td").length-2; 
+                	   var nColLength = nRow.find("td").length-2; 
                 	   var rowData=""; 
                 	   $(this).find("td:lt("+nColLength+")").each(function(){
                 		   var nCol = $(this); 
-                		   rowData += nCol.html() +"@@"; 
+                		   var data = nCol.attr('data');
+                		   rowData += data+"="+nCol.html() +"@@"; 
                 	   });
                 	   dataList += rowData +"$$";  
                 });  
@@ -138,10 +140,10 @@ var TableEditable = function () {
             $('#screenshot_add_btn').click(function (e) { 
                 e.preventDefault();
                 var aiNew = oTable.fnAddData(['', '', '','','',
-                        '<a class="edit" href="">编辑</a>', '<a class="cancel" data-mode="new" href="">取消</a>'
+                        '<a class="edit" href="">编辑</a>', '<a class="delete" data-mode="new" href="">删除</a>'
                 ]);  
                 var nRow = oTable.fnGetNodes(aiNew[0]);  
-                editRow(oTable, nRow);  
+                editRow(oTable, nRow, true);  
                 nEditing = nRow;
             });
 
@@ -152,8 +154,7 @@ var TableEditable = function () {
     				content : '是否删除选中项？',
     				showAction : true,
     				actionContent : '删除',
-    				actionFn : function() {
-    					 
+    				actionFn : function() { 
     		                oTable.fnDeleteRow(nRow);
     				}
     			});
@@ -162,10 +163,11 @@ var TableEditable = function () {
 
             $('#'+tableName+' a.cancel').live('click', function (e) {
                 e.preventDefault();
-                if ($(this).attr("data-mode") == "new") {
-                    var nRow = $(this).parents('tr')[0];
+                var nRow = $(this).parents('tr')[0];
+                nEditing = nRow;
+                if ($(this).attr("data-mode") == "new") {  
                     oTable.fnDeleteRow(nRow);
-                } else {
+                } else {  
                     restoreRow(oTable, nEditing);
                     nEditing = null;
                 }
@@ -173,21 +175,23 @@ var TableEditable = function () {
 
             $('#'+tableName+' a.edit').live('click', function (e) {
                 e.preventDefault();
-
+				
                 /* Get the row as a parent of the link that was clicked on */
                 var nRow = $(this).parents('tr')[0];
-                if (nEditing !== null && nEditing != nRow) {
+                if ( this.innerHTML == "编辑") { 
+                	nEditing = nRow;
                     /* Currently editing - but not this row - restore the old before continuing to edit mode */
-                    restoreRow(oTable, nEditing);
-                    editRow(oTable, nRow);
+                    restoreRow(oTable, nEditing); 
+                    editRow(oTable, nRow); 
                     nEditing = nRow;
-                } else if (nEditing == nRow && this.innerHTML == "保存") {
+                } else if ( this.innerHTML == "保存") { 
                     /* Editing this row and want to save it */
+                    nEditing = nRow;
                     saveRow(oTable, nEditing);
                     nEditing = null;
                     //alert("Updated! Do not forget to do some ajax to sync with backend :)");
                 } else {
-                    /* No edit in progress - let's start one */
+                    /* No edit in progress - let's start one */ 
                     editRow(oTable, nRow);
                     nEditing = nRow;
                 }
@@ -200,14 +204,13 @@ var TableEditable = function () {
     };
 
 }();
-	jQuery(document).ready(function() {
+	jQuery(document).ready(function() { 
 		  tableAction.init({
 			tableId : 'screenshotTable',
 			queryUrl : '${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id=1',
 			deleteUrl : '${contextPath}/Admin-ResScreenShot-delete.action',
 			editUrl : '${contextPath}/Admin-ResScreenShot-showEditForm.action', 
-			deleteBtnId : 'screenshot_del_btn',
-			editBtnId : 'screenshot_add_btn11' 
+			deleteBtnId : 'screenshot_del_btn' 
 		});  
 	 
 		 mainFrame.addArea('${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id=1','screenshotShowDiv'); 
