@@ -27,6 +27,7 @@ import com.core.jdbc.DaoException;
 import com.core.jdbc.util.PageBean;
 import com.core.json.JsonUtil;
 import com.core.template.FreeMarkerTool;
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.util.DataFormat;
 import com.util.StringUtil;
@@ -58,7 +59,9 @@ public class BaseAction extends ActionSupport
 	public FreeMarkerConfigurer freeMarkerConfigurer;
 	@Resource
 	public SysParamService sysParamService;
-
+	
+	protected final static Gson gson = new Gson();
+	
 	public BaseAction() {
 
 	}

@@ -1,5 +1,7 @@
 package com.core.json;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -10,9 +12,13 @@ import net.sf.json.JsonConfig;
 
 import org.apache.log4j.Logger;
 
+import com.admin.model.SysMenu;
 import com.core.json.config.DateFormatProcessor;
 import com.core.json.config.JSONProcessor;
 import com.core.json.config.NullStringProcessor;
+import com.google.gson.Gson;
+import com.googlecode.jsonplugin.JSONException;
+import com.googlecode.jsonplugin.JSONUtil;
 
 /**
  * json处理工具类
@@ -73,13 +79,20 @@ public class JsonUtil {
 				new DateFormatProcessor());
 		config.registerJsonValueProcessor(java.lang.String.class,
 				new NullStringProcessor());
-		config
-				.registerJsonValueProcessor(JSONObject.class,
-						new JSONProcessor());
+		config.registerJsonValueProcessor(JSONObject.class, new JSONProcessor());
 		config.registerJsonValueProcessor(JSONNull.class, new JSONProcessor());
 		config.registerJsonValueProcessor(JSONArray.class, new JSONProcessor());
 		return tranBean2String(resultObj, config);
-	} 
-	
- 
+	}
+
+	public static void main(String[] args) throws JSONException {
+		SysMenu menu = new SysMenu();
+		menu.setId(1111);
+		menu.setCreateTime(new Timestamp((new Date().getTime())));
+		String json = JSONUtil.serialize(menu);
+		System.out.println(json);
+		Gson gson = new Gson();
+		SysMenu menu2 = gson.fromJson(json, SysMenu.class);
+		System.out.println(menu2);
+	}
 }

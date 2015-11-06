@@ -97,19 +97,48 @@ var TableEditable = function () {
                 } 
                 var dataFieldDeinfe =new Array();
                 var rows = $('#'+tableName).find("tr").length; 
-                var dataList ="";
+                var dataDefine = 'id,name,imageUrl,rank,iseff';
+                var dataDefineArr = dataDefine.split(",");
+                var dataList; 
                 $("#"+tableName+" tr:gt(0)").each(function(){
                 	   var nRow = $(this);
                 	   var nColLength = nRow.find("td").length-2; 
                 	   var rowData=""; 
+                	   var index=0;
                 	   $(this).find("td:lt("+nColLength+")").each(function(){
-                		   var nCol = $(this); 
-                		   var data = nCol.attr('data');
-                		   rowData += data+"="+nCol.html() +"@@"; 
+                		   var nCol = $(this);  
+                		   rowData += "'"+dataDefineArr[index]+"':'"+nCol.html() +","; 
+                		   index++;
                 	   });
-                	   dataList += rowData +"$$";  
+                	   if(rowData!=""){
+	                	   rowData = "{"+rowData+"}"; 
+	                	   if(!dataList)
+	                	     dataList = rowData;  
+	                	   else
+	                		 dataList = ","+rowData ;
+                		}
                 });  
+                dataList = "["+dataList+"]";
                 alert(dataList);
+            /*     var param = "screenList="+dataList;
+            	ajax.syncJsonRequest({
+    				url : '${contextPath}/Admin-ResScreenShot-show.action',
+    				param : param,
+    				success : function(data) {
+    					if (!data || !data.success) {
+    						$('#errtip').html('保存失败！');
+    						$('#errtip').show();
+    					}
+    					if (data.success) { 
+    						common.alert({
+    							content : '保存成功！',
+    							closeFn : function() { 
+    								
+    							}
+    						});
+    					}
+    				}
+    			}); */
  		   });  
         
             var oTable = $('#'+tableName).dataTable({

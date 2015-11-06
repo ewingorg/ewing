@@ -7,7 +7,6 @@ import java.util.Map;
 import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.admin.constant.GroupType;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
 import com.admin.model.WebResourceScreenshot;
@@ -38,8 +37,7 @@ public class ResScreenShotAction extends BaseAction {
 			String pageSizeStr = request.getParameter("pageSize");
 			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
 					.valueOf(pageStr);
-			Integer pageSize = StringUtils.isEmpty(pageSizeStr)
-					? null
+			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
 					: Integer.valueOf(pageSizeStr);
 			String condition = bulidConditionSql();
 			PageBean pageBean = baseModelService.pageQuery(condition,
@@ -47,7 +45,7 @@ public class ResScreenShotAction extends BaseAction {
 					WebResourceScreenshot.class);
 			pageBean.setPageUrl(getPaginationUrl("/Admin-ResScreenShot-show.action"));
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF); 
+					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("pageBean", pageBean);
 			render(LIST_PAGE, dataModel);
@@ -78,30 +76,6 @@ public class ResScreenShotAction extends BaseAction {
 	}
 
 	/**
-	 * 保存
-	 */
-	public void save() {
-		ResponseData responseData = null;
-		try {
-			String id = request.getParameter("id");
-			WebResourceScreenshot webResourceScreenshot = new WebResourceScreenshot();
-			this.buildPageData(webResourceScreenshot);
-
-			if (!StringUtils.isEmpty(id)) {
-				webResourceScreenshot.setId(Integer.valueOf(id));
-				baseModelService.update(webResourceScreenshot);
-			} else {
-				baseModelService.save(webResourceScreenshot);
-			}
-			responseData = ResponseUtils.success("保存成功！");
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			responseData = ResponseUtils.fail("保存失败！");
-		}
-		this.outResult(responseData);
-	}
-
-	/**
 	 * 删除
 	 */
 	public void delete() {
@@ -127,5 +101,31 @@ public class ResScreenShotAction extends BaseAction {
 			responseData = ResponseUtils.fail("删除失败！");
 		}
 		this.outResult(responseData);
+	}
+
+	/**
+	 * 保存截图
+	 */
+	public void saveScreenshotList() {
+		ResponseData responseData = null;
+		try {
+			List<WebResourceScreenshot> list = gson.fromJson(
+					(String) request.getAttribute("screenList"), List.class);
+			if (list.isEmpty())
+				throw new Exception("截图为空！");
+			for (WebResourceScreenshot webResourceScreenshot : list) {
+				if (webResourceScreenshot.getId() != null) {
+					baseModelService.update(webResourceScreenshot);
+				} else {
+					baseModelService.save(webResourceScreenshot);
+				}
+			}
+			responseData = ResponseUtils.success("保存成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			responseData = ResponseUtils.fail("保存失败！");
+		}
+		this.outResult(responseData);
+
 	}
 }

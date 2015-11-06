@@ -169,4 +169,5 @@ public class ResAction extends BaseAction {
 		}
 		this.outResult(responseData);
 	}
+	
 }

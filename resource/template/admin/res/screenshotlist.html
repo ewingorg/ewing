@@ -21,14 +21,14 @@
 			<#if pageBean??> <#list pageBean.result as nav >
 			<tr class="">
 
-				<td data="id">${nav.id}</td>
+				<td>${nav.id}</td>
 
-				<td data="name">${nav.name}</td>
+				<td>${nav.name}</td>
 
-				<td data="imageUrl">${nav.imageUrl}</td>
+				<td>${nav.imageUrl}</td>
 
-				<td class="center" data="rank">${nav.rank}</td>
-				<td data="iseff"><@translate paramCode=(iseffCode)?if_exists 
+				<td>${nav.rank}</td>
+				<td><@translate paramCode=(iseffCode)?if_exists 
 											value=(nav.iseff)?if_exists /></td>
 				<td><a class="edit" href="javascript:;">编辑</a></td>
 
