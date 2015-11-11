@@ -24,7 +24,7 @@
             </column>
         </property>
         <property name="shortDesc" type="string">
-            <column name="short_desc" length="200" not-null="true">
+            <column name="short_desc" length="200" >
                 <comment>&#188;&#242;&#181;&#165;&#195;&#232;&#202;&#246;</comment>
             </column>
         </property>

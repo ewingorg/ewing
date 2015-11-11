@@ -14,6 +14,7 @@ import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
 import com.core.app.action.base.ResponseUtils;
 import com.core.jdbc.util.PageBean;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * 网站资源分組展示类
@@ -37,7 +38,8 @@ public class ResScreenShotAction extends BaseAction {
 			String pageSizeStr = request.getParameter("pageSize");
 			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
 					.valueOf(pageStr);
-			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
+			Integer pageSize = StringUtils.isEmpty(pageSizeStr)
+					? null
 					: Integer.valueOf(pageSizeStr);
 			String condition = bulidConditionSql();
 			PageBean pageBean = baseModelService.pageQuery(condition,
@@ -110,11 +112,17 @@ public class ResScreenShotAction extends BaseAction {
 		ResponseData responseData = null;
 		try {
 			List<WebResourceScreenshot> list = gson.fromJson(
-					(String) request.getAttribute("screenList"), List.class);
+					(String) request.getParameter("screenList"),
+					new TypeToken<List<WebResourceScreenshot>>() {
+					}.getType());
+			Integer resourceId = Integer.valueOf(request
+					.getParameter("resouceId"));
 			if (list.isEmpty())
 				throw new Exception("截图为空！");
 			for (WebResourceScreenshot webResourceScreenshot : list) {
-				if (webResourceScreenshot.getId() != null) {
+				webResourceScreenshot.setResourceId(resourceId);
+				if (webResourceScreenshot.getId() != null
+						&& webResourceScreenshot.getId() > 0) {
 					baseModelService.update(webResourceScreenshot);
 				} else {
 					baseModelService.save(webResourceScreenshot);
