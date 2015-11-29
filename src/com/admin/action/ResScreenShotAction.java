@@ -7,8 +7,10 @@ import java.util.Map;
 import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.admin.constant.GroupType;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
+import com.admin.model.WebBlock;
 import com.admin.model.WebResourceScreenshot;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
@@ -25,7 +27,7 @@ import com.google.gson.reflect.TypeToken;
 public class ResScreenShotAction extends BaseAction {
 
 	private static Logger logger = Logger.getLogger(MainAction.class);
-	private static final String LIST_PAGE = "/admin/res/screenshotlist.html";
+	private static final String LIST_PAGE = "/admin/res/screenshotlist2.html";
 	private static final String EDIT_FORM = "/admin/res/screenshotedit.html";
 
 	/**
@@ -105,6 +107,32 @@ public class ResScreenShotAction extends BaseAction {
 		this.outResult(responseData);
 	}
 
+	
+	/**
+	 * 保存截图
+	 */
+	public void save() {
+		ResponseData responseData = null;
+		try {
+			String id = request.getParameter("id");
+			String resourceId = request.getParameter("resourceId");
+			WebResourceScreenshot webResourceScreenshot = new WebResourceScreenshot();
+			this.buildPageData(webResourceScreenshot); 
+			if (!StringUtils.isEmpty(id)) {
+				webResourceScreenshot.setId(Integer.valueOf(id));
+				baseModelService.update(webResourceScreenshot);
+			} else {
+				baseModelService.save(webResourceScreenshot);
+			}
+			responseData = ResponseUtils.success("保存成功！");
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			responseData = ResponseUtils.fail("保存失败！");
+		}
+		this.outResult(responseData);
+	}
+	
+	
 	/**
 	 * 保存截图
 	 */

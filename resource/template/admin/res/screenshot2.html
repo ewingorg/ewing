@@ -1,0 +1,41 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+
+<!-- BEGIN FORM-->
+ 
+	<div class="alert alert-error " id="screenshoterrTip" style="display: none;"></div> 
+ 
+	<div class="portlet-body">
+		<div class="clearfix">
+			<button id="screenshot_add_btn" class="btn blue">
+				<i class="icon-plus"></i>&nbsp;&nbsp;新增
+			</button> 
+			<button id="screenshot_del_btn" class="btn blue">
+				<i class="icon-trash"></i>&nbsp;&nbsp;删除
+			</button>
+		</div>
+		<br> 
+		<div id="screenshotShowDiv">
+			<#include "admin/res/screenshotlist2.html">
+		</div> 
+	</div>
+ 
+<script> 
+	jQuery(document).ready(function() {  
+		  tableAction.init({
+			tableId : 'screenshotTable',
+			queryUrl : '${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id=1',
+			deleteUrl : '${contextPath}/Admin-ResScreenShot-delete.action',
+			editUrl : '${contextPath}/Admin-ResScreenShot-showEditForm.action?resourceId=1', 
+			deleteBtnId : 'screenshot_del_btn' ,
+			editBtnId : 'screenshot_add_btn',
+			areaId:'screenshotShowDiv'
+		});  
+	 
+		 mainFrame.addArea('${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id=1','screenshotShowDiv'); 
+		 
+	});
+	
+</script>
+ 

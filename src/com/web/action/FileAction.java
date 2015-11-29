@@ -70,28 +70,32 @@ public class FileAction extends BaseAction {
 			responseData = ResponseUtils.fail("上传失败！");
 			this.outResult(responseData);
 		}
-
-		String attachPath = SysParamFactory.WEB_REAL_PATH + "fileupload"
-				+ File.separator;
-		String savePath = attachPath;
-		File rootPath = new File(savePath);
-		if (!rootPath.exists()) {
-			rootPath.mkdirs();
-		}
-
 		InputStream in = null;
 		OutputStream out = null;
-		String fileName = uploadfileFileName.toString();
-		int typeInd = fileName.lastIndexOf(".");
-		if (typeInd > 0) {
-			fileName = fileName.substring(0, typeInd)
-					+ System.currentTimeMillis() + fileName.substring(typeInd);
-		}
-
-		File detfile = new File(savePath + File.separator + fileName);
-
-		int BUFFER_SIZE = 99999;
+		File detfile = null;
 		try {
+			String attachPath = SysParamFactory.WEB_REAL_PATH + "fileupload"
+					+ File.separator;
+			String savePath = attachPath;
+			File rootPath = new File(savePath);
+			if (!rootPath.exists()) {
+				rootPath.mkdirs();
+			}
+
+			if (uploadfileFileName == null)
+				throw new Exception("file name can not be null");
+			String fileName = uploadfileFileName.toString();
+			int typeInd = fileName.lastIndexOf(".");
+			if (typeInd > 0) {
+				fileName = fileName.substring(0, typeInd)
+						+ System.currentTimeMillis()
+						+ fileName.substring(typeInd);
+			}
+
+			detfile = new File(savePath + File.separator + fileName);
+
+			int BUFFER_SIZE = 9999;
+
 			in = new BufferedInputStream(new FileInputStream(uploadfile),
 					BUFFER_SIZE);
 			out = new BufferedOutputStream(new FileOutputStream(detfile),
@@ -124,7 +128,7 @@ public class FileAction extends BaseAction {
 		responseData.setResult(resultFile);
 		this.outResult(responseData);
 	}
-	
+
 	/**
 	 * 显示上传公用页面
 	 */

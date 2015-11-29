@@ -51,6 +51,8 @@ common.hideImgBtn = function(obj) {
 	$(obj).find("#imagebtn").hide();
 };
 
+ 
+
 common.alert = function(options) {
 	var opts = $.extend(true, {}, common.alert.settings, options);
 	var html = common.getHtml(contextPath + "/common/alert.html");

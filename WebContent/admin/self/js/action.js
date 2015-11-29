@@ -7,7 +7,7 @@ var tableAction = {
 	},
 
 	bindEditAction : function(editUrl, isPopEditForm) {
-		$("a[name='edit_action']").bind("click", function() {
+		$("a[name='edit_action']").bind("click", function() { 
 			var url = editUrl;
 			var id = $(this).attr("value");
 			if (id)
@@ -28,7 +28,7 @@ var tableAction = {
 		});
 	},
 	bindSaveAction : function(saveBtnId, formId, saveUrl, queryUrl,
-			beforeSaveFn) {
+			beforeSaveFn, areaId) {
 
 		$("#" + saveBtnId).bind("click", function() {
 			if ($.isFunction(beforeSaveFn))
@@ -51,8 +51,12 @@ var tableAction = {
 						common.alert({
 							content : '保存成功！',
 							closeFn : function() {
-								if (queryUrl != '' && queryUrl)
-									mainFrame.addContainer(queryUrl);
+								if (queryUrl != '' && queryUrl){
+									if (areaId != '' && areaId) 
+										mainFrame.addArea(queryUrl,areaId);
+									else
+										mainFrame.addContainer(queryUrl);
+								}
 								
 							}
 						});
@@ -61,7 +65,7 @@ var tableAction = {
 			});
 		});
 	},
-	bindDeleteAction : function(deleteBtnId, tableId, deleteUrl, queryUrl) {
+	bindDeleteAction : function(deleteBtnId, tableId, deleteUrl, queryUrl, areaId) {
 		$('#' + deleteBtnId).bind('click', function() {
 			var selectItems = tableMng.selectItem(tableId);
 			if (selectItems.length == 0) {
@@ -87,8 +91,12 @@ var tableAction = {
 								common.alert({
 									content : data.retinfo,
 									closeFn : function() {
-										if (queryUrl != '' && queryUrl)
-											mainFrame.addContainer(queryUrl);
+										if (queryUrl != '' && queryUrl){
+											if (areaId != '' && areaId) 
+												mainFrame.addArea(queryUrl,areaId);
+											else
+												mainFrame.addContainer(queryUrl);
+										}
 									}
 								});
 							}
@@ -113,7 +121,8 @@ tableAction.option = {
 	saveBtnId : '',
 	searchFormId : '',
 	beforeSaveFn : '',
-	isPopEditForm : true
+	isPopEditForm : true,
+	areaId:''
 }
 
 tableAction.init = function(opt) {
@@ -135,7 +144,7 @@ tableAction.init = function(opt) {
 	if (option.deleteBtnId && option.tableId && option.deleteUrl
 			&& option.queryUrl)
 		tableAction.bindDeleteAction(option.deleteBtnId, option.tableId,
-				option.deleteUrl, option.queryUrl);
+				option.deleteUrl, option.queryUrl, option.areaId);
 }
 
 /**
@@ -144,7 +153,7 @@ tableAction.init = function(opt) {
 tableAction.initSaveAction = function(option) {
 	if (option.saveBtnId && option.formId && option.saveUrl) {
 		tableAction.bindSaveAction(option.saveBtnId, option.formId,
-				option.saveUrl, option.queryUrl, option.beforeSaveFn);
+				option.saveUrl, option.queryUrl, option.beforeSaveFn, option.areaId);
 	}
 }
 

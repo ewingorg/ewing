@@ -252,7 +252,7 @@ public class BaseAction extends ActionSupport
 					continue;
 				if (fieldType.equals("java.lang.String")) {
 					f.set(entityBean, value);
-				} else if (fieldType.equals("java.lang.Integer")) {
+				} else if (fieldType.equals("java.lang.Integer") || fieldType.equals("int")) {
 					f.set(entityBean, Integer.valueOf(value));
 				} else if (fieldType.equals("java.util.Date")) {
 					if (value.length() == 10) {
