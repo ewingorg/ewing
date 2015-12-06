@@ -497,13 +497,12 @@ public class BaseAction extends ActionSupport
 		}
 		return null;
 	}
+	
 	public Integer getIntegerParameter(String key) {
 		String value = request.getParameter(key); 
 		if (StringUtil.isEmpty(value) || (value != null && value.equals("undefined")))
 			return null;
 		return Integer.valueOf(value);
-	}
-	
-	 
+	} 
 
 }

@@ -1,6 +1,6 @@
  <#include "admin/common/include/html_head.html"> <#include
 "admin/common/include/sysparam.html">
- 
+
 <script src="${contextPath}/ckeditor/ckeditor.js"></script>
 <script src="${contextPath}/ckeditor/adapters/jquery.js"></script>
 <style>
@@ -11,7 +11,11 @@
 </style>
 
 <!-- BEGIN FORM-->
- 
+<div class="alert alert-error " id="resLongDescErrtip"
+	style="display: none;"></div>
+<form action="${contextPath}/Admin-Res-saveLongDesc.action"
+	id="ResLongDescSaveForm" class="form-horizontal" method="post"
+	onSubmit="return false;">
 	<div class="control-group">
 		<label class="control-label">详细描述</label>
 		<div class="controls">
@@ -19,13 +23,28 @@
 				id="longDescEdit">${(bean.longDesc)?if_exists}</textarea>
 			<input type="hidden" id="longDesc" name="longDesc"
 				value="${(bean.longDesc)?if_exists}" require="true"
-				datatype="require" type="text"   msg="详细描述不能为空" />
+				datatype="require" type="text" msg="详细描述不能为空" />
+		</div>
+		<div class="form-actions">
+			<button type="button" id="reslongDesc_save_btn" class="btn green">保存</button>  
 		</div>
 	</div>
-	  
+</form>
 <script>
-	$(document).ready(function() { 
-		$('#longDescEdit').ckeditor(); 
+	$(document).ready(function() {
+		var resourceId = '${(webResource.id)?if_exists}';
+		if (!resourceId) {
+			$('#resLongDescErrtip').html('暂时不能编辑详细描述，请先编辑资源基本信息!');
+			$('#resLongDescErrtip').show();
+			$('#reslongDesc_save_btn').attr('disabled', 'true');
+		}
+		$('#longDescEdit').ckeditor();
+		  tableAction.initSaveAction({
+			formId : 'ResLongDescSaveForm', 
+			saveUrl : '${contextPath}/Admin-Res-saveResLongDesc.action',
+			saveBtnId : 'reslongDesc_save_btn' ,
+			errZoneId:'resLongDescErrtip'
+		}); 
 	});
 </script>
 

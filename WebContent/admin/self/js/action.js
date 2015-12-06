@@ -28,34 +28,39 @@ var tableAction = {
 		});
 	},
 	bindSaveAction : function(saveBtnId, formId, saveUrl, queryUrl,
-			beforeSaveFn, areaId) {
-
-		$("#" + saveBtnId).bind("click", function() {
+			beforeSaveFn, areaId, errZoneId,afterSaveFn) {
+		
+		var _errZoneId= errZoneId && errZoneId!=''? errZoneId:'errtip'; 
+		$("#" + saveBtnId).bind("click", function() { 
 			if ($.isFunction(beforeSaveFn))
 				beforeSaveFn();
-			var valResult = AI.Validator.validForm(formId, 1, "errtip");
+			var valResult = AI.Validator.validForm(formId, 1, _errZoneId);
 			if (!valResult)
 				return;
 			var param = $("#" + formId).serialize();
-			var url = saveUrl;
+			var url = saveUrl; 
 			ajax.syncJsonRequest({
 				url : url,
 				param : param,
-				success : function(data) {
-					if (!data || !data.success) {
-						$('#errtip').html('保存失败！');
-						$('#errtip').show();
+				success : function(data) { 
+					if (!data || !data.success) { 
+						$('#'+_errZoneId).html(data.retinfo);
+						$('#'+_errZoneId).show();
 					}
 					if (data.success) {
 						$('#navModel').modal('hide');
 						common.alert({
 							content : '保存成功！',
-							closeFn : function() {
-								if (queryUrl != '' && queryUrl){
-									if (areaId != '' && areaId) 
-										mainFrame.addArea(queryUrl,areaId);
-									else
-										mainFrame.addContainer(queryUrl);
+							closeFn : function() { 
+								if ($.isFunction(afterSaveFn))
+									afterSaveFn(data);
+								else{
+									if (queryUrl != '' && queryUrl){
+										if (areaId != '' && areaId) 
+											mainFrame.addArea(queryUrl,areaId);
+										else
+											mainFrame.addContainer(queryUrl);
+									}
 								}
 								
 							}
@@ -65,9 +70,10 @@ var tableAction = {
 			});
 		});
 	},
-	bindDeleteAction : function(deleteBtnId, tableId, deleteUrl, queryUrl, areaId) {
+	bindDeleteAction : function(deleteBtnId, tableId, deleteUrl, queryUrl, areaId, errZoneId) {
 		$('#' + deleteBtnId).bind('click', function() {
 			var selectItems = tableMng.selectItem(tableId);
+			var _errZoneId= errZoneId && errZoneId!=''? errZoneId:'errtip';
 			if (selectItems.length == 0) {
 				common.alert({
 					content : '请选中需要操作的项！'
@@ -84,8 +90,8 @@ var tableAction = {
 						url : url,
 						success : function(data) {
 							if (!data || !data.success) {
-								$('#errtip').html(data.retinfo);
-								$('#errtip').show();
+								$('#'+_errZoneId).html(data.retinfo);
+								$('#'+_errZoneId).show();
 							}
 							if (data.success) {
 								common.alert({
@@ -121,8 +127,10 @@ tableAction.option = {
 	saveBtnId : '',
 	searchFormId : '',
 	beforeSaveFn : '',
+	afterSaveFn:'',
 	isPopEditForm : true,
-	areaId:''
+	areaId:'',
+	errZoneId:''
 }
 
 tableAction.init = function(opt) {
@@ -144,16 +152,16 @@ tableAction.init = function(opt) {
 	if (option.deleteBtnId && option.tableId && option.deleteUrl
 			&& option.queryUrl)
 		tableAction.bindDeleteAction(option.deleteBtnId, option.tableId,
-				option.deleteUrl, option.queryUrl, option.areaId);
+				option.deleteUrl, option.queryUrl, option.areaId,option.errZoneId);
 }
 
 /**
  * 初始化保存逻辑
  */
 tableAction.initSaveAction = function(option) {
-	if (option.saveBtnId && option.formId && option.saveUrl) {
+	if (option.saveBtnId && option.formId) {
 		tableAction.bindSaveAction(option.saveBtnId, option.formId,
-				option.saveUrl, option.queryUrl, option.beforeSaveFn, option.areaId);
+				option.saveUrl, option.queryUrl, option.beforeSaveFn, option.areaId,option.errZoneId,option.afterSaveFn);
 	}
 }
 

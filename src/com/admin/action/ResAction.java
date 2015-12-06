@@ -12,12 +12,10 @@ import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.admin.constant.AttrConstant;
-import com.admin.constant.GroupType;
 import com.admin.constant.SysParamCode;
 import com.admin.model.SysParam;
 import com.admin.model.WebResource;
 import com.admin.model.WebResourceAttr;
-import com.admin.model.WebResourceScreenshot;
 import com.admin.service.TemplateService;
 import com.admin.service.WebResourceScreenService;
 import com.admin.service.WebResourceService;
@@ -80,12 +78,12 @@ public class ResAction extends BaseAction {
 			String id = request.getParameter("id");
 			if (!StringUtils.isEmpty(id)) {
 				WebResource webResource = findOne(Integer.valueOf(id),
-						WebResource.class); 
-				dataModel.put("bean", webResource); 
+						WebResource.class);
+				dataModel.put("webResource", webResource);
 			}
 			List<SysParam> templateType = templateService.getResTemplates();
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF); 
+					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("templateType", templateType);
 			dataModel.put("iseffCode", iseffCode);
@@ -136,6 +134,29 @@ public class ResAction extends BaseAction {
 				webResourceService.saveResource(webResource, attrList);
 			}
 			responseData = ResponseUtils.success("保存成功！");
+			responseData.setResult(webResource);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			responseData = ResponseUtils.fail("保存失败！");
+		}
+		this.outResult(responseData);
+	}
+
+	/**
+	 * 保存资源详细描述信息
+	 */
+	public void saveResLongDesc() {
+		ResponseData responseData = null;
+		try {
+			Integer resourceId = getIntegerParameter("resourceId");
+			String longDesc = getUTFParameter("longDesc");
+			WebResource webResource = webResourceService.findById(resourceId);
+			if (StringUtils.isEmpty(longDesc) || webResource == null) {
+				responseData = ResponseUtils.fail("保存失败！");
+			} else {
+				webResource.setLongDesc(longDesc);
+				responseData = ResponseUtils.success("保存成功！");
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			responseData = ResponseUtils.fail("保存失败！");
@@ -169,5 +190,5 @@ public class ResAction extends BaseAction {
 		}
 		this.outResult(responseData);
 	}
-	
+
 }

@@ -11,7 +11,6 @@ import com.admin.model.WebAttrConf;
 import com.admin.model.WebResource;
 import com.admin.model.WebResourceAttr;
 import com.core.app.constant.IsEff;
-import com.core.app.service.CacheModelService;
 import com.core.jdbc.BaseDao;
 
 /**
@@ -21,7 +20,7 @@ import com.core.jdbc.BaseDao;
  * @creation 2015年5月20日
  */
 @Repository("webResourceService")
-public class WebResourceService { 
+public class WebResourceService {
 	@Resource
 	private BaseDao baseDao;
 	@Resource
@@ -109,5 +108,15 @@ public class WebResourceService {
 
 		}
 		return true;
+	}
+
+	/**
+	 * 查找单个资源信息
+	 * 
+	 * @param resourceId
+	 * @return
+	 */
+	public WebResource findById(Integer resourceId) {
+		return baseDao.findOne(resourceId, WebResource.class);
 	}
 }

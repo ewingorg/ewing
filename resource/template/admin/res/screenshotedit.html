@@ -25,7 +25,7 @@
 			<strong>导航栏编辑</strong>
 		</h4>
 	</div>
-	<div class="alert alert-error " id="errtip" style="display: none;"></div>
+	<div class="alert alert-error " id="screenErrtip" style="display: none;"></div>
 
 	<div class="modal-body" style="max-height: 550px;">
 		<!-- BEGIN FORM-->
@@ -103,12 +103,19 @@
 
 <script>
 	jQuery(document).ready(function() {
+		if(!$('#resourceId').val()){
+			$('#screenErrtip').html('暂时不能编辑资源截图，请先编辑资源基本信息!');
+			$('#screenErrtip').show();
+			$('#screen_save_btn').attr('disabled','true');
+		}
+			
 		tableAction.initSaveAction({
 			formId : 'ResScreenShotAddForm',
 			queryUrl : '${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id='+$('#resourceId').val(),
 			saveUrl : '${contextPath}/Admin-ResScreenShot-save.action',
 			saveBtnId : 'screen_save_btn',
-			areaId:'screenshotShowDiv'
+			areaId:'screenshotShowDiv',
+			errZoneId:'screenErrtip'
 		});
 	});
 </script>
