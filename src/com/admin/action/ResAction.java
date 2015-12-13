@@ -155,6 +155,7 @@ public class ResAction extends BaseAction {
 				responseData = ResponseUtils.fail("保存失败！");
 			} else {
 				webResource.setLongDesc(longDesc);
+				baseModelService.update(webResource);
 				responseData = ResponseUtils.success("保存成功！");
 			}
 		} catch (Exception e) {

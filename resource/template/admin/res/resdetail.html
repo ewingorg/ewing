@@ -16,11 +16,11 @@
 <form action="${contextPath}/Admin-Res-saveLongDesc.action"
 	id="ResLongDescSaveForm" class="form-horizontal" method="post"
 	onSubmit="return false;">
-	<div class="control-group">
+	<div class="control-group" >
 		<label class="control-label">详细描述</label>
-		<div class="controls">
-			<textarea class="span12 m-wrap" name="longDescEdit" rows="6"
-				id="longDescEdit">${(bean.longDesc)?if_exists}</textarea>
+		<div class="controls" > 
+			<textarea class="span12" name="longDescEdit" rows="50" 
+				id="longDescEdit">${(webResource.longDesc)?if_exists}</textarea>
 			<input type="hidden" id="longDesc" name="longDesc"
 				value="${(bean.longDesc)?if_exists}" require="true"
 				datatype="require" type="text" msg="详细描述不能为空" />
@@ -30,21 +30,34 @@
 		</div>
 	</div>
 </form>
+
+
 <script>
 	$(document).ready(function() {
-		var resourceId = '${(webResource.id)?if_exists}';
+		var resourceId = '${(webResource.id)?if_exists}'; 
 		if (!resourceId) {
 			$('#resLongDescErrtip').html('暂时不能编辑详细描述，请先编辑资源基本信息!');
 			$('#resLongDescErrtip').show();
 			$('#reslongDesc_save_btn').attr('disabled', 'true');
 		}
-		$('#longDescEdit').ckeditor();
+	 
+		//$('#longDescEdit').ckeditor();
+		var oCKeditor = CKEDITOR.replace( 'longDescEdit',{ height: '540px' } );
+
+	 
+
+
 		  tableAction.initSaveAction({
 			formId : 'ResLongDescSaveForm', 
-			saveUrl : '${contextPath}/Admin-Res-saveResLongDesc.action',
+			saveUrl : '${contextPath}/Admin-Res-saveResLongDesc.action?resourceId='+resourceId,
 			saveBtnId : 'reslongDesc_save_btn' ,
-			errZoneId:'resLongDescErrtip'
+			errZoneId:'resLongDescErrtip',
+			beforeSaveFn : function() {
+				var editor = CKEDITOR.instances.longDescEdit;
+				$("#longDesc").val(editor.getData());
+			}
 		}); 
+		 
 	});
 </script>
 
