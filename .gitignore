@@ -8,3 +8,5 @@
 /WebContent/shopxx
 /resource/template/shopxx
 /WebContent/fileupload
+
+/WebContent/WEB-INF/lib/gson-2.2.2.jar

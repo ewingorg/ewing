@@ -1,0 +1,107 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+<br>
+<style>
+.childTable th {
+	text-align: center;
+}
+
+.childTable td {
+	text-align: center;
+}
+</style>
+<#list resGroupList as group>
+<table class="table table-bordered" style="width: 60%;" name="paramGroupTable">
+	<thead>
+		<tr>
+			<th><input class="m-wrap long span4" name="paramGourpName" type="text" value="${group.rootResourceParam.paramName}"/>
+			<a href='#' name="deleteParamGroup" onclick="$(this).parents('table')[0].remove();"><i
+			class="icon-remove"></i></a></th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<table class="table childTable table-bordered table-hover">
+					<thead>
+						<tr>
+							<th width="40%">参数名称</th>
+							<th width="40%">参数值</th>
+							<th width="10%">排序</th>
+							<th width="10%">操作</th>
+						</tr>
+					</thead>
+					<tbody class="param-tbody" id="11">
+						<#list group.childParamlist as childParam>
+						<tr class="odd gradeX">
+							<td><input class="m-wrap long span12" name="paramName" type="text"
+								value="${childParam.paramName}" /></td>
+							<td><input class="m-wrap long span12" name="paramValue" type="text"
+								value="${childParam.paramValue}" /></td>
+							<td><input class="m-wrap span6" name="rank" type="text"
+								value="${childParam.rank}" /></td>
+							<td><a href='#' name="edit_action"  onclick="$(this).parents('tr')[0].remove();"><i
+									class="icon-remove"></i></a></td>
+						</tr>
+						</#list>
+						<tr id="22">
+							<td colspan="4" >
+								<button class="btn blue add-param">
+									<i class="icon-plus"></i>&nbsp;&nbsp;新增参数
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+</#list>
+ 
+<button class="btn blue  add-paramgroup">
+	<i class="icon-plus"></i>&nbsp;&nbsp;新增参数组
+</button>
+
+<div class="form-actions">
+		<button type="button" id="resparam_save_btn" class="btn green">保存</button>  
+</div>
+
+<script>
+	jQuery(document).ready(function() { 
+		bindAddParam();
+		
+		$(".add-paramgroup").bind("click", function() { 
+			 var curObj = $(this);  
+			 var trhtml =  common.getTemplateHtml('/admin/res/resparamgroup_pi.html'); 
+		     $(trhtml).insertBefore(curObj); 
+		     bindAddParam();
+		});
+		
+		$("#resparam_save_btn").bind("click", function() { 
+			 $("table[name='paramGroupTable']").each(function(){
+				 console.log('par:');
+				 var paramNameObj = $(this).find("input[name='paramName']")[0];
+				 if(paramNameObj)
+					 console.log('paramName:'+$(paramNameObj).val());
+			 }); 
+		});
+		
+	});
+	
+	function  bindAddParam(){
+		$(".add-param").bind("click", function() {
+			var tbody = $(this).parents(".param-tbody");
+			var parentTr = $(this).parent().parent();  
+			var trhtml =  common.getTemplateHtml('/admin/res/resparam_pi.html'); 
+		    $(trhtml).insertBefore(parentTr); 
+		});
+	}
+</script>
+
+

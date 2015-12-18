@@ -1,0 +1,36 @@
+<table class="table table-bordered" style="width:60%" name="paramGroupTable">
+	<thead>
+		<tr>
+			<th><input class="m-wrap long span4" name="paramGourpName" type="text" />
+			<a href='#' name="deleteParamGroup" onclick="$(this).parents('table')[0].remove();"><i
+			class="icon-remove"></i></a>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<table class="table childTable table-bordered table-hover">
+					<thead>
+						<tr>
+							<th width="40%">参数名称</th>
+							<th width="40%">参数值</th>
+							<th width="10%">排序</th>
+							<th width="10%">操作</th>
+						</tr>
+					</thead>
+					<tbody class="param-tbody">
+						<tr>
+							<td colspan="4">
+								<button class="btn blue add-param">
+									<i class="icon-plus"></i>&nbsp;&nbsp;新增参数
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+
+	</tbody>
+</table>

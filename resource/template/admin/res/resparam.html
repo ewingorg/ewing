@@ -1,0 +1,39 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+
+<!-- BEGIN FORM-->
+ 
+	<div class="alert alert-error " id="resparamerrTip" style="display: none;"></div> 
+ 
+	<div class="portlet-body">
+		 
+		<div id="resparamShowDiv">
+			<#include "admin/res/resparamlist.html">
+		</div> 
+	</div>
+ 
+<script>
+ 
+	jQuery(document).ready(function() { 
+		var resourceId = 7;
+		if (!resourceId) {
+			$('#resparamerrTip').html(
+					'暂时不能编辑资源参数，请先编辑资源基本信息!');
+			$('#resparamerrTip').show();
+			$('#resparam_add_btn').attr('disabled', 'true'); 
+			$('#resparam_save_btn').attr('disabled', 'true');
+		} else {
+		   mainFrame.addArea('${contextPath}/Admin-ResParam-show.action?resourceId='+resourceId,'resparamShowDiv'); 
+		   tableAction.init({
+			tableId : 'resparamTable',
+			queryUrl : '${contextPath}/Admin-ResParam-show.action?resource_id='+resourceId,
+			deleteUrl : '${contextPath}/Admin-ResParam-delete.action',
+			editUrl : '${contextPath}/Admin-ResParam-showEditForm.action', 
+			deleteBtnId : 'resparam_del_btn' 
+		   });    
+		}
+	});
+	
+</script>
+ 

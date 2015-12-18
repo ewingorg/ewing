@@ -13,11 +13,12 @@
                 <comment>&#215;&#202;&#212;&#180;id&#163;&#172;&#177;&#237;web_resource&#214;&#247;&#188;&#252;</comment>
             </column>
         </property>
-        <property name="paramCode" type="string">
-            <column name="param_code" length="50" not-null="true">
-                <comment>&#178;&#206;&#202;&#253;&#177;&#224;&#194;&#235;</comment>
+         <property name="categoryId" type="int">
+            <column name="category_id" not-null="true">
+                <comment>&#215;&#202;&#212;&#180;id&#163;&#172;&#177;&#237;web_resource&#214;&#247;&#188;&#252;</comment>
             </column>
-        </property>
+        </property> 
+        
         <property name="paramName" type="string">
             <column name="param_name" length="50" not-null="true">
                 <comment>&#178;&#206;&#202;&#253;&#195;&#251;&#179;&#198;</comment>
@@ -28,8 +29,8 @@
                 <comment>&#178;&#206;&#202;&#253;&#214;&#181;</comment>
             </column>
         </property>
-        <property name="rootCode" type="string">
-            <column name="root_code" length="50">
+        <property name="rootParamName" type="string">
+            <column name="root_param_name" length="50">
                 <comment>&#184;&#184;&#177;&#224;&#194;&#235;</comment>
             </column>
         </property>

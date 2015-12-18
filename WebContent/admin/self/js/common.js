@@ -32,6 +32,19 @@ common.getHtml = function(htmlhref, isNeedLogin) {
 	return html;
 };
 
+common.getTemplateHtml = function(template) {
+	var html = null;
+	var htmlhref = '${contextPath}/Admin-Html-response.action?page='+template;
+	ajax.syncHtmlRequest({
+		url : htmlhref,
+		success : function(data) {
+			if (data)
+				html = data;
+		} 
+	});
+	return html;
+};
+
 common.popHtml = function(htmlhref, showId) {
 	var html = common.getHtml(htmlhref);
 	$('#' + showId).remove();

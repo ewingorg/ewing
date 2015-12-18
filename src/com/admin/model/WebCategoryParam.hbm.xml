@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-10-10 22:43:59 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.admin.model.WebCatagoryParam" table="web_category_param"
+		catalog="ewing">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property name="categoryId" type="int">
+			<column name="category_id" not-null="true">
+				<comment>&#215;&#202;&#212;&#180;id&#163;&#172;&#177;&#237;web_resource&#214;&#247;&#188;&#252;</comment>
+			</column>
+		</property>
+		<property name="paramName" type="string">
+			<column name="param_name" length="50" not-null="true">
+				<comment>&#178;&#206;&#202;&#253;&#195;&#251;&#179;&#198;</comment>
+			</column>
+		</property>
+		<property name="paramValue" type="string">
+			<column name="param_value" length="50">
+				<comment>&#178;&#206;&#202;&#253;&#214;&#181;</comment>
+			</column>
+		</property>
+		<property name="rootParamName" type="string">
+			<column name="root_param_name" length="50">
+				<comment>&#184;&#184;&#177;&#224;&#194;&#235;</comment>
+			</column>
+		</property>
+		<property name="rank" type="int">
+			<column name="rank" not-null="true">
+				<comment>&#197;&#197;&#208;&#242;</comment>
+			</column>
+		</property>
+		<property name="iseff" type="java.lang.String">
+			<column name="iseff" length="1" not-null="true">
+				<comment>&#202;&#199;&#183;&#241;&#201;&#250;&#208;&#167;
+					0:&#195;&#187;&#201;&#250;&#208;&#167; 1:&#201;&#250;&#208;&#167;</comment>
+			</column>
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="create_time" length="19" not-null="true" />
+		</property>
+		<property name="lastUpdate" type="timestamp">
+			<column name="last_update" length="19" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>
