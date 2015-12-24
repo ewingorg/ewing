@@ -10,6 +10,7 @@ import org.apache.axis.utils.StringUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 
+import com.admin.dto.ResParamGroupComparatorUtil;
 import com.admin.dto.WebResourceParamGroup;
 import com.admin.model.WebCatagoryParam;
 import com.admin.model.WebResource;
@@ -60,7 +61,8 @@ public class WebResourceParamService {
 			if (StringUtils.isEmpty(resParam.getRootParamName()))
 				addRootResParam2Group(resParam, resParamlist, groupList);
 		}
-
+		// 排序
+		ResParamGroupComparatorUtil.sortResGroupList(groupList);
 		return groupList;
 	}
 
@@ -71,6 +73,12 @@ public class WebResourceParamService {
 		for (WebResourceParamGroup webResourceParamGroup : groupList) {
 			if (webResourceParamGroup.getRootResourceParam().getParamName()
 					.equals(rootResourceParam.getParamName())) {
+
+				webResourceParamGroup.getRootResourceParam().setParamName(
+						rootResourceParam.getParamName());
+				webResourceParamGroup.getRootResourceParam().setRank(
+						rootResourceParam.getRank());
+
 				group = webResourceParamGroup;
 				List<WebResourceParam> childParamList = group
 						.getChildParamlist();
@@ -158,6 +166,7 @@ public class WebResourceParamService {
 		WebResourceParamGroup group = new WebResourceParamGroup();
 		WebResourceParam rootResourceParam = new WebResourceParam();
 		rootResourceParam.setParamName(rootCategoryParam.getParamName());
+		rootResourceParam.setRank(rootCategoryParam.getRank());
 		group.setRootResourceParam(rootResourceParam);
 		groupList.add(group);
 		List<WebResourceParam> resParamlist = new ArrayList<WebResourceParam>();
@@ -168,10 +177,35 @@ public class WebResourceParamService {
 				WebResourceParam webResourceParam = new WebResourceParam();
 				webResourceParam.setParamName(param.getParamName());
 				webResourceParam.setRootParamName(param.getRootParamName());
+				webResourceParam.setRank(param.getRank());
 				resParamlist.add(webResourceParam);
 			}
 		}
 		group.setChildParamlist(resParamlist);
 
+	}
+
+	/**
+	 * 保存资源参数组
+	 * 
+	 * @throws Exception
+	 */
+	public void saveParamList(Integer resourceId,
+			List<WebResourceParam> resparamList) throws Exception {
+		WebResource webResource = webResourceService.findById(resourceId);
+		if (webResource == null)
+			throw new Exception("没有找到匹配的资源信息");
+		// 删除旧的参数记录
+		baseDao.executeSql("delete from web_resource_param where resource_id="
+				+ resourceId);
+
+		for (WebResourceParam param : resparamList) {
+			if (StringUtils.isEmpty(param.getParamName()))
+				continue;
+			param.setCategoryId(webResource.getCategoryId());
+			param.setResourceId(resourceId);
+			param.setIseff(IsEff.EFFECTIVE);
+			baseDao.save(param);
+		}
 	}
 }

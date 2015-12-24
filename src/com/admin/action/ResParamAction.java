@@ -6,20 +6,21 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.admin.constant.SysParamCode;
 import com.admin.dto.WebResourceParamGroup;
 import com.admin.model.SysParam;
 import com.admin.model.WebCatagoryParam;
+import com.admin.model.WebResource;
 import com.admin.model.WebResourceParam;
 import com.admin.service.WebCategoryParamService;
 import com.admin.service.WebResourceParamService;
+import com.admin.service.WebResourceService;
 import com.core.app.action.base.BaseAction;
 import com.core.app.action.base.ResponseData;
 import com.core.app.action.base.ResponseUtils;
-import com.core.jdbc.util.PageBean;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * 网站资源分組展示类
@@ -37,6 +38,8 @@ public class ResParamAction extends BaseAction {
 
 	@Resource
 	private WebResourceParamService webResourceParamService;
+	@Resource
+	private WebResourceService webResourceService;
 
 	/**
 	 * 查詢列表
@@ -109,24 +112,26 @@ public class ResParamAction extends BaseAction {
 	/**
 	 * 保存
 	 */
-	public void save() {
+	public void saveParamList() {
 		ResponseData responseData = null;
 		try {
-			String id = request.getParameter("id");
-			WebResourceParam webResourceParam = new WebResourceParam();
-			this.buildPageData(webResourceParam);
-			if (!StringUtils.isEmpty(id)) {
-				webResourceParam.setId(Integer.valueOf(id));
-				baseModelService.update(webResourceParam);
-			} else {
-				baseModelService.save(webResourceParam);
-			}
+			System.out.println(request.getParameter("resparamList"));
+			List<WebResourceParam> resparamList = gson.fromJson(
+					(String) request.getParameter("resparamList"),
+					new TypeToken<List<WebResourceParam>>() {
+					}.getType());
+			Integer resourceId = Integer.valueOf(request
+					.getParameter("resourceId"));
+			if (resparamList.isEmpty())
+				throw new Exception("资源参数为空！");
+			webResourceParamService.saveParamList(resourceId, resparamList);
 			responseData = ResponseUtils.success("保存成功！");
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			responseData = ResponseUtils.fail("保存失败！");
 		}
 		this.outResult(responseData);
+
 	}
 
 }

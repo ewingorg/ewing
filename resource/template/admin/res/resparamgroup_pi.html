@@ -1,16 +1,20 @@
-<table class="table table-bordered" style="width:60%" name="paramGroupTable">
+<table class="table" style="width: 80%" name="paramGroupTable">
 	<thead>
 		<tr>
-			<th><input class="m-wrap long span4" name="paramGourpName" type="text" />
-			<a href='#' name="deleteParamGroup" onclick="$(this).parents('table')[0].remove();"><i
-			class="icon-remove"></i></a>
-			</th>
+			<th><input class="m-wrap long span4" name="rootParamName"
+				type="text"  
+				placeholder="参数组名称" /> <input class="m-wrap long span1"
+				name="rootParamRank" type="text"
+				  placeholder="排位" />
+				<a href='#' name="deleteParamGroup"
+				onclick="$(this).parents('table')[0].remove();"><i
+					class="icon-remove"></i></a></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>
-				<table class="table childTable table-bordered table-hover">
+				<table class="table table-bordered childTable  table-hover">
 					<thead>
 						<tr>
 							<th width="40%">参数名称</th>
