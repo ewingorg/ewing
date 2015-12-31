@@ -3,20 +3,31 @@
 "admin/common/include/pagination.html">
 <br>
 <style>
-.childTable th {
-	text-align: center;
+ 
+.resParamTable{
+	width: 80%;
+	border:1px dashed #DDDDDD;
+	margin: 20px;  
+	padding: 10px;
 }
-
-.childTable td {
+.resParamTable th{
+	 text-align: center; 
+} 
+.resParamTable tr {
+	margin: 10px; 
+	padding: 10px; 
+}
+.resParamTable td {
 	text-align: center;
+	padding: 10px; 
 }
 </style>
 <#list resGroupList as group>
-<table class="table " style="width: 80%;" name="paramGroupTable">
+<table class="resParamTable" name="paramGroupTable">
 	<thead>
 		<tr>
-			<th><input class="m-wrap long span4" name="rootParamName" type="text" value="${group.rootResourceParam.paramName}"  placeholder="参数组名彻骨"/>
-			<input class="m-wrap long span1" name="rootParamRank" type="text" value="${group.rootResourceParam.rank}" placeholder="排位"/>
+			<th><br>参数组：<input class="m-wrap long span4" name="rootParamName" type="text" value="${group.rootResourceParam.paramName}"  placeholder="参数组名彻骨"/>
+			排位：<input class="m-wrap long span1" name="rootParamRank" type="text" value="${group.rootResourceParam.rank}" placeholder="排位"/>
 			
 			 <a href='#' name="deleteParamGroup" onclick="$(this).parents('table')[0].remove();"><i
 			class="icon-remove"></i></a></th>
@@ -26,7 +37,7 @@
 	<tbody>
 		<tr>
 			<td>
-				<table class="table childTable table-bordered table-hover">
+				<table class="table">
 					<thead>
 						<tr>
 							<th width="40%">参数名称</th>
@@ -35,7 +46,7 @@
 							<th width="10%">操作</th>
 						</tr>
 					</thead>
-					<tbody class="param-tbody">
+					<tbody >
 						<#list group.childParamlist as childParam>
 						<tr class="odd gradeX">
 							<td><input class="m-wrap long span12" name="paramName" type="text"

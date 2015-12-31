@@ -9,6 +9,7 @@ encoding//resource/template/admin/banner/resmng.html=UTF-8
 encoding//resource/template/admin/banner/unbindreslist.html=UTF-8
 encoding//resource/template/admin/busitemplate/templateform.html=UTF-8
 encoding//resource/template/admin/busitemplate/templatelist.html=UTF-8
+encoding//resource/template/admin/common/include/pagination.html=UTF-8
 encoding//resource/template/admin/common/include/sysparam.html=UTF-8
 encoding//resource/template/admin/dashboard.html=UTF-8
 encoding//resource/template/admin/file/uploadfile.html=UTF-8

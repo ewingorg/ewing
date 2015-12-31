@@ -49,7 +49,7 @@ public class MainAction extends BaseAction {
 
 		request.getSession().setAttribute("parentMenu", parentMenu);
 		request.getSession().setAttribute("curMenu", menu);
-		dataModel.put("htmlheadload", true);
+		dataModel.put("hl", true);
 		dataModel.put("menuList", menuList);
 		dataModel.put("firstTopmenuId",
 				firstTopmenu != null ? firstTopmenu.getId() : 0);

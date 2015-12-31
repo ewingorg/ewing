@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-10-10 22:43:59 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.admin.model.WebResourceSpec" table="web_resource_spec" catalog="ewing">
+    <class name="com.admin.model.WebResourcePrice" table="web_resource_price" catalog="ewing">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -13,11 +13,31 @@
                 <comment>&#215;&#202;&#212;&#180;id&#163;&#172;&#177;&#237;web_resource&#214;&#247;&#188;&#252;</comment>
             </column>
         </property>
-        <property name="spec" type="string">
-            <column name="spec" length="50" not-null="true">
+        <property name="specIds" type="string">
+            <column name="spec_ids" length="50" not-null="true">
                 <comment>&#185;&#230;&#184;&#241;&#177;&#224;&#194;&#235;&#163;&#172;&#182;&#224;&#184;&#246;&#210;&#212;&#182;&#186;&#186;&#197;&#183;&#214;&#184;&#244;</comment>
             </column>
-        </property> 
+        </property>
+        <property name="cost" type="string">
+            <column name="cost" length="20">
+                <comment>&#178;&#250;&#198;&#183;&#179;&#201;&#177;&#190;&#188;&#219;</comment>
+            </column>
+        </property>
+        <property name="price" type="string">
+            <column name="price" length="20">
+                <comment>&#178;&#250;&#198;&#183;&#188;&#219;&#184;&#241;</comment>
+            </column>
+        </property>
+        <property name="giftScore" type="string">
+            <column name="gift_score" length="20">
+                <comment>&#212;&#249;&#203;&#205;&#187;&#253;&#183;&#214;</comment>
+            </column>
+        </property>
+        <property name="stockNum" type="java.lang.Integer">
+            <column name="stock_num">
+                <comment>&#191;&#226;&#180;&#230;</comment>
+            </column>
+        </property>
          <property name="rank" type="java.lang.Integer">
             <column name="rank">
                 <comment>&#191;&#226;&#180;&#230;</comment>
