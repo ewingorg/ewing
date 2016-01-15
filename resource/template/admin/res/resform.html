@@ -26,28 +26,35 @@
 
 								<li class="active"><a href="#tab_1" data-toggle="tab">基本信息</a></li>
 
-								<li><a class="" href="#tab_2" data-toggle="tab">资源图片</a></li>
+								<li><a class="" href="#tab_2"   id="resscreenshotTab">资源图片</a></li>
 
 							 	<li><a class="" href="#tab_3" data-toggle="tab">资源介绍</a></li>
 								 
-								<li><a class="" href="#tab_4" data-toggle="tab">资源参数</a></li>
+								<li><a class="" href="#tab_4"   id="resparamTab">资源参数</a></li>
 								
-								<li><a class="" href="#tab_5" data-toggle="tab">资源规格</a></li>
+								<li><a class="" href="#tab_5"   id="resspecTab">资源规格</a></li>
+								
+								<li><a class="" href="#tab_6"   id="respriceTab">资源价格</a></li>
 							</ul>
   
-							<div class="tab-content">
-						 
+							<div class="tab-content"> 
 								<div class="tab-pane active" id="tab_1">
-									<#include "admin/res/resbase.html">
+									<#include "admin/res/base/resbase.html">
 			 					</div>
 		 						<div class="tab-pane" id="tab_2">
-									<#include "admin/res/screenshot2.html">
+									<#include "admin/res/screenshot/screenshot2.html">
 			 					</div>
 		 						<div class="tab-pane" id="tab_3">
-									<#include "admin/res/resdetail.html">
+									<#include "admin/res/detail/resdetail.html">
 			 					</div>
 			 					<div class="tab-pane" id="tab_4">
-									<#include "admin/res/resparam.html">
+									<#include "admin/res/param/resparam.html">
+			 					</div>
+			 					<div class="tab-pane" id="tab_5">
+									<#include "admin/res/spec/resspec.html">
+			 					</div>
+			 					<div class="tab-pane" id="tab_6">
+									<#include "admin/res/price/resprice.html">
 			 					</div>
 			 				</div>
 			 				 

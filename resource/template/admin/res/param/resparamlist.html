@@ -5,7 +5,7 @@
 <style>
  
 .resParamTable{
-	width: 80%;
+	width: 50%;
 	border:1px dashed #DDDDDD;
 	margin: 20px;  
 	padding: 10px;
@@ -22,12 +22,12 @@
 	padding: 10px; 
 }
 </style>
-<#list resGroupList as group>
+<#list resParamGroupList as group>
 <table class="resParamTable" name="paramGroupTable">
 	<thead>
 		<tr>
-			<th><br>参数组：<input class="m-wrap long span4" name="rootParamName" type="text" value="${group.rootResourceParam.paramName}"  placeholder="参数组名彻骨"/>
-			排位：<input class="m-wrap long span1" name="rootParamRank" type="text" value="${group.rootResourceParam.rank}" placeholder="排位"/>
+			<th><br>参数组：<input class="m-wrap long span4" name="rootParamName" type="text" value="${group.rootResourceParam.paramName}"  placeholder="参数组名"/>
+			排位：<input class="m-wrap long span2" name="rootParamRank" type="text" value="${group.rootResourceParam.rank}" placeholder="排位"/>
 			
 			 <a href='#' name="deleteParamGroup" onclick="$(this).parents('table')[0].remove();"><i
 			class="icon-remove"></i></a></th>
@@ -46,7 +46,7 @@
 							<th width="10%">操作</th>
 						</tr>
 					</thead>
-					<tbody >
+					<tbody class="param-tbody">
 						<#list group.childParamlist as childParam>
 						<tr class="odd gradeX">
 							<td><input class="m-wrap long span12" name="paramName" type="text"
@@ -91,7 +91,7 @@
 		
 		$(".add-paramgroup").bind("click", function() { 
 			 var curObj = $(this);  
-			 var trhtml =  common.getTemplateHtml('/admin/res/resparamgroup_pi.html'); 
+			 var trhtml =  common.getTemplateHtml('/admin/res/param/resparamgroup_pi.html'); 
 		     $(trhtml).insertBefore(curObj); 
 		     bindAddParam();
 		});
@@ -148,7 +148,7 @@
 		$(".add-param").bind("click", function() {
 			var tbody = $(this).parents(".param-tbody");
 			var parentTr = $(this).parent().parent();  
-			var trhtml =  common.getTemplateHtml('/admin/res/resparam_pi.html'); 
+			var trhtml =  common.getTemplateHtml('/admin/res/param/resparam_pi.html'); 
 		    $(trhtml).insertBefore(parentTr); 
 		});
 	}

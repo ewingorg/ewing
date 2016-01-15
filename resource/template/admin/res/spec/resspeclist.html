@@ -1,0 +1,155 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+<br>
+<style>
+ 
+.resSpecTable{
+	width: 50%;
+	border:1px dashed #DDDDDD;
+	margin: 20px;  
+	padding: 10px;
+}
+.resSpecTable th{
+	 text-align: center; 
+	 height: 5px;
+} 
+.resSpecTable tr {
+	margin: 10px; 
+	padding: 10px; 
+	 height: 5px;
+}
+.resSpecTable td {
+	text-align: center;
+	padding: 10px; 
+	 height: 5px;
+}
+</style>
+<#list resSpecGroupList as group>
+<table class="resSpecTable" name="specGroupTable">
+	<thead>
+		<tr>
+			<th><br>参数组：<input class="m-wrap long span4" name="rootSpec" type="text" value="${group.rootWebResourceSpec.spec}"  placeholder="规格组名"/>
+			排位：<input class="m-wrap long span2" name="rootSpecRank" type="text" value="${group.rootWebResourceSpec.rank}" placeholder="排位"/>
+			
+			 <a href='#' name="deleteSpecGroup" onclick="$(this).parents('table')[0].remove();"><i
+			class="icon-remove"></i></a></th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<table class="table">
+					<thead>
+						<tr>
+							<th width="60%">规格</th>
+							<th width="20%">排序</th>
+							<th width="20%">操作</th>
+						</tr>
+					</thead>
+					<tbody class="param-tbody">
+						<#list group.childParamlist as childSpec>
+						<tr class="odd gradeX"> 
+							<td><input class="m-wrap long span12" name="spec" type="text"
+								value="${childSpec.spec}" /></td>
+							<td><input class="m-wrap span6" name="rank" type="text"
+								value="${childSpec.rank}" /></td>
+							<td><a href='#' name="edit_action"  onclick="$(this).parents('tr')[0].remove();"><i
+									class="icon-remove"></i></a></td>
+						</tr>
+						</#list>
+						<tr>
+							<td colspan="3" >
+								<button class="btn blue add-resspec">
+									<i class="icon-plus"></i>&nbsp;&nbsp;新增规格
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+</#list>
+ 
+<button class="btn blue  add-resspecgroup">
+	<i class="icon-plus"></i>&nbsp;&nbsp;新增规格组
+</button>
+
+<div class="form-actions">
+		<button type="button" id="resspec_save_btn" class="btn green">保存</button>  
+</div>
+
+<script>
+	jQuery(document).ready(function() { 
+		bindAddSpec();
+		
+		$(".add-resspecgroup").bind("click", function() { 
+			 var curObj = $(this);  
+			 var trhtml =  common.getTemplateHtml('/admin/res/spec/resspecgroup_pi.html'); 
+		     $(trhtml).insertBefore(curObj); 
+		     bindAddSpec();
+		});
+		
+		$("#resspec_save_btn").bind("click", function() { 
+			var dataList = new Array();
+			 $("table[name='specGroupTable']").each(function(){
+				 var rootSpecObj =  $(this).find("input[name='rootSpec']")[0];
+				 var rootSpecRankObj =  $(this).find("input[name='rootSpecRank']")[0];
+				 var groupArray={};
+				 groupArray["spec"] = $(rootSpecObj).val();
+				 groupArray["rank"] = $(rootSpecRankObj).val();
+				 dataList.push(groupArray);
+				 var length = $(this).find("input[name='spec']").length; 
+				 for(var i=0;i<length;i++){ 
+					 var dataArray={}; 
+					 var specObj = $(this).find("input[name='spec']")[i]; 
+					 var rankObj = $(this).find("input[name='rank']")[i];
+					 dataArray["rootSpec"] = $(rootSpecObj).val();
+					 dataArray["spec"] = $(specObj).val(); 
+					 dataArray["rank"] = $(rankObj).val();
+					 dataList.push(dataArray);
+			      }
+			 }); 
+			 var dataListJson = JSON.stringify(dataList); 
+			 var param = "resSpecList="+dataListJson;
+			     param += "&resourceId=7";
+			 ajax.syncJsonRequest({
+ 				url : '${contextPath}/Admin-ResSpec-saveSpec.action',
+ 				param : param,
+ 				success : function(data) {
+ 					if (!data || !data.success) {
+ 						$('#errtip').html('保存失败！');
+ 						$('#errtip').show();
+ 					}
+ 					if (data.success) { 
+ 						common.alert({
+ 							content : '保存成功！',
+ 							closeFn : function() {  
+ 							}
+ 						});
+ 					}
+ 				}
+ 			}); 
+		});
+		
+	});
+	
+	
+	
+	function bindAddSpec(){
+		$(".add-resspec").bind("click", function() {
+			var tbody = $(this).parents(".param-tbody");
+			var parentTr = $(this).parent().parent();  
+			var trhtml =  common.getTemplateHtml('/admin/res/spec/resspec_pi.html'); 
+		    $(trhtml).insertBefore(parentTr); 
+		});
+	}
+</script>
+
+

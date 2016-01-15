@@ -18,6 +18,11 @@
                 <comment>&#185;&#230;&#184;&#241;&#177;&#224;&#194;&#235;&#163;&#172;&#182;&#224;&#184;&#246;&#210;&#212;&#182;&#186;&#186;&#197;&#183;&#214;&#184;&#244;</comment>
             </column>
         </property> 
+        <property name="rootSpec" type="string">
+            <column name="root_spec" length="50" >
+                <comment>&#185;&#230;&#184;&#241;&#177;&#224;&#194;&#235;&#163;&#172;&#182;&#224;&#184;&#246;&#210;&#212;&#182;&#186;&#186;&#197;&#183;&#214;&#184;&#244;</comment>
+            </column>
+        </property> 
          <property name="rank" type="java.lang.Integer">
             <column name="rank">
                 <comment>&#191;&#226;&#180;&#230;</comment>

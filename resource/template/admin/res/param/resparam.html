@@ -9,7 +9,7 @@
 	<div class="portlet-body">
 		 
 		<div id="resparamShowDiv">
-			<#include "admin/res/resparamlist.html">
+			<#include "admin/res/param/resparamlist.html">
 		</div> 
 	</div>
  
@@ -23,16 +23,20 @@
 			$('#resparamerrTip').show();
 			$('#resparam_add_btn').attr('disabled', 'true'); 
 			$('#resparam_save_btn').attr('disabled', 'true');
-		} else {
-		   mainFrame.addArea('${contextPath}/Admin-ResParam-show.action?resourceId='+resourceId,'resparamShowDiv'); 
-		   tableAction.init({
-			tableId : 'resparamTable',
-			queryUrl : '${contextPath}/Admin-ResParam-show.action?resourceId='+resourceId,
-			deleteUrl : '${contextPath}/Admin-ResParam-delete.action',
-			editUrl : '${contextPath}/Admin-ResParam-showEditForm.action', 
-			deleteBtnId : 'resparam_del_btn' 
-		   });    
-		}
+		} 
+		
+		$("#resparamTab").bind("click", function(e) {  
+			 e.preventDefault(); 
+			 $(this).tab('show'); 
+			 mainFrame.addArea('${contextPath}/Admin-ResParam-show.action?resourceId='+resourceId,'resparamShowDiv'); 
+			   tableAction.init({
+				tableId : 'resparamTable',
+				queryUrl : '${contextPath}/Admin-ResParam-show.action?resourceId='+resourceId,
+				deleteUrl : '${contextPath}/Admin-ResParam-delete.action',
+				editUrl : '${contextPath}/Admin-ResParam-showEditForm.action', 
+				deleteBtnId : 'resparam_del_btn' 
+			   });    
+		} );
 	});
 	
 </script>

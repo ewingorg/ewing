@@ -1,0 +1,15 @@
+ <#macro specselect specList> 
+	 <#list resSpecGroupList as group>
+	${group.rootWebResourceSpec.spec}:
+	<select class="span2 m-wrap" name="spec">
+		<option value="">选择</option> <#list group.childParamlist as childSpec>
+		<option value="${childSpec.id}"
+		     <#list specList as spec>
+		   	  	<#if spec = childSpec.id>
+				 	selected="selected"
+			 	</#if>
+		    </#list>
+		>${childSpec.spec}</option> </#list>
+	</select>
+	</#list>
+ </#macro>

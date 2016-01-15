@@ -74,21 +74,20 @@ common.alert = function(options) {
 	$('#alert_result_win').modal('show');
 	$('#alert_title').html(opts.title);
 	$('#alert_content').html(opts.content);
+	 
 	if (opts.showAction) {
 		$('#alert_action_btn').html(opts.actionContent);
 		$('#alert_action_btn').show();
 
-	}
-
+	} 
 	if ($.isFunction(opts.actionFn)) {
 		$('#alert_action_btn').bind("click", function() {
 			$('#alert_result_win').modal('hide');
 			opts.actionFn();
 		});
-	}
-
+	} 
 	if ($.isFunction(opts.closeFn)) {
-		$('#alert_close_btn').bind("click", function() {
+		$('#alert_close_btn').bind("click", function() { 
 			$('#alert_result_win').modal('hide');
 			opts.closeFn();
 		});

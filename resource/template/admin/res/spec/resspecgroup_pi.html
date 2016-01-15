@@ -1,0 +1,40 @@
+<table class="resSpecTable" name="specGroupTable">
+	<thead>
+		<tr>
+			<th><br>规格组：<input class="m-wrap long span4" name="rootSpec"
+				type="text"  
+				placeholder="规格组名称" /> 
+				排位：<input class="m-wrap long span2"
+				name="rootSpecRank" type="text"
+				  placeholder="排位" />
+				<a href='#' name="deleteSpecGroup"
+				onclick="$(this).parents('table')[0].remove();"><i
+					class="icon-remove"></i></a></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<table class="table">
+					<thead>
+						<tr> 
+							<th width="60%">规格</th>
+							<th width="20%">排序</th>
+							<th width="20%">操作</th>
+						</tr>
+					</thead>
+					<tbody class="param-tbody">
+						<tr>
+							<td colspan="3">
+								<button class="btn blue add-resspec">
+									<i class="icon-plus"></i>&nbsp;&nbsp;新增规格
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+
+	</tbody>
+</table>

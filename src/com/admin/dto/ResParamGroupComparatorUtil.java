@@ -15,13 +15,14 @@ import com.admin.model.WebResourceParam;
 public class ResParamGroupComparatorUtil {
 	/**
 	 * 排序
+	 * 
 	 * @param groupList
 	 */
 	public static void sortResGroupList(List<WebResourceParamGroup> groupList) {
 		ResParamGroupComparator groupComparator = new ResParamGroupComparator();
+		ResParamComparator paramComparator = new ResParamComparator();
 		Collections.sort(groupList, groupComparator);
 		for (WebResourceParamGroup group : groupList) {
-			ResParamComparator paramComparator = new ResParamComparator();
 			Collections.sort(group.getChildParamlist(), paramComparator);
 		}
 	}

@@ -1,0 +1,106 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html"> <#include
+"admin/res/price/specselect.html">
+<br>
+
+<table class="table table-bordered table-hover resPriceTable" name="resPriceTable">
+	<thead>
+		<tr>
+			<th width="50%">规格</th>
+			<th width="10%">产品成本价</th>
+			<th width="10%">产品价格</th>
+			<th width="10%">库存</th>
+			<th width="10%">排位</th>
+			<th width="10%">操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<#list priceList as dto>
+		<tr>
+			<td><@specselect specList = dto.specIds?if_exists/></td>
+			<td><input class="m-wrap span12" name="cost" type="text"
+				value="${(dto.price.cost)?if_exists}" /></td>
+			<td><input class="m-wrap span12" name="price" type="text"
+				value="${(dto.price.price)?if_exists}" /></td>
+			<td><input class="m-wrap span12" name="stockNum" type="text"
+				value="${(dto.price.stockNum)?if_exists}" /></td>
+			<td><input class="m-wrap span12" name="rank" type="text"
+				value="${(dto.price.rank)?if_exists}" /></td>
+			<td><a href='#' name="edit_action"
+				onclick="$(this).parents('tr')[0].remove();"><i
+					class="icon-remove"></i></a></td>
+		</tr>
+		</#list>
+	</tbody>
+</table>
+<div class="form-actions">
+	<button type="button" id="resprice_save_btn" class="btn green">保存</button>
+</div>
+
+<script>
+	jQuery(document).ready(function() {
+
+		$("#resprice_save_btn").bind("click", function() {
+			var dataList = new Array();
+			$("table[name='resPriceTable'] tr:gt(0)").each(function() {
+				 
+				var dataArray = {};
+				var specIds=''; 
+			    $(this).find("select[name='spec']").each(function(){ 
+			    	var selectSpec = $(this).val(); 
+			    	if(specIds==''){
+			    		specIds += selectSpec;
+			    	}else{
+			    		specIds += ","+selectSpec;
+			    	}
+			    	
+			    });
+				var costObj = $(this).find("input[name='cost']")[0];
+				var priceObj = $(this).find("input[name='price']")[0];
+				var stockNumObj = $(this).find("input[name='stockNum']")[0];
+				var rankObj = $(this).find("input[name='rank']")[0];
+			 	if(!$(costObj).val() ||  !$(priceObj).val() || !$(stockNumObj).val() || !$(rankObj).val()){
+			 	 
+			 		common.alert({
+						content : '请正确填写完整价格设置！',
+						closeFn : function() { 
+							 
+						}
+					});
+			 		return false;
+			 	}
+				dataArray["specIds"] = specIds;
+				dataArray["cost"] = $(costObj).val();
+				dataArray["price"] = $(priceObj).val();
+				dataArray["stockNum"] = $(stockNumObj).val();
+				dataArray["rank"] = $(rankObj).val();
+				dataList.push(dataArray);
+
+			});
+			console.log(dataList);
+			var dataListJson = JSON.stringify(dataList);
+			var param = "resPriceList=" + dataListJson;
+			param += "&resourceId=7";
+			ajax.syncJsonRequest({
+				url : '${contextPath}/Admin-ResPrice-savePrice.action',
+				param : param,
+				success : function(data) {
+					if (!data || !data.success) {
+						$('#errtip').html('保存失败！');
+						$('#errtip').show();
+					}
+					if (data.success) {
+						common.alert({
+							content : '保存成功！',
+							closeFn : function() {
+							}
+						});
+					}
+				}
+			});
+		});
+
+	});
+</script>
+

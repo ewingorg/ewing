@@ -27,8 +27,8 @@ import com.google.gson.reflect.TypeToken;
 public class ResScreenShotAction extends BaseAction {
 
 	private static Logger logger = Logger.getLogger(MainAction.class);
-	private static final String LIST_PAGE = "/admin/res/screenshotlist2.html";
-	private static final String EDIT_FORM = "/admin/res/screenshotedit.html";
+	private static final String LIST_PAGE = "/admin/res/screenshot/screenshotlist2.html";
+	private static final String EDIT_FORM = "/admin/res/screenshot/screenshotedit.html";
 
 	/**
 	 * 查詢列表

@@ -31,22 +31,27 @@
 							$('#screenshoterrTip').show();
 							$('#screenshot_add_btn').attr('disabled', 'true');
 							$('#screenshot_del_btn').attr('disabled', 'true');
-						} else {
-							mainFrame.addArea(
-									'${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id='
-											+ resourceId, 'screenshotShowDiv');
-							tableAction
-									.init({
-										tableId : 'screenshotTable',
-										queryUrl : '${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id='
-												+ resourceId,
-										deleteUrl : '${contextPath}/Admin-ResScreenShot-delete.action',
-										editUrl : '${contextPath}/Admin-ResScreenShot-showEditForm.action?resourceId='
-												+ resourceId,
-										deleteBtnId : 'screenshot_del_btn',
-										editBtnId : 'screenshot_add_btn',
-										areaId : 'screenshotShowDiv'
-									});
-						}
+						} 
+						// 捆绑
+						$("#resscreenshotTab").bind("click", function(e) {  
+							 e.preventDefault(); 
+							 $(this).tab('show'); 
+								mainFrame.addArea(
+										'${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id='
+												+ resourceId, 'screenshotShowDiv');
+								tableAction
+										.init({
+											tableId : 'screenshotTable',
+											queryUrl : '${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id='
+													+ resourceId,
+											deleteUrl : '${contextPath}/Admin-ResScreenShot-delete.action',
+											editUrl : '${contextPath}/Admin-ResScreenShot-showEditForm.action?resourceId='
+													+ resourceId,
+											deleteBtnId : 'screenshot_del_btn',
+											editBtnId : 'screenshot_add_btn',
+											areaId : 'screenshotShowDiv'
+										});
+						} );
+						
 					});
 </script>

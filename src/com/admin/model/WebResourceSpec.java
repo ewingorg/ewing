@@ -12,12 +12,37 @@ public class WebResourceSpec implements java.io.Serializable {
 	private Integer id;
 	private int resourceId;
 	private String spec;
+	private String rootSpec;
 	private Integer rank;
 	private String iseff;
 	private Date createTime;
 	private Date lastUpdate;
 
+	public Boolean isSameSpec(WebResourceSpec newOne) {
+		if (newOne == null)
+			return false;
+		if (newOne.rootSpec == null && this.rootSpec == null
+				&& newOne.spec.equals(this.spec)) {
+			return true;
+		}
+
+		if (newOne.rootSpec != null && this.rootSpec != null
+				&& newOne.spec.equals(this.spec)
+				&& newOne.rootSpec.equals(this.rootSpec)) {
+			return true;
+		}
+		return false;
+	}
+
 	public WebResourceSpec() {
+	}
+
+	public String getRootSpec() {
+		return rootSpec;
+	}
+
+	public void setRootSpec(String rootSpec) {
+		this.rootSpec = rootSpec;
 	}
 
 	public String getSpec() {

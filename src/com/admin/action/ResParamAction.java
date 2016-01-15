@@ -31,8 +31,8 @@ import com.google.gson.reflect.TypeToken;
 public class ResParamAction extends BaseAction {
 
 	private static Logger logger = Logger.getLogger(MainAction.class);
-	private static final String LIST_PAGE = "/admin/res/resparamlist.html";
-	private static final String EDIT_FORM = "/admin/res/resparamedit.html";
+	private static final String LIST_PAGE = "/admin/res/param/resparamlist.html";
+	private static final String EDIT_FORM = "/admin/res/param/resparamedit.html";
 	@Resource
 	private WebCategoryParamService webCategoryParamService;
 
@@ -50,7 +50,7 @@ public class ResParamAction extends BaseAction {
 			Integer resourceId = getIntegerParameter("resourceId");
 			List<WebResourceParamGroup> resGroupList = webResourceParamService
 					.getResParamList(resourceId);
-			dataModel.put("resGroupList", resGroupList);
+			dataModel.put("resParamGroupList", resGroupList);
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
