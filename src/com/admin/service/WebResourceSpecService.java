@@ -80,18 +80,9 @@ public class WebResourceSpecService {
 				+ "' order by rank", WebResourceSpec.class);
 		//保存规格配置
 		for (WebResourceSpec spec : resSpecList) {
-			boolean exist = false;
+		
 			spec.setResourceId(resourceId);
-			spec.setIseff(IsEff.EFFECTIVE);
-			for (WebResourceSpec oldSpec : oldSpecList) {
-				if (oldSpec.isSameSpec(spec)) {
-					exist = true;
-					break;
-				}
-				if (!exist)
-					removeList.add(spec);
-			}
-
+			spec.setIseff(IsEff.EFFECTIVE); 
 			WebResourceSpec oldSpec = findBySpec(resourceId, spec.getSpec());
 			if (spec.isSameSpec(oldSpec)) {
 				oldSpec.setRank(spec.getRank());
@@ -102,12 +93,25 @@ public class WebResourceSpecService {
 			}
 
 		}
+		//检查被删除的规格
+		for (WebResourceSpec oldSpec : oldSpecList) {
+			boolean exist = false;
+			for (WebResourceSpec spec : resSpecList) {
+				if (oldSpec.isSameSpec(spec)) {
+					exist = true;
+					break;
+				} 
+			}
+			if (!exist)
+				removeList.add(oldSpec);
+		}
+
 		// 删除失效的规格配置
 		for (WebResourceSpec spec : removeList) {
 			baseDao.delete(spec);
 		}
 		// 由于变更了规则，删除失效的价格设置
-		webResourcePriceService.removeIneffPrice(resourceId);
+		webResourcePriceService.removePriceForChangeSpec(resourceId);
 	}
 
 	/**
@@ -119,7 +123,7 @@ public class WebResourceSpecService {
 	 */
 	public WebResourceSpec findBySpec(Integer resourceId, String specName) {
 		return baseDao.findOne("resource_id=" + resourceId + " and spec='"
-				+ specName + "' and iseff='" + IsEff.EFFECTIVE,
+				+ specName + "' and iseff='" + IsEff.EFFECTIVE+"'",
 				WebResourceSpec.class);
 	}
 

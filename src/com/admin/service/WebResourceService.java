@@ -1,17 +1,25 @@
 package com.admin.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.admin.dto.WebResourceDto;
 import com.admin.model.WebAttrConf;
+import com.admin.model.WebCategory;
 import com.admin.model.WebResource;
 import com.admin.model.WebResourceAttr;
 import com.core.app.constant.IsEff;
+import com.core.app.service.BaseModelService;
 import com.core.jdbc.BaseDao;
+import com.core.jdbc.util.PageBean;
 
 /**
  * 资源服务类
@@ -25,6 +33,38 @@ public class WebResourceService {
 	private BaseDao baseDao;
 	@Resource
 	private WebAttrConfService webAttrConfService;
+	@Resource
+	private ResCategoryService resCategoryService;
+	@Resource
+	private BaseModelService baseModelService;
+
+	public PageBean pageQueryResource(String condition, String order,
+			Integer pageSize, Integer page) {
+		PageBean pageBean = baseModelService.pageQuery(condition, order,
+				pageSize, page, WebResource.class);
+		List<WebResource> list = (List<WebResource>) pageBean.getResult();
+
+		List<WebResourceDto> dtoList = new ArrayList<WebResourceDto>();
+		Map<Integer, WebCategory> categoryMap = resCategoryService
+				.findAllCategory();
+		for (WebResource webResource : list) {
+			WebResourceDto dto = new WebResourceDto();
+			try {
+				BeanUtils.copyProperties(dto, webResource);
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			WebCategory webCategory = categoryMap.get(webResource
+					.getCategoryId());
+			if (webCategory != null)
+				dto.setCategoryName(webCategory.getName());
+			dtoList.add(dto);
+		}
+		pageBean.setResult(dtoList);
+		return pageBean;
+	}
 
 	/**
 	 * 获取资源属性值

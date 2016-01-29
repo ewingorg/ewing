@@ -429,7 +429,7 @@ public class BaseAction extends ActionSupport
 			if (dataModel == null)
 				dataModel = new HashMap<String, T>();
 
-			dataModel.put("contextPath", (T) getContextPath(request));
+			dataModel.put("contextPath", (T)getContextPath(request));
 			// 模板中传入session值
 			HttpSession session = request.getSession();
 			String[] sessionName = session.getValueNames();

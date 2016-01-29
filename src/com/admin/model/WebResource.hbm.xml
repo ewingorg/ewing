@@ -8,6 +8,11 @@
             <column name="id" />
             <generator class="identity" />
         </id>
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id">
+                <comment>&#196;&#163;&#176;&#229;id&#163;&#172;web_template&#181;&#196;&#214;&#247;&#188;&#252;</comment>
+            </column>
+        </property>
         <property name="name" type="string">
             <column name="name" length="50" not-null="true">
                 <comment>&#215;&#202;&#212;&#180;&#195;&#251;&#179;&#198;</comment>
@@ -44,13 +49,13 @@
                 <comment>&#207;&#234;&#207;&#184;&#195;&#232;&#202;&#246;</comment>
             </column>
         </property>
-        <property name="cost" type="string">
-            <column name="cost" length="20">
+        <property name="cost" type="java.lang.Float">
+            <column name="cost"  >
                 <comment>&#178;&#250;&#198;&#183;&#179;&#201;&#177;&#190;&#188;&#219;</comment>
             </column>
         </property>
-        <property name="price" type="string">
-            <column name="price" length="20">
+        <property name="price" type="java.lang.Float">
+            <column name="price"  >
                 <comment>&#178;&#250;&#198;&#183;&#188;&#219;&#184;&#241;</comment>
             </column>
         </property>

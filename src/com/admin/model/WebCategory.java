@@ -14,6 +14,8 @@ public class WebCategory implements java.io.Serializable {
 
 	private Integer id;
 
+	private Integer userId;
+
 	private String name;
 
 	private String level;
@@ -29,6 +31,14 @@ public class WebCategory implements java.io.Serializable {
 	private Integer sort;
 	@IgnoreField
 	private String parentName;
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
 	public String getParentName() {
 		return parentName;

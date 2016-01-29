@@ -41,6 +41,7 @@ public class ResAction extends BaseAction {
 	private WebResourceService webResourceService;
 	@Resource
 	private WebResourceScreenService webResourceScreenService;
+
 	/**
 	 * 查詢列表
 	 */
@@ -51,18 +52,20 @@ public class ResAction extends BaseAction {
 			String pageSizeStr = request.getParameter("pageSize");
 			Integer page = StringUtils.isEmpty(pageStr) ? null : Integer
 					.valueOf(pageStr);
-			Integer pageSize = StringUtils.isEmpty(pageSizeStr)
-					? null
+			Integer pageSize = StringUtils.isEmpty(pageSizeStr) ? null
 					: Integer.valueOf(pageSizeStr);
 			String condition = bulidConditionSql();
-			PageBean pageBean = baseModelService.pageQuery(condition,
-					bulidOrderBySql(), pageSize, page, WebResource.class);
-			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
-			dataModel.put("iseffCode", iseffCode);
+			PageBean pageBean = webResourceService.pageQueryResource(condition,
+					bulidOrderBySql(), pageSize, page);
 			pageBean.setPageUrl(getPaginationUrl("/Admin-Res-show.action"));
 			dataModel.put("pageBean", pageBean);
 
+			dataModel.put("iseffCode",
+					sysParamService.getSysParam(SysParamCode.ISEFF));
+			dataModel.put("resOnlineType",
+					sysParamService.getSysParam(SysParamCode.RES_ONLINE_TYPE));
+			dataModel.put("resShowType",
+					sysParamService.getSysParam(SysParamCode.RES_SHOW_TYPE));
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -82,11 +85,14 @@ public class ResAction extends BaseAction {
 				dataModel.put("webResource", webResource);
 			}
 			List<SysParam> templateType = templateService.getResTemplates();
-			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
-			dataModel.put("iseffCode", iseffCode);
+
 			dataModel.put("templateType", templateType);
-			dataModel.put("iseffCode", iseffCode);
+			dataModel.put("iseffCode",
+					sysParamService.getSysParam(SysParamCode.ISEFF));
+			dataModel.put("resOnlineType",
+					sysParamService.getSysParam(SysParamCode.RES_ONLINE_TYPE));
+			dataModel.put("resShowType",
+					sysParamService.getSysParam(SysParamCode.RES_SHOW_TYPE));
 			render(EDIT_FORM, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

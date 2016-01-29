@@ -1,5 +1,7 @@
 package com.admin.dto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.admin.model.WebResourcePrice;
@@ -47,6 +49,17 @@ public class ResPriceDto {
 				return false;
 		}
 		return true;
+	}
+
+	public static List<ResPriceDto> toPriceDto(List<WebResourcePrice> priceList) {
+		List<ResPriceDto> dtoList = new ArrayList<ResPriceDto>();
+		for (WebResourcePrice price : priceList) {
+			ResPriceDto dto = new ResPriceDto();
+			dto.setPrice(price);
+			dto.setSpecIds(Arrays.asList(price.getSpecIds().split(",")));
+			dtoList.add(dto);
+		}
+		return dtoList;
 	}
 
 }

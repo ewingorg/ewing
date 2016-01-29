@@ -12,8 +12,8 @@ public class WebResourcePrice implements java.io.Serializable {
 	private Integer id;
 	private int resourceId;
 	private String specIds;
-	private String cost;
-	private String price;
+	private Float cost;
+	private Float price;
 	private String giftScore;
 	private Integer stockNum;
 	private Integer rank;
@@ -56,19 +56,19 @@ public class WebResourcePrice implements java.io.Serializable {
 		this.resourceId = resourceId;
 	}
 
-	public String getCost() {
-		return this.cost;
+	public Float getCost() {
+		return cost;
 	}
 
-	public void setCost(String cost) {
+	public void setCost(Float cost) {
 		this.cost = cost;
 	}
 
-	public String getPrice() {
-		return this.price;
+	public Float getPrice() {
+		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 
