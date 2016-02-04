@@ -126,33 +126,13 @@ public class ResAction extends BaseAction {
             WebResource webResource = new WebResource();
             this.buildPageData(webResource);
             webResource.setUserId(getLoginUserId());
-            List<WebResourceAttr> attrList = new ArrayList<WebResourceAttr>();
-
-            Map paramMap = request.getParameterMap();
-            for (Iterator itor = paramMap.keySet().iterator(); itor.hasNext();) {
-                Object key = itor.next();
-                Object object = paramMap.get(key);
-
-                if (key instanceof String && key.toString().startsWith(AttrConstant.ATTRKEY_PREFIX)
-                        && object != null) {
-                    if (object.getClass().isArray()) {
-                        Object[] sValue = (Object[]) object;
-                        String value = sValue[0].toString();
-                        if (value.trim().isEmpty())
-                            continue;
-                        WebResourceAttr attr = new WebResourceAttr();
-                        attr.setAttrKey(key.toString().replace(AttrConstant.ATTRKEY_PREFIX, ""));
-                        attr.setAttrValue(value);
-                        attrList.add(attr);
-                    }
-                }
-            }
+          
 
             if (!StringUtils.isEmpty(id)) {
                 webResource.setId(Integer.valueOf(id));
-                webResourceService.editResource(webResource, attrList);
+                webResourceService.editResource(webResource);
             } else {
-                webResourceService.saveResource(webResource, attrList);
+                webResourceService.saveResource(webResource);
             }
             responseData = ResponseUtils.success("保存成功！");
             responseData.setResult(webResource);

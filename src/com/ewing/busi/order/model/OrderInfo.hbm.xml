@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-2-4 17:41:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ewing.busi.order.model.OrderInfo" table="order_info" catalog="ewing">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="customerId" type="int">
+            <column name="customer_id" not-null="true">
+                <comment>&#207;&#251;&#183;&#209;&#213;&#223;ID</comment>
+            </column>
+        </property>
+        <property name="userId" type="int">
+            <column name="user_id" not-null="true">
+                <comment>&#201;&#204;&#187;&#167;&#211;&#195;&#187;&#167;ID</comment>
+            </column>
+        </property>
+        <property name="bizId" type="string">
+            <column name="biz_id" length="50" not-null="true">
+                <comment>&#193;&#247;&#203;&#174;&#186;&#197;</comment>
+            </column>
+        </property>
+        <property name="productPrice" type="float">
+            <column name="product_price" precision="9" not-null="true">
+                <comment>&#178;&#250;&#198;&#183;&#183;&#209;&#211;&#195;</comment>
+            </column>
+        </property>
+        <property name="cargoPrice" type="float">
+            <column name="cargo_price" precision="9" not-null="true">
+                <comment>&#212;&#203;&#183;&#209;</comment>
+            </column>
+        </property>
+        <property name="totalPrice" type="float">
+            <column name="total_price" precision="9" not-null="true">
+                <comment>&#215;&#220;&#183;&#209;&#211;&#195;</comment>
+            </column>
+        </property>
+        <property name="status" type="char">
+            <column name="status" length="1" not-null="true">
+                <comment>&#185;&#186;&#206;&#239;&#215;&#180;&#204;&#172; 0:&#180;&#253;&#184;&#182;&#191;&#238; 1:&#180;&#253;&#183;&#162;&#187;&#245;
+                2:&#180;&#253;&#202;&#213;&#187;&#245;</comment>
+            </column>
+        </property>
+        <property name="receiver" type="string">
+            <column name="receiver" length="20">
+                <comment>&#202;&#213;&#188;&#254;&#200;&#203;</comment>
+            </column>
+        </property>
+        <property name="postCode" type="string">
+            <column name="post_code" length="10">
+                <comment>&#211;&#202;&#177;&#224;</comment>
+            </column>
+        </property>
+        <property name="province" type="string">
+            <column name="province" length="50">
+                <comment>&#202;&#161;&#183;&#221;</comment>
+            </column>
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="50">
+                <comment>&#179;&#199;&#202;&#208;</comment>
+            </column>
+        </property>
+        <property name="region" type="string">
+            <column name="region" length="50">
+                <comment>&#199;&#248;</comment>
+            </column>
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="200">
+                <comment>&#190;&#223;&#204;&#229;&#206;&#187;&#214;&#195;</comment>
+            </column>
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="50" not-null="true">
+                <comment>&#181;&#231;&#187;&#176;&#186;&#197;&#194;&#235;</comment>
+            </column>
+        </property>
+        <property name="iseff" type="char">
+            <column name="iseff" length="1" not-null="true">
+                <comment>&#202;&#199;&#183;&#241;&#201;&#250;&#208;&#167; 0:&#195;&#187;&#201;&#250;&#208;&#167; 1:&#201;&#250;&#208;&#167;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

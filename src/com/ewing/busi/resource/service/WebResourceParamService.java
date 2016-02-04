@@ -2,11 +2,10 @@ package com.ewing.busi.resource.service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.jws.WebParam;
 
 import org.apache.axis.utils.StringUtils;
 import org.apache.commons.beanutils.BeanUtils;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ewing.busi.category.model.WebCatagoryParam;
 import com.ewing.busi.category.service.WebCategoryParamService;
+import com.ewing.busi.resource.dao.WebResourceParamDao;
 import com.ewing.busi.resource.dto.ResParamGroupComparatorUtil;
 import com.ewing.busi.resource.dto.WebResourceParamGroup;
 import com.ewing.busi.resource.model.WebResource;
@@ -32,7 +32,8 @@ import com.ewing.core.jdbc.BaseDao;
 public class WebResourceParamService {
     @Resource
     private BaseDao baseDao;
-
+    @Resource
+    private WebResourceParamDao webResourceParamDao;
     @Resource
     private WebResourceService webResourceService;
     @Resource
@@ -45,8 +46,7 @@ public class WebResourceParamService {
      * @return
      */
     public List<WebResourceParamGroup> getResParamList(Integer resourceId) {
-        List<WebResourceParam> resParamlist = baseDao.find("resource_id=" + resourceId
-                + " and iseff='" + IsEff.EFFECTIVE + "' order by rank", WebResourceParam.class);
+        List<WebResourceParam> resParamlist = webResourceParamDao.getParamByResourceId(resourceId);
         WebResource webResource = webResourceService.findById(resourceId);
         List<WebCatagoryParam> categoryParamList = webCategoryParamService
                 .getDefindParams(webResource.getCategoryId());
@@ -180,12 +180,12 @@ public class WebResourceParamService {
      */
 
     public void saveParamList(Integer resourceId, List<WebResourceParam> resparamList)
-            throws Exception { 
+            throws Exception {
         WebResource webResource = webResourceService.findById(resourceId);
         if (webResource == null)
             throw new Exception("没有找到匹配的资源信息");
         // 删除旧的参数记录
-        baseDao.executeSql("delete from web_resource_param where resource_id=" + resourceId);
+        webResourceParamDao.deleteParams(resourceId);
         if (resparamList != null) {
             for (WebResourceParam param : resparamList) {
                 if (StringUtils.isEmpty(param.getParamName()))
@@ -198,5 +198,4 @@ public class WebResourceParamService {
         }
     }
 
-    
 }

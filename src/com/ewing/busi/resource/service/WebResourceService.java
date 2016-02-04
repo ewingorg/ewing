@@ -9,16 +9,13 @@ import javax.annotation.Resource;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ewing.busi.category.model.WebCategory;
 import com.ewing.busi.category.service.ResCategoryService;
+import com.ewing.busi.resource.dao.WebResourceDao;
 import com.ewing.busi.resource.dto.WebResourceDto;
 import com.ewing.busi.resource.model.WebResource;
-import com.ewing.busi.resource.model.WebResourceAttr;
-import com.ewing.busi.web.model.WebAttrConf;
 import com.ewing.busi.web.service.WebAttrConfService;
-import com.ewing.core.app.constant.IsEff;
 import com.ewing.core.app.service.BaseModelService;
 import com.ewing.core.jdbc.BaseDao;
 import com.ewing.core.jdbc.util.PageBean;
@@ -34,11 +31,28 @@ public class WebResourceService {
     @Resource
     private BaseDao baseDao;
     @Resource
+    private WebResourceDao webResourceDao;
+    @Resource
     private WebAttrConfService webAttrConfService;
     @Resource
     private ResCategoryService resCategoryService;
     @Resource
     private BaseModelService baseModelService;
+
+    public boolean editResource(WebResource resource) {
+        baseDao.update(resource);  
+        return true;
+    }
+
+    /**
+     * 查找单个资源信息
+     * 
+     * @param resourceId
+     * @return
+     */
+    public WebResource findById(Integer resourceId) {
+        return baseDao.findOne(resourceId, WebResource.class);
+    }
 
     /**
      * 查找用户的资源
@@ -48,14 +62,13 @@ public class WebResourceService {
      * @return
      */
     public WebResource findOne(Integer userId, Integer resourceId) {
-        return baseDao.findOne("id=" + resourceId + " and user_id=" + userId, WebResource.class);
+        return webResourceDao.findOne(userId, resourceId);
     }
 
     public PageBean pageQueryResource(Integer userId, String condition, String order,
             Integer pageSize, Integer page) {
-        condition = condition + " and user_id=" + userId + " and iseff='" + IsEff.EFFECTIVE + "'";
-        PageBean pageBean = baseModelService.pageQuery(condition, order, pageSize, page,
-                WebResource.class);
+        PageBean pageBean = webResourceDao.pageQueryResource(userId, condition, order, pageSize,
+                page);
         List<WebResource> list = (List<WebResource>) pageBean.getResult();
 
         List<WebResourceDto> dtoList = new ArrayList<WebResourceDto>();
@@ -79,89 +92,14 @@ public class WebResourceService {
     }
 
     /**
-     * 获取资源属性值
-     * 
-     * @param resourceId 资源id
-     * @return
-     */
-    public List<WebResourceAttr> getResourceAttrs(Integer resourceId) {
-        return baseDao.find("resource_id=" + resourceId + " and iseff='" + IsEff.EFFECTIVE
-                + "' order by rank", WebResourceAttr.class);
-    }
-
-    /**
-     * 获取资源属性
-     * 
-     * @param resourceId
-     * @param attrKey
-     * @return
-     */
-    public WebResourceAttr getResourceAttr(Integer resourceId, String attrKey) {
-        return baseDao.findOne("resource_id=" + resourceId + " and attr_key='" + attrKey
-                + "' and iseff='" + IsEff.EFFECTIVE + "' order by rank", WebResourceAttr.class);
-    }
-
-    /**
      * 保存
      * 
      * @param resource
      * @param attrList
      * @return
-     */
-    @Transactional(rollbackFor = Exception.class)
-    public boolean saveResource(WebResource resource, List<WebResourceAttr> attrList) {
-        baseDao.save(resource);
-        Integer resourceId = resource.getId();
-        Integer templateId = resource.getTemplateId();
-        List<WebAttrConf> attrConfList = webAttrConfService.getTemplateAttrs(templateId);
-        for (WebResourceAttr attr : attrList) {
-            for (WebAttrConf webAttrConf : attrConfList) {
-                if (webAttrConf.getAttrKey().equals(attr.getAttrKey())) {
-                    attr.setAttrName(webAttrConf.getAttrName());
-                    attr.setRank(webAttrConf.getSort());
-                }
-            }
-            attr.setIseff(IsEff.EFFECTIVE);
-            attr.setResourceId(resourceId);
-            baseDao.save(attr);
-        }
+     */ 
+    public boolean saveResource(WebResource resource ) {
+        baseDao.save(resource); 
         return true;
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public boolean editResource(WebResource resource, List<WebResourceAttr> changeAttrList) {
-        baseDao.update(resource);
-        Integer resourceId = resource.getId();
-        Integer templateId = resource.getTemplateId();
-        List<WebAttrConf> attrConfList = webAttrConfService.getTemplateAttrs(templateId);
-        for (WebResourceAttr attr : changeAttrList) {
-            for (WebAttrConf webAttrConf : attrConfList) {
-                if (webAttrConf.getAttrKey().equals(attr.getAttrKey())) {
-                    attr.setAttrName(webAttrConf.getAttrName());
-                    attr.setRank(webAttrConf.getSort());
-                }
-            }
-            attr.setIseff(IsEff.EFFECTIVE);
-            attr.setResourceId(resourceId);
-            WebResourceAttr oldAttr = getResourceAttr(resourceId, attr.getAttrKey());
-            if (oldAttr != null) {
-                attr.setAttrValue(attr.getAttrValue());
-                baseDao.update(attr);
-            } else {
-                baseDao.save(attr);
-            }
-
-        }
-        return true;
-    }
-
-    /**
-     * 查找单个资源信息
-     * 
-     * @param resourceId
-     * @return
-     */
-    public WebResource findById(Integer resourceId) {
-        return baseDao.findOne(resourceId, WebResource.class);
     }
 }

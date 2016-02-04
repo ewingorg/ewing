@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 
+import com.ewing.busi.resource.dao.WebResourcePriceDao;
 import com.ewing.busi.resource.dto.ResPriceDto;
 import com.ewing.busi.resource.dto.WebResourceSpecGroup;
 import com.ewing.busi.resource.model.WebResource;
@@ -30,6 +31,8 @@ public class WebResourcePriceService {
     @Resource
     private BaseDao baseDao;
     @Resource
+    private WebResourcePriceDao webResourcePriceDao;
+    @Resource
     private WebResourceService webResourceService;
     @Resource
     private WebResourceSpecService webResourceSpecService;
@@ -41,8 +44,7 @@ public class WebResourcePriceService {
      * @return
      */
     public List<ResPriceDto> getConfigurePrices(Integer resourceId) {
-        List<WebResourcePrice> priceList = baseDao.find("resource_id=" + resourceId
-                + " and iseff='" + IsEff.EFFECTIVE + "' order by rank", WebResourcePrice.class);
+        List<WebResourcePrice> priceList = webResourcePriceDao.getResourcePrice(resourceId);
         List<ResPriceDto> configurePrices = ResPriceDto.toPriceDto(priceList);
 
         // 获取资源所有规格
@@ -205,8 +207,7 @@ public class WebResourcePriceService {
      */
     public void removePriceForChangeSpec(Integer resourceId) {
         // 获取资源所有规格
-        List<WebResourcePrice> priceList = baseDao.find("resource_id=" + resourceId
-                + " and iseff='" + IsEff.EFFECTIVE + "' order by rank", WebResourcePrice.class);
+        List<WebResourcePrice> priceList = webResourcePriceDao.getResourcePrice(resourceId);
         List<ResPriceDto> defaultPrices = generateDefaultPrices(resourceId);
         List<ResPriceDto> configurePrices = ResPriceDto.toPriceDto(priceList);
         List<WebResourcePrice> removePriceList = new ArrayList<WebResourcePrice>();

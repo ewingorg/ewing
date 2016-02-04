@@ -43,9 +43,9 @@ public class AttrConfAction extends BaseAction {
 				return;
 			Integer resourceId = getIntegerParameter("resourceId");
 			List<WebResourceAttr> resAttrs = null;
-			if (resourceId != null) {
+			/*if (resourceId != null) {
 				resAttrs = webResourceService.getResourceAttrs(resourceId);
-			}
+			}*/
 			List<WebAttrConf> attrList = webAttrConfService
 					.getTemplateAttrs(templateId);
 			for (WebAttrConf webAttrConf : attrList) {

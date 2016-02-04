@@ -9,9 +9,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
 
+import com.ewing.busi.resource.dao.WebResourceScreenDao;
 import com.ewing.busi.resource.model.WebResourceScreenshot;
 import com.ewing.core.app.constant.IsEff;
 import com.ewing.core.jdbc.BaseDao;
+
 /**
  * 
  * 
@@ -20,12 +22,10 @@ import com.ewing.core.jdbc.BaseDao;
  */
 @Repository("webResourceScreenService")
 public class WebResourceScreenService {
-	@Resource
-	private BaseDao baseDao;
+    @Resource
+    private WebResourceScreenDao webResourceScreenDao;
 
-	public List<WebResourceScreenshot> getResScreenshot(Integer resourceId) {
-		return baseDao.find("resource_id=" + resourceId + " and iseff='"
-				+ IsEff.EFFECTIVE + "' order by rank",
-				WebResourceScreenshot.class);
-	}
+    public List<WebResourceScreenshot> getResScreenshot(Integer resourceId) {
+        return webResourceScreenDao.getResScreenshot(resourceId);
+    }
 }
