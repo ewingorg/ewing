@@ -4,16 +4,15 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
-<struts>
-
-	<package name="public" extends="struts-default">
-		<action name="Public-*-*" method="{2}"
-			class="com.core.app.action.{1}Action" />
-		<action name="Busi-*-*" method="{2}" class="com.web.action.{1}Action" />
-		<action name="Admin-*-*" method="{2}" class="com.admin.action.{1}Action" />
+<struts> 
+	<package name="public" extends="struts-default"> 
+		<action name="Busi-*-*" method="{2}" class="com.ewing.web.action.{1}Action" />  
+		<action name="Admin-*-*" method="{2}" class="com.ewing.web.action.{1}Action" />
 	</package>
+	 
+	
 	<package name="file" extends="struts-default">
-		<action name="fileAction" class="com.web.action.FileAction"
+		<action name="fileAction" class="com.ewing.web.action.FileAction"
 			method="down">
 			<!-- 下载文件配置 type 为 stream 应用 StreamResult 处理 -->
 			<result name="down" type="stream">

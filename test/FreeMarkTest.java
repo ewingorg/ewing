@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.core.factory.SpringCtx;
+import com.ewing.core.factory.SpringCtx;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

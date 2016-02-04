@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.admin.model.SysMenu;
-import com.admin.model.WebResourceScreenshot;
-import com.core.json.StringConverter;
+import com.ewing.busi.resource.model.WebResourceScreenshot;
+import com.ewing.busi.system.model.SysMenu;
+import com.ewing.core.json.StringConverter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

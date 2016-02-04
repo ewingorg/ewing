@@ -27,7 +27,7 @@
 	
 	<filter>
 		<filter-name>ValidateUserLogin</filter-name>
-		<filter-class>com.core.app.filter.LoginFilter</filter-class> 
+		<filter-class>com.ewing.core.app.filter.LoginFilter</filter-class> 
 		<init-param>
 			<param-name>toLogin</param-name>
 			<param-value>Admin-Login-toLogin.action</param-value>
@@ -74,7 +74,7 @@
 	</filter-mapping>
 	<filter>
 		<filter-name>UrlContainerFilter</filter-name>
-		<filter-class>com.core.app.filter.UrlContainerFilter</filter-class>
+		<filter-class>com.ewing.core.app.filter.UrlContainerFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>UrlContainerFilter</filter-name>
@@ -92,7 +92,7 @@
 
 	<filter>
 		<filter-name>GzipJsFilter</filter-name>
-		<filter-class>com.core.app.filter.GzipJsFilter</filter-class>
+		<filter-class>com.ewing.core.app.filter.GzipJsFilter</filter-class>
 		<init-param>
 			<param-name>headers</param-name>
 			<param-value>Content-Encoding=gzip</param-value>
@@ -106,7 +106,7 @@
 	
 	<servlet>
 		<servlet-name>Captcha</servlet-name>
-		<servlet-class>com.core.servlet.CaptchaServlet</servlet-class>
+		<servlet-class>com.ewing.core.servlet.CaptchaServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Captcha</servlet-name>
@@ -119,7 +119,7 @@
 	<!-- 系统初始化servlet -->
 	<servlet>
 		<servlet-name>InitServlet</servlet-name>
-		<servlet-class>com.core.servlet.InitServlet</servlet-class>
+		<servlet-class>com.ewing.core.servlet.InitServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>  
 	<servlet>

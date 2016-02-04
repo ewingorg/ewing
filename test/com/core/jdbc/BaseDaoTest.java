@@ -2,9 +2,10 @@ package com.core.jdbc;
 
 import org.junit.Test;
 
-import com.admin.model.SysMenu;
-import com.core.factory.SpringCtx;
-import com.core.jdbc.util.PageBean;
+import com.ewing.busi.system.model.SysMenu;
+import com.ewing.core.factory.SpringCtx;
+import com.ewing.core.jdbc.BaseDao;
+import com.ewing.core.jdbc.util.PageBean;
 
 /**
  * 

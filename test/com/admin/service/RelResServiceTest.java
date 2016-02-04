@@ -2,8 +2,9 @@ package com.admin.service;
 
 import org.junit.Test;
 
-import com.core.factory.SpringCtx;
-import com.core.jdbc.util.PageBean;
+import com.ewing.busi.web.service.RelResService;
+import com.ewing.core.factory.SpringCtx;
+import com.ewing.core.jdbc.util.PageBean;
 
 public class RelResServiceTest {
 	@Test
