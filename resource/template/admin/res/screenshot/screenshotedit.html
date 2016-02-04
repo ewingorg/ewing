@@ -31,21 +31,21 @@
 		<!-- BEGIN FORM-->
 		<form action="${contextPath}/Admin-ResScreenShot-save.action"
 			id="ResScreenShotAddForm" class="form-horizontal" method="post">
-			<input type="hidden" name="id" value="${(bean.id)?if_exists}" />
+			<input type="hidden" name="id" value="${(resScreenBean.id)?if_exists}" />
 			<input type="hidden" name="resourceId" id="resourceId" value="${resourceId}" /> 
 			<div class="control-group">
 				<label class="control-label">标题<span class="required">*</span></label>
 				<div class="controls">
 					<input type="text" name="name" id="name" require="true"
 						datatype="require"  msg="标题不能为空"
-						class="m-wrap medium" value="${(bean.name)?if_exists}" />
+						class="m-wrap medium" value="${(resScreenBean.name)?if_exists}" />
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">资源图片</label>
 				<div class="controls">
-				  <#if bean?? && bean.imageUrl ?? >
-				  <img src="${contextPath}${(bean.imageUrl)?if_exists}" width="80" height="80"
+				  <#if resScreenBean?? && resScreenBean.imageUrl ?? >
+				  <img src="${contextPath}${(resScreenBean.imageUrl)?if_exists}" width="80" height="80"
 						id="screenImgShow" />
 				<#else> 
 					 <img src="${contextPath}/common/image/default-pic.png" width="80" height="80"
@@ -59,7 +59,7 @@
 					<span class="btn  fileinput-button"> <i
 						class="icon-plus icon-white"></i> <span>选择文件...</span> <input
 						type="file" id="screenUpfile" name="screenUpfile" />
-					</span> <input type="hidden" id="screenImageUrl" name="imageUrl" value="${(bean.imageUrl)?if_exists}"  /> <a
+					</span> <input type="hidden" id="screenImageUrl" name="imageUrl" value="${(resScreenBean.imageUrl)?if_exists}"  /> <a
 						class="btn start" onclick="uploadScreenPic();"> <i
 						class="icon-upload icon-white"></i> <span>上传</span>
 					</a> <br> <span class="alert alert-error" id="screenUpfile_error_tip"
@@ -81,14 +81,14 @@
 				<label class="control-label">排位&nbsp;&nbsp;</label>
 				<div class="controls">
 					<input name="rank" type="text" class="m-wrap medium"
-						value="${(bean.rank)?if_exists}" require="true" datatype="require"
+						value="${(resScreenBean.rank)?if_exists}" require="true" datatype="require"
 						msg="排位不能为空" />
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">是否有效<span class="required">*</span></label>
 				<div class="controls"><@select paramCode=iseffCode
-					value=(bean.iseff)?if_exists item=' name="iseff" require="true"
+					value=(resScreenBean.iseff)?if_exists item=' name="iseff" require="true"
 					datatype="require" msg="是否有效不能为空"'/></div>
 			</div>
 
@@ -103,19 +103,17 @@
 
 <script>
 	jQuery(document).ready(function() {
-		if(!$('#resourceId').val()){
-			$('#screenErrtip').html('暂时不能编辑资源截图，请先编辑资源基本信息!');
-			$('#screenErrtip').show();
-			$('#screen_save_btn').attr('disabled','true');
-		}
-			
+	  
 		tableAction.initSaveAction({
 			formId : 'ResScreenShotAddForm',
 			queryUrl : '${contextPath}/Admin-ResScreenShot-show.action?_QUERY_n_eq_resource_id='+$('#resourceId').val(),
 			saveUrl : '${contextPath}/Admin-ResScreenShot-save.action',
 			saveBtnId : 'screen_save_btn',
 			areaId:'screenshotShowDiv',
-			errZoneId:'screenErrtip'
+			errZoneId:'screenErrtip',
+			afterSaveFn:function(){ 
+				$('#resscreenshotTab').trigger("click"); 
+			}
 		});
 	});
 </script>

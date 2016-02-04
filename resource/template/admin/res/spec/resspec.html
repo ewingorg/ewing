@@ -17,11 +17,13 @@
  
 	jQuery(document).ready(function() { 
 		 
-		var resourceId = 8;
+		var resourceId = '${(resourceId)?if_exists}'; 
 		if (!resourceId) {
 			$('#resspecerrTip').html(
 					'暂时不能编辑资源规格，请先编辑资源基本信息!');
 			$('#resspecerrTip').show();
+			$('#resspec_add_btn').attr('disabled', 'true'); 
+			$('#resspec_save_btn').attr('disabled', 'true');
 		} 
 		// 捆绑
 		$("#resspecTab").bind("click", function(e) {  

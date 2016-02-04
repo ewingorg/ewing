@@ -27,7 +27,7 @@ import com.google.gson.reflect.TypeToken;
 public class ResScreenShotAction extends BaseAction {
 
 	private static Logger logger = Logger.getLogger(MainAction.class);
-	private static final String LIST_PAGE = "/admin/res/screenshot/screenshotlist2.html";
+	private static final String LIST_PAGE = "/admin/res/screenshot/screenshotlist.html";
 	private static final String EDIT_FORM = "/admin/res/screenshot/screenshotedit.html";
 
 	/**
@@ -51,7 +51,7 @@ public class ResScreenShotAction extends BaseAction {
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
-			dataModel.put("resparamPageBean", pageBean);
+			dataModel.put("resScreenPageBean", pageBean);
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -68,8 +68,9 @@ public class ResScreenShotAction extends BaseAction {
 			if (!StringUtils.isEmpty(id)) {
 				WebResourceScreenshot webResourceScreenshot = findOne(
 						Integer.valueOf(id), WebResourceScreenshot.class);
-				dataModel.put("resparamBean", webResourceScreenshot);
+				dataModel.put("resScreenBean", webResourceScreenshot);
 			}
+			dataModel.put("resourceId", getIntegerParameter("resourceId"));
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);

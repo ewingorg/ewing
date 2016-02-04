@@ -51,6 +51,7 @@ public class ResParamAction extends BaseAction {
 			List<WebResourceParamGroup> resGroupList = webResourceParamService
 					.getResParamList(resourceId);
 			dataModel.put("resParamGroupList", resGroupList);
+			dataModel.put("resourceId", resourceId);
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -121,14 +122,12 @@ public class ResParamAction extends BaseAction {
 					new TypeToken<List<WebResourceParam>>() {
 					}.getType());
 			Integer resourceId = Integer.valueOf(request
-					.getParameter("resourceId"));
-			if (resparamList.isEmpty())
-				throw new Exception("资源参数为空！");
+					.getParameter("resourceId")); 
 			webResourceParamService.saveParamList(resourceId, resparamList);
 			responseData = ResponseUtils.success("保存成功！");
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			responseData = ResponseUtils.fail("保存失败！");
+			responseData = ResponseUtils.fail("保存失败！"+e.getMessage());
 		}
 		this.outResult(responseData);
 

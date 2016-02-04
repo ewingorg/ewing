@@ -24,7 +24,27 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	
+	<filter>
+		<filter-name>ValidateUserLogin</filter-name>
+		<filter-class>com.core.app.filter.LoginFilter</filter-class> 
+		<init-param>
+			<param-name>toLogin</param-name>
+			<param-value>Admin-Login-toLogin.action</param-value>
+		</init-param>
+		<init-param>
+			<param-name>userLogin</param-name>
+			<param-value>Admin-Login-userLogin.action</param-value>
+		</init-param>
+		<init-param>
+			<param-name>userLogOut</param-name>
+			<param-value>Admin-Login-userLogOut.action</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>ValidateUserLogin</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
 
 	<filter>
 		<filter-name>struts-cleanup</filter-name>
@@ -52,22 +72,22 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-  	<filter>
+	<filter>
 		<filter-name>UrlContainerFilter</filter-name>
 		<filter-class>com.core.app.filter.UrlContainerFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>UrlContainerFilter</filter-name>
 		<url-pattern>*.html</url-pattern>
-	</filter-mapping>  
-	<filter>
+	</filter-mapping>
+	<!-- <filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>com.web.action.filter.EncodingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>*.action</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
 
 	<filter>
@@ -81,7 +101,9 @@
 	<filter-mapping>
 		<filter-name>GzipJsFilter</filter-name>
 		<url-pattern>*.gzjs</url-pattern>
-	</filter-mapping>
+	</filter-mapping> 
+	
+	
 	<servlet>
 		<servlet-name>Captcha</servlet-name>
 		<servlet-class>com.core.servlet.CaptchaServlet</servlet-class>
@@ -93,58 +115,13 @@
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
-	<servlet>
-		<servlet-name>axis</servlet-name>
-		<servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
-		<load-on-startup>4</load-on-startup>
-	</servlet>
-	<!-- axis webservice filter -->
-	<servlet-mapping>
-		<servlet-name>axis</servlet-name>
-		<url-pattern>/webservice/*</url-pattern>
-	</servlet-mapping>
-	<mime-mapping>
-		<extension>CAB</extension>
-		<mime-type>application/x-download</mime-type>
-	</mime-mapping>
 
 	<!-- 系统初始化servlet -->
 	<servlet>
 		<servlet-name>InitServlet</servlet-name>
 		<servlet-class>com.core.servlet.InitServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-
-	<servlet>
-		<servlet-name>ImageServlet</servlet-name>
-		<servlet-class>net.sf.jasperreports.j2ee.servlets.ImageServlet</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>ExportServlet</servlet-name>
-		<servlet-class>com.core.jasperreports.ExportServlet</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>PrintServlet</servlet-name>
-		<servlet-class>com.core.jasperreports.PrintServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ImageServlet</servlet-name>
-		<url-pattern>/jasperreports/commons/image</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>ExportServlet</servlet-name>
-		<url-pattern>/jasperreports/commons/export</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>PrintServlet</servlet-name>
-		<url-pattern>/jasperreports/commons/print</url-pattern>
-	</servlet-mapping>
-
+	</servlet>  
 	<servlet>
 		<servlet-name>pushlet</servlet-name>
 		<servlet-class>nl.justobjects.pushlet.servlet.Pushlet</servlet-class>
@@ -156,11 +133,8 @@
 		<servlet-name>pushlet</servlet-name>
 		<url-pattern>/frame/main/pushlet.srv</url-pattern>
 	</servlet-mapping>
-	<!-- <filter> <filter-name>ValidateUserLogin</filter-name> <filter-class>com.core.app.filter.LoginFilter</filter-class> 
-		<init-param> <param-name>redirectURL</param-name> <param-value>login.jsp</param-value> 
-		</init-param> </filter> <filter-mapping> <filter-name>ValidateUserLogin</filter-name> 
-		<url-pattern>/*</url-pattern> </filter-mapping> -->
-	 <session-config>  
-         <session-timeout>15</session-timeout>  
-    </session-config>  
+
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
 </web-app>

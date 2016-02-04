@@ -79,6 +79,11 @@
                 <comment>&#191;&#226;&#180;&#230;</comment>
             </column>
         </property>
+         <property name="isHot" type="java.lang.Integer">
+            <column name="is_hot">
+                <comment>&#191;&#226;&#180;&#230;</comment>
+            </column>
+        </property>
         <property name="brandId" type="java.lang.Integer">
             <column name="brand_id">
                 <comment>&#198;&#183;&#197;&#198;ID</comment>
@@ -95,16 +100,7 @@
                 <comment>&#202;&#199;&#183;&#241;&#201;&#207;&#188;&#220; 0:&#207;&#194;&#188;&#220; 1:&#201;&#207;&#188;&#220;</comment>
             </column>
         </property>
-        <property name="isShow" type="java.lang.Integer">
-            <column name="is_show">
-                <comment>&#202;&#199;&#183;&#241;&#193;&#208;&#179;&#246; 0:&#178;&#187;&#207;&#212;&#202;&#190; 1:&#207;&#212;&#202;&#190;</comment>
-            </column>
-        </property>
-        <property name="isTop" type="java.lang.Integer">
-            <column name="is_top">
-                <comment>&#202;&#199;&#183;&#241;&#214;&#195;&#182;&#165; 0:&#178;&#187; 1:&#202;&#199;</comment>
-            </column>
-        </property>
+       
         <property name="needCarry" type="java.lang.Integer">
             <column name="need_carry">
                 <comment>&#202;&#199;&#183;&#241;&#208;&#232;&#210;&#170;&#206;&#239;&#193;&#247; 0:&#183;&#241; 1:&#202;&#199;</comment>

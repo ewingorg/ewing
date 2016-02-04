@@ -10,8 +10,12 @@ var tableAction = {
 		$("a[name='edit_action']").bind("click", function() { 
 			var url = editUrl;
 			var id = $(this).attr("value");
-			if (id)
-				url += "?id=" + id;
+			if (id){ 
+				if(url.indexOf('?')>-1)
+					url += "&id=" + id;
+				else
+					url += "?id=" + id;
+			}
 			if (isPopEditForm)
 				common.popHtml(url, 'navModel');
 			else
@@ -85,7 +89,12 @@ var tableAction = {
 				showAction : true,
 				actionContent : '删除',
 				actionFn : function() {
-					var url = deleteUrl + '?selectItems=' + selectItems;
+					var url = deleteUrl;  
+					if(url.indexOf('?')>-1)
+						url += '&selectItems=' + selectItems;
+					else
+						url += '?selectItems=' + selectItems;
+					 
 					ajax.syncJsonRequest({
 						url : url,
 						success : function(data) {

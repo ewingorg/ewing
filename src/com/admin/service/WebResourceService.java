@@ -29,134 +29,137 @@ import com.core.jdbc.util.PageBean;
  */
 @Repository("webResourceService")
 public class WebResourceService {
-	@Resource
-	private BaseDao baseDao;
-	@Resource
-	private WebAttrConfService webAttrConfService;
-	@Resource
-	private ResCategoryService resCategoryService;
-	@Resource
-	private BaseModelService baseModelService;
+    @Resource
+    private BaseDao baseDao;
+    @Resource
+    private WebAttrConfService webAttrConfService;
+    @Resource
+    private ResCategoryService resCategoryService;
+    @Resource
+    private BaseModelService baseModelService;
 
-	public PageBean pageQueryResource(String condition, String order,
-			Integer pageSize, Integer page) {
-		PageBean pageBean = baseModelService.pageQuery(condition, order,
-				pageSize, page, WebResource.class);
-		List<WebResource> list = (List<WebResource>) pageBean.getResult();
+    /**
+     * 查找用户的资源
+     * 
+     * @param userId
+     * @param resourceId
+     * @return
+     */
+    public WebResource findOne(Integer userId, Integer resourceId) {
+        return baseDao.findOne("id=" + resourceId + " and user_id=" + userId, WebResource.class);
+    }
 
-		List<WebResourceDto> dtoList = new ArrayList<WebResourceDto>();
-		Map<Integer, WebCategory> categoryMap = resCategoryService
-				.findAllCategory();
-		for (WebResource webResource : list) {
-			WebResourceDto dto = new WebResourceDto();
-			try {
-				BeanUtils.copyProperties(dto, webResource);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-			WebCategory webCategory = categoryMap.get(webResource
-					.getCategoryId());
-			if (webCategory != null)
-				dto.setCategoryName(webCategory.getName());
-			dtoList.add(dto);
-		}
-		pageBean.setResult(dtoList);
-		return pageBean;
-	}
+    public PageBean pageQueryResource(Integer userId, String condition, String order,
+            Integer pageSize, Integer page) {
+        condition = condition + " and user_id=" + userId + " and iseff='" + IsEff.EFFECTIVE + "'";
+        PageBean pageBean = baseModelService.pageQuery(condition, order, pageSize, page,
+                WebResource.class);
+        List<WebResource> list = (List<WebResource>) pageBean.getResult();
 
-	/**
-	 * 获取资源属性值
-	 * 
-	 * @param resourceId
-	 *            资源id
-	 * @return
-	 */
-	public List<WebResourceAttr> getResourceAttrs(Integer resourceId) {
-		return baseDao.find("resource_id=" + resourceId + " and iseff='"
-				+ IsEff.EFFECTIVE + "' order by rank", WebResourceAttr.class);
-	}
+        List<WebResourceDto> dtoList = new ArrayList<WebResourceDto>();
+        Map<Integer, WebCategory> categoryMap = resCategoryService.findAllCategory(userId);
+        for (WebResource webResource : list) {
+            WebResourceDto dto = new WebResourceDto();
+            try {
+                BeanUtils.copyProperties(dto, webResource);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            WebCategory webCategory = categoryMap.get(webResource.getCategoryId());
+            if (webCategory != null)
+                dto.setCategoryName(webCategory.getName());
+            dtoList.add(dto);
+        }
+        pageBean.setResult(dtoList);
+        return pageBean;
+    }
 
-	/**
-	 * 获取资源属性
-	 * 
-	 * @param resourceId
-	 * @param attrKey
-	 * @return
-	 */
-	public WebResourceAttr getResourceAttr(Integer resourceId, String attrKey) {
-		return baseDao.findOne("resource_id=" + resourceId + " and attr_key='"
-				+ attrKey + "' and iseff='" + IsEff.EFFECTIVE
-				+ "' order by rank", WebResourceAttr.class);
-	}
+    /**
+     * 获取资源属性值
+     * 
+     * @param resourceId 资源id
+     * @return
+     */
+    public List<WebResourceAttr> getResourceAttrs(Integer resourceId) {
+        return baseDao.find("resource_id=" + resourceId + " and iseff='" + IsEff.EFFECTIVE
+                + "' order by rank", WebResourceAttr.class);
+    }
 
-	/**
-	 * 保存
-	 * 
-	 * @param resource
-	 * @param attrList
-	 * @return
-	 */
-	@Transactional(rollbackFor = Exception.class)
-	public boolean saveResource(WebResource resource,
-			List<WebResourceAttr> attrList) {
-		baseDao.save(resource);
-		Integer resourceId = resource.getId();
-		Integer templateId = resource.getTemplateId();
-		List<WebAttrConf> attrConfList = webAttrConfService
-				.getTemplateAttrs(templateId);
-		for (WebResourceAttr attr : attrList) {
-			for (WebAttrConf webAttrConf : attrConfList) {
-				if (webAttrConf.getAttrKey().equals(attr.getAttrKey())) {
-					attr.setAttrName(webAttrConf.getAttrName());
-					attr.setRank(webAttrConf.getSort());
-				}
-			}
-			attr.setIseff(IsEff.EFFECTIVE);
-			attr.setResourceId(resourceId);
-			baseDao.save(attr);
-		}
-		return true;
-	}
+    /**
+     * 获取资源属性
+     * 
+     * @param resourceId
+     * @param attrKey
+     * @return
+     */
+    public WebResourceAttr getResourceAttr(Integer resourceId, String attrKey) {
+        return baseDao.findOne("resource_id=" + resourceId + " and attr_key='" + attrKey
+                + "' and iseff='" + IsEff.EFFECTIVE + "' order by rank", WebResourceAttr.class);
+    }
 
-	@Transactional(rollbackFor = Exception.class)
-	public boolean editResource(WebResource resource,
-			List<WebResourceAttr> changeAttrList) {
-		baseDao.update(resource);
-		Integer resourceId = resource.getId();
-		Integer templateId = resource.getTemplateId();
-		List<WebAttrConf> attrConfList = webAttrConfService
-				.getTemplateAttrs(templateId);
-		for (WebResourceAttr attr : changeAttrList) {
-			for (WebAttrConf webAttrConf : attrConfList) {
-				if (webAttrConf.getAttrKey().equals(attr.getAttrKey())) {
-					attr.setAttrName(webAttrConf.getAttrName());
-					attr.setRank(webAttrConf.getSort());
-				}
-			}
-			attr.setIseff(IsEff.EFFECTIVE);
-			attr.setResourceId(resourceId);
-			WebResourceAttr oldAttr = getResourceAttr(resourceId,
-					attr.getAttrKey());
-			if (oldAttr != null) {
-				attr.setAttrValue(attr.getAttrValue());
-				baseDao.update(attr);
-			} else {
-				baseDao.save(attr);
-			}
+    /**
+     * 保存
+     * 
+     * @param resource
+     * @param attrList
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public boolean saveResource(WebResource resource, List<WebResourceAttr> attrList) {
+        baseDao.save(resource);
+        Integer resourceId = resource.getId();
+        Integer templateId = resource.getTemplateId();
+        List<WebAttrConf> attrConfList = webAttrConfService.getTemplateAttrs(templateId);
+        for (WebResourceAttr attr : attrList) {
+            for (WebAttrConf webAttrConf : attrConfList) {
+                if (webAttrConf.getAttrKey().equals(attr.getAttrKey())) {
+                    attr.setAttrName(webAttrConf.getAttrName());
+                    attr.setRank(webAttrConf.getSort());
+                }
+            }
+            attr.setIseff(IsEff.EFFECTIVE);
+            attr.setResourceId(resourceId);
+            baseDao.save(attr);
+        }
+        return true;
+    }
 
-		}
-		return true;
-	}
+    @Transactional(rollbackFor = Exception.class)
+    public boolean editResource(WebResource resource, List<WebResourceAttr> changeAttrList) {
+        baseDao.update(resource);
+        Integer resourceId = resource.getId();
+        Integer templateId = resource.getTemplateId();
+        List<WebAttrConf> attrConfList = webAttrConfService.getTemplateAttrs(templateId);
+        for (WebResourceAttr attr : changeAttrList) {
+            for (WebAttrConf webAttrConf : attrConfList) {
+                if (webAttrConf.getAttrKey().equals(attr.getAttrKey())) {
+                    attr.setAttrName(webAttrConf.getAttrName());
+                    attr.setRank(webAttrConf.getSort());
+                }
+            }
+            attr.setIseff(IsEff.EFFECTIVE);
+            attr.setResourceId(resourceId);
+            WebResourceAttr oldAttr = getResourceAttr(resourceId, attr.getAttrKey());
+            if (oldAttr != null) {
+                attr.setAttrValue(attr.getAttrValue());
+                baseDao.update(attr);
+            } else {
+                baseDao.save(attr);
+            }
 
-	/**
-	 * 查找单个资源信息
-	 * 
-	 * @param resourceId
-	 * @return
-	 */
-	public WebResource findById(Integer resourceId) {
-		return baseDao.findOne(resourceId, WebResource.class);
-	}
+        }
+        return true;
+    }
+
+    /**
+     * 查找单个资源信息
+     * 
+     * @param resourceId
+     * @return
+     */
+    public WebResource findById(Integer resourceId) {
+        return baseDao.findOne(resourceId, WebResource.class);
+    }
 }

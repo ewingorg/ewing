@@ -5,8 +5,7 @@
 <style>
  
 .resParamTable{
-	width: 50%;
-	border:1px dashed #DDDDDD;
+	width: 80%; 
 	margin: 20px;  
 	padding: 10px;
 }
@@ -37,13 +36,13 @@
 	<tbody>
 		<tr>
 			<td>
-				<table class="table">
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th width="40%">参数名称</th>
-							<th width="40%">参数值</th>
-							<th width="10%">排序</th>
-							<th width="10%">操作</th>
+							<th width="30%">参数名称</th>
+							<th width="30%">参数值</th>
+							<th width="20%">排序</th>
+							<th width="20%">操作</th>
 						</tr>
 					</thead>
 					<tbody class="param-tbody">
@@ -87,6 +86,7 @@
 
 <script>
 	jQuery(document).ready(function() { 
+		var resourceId = '${(resourceId)?if_exists}'; 
 		bindAddParam();
 		
 		$(".add-paramgroup").bind("click", function() { 
@@ -118,9 +118,12 @@
 					 dataList.push(dataArray);
 			      }
 			 }); 
-			 var dataListJson = JSON.stringify(dataList); 
+			 
+			 if(!checkSaveParam(dataList))
+					return;
+			 var dataListJson = JSON.stringify(dataList);  
 			 var param = "resparamList="+dataListJson;
-			     param += "&resourceId=7";
+			     param += "&resourceId="+resourceId;
 			 ajax.syncJsonRequest({
  				url : '${contextPath}/Admin-ResParam-saveParamList.action',
  				param : param,
@@ -142,7 +145,36 @@
 		
 	});
 	
-	
+	function checkSaveParam(dataList){  
+		 for(var i=0;i<dataList.length;i++){ 
+			 if(!dataList[i].paramName || !dataList[i].rank){ 
+				 common.alert({
+						content : '请正确填写完整的商品参数！',
+						closeFn : function() {  
+						}
+					});
+				return false;
+			 }
+		 }
+		
+		
+		 for(var i=0;i<dataList.length;i++){
+			 var count = 0;
+			 for(var j=0;j<dataList.length;j++){
+				 if(dataList[j].paramName ==dataList[i].paramName ){ 
+					 if(++count > 1){
+						 common.alert({
+	 							content : '请不要出现重复的商品参数名称['+dataList[j].paramName+']！',
+	 							closeFn : function() {  
+	 							}
+	 						});
+					 return false;
+					 }
+				 }
+			 }
+		 }
+		 return true;
+	}
 	
 	function  bindAddParam(){
 		$(".add-param").bind("click", function() {

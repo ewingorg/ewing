@@ -24,42 +24,53 @@ import com.core.jdbc.DaoException;
 @Repository("resCategoryService")
 public class ResCategoryService {
 
-	@Resource
-	private BaseDao baseDao;
+    @Resource
+    private BaseDao baseDao;
 
-	/**
-	 * 查询分类树结构
-	 * 
-	 * @param userInfo
-	 * @throws DaoException
-	 */
-	public List<ResCategoryTreeDto> queryCatagoryTree() throws DaoException {
-		List<WebCategory> categoryList = baseDao.find(" iseff='"
-				+ IsEff.EFFECTIVE + "' order by sort", WebCategory.class);
-		List<ResCategoryTreeDto> moduleList = new ArrayList<ResCategoryTreeDto>();
-		for (WebCategory category : categoryList) {
-			boolean expand = false;
-			if (category.getParentid() == -1)
-				expand = true;
-			ResCategoryTreeDto dto = new ResCategoryTreeDto(category.getId(),
-					category.getParentid(), category.getName(), expand, "");
-			moduleList.add(dto);
-		}
-		return moduleList;
-	}
+    /**
+     * 查找用户的資源分类
+     * 
+     * @param userId
+     * @param categoryId
+     * @return
+     */
+    public WebCategory findOne(Integer userId, Integer categoryId) {
+        return baseDao.findOne("id=" + categoryId + " and user_id=" + userId, WebCategory.class);
+    }
 
-	/**
-	 * 查找所有的分类
-	 * 
-	 * @return
-	 */
-	public Map<Integer, WebCategory> findAllCategory() {
-		List<WebCategory> list = baseDao.find(" iseff='" + IsEff.EFFECTIVE
-				+ "' order by sort", WebCategory.class);
-		Map<Integer, WebCategory> map = new HashMap<Integer, WebCategory>();
-		for (WebCategory webCategory : list) {
-			map.put(webCategory.getId(), webCategory);
-		}
-		return map;
-	}
+    /**
+     * 查询分类树结构
+     * 
+     * @param userInfo
+     * @throws DaoException
+     */
+    public List<ResCategoryTreeDto> queryCatagoryTree(Integer userId) throws DaoException {
+        List<WebCategory> categoryList = baseDao.find("user_id=" + userId + " and iseff='"
+                + IsEff.EFFECTIVE + "' order by sort", WebCategory.class);
+        List<ResCategoryTreeDto> moduleList = new ArrayList<ResCategoryTreeDto>();
+        for (WebCategory category : categoryList) {
+            boolean expand = false;
+            if (category.getParentid() == -1)
+                expand = true;
+            ResCategoryTreeDto dto = new ResCategoryTreeDto(category.getId(),
+                    category.getParentid(), category.getName(), expand, "");
+            moduleList.add(dto);
+        }
+        return moduleList;
+    }
+
+    /**
+     * 查找所有的分类
+     * 
+     * @return
+     */
+    public Map<Integer, WebCategory> findAllCategory(Integer userId) {
+        List<WebCategory> list = baseDao.find("user_id=" + userId + " and iseff='"
+                + IsEff.EFFECTIVE + "' order by sort", WebCategory.class);
+        Map<Integer, WebCategory> map = new HashMap<Integer, WebCategory>();
+        for (WebCategory webCategory : list) {
+            map.put(webCategory.getId(), webCategory);
+        }
+        return map;
+    }
 }

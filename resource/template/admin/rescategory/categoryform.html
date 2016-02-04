@@ -22,14 +22,14 @@
 			<label class="control-label">父节点<span class="required">*</span></label>
 				<div class="controls">
 					<input type="hidden" name="parentid" id="parentid"  value="${(bean.parentid)?if_exists}" />
-					<input type="text" class="span3 m-wrap" value="${(bean.parentName)?if_exists}" readonly="readonly"/>
+					<input type="text" class="m-wrap medium" value="${(bean.parentName)?if_exists}" readonly="readonly"/>
 				</div>
 			</div> 
 			<label class="control-label">分类名称<span class="required">*</span></label>
 				<div class="controls">
 					<input type="text" name="name" id="name" require="true"
 						datatype="require"  msg="分类名称不能为空"
-						class="span3 m-wrap" value="${(bean.name)?if_exists}" />
+						class="m-wrap medium" value="${(bean.name)?if_exists}" />
 				</div>
 			</div> 
 			<div class="control-group">
@@ -37,13 +37,13 @@
 				<div class="controls">
 					<input type="text" name="level" id="level" require="true"
 						datatype="require|limit|number" min="1" max="2" msg="key不能为空"
-						class="span3 m-wrap" value="${(bean.level)?if_exists}" />
+						class="m-wrap medium" value="${(bean.level)?if_exists}" />
 				</div>
 			</div> 
 		    <div class="control-group">
-				<label class="control-label">排位&nbsp;&nbsp;</label>
+				<label class="control-label">排位</label>
 				<div class="controls">
-					<input name="sort" id="sort" type="text" class="span2 m-wrap"
+					<input name="sort" id="sort" type="text" class="m-wrap medium"
 						value="${(bean.sort)?if_exists}" require="true" datatype="require"
 						msg="排位不能为空" />
 				</div>

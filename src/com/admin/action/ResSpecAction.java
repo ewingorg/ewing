@@ -42,6 +42,7 @@ public class ResSpecAction extends BaseAction {
 			List<WebResourceSpecGroup> resSpecGroupList = webResourceSpecService
 					.getConfigureSpecs(resourceId);
 			dataModel.put("resSpecGroupList", resSpecGroupList);
+			dataModel.put("resourceId", resourceId);
 			render(LIST_PAGE, dataModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -60,9 +61,7 @@ public class ResSpecAction extends BaseAction {
 					}.getType());
 
 			Integer resourceId = Integer.valueOf(request
-					.getParameter("resourceId"));
-			if (resSpecList.isEmpty())
-				throw new Exception("资源规格为空！");
+					.getParameter("resourceId")); 
 			webResourceSpecService.saveSpecList(resourceId, resSpecList);
 			responseData = ResponseUtils.success("保存成功！");
 		} catch (Exception e) {

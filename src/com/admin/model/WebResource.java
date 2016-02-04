@@ -9,280 +9,272 @@ import java.util.Date;
  */
 public class WebResource implements java.io.Serializable {
 
-	private Integer id;
-	private Integer userId;
-	private String name;
-	private Integer templateId;
-	private Integer categoryId;
-	private String tagId;
-	private String imageUrl;
-	private String shortDesc;
-	private String longDesc;
-	private Float cost;
-	private Float price;
-	private String unit;
-	private String weight;
-	private String giftScore;
-	private Integer stockNum;
-	private Integer brandId;
-	private Integer promotionType;
-	private Integer isOnline;
-	private Integer isShow;
-	private Integer isTop;
-	private Integer needCarry;
-	private String remark;
-	private String searchKeyword;
-	private String pageTitle;
-	private String pageKeyword;
-	private String pageDesc;
-	private String iseff;
-	private Date createTime;
-	private Date lastUpdate;
+    private Integer id;
+    private Integer userId;
+    private String name;
+    private Integer templateId;
+    private Integer categoryId;
+    private String tagId;
+    private String imageUrl;
+    private String shortDesc;
+    private String longDesc; 
+    private Float cost;
+    private Float price;
+    private String unit;
+    private String weight;
+    private String giftScore;
+    private Integer stockNum;
+    private Integer brandId;
+    private Integer promotionType;
+    private Integer isOnline;  
+    private Integer isHot;
+    private Integer needCarry;
+    private String remark;
+    private String searchKeyword;
+    private String pageTitle;
+    private String pageKeyword;
+    private String pageDesc;
+    private String iseff;
+    private Date createTime;
+    private Date lastUpdate;
 
-	public WebResource() {
-	}
+    public WebResource() {
+    }
 
-	public WebResource(String name, String imageUrl, String shortDesc,
-			String longDesc, String iseff, Date createTime, Date lastUpdate) {
-		this.name = name;
-		this.imageUrl = imageUrl;
-		this.shortDesc = shortDesc;
-		this.longDesc = longDesc;
-		this.iseff = iseff;
-		this.createTime = createTime;
-		this.lastUpdate = lastUpdate;
-	}
+    public WebResource(String name, String imageUrl, String shortDesc, String longDesc,
+            String iseff, Date createTime, Date lastUpdate) {
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.shortDesc = shortDesc;
+        this.longDesc = longDesc;
+        this.iseff = iseff;
+        this.createTime = createTime;
+        this.lastUpdate = lastUpdate;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public Integer getIsHot() {
+        return isHot;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setIsHot(Integer isHot) {
+        this.isHot = isHot;
+    }
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getTemplateId() {
-		return this.templateId;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setTemplateId(Integer templateId) {
-		this.templateId = templateId;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Integer getCategoryId() {
-		return this.categoryId;
-	}
+    public Integer getTemplateId() {
+        return this.templateId;
+    }
 
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
+    public void setTemplateId(Integer templateId) {
+        this.templateId = templateId;
+    }
 
-	public String getTagId() {
-		return this.tagId;
-	}
+    public Integer getCategoryId() {
+        return this.categoryId;
+    }
 
-	public void setTagId(String tagId) {
-		this.tagId = tagId;
-	}
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
-	public String getImageUrl() {
-		return this.imageUrl;
-	}
+    public String getTagId() {
+        return this.tagId;
+    }
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
+    public void setTagId(String tagId) {
+        this.tagId = tagId;
+    }
 
-	public String getShortDesc() {
-		return this.shortDesc;
-	}
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
 
-	public void setShortDesc(String shortDesc) {
-		this.shortDesc = shortDesc;
-	}
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-	public String getLongDesc() {
-		return this.longDesc;
-	}
+    public String getShortDesc() {
+        return this.shortDesc;
+    }
 
-	public void setLongDesc(String longDesc) {
-		this.longDesc = longDesc;
-	}
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
+    }
 
-	public Float getCost() {
-		return cost;
-	}
+    public String getLongDesc() {
+        return this.longDesc;
+    }
 
-	public void setCost(Float cost) {
-		this.cost = cost;
-	}
+    public void setLongDesc(String longDesc) {
+        this.longDesc = longDesc;
+    }
 
-	public Float getPrice() {
-		return price;
-	}
+    public Float getCost() {
+        return cost;
+    }
 
-	public void setPrice(Float price) {
-		this.price = price;
-	}
+    public void setCost(Float cost) {
+        this.cost = cost;
+    }
 
-	public String getUnit() {
-		return this.unit;
-	}
+    public Float getPrice() {
+        return price;
+    }
 
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
+    public void setPrice(Float price) {
+        this.price = price;
+    }
 
-	public String getWeight() {
-		return this.weight;
-	}
+    public String getUnit() {
+        return this.unit;
+    }
 
-	public void setWeight(String weight) {
-		this.weight = weight;
-	}
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
-	public String getGiftScore() {
-		return this.giftScore;
-	}
+    public String getWeight() {
+        return this.weight;
+    }
 
-	public void setGiftScore(String giftScore) {
-		this.giftScore = giftScore;
-	}
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
 
-	public Integer getStockNum() {
-		return this.stockNum;
-	}
+    public String getGiftScore() {
+        return this.giftScore;
+    }
 
-	public void setStockNum(Integer stockNum) {
-		this.stockNum = stockNum;
-	}
+    public void setGiftScore(String giftScore) {
+        this.giftScore = giftScore;
+    }
 
-	public Integer getBrandId() {
-		return this.brandId;
-	}
+    public Integer getStockNum() {
+        return this.stockNum;
+    }
 
-	public void setBrandId(Integer brandId) {
-		this.brandId = brandId;
-	}
+    public void setStockNum(Integer stockNum) {
+        this.stockNum = stockNum;
+    }
 
-	public Integer getPromotionType() {
-		return this.promotionType;
-	}
+    public Integer getBrandId() {
+        return this.brandId;
+    }
 
-	public void setPromotionType(Integer promotionType) {
-		this.promotionType = promotionType;
-	}
+    public void setBrandId(Integer brandId) {
+        this.brandId = brandId;
+    }
 
-	public Integer getIsOnline() {
-		return this.isOnline;
-	}
+    public Integer getPromotionType() {
+        return this.promotionType;
+    }
 
-	public void setIsOnline(Integer isOnline) {
-		this.isOnline = isOnline;
-	}
+    public void setPromotionType(Integer promotionType) {
+        this.promotionType = promotionType;
+    }
 
-	public Integer getIsShow() {
-		return this.isShow;
-	}
+    public Integer getIsOnline() {
+        return this.isOnline;
+    }
 
-	public void setIsShow(Integer isShow) {
-		this.isShow = isShow;
-	}
+    public void setIsOnline(Integer isOnline) {
+        this.isOnline = isOnline;
+    }
+ 
 
-	public Integer getIsTop() {
-		return this.isTop;
-	}
+    public Integer getNeedCarry() {
+        return this.needCarry;
+    }
 
-	public void setIsTop(Integer isTop) {
-		this.isTop = isTop;
-	}
+    public void setNeedCarry(Integer needCarry) {
+        this.needCarry = needCarry;
+    }
 
-	public Integer getNeedCarry() {
-		return this.needCarry;
-	}
+    public String getRemark() {
+        return this.remark;
+    }
 
-	public void setNeedCarry(Integer needCarry) {
-		this.needCarry = needCarry;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public String getRemark() {
-		return this.remark;
-	}
+    public String getSearchKeyword() {
+        return this.searchKeyword;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public void setSearchKeyword(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
+    }
 
-	public String getSearchKeyword() {
-		return this.searchKeyword;
-	}
+    public String getPageTitle() {
+        return this.pageTitle;
+    }
 
-	public void setSearchKeyword(String searchKeyword) {
-		this.searchKeyword = searchKeyword;
-	}
+    public void setPageTitle(String pageTitle) {
+        this.pageTitle = pageTitle;
+    }
 
-	public String getPageTitle() {
-		return this.pageTitle;
-	}
+    public String getPageKeyword() {
+        return this.pageKeyword;
+    }
 
-	public void setPageTitle(String pageTitle) {
-		this.pageTitle = pageTitle;
-	}
+    public void setPageKeyword(String pageKeyword) {
+        this.pageKeyword = pageKeyword;
+    }
 
-	public String getPageKeyword() {
-		return this.pageKeyword;
-	}
+    public String getPageDesc() {
+        return this.pageDesc;
+    }
 
-	public void setPageKeyword(String pageKeyword) {
-		this.pageKeyword = pageKeyword;
-	}
+    public void setPageDesc(String pageDesc) {
+        this.pageDesc = pageDesc;
+    }
 
-	public String getPageDesc() {
-		return this.pageDesc;
-	}
+    public String getIseff() {
+        return this.iseff;
+    }
 
-	public void setPageDesc(String pageDesc) {
-		this.pageDesc = pageDesc;
-	}
+    public void setIseff(String iseff) {
+        this.iseff = iseff;
+    }
 
-	public String getIseff() {
-		return this.iseff;
-	}
+    public Date getCreateTime() {
+        return this.createTime;
+    }
 
-	public void setIseff(String iseff) {
-		this.iseff = iseff;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public Date getCreateTime() {
-		return this.createTime;
-	}
+    public Date getLastUpdate() {
+        return this.lastUpdate;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Date getLastUpdate() {
-		return this.lastUpdate;
-	}
-
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 
 }

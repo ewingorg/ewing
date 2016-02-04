@@ -13,12 +13,12 @@
 				<!-- BEGIN FORM--> 
 					<input type="hidden" name="id" value="${(webResource.id)?if_exists}" />
 					<input type="hidden" name="resourceId" value="${(webResource.id)?if_exists}" />
-					<div class="control-group">
+					<!-- <div class="control-group">
 						<label class="control-label">资源模板<span class="required">*</span></label>
 						<div class="controls"><@select paramCode=templateType
 							value=(webResource.templateId)?if_exists item=' name="templateId" require="true"
 							datatype="require" msg="资源模板不能为空"'/></div>
-					</div> 
+					</div>  -->
 					<div class="control-group">
 						<label class="control-label">分类<span class="required">*</span></label>
 						<div class="controls">
@@ -26,7 +26,7 @@
 								value="${(webResource.categoryId)?if_exists}" require="true"
 						 		datatype="require" msg="分类不能为空"/> 
 							<input class="m-wrap medium" name="categoryName" id="categoryName"  readonly="readonly"
-								value="${(webResource.categoryId)?if_exists}"  type="text"/> 
+								value="${(categoryName)?if_exists}"  type="text"/> 
 								<button type="button" id="chooseCategoryBtn" class="btn" >选择分类</button>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 						<label class="control-label">成本价</label>
 						<div class="controls">
 							<input class="m-wrap medium" name="cost" type="text"  
-								value="${(webResource.cost)?if_exists}" />
+								value="${(webResource.cost?string('0.##'))?if_exists}" />
 								
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 						<label class="control-label">价格<span class="required">*</span></label>
 						<div class="controls">
 							<input class="m-wrap medium" name="price" 
-								value="${(webResource.price)?if_exists}" require="true" datatype="require|limit" type="text" min="1"
+								value="${(webResource.price?string('0.##'))?if_exists}" require="true" datatype="require|limit" type="text" min="1"
 								max="10" msg="价格不能为空|价格不能超过10个字符"/>
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 						<div class="controls">
 							<input class="m-wrap medium" name="stockNum"   require="true" datatype="require|limit" type="text" min="1"
 								max="4" msg="库存不能为空|库存不能超过10个字符"
-								value="${(webResource.stockNum)?if_exists}" />
+								value="${(webResource.stockNum?string('0'))?if_exists}" />
 						</div>
 					</div>
 					
@@ -136,14 +136,14 @@
 							require="true" datatype="require" msg="是否有效不能为空"'/></div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">是否置顶<span class="required">*</span></label>
-						<div class="controls"><@select paramCode=iseffCode
-							value=(webResource.isTop)?if_exists item=' name="isTop"
-							datatype="require" msg="是否置顶不能为空"'/></div>
+						<label class="control-label">是否热门<span class="required">*</span></label>
+						<div class="controls"><@select paramCode=resHotType
+							value=(webResource.isHot)?if_exists item=' name="isHot"
+							datatype="require" msg="是否热门不能为空"'/></div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">是否需要物流<span class="required">*</span></label>
-						<div class="controls"><@select paramCode=iseffCode
+						<div class="controls"><@select paramCode=needType
 							value=(webResource.needCarry)?if_exists item=' name="needCarry"
 							require="true" datatype="require" msg="是否需要物流不能为空"'/></div>
 					</div>
@@ -207,11 +207,7 @@
 		tableAction.initSaveAction({
 			formId : 'resAddForm',
 			saveUrl : '${contextPath}/Admin-Res-save.action',
-			saveBtnId : 'res_save_btn', 
-			beforeSaveFn : function() {
-				var editor = CKEDITOR.instances.longDescEdit;
-				$("#longDesc").val(editor.getData());
-			},
+			saveBtnId : 'res_save_btn',  
 			afterSaveFn : function(data){  
 				var  editUrl = '${contextPath}/Admin-Res-showEditForm.action?id='+data.result.id;
 				mainFrame.addContainer(editUrl);

@@ -40,7 +40,7 @@
 
 <script>
 	jQuery(document).ready(function() {
-
+		var resourceId = '${(resourceId)?if_exists}'; 
 		$("#resprice_save_btn").bind("click", function() {
 			var dataList = new Array();
 			$("table[name='resPriceTable'] tr:gt(0)").each(function() {
@@ -59,17 +59,7 @@
 				var costObj = $(this).find("input[name='cost']")[0];
 				var priceObj = $(this).find("input[name='price']")[0];
 				var stockNumObj = $(this).find("input[name='stockNum']")[0];
-				var rankObj = $(this).find("input[name='rank']")[0];
-			 	if(!$(costObj).val() ||  !$(priceObj).val() || !$(stockNumObj).val() || !$(rankObj).val()){
-			 	 
-			 		common.alert({
-						content : '请正确填写完整价格设置！',
-						closeFn : function() { 
-							 
-						}
-					});
-			 		return false;
-			 	}
+				var rankObj = $(this).find("input[name='rank']")[0]; 
 				dataArray["specIds"] = specIds;
 				dataArray["cost"] = $(costObj).val();
 				dataArray["price"] = $(priceObj).val();
@@ -77,11 +67,13 @@
 				dataArray["rank"] = $(rankObj).val();
 				dataList.push(dataArray);
 
-			});
-			console.log(dataList);
+			}); 
+			if(!checkSavePrice(dataList)){
+				return;
+			}
 			var dataListJson = JSON.stringify(dataList);
 			var param = "resPriceList=" + dataListJson;
-			param += "&resourceId=8";
+			param += "&resourceId="+resourceId;
 			ajax.syncJsonRequest({
 				url : '${contextPath}/Admin-ResPrice-savePrice.action',
 				param : param,
@@ -102,5 +94,22 @@
 		});
 
 	});
+	
+	function checkSavePrice(dataList){
+		 for(var i=0;i<dataList.length;i++){  
+			 if(!dataList[i].cost
+					 || !dataList[i].price 
+					 ||  !dataList[i].stockNum 
+					 ||  !dataList[i].rank){ 
+				 common.alert({
+						content : '请正确填写完整的商品价格！',
+						closeFn : function() {  
+						}
+					});
+				return false;
+			 }
+		 }
+		 return true;
+	}
 </script>
 
