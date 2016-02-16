@@ -1,4 +1,4 @@
-package com.ewing.core.app.filter;
+package com.ewing.web.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,16 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.ewing.busi.system.service.SysLogTraceService;
 import com.ewing.core.app.bean.UserInfo;
 import com.ewing.core.app.control.SessionControl;
 import com.ewing.core.app.control.SessionException;
-import com.ewing.core.factory.SpringCtx;
-import com.ewing.core.tool.trace.SysLogTraceThread;
-import com.ewing.core.tool.trace.SysTrace;
 
-public class LoginFilter implements Filter {
-    private static Logger logger = Logger.getLogger(LoginFilter.class);
+public class SellerLoginFilter implements Filter {
+    private static Logger logger = Logger.getLogger(SellerLoginFilter.class);
     private FilterConfig filterConfig = null;
     private String toLogin = null;
     private List<String> ignoreUrl; 

@@ -27,18 +27,18 @@
 	
 	<filter>
 		<filter-name>ValidateUserLogin</filter-name>
-		<filter-class>com.ewing.core.app.filter.LoginFilter</filter-class> 
+		<filter-class>com.ewing.web.filter.SellerLoginFilter</filter-class> 
 		<init-param>
 			<param-name>toLogin</param-name>
-			<param-value>Admin-Login-toLogin.action</param-value>
+			<param-value>Admin-SellerLogin-toLogin.action</param-value>
 		</init-param>
 		<init-param>
 			<param-name>userLogin</param-name>
-			<param-value>Admin-Login-userLogin.action</param-value>
+			<param-value>Admin-SellerLogin-userLogin.action</param-value>
 		</init-param>
 		<init-param>
 			<param-name>userLogOut</param-name>
-			<param-value>Admin-Login-userLogOut.action</param-value>
+			<param-value>Admin-SellerLogin-userLogOut.action</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

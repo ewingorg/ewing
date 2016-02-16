@@ -11,13 +11,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nl.justobjects.pushlet.util.Sys;
-
-import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
 public class UrlContainerFilter implements Filter {
-	private static Logger logger = Logger.getLogger(LoginFilter.class);
+	private static Logger logger = Logger.getLogger(UrlContainerFilter.class);
 	private FilterConfig filterConfig = null;
 	private String redirectURL = null;
 

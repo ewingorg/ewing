@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-2-16 11:51:44 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ewing.busi.seller.model.SellerShop" table="seller_shop" catalog="ewing">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="userId" type="string">
+            <column name="user_id" length="50" not-null="true">
+                <comment>&#201;&#204;&#181;&#234;&#181;&#196;&#180;&#180;&#189;&#168;&#213;&#223;ID</comment>
+            </column>
+        </property>
+        <property name="shopName" type="string">
+            <column name="shop_name" length="200" not-null="true">
+                <comment>&#201;&#204;&#181;&#234;&#195;&#251;&#179;&#198;</comment>
+            </column>
+        </property>
+        <property name="shopIcon" type="string">
+            <column name="shop_icon" length="200" not-null="true">
+                <comment>&#201;&#204;&#181;&#234;&#195;&#251;&#179;&#198;</comment>
+            </column>
+        </property>
+        <property name="shopDesc" type="string">
+            <column name="shop_desc" length="200" not-null="true">
+                <comment>&#201;&#204;&#181;&#234;&#195;&#232;&#202;&#246;</comment>
+            </column>
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="100" />
+        </property>
+        <property name="addr" type="string">
+            <column name="addr" length="200" />
+        </property>
+        <property name="iseff" type="java.lang.Character">
+            <column name="iseff" length="1" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

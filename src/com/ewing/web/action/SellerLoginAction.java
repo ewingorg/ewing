@@ -9,8 +9,8 @@ import javax.annotation.Resource;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
-import com.ewing.busi.system.model.SysUser;
-import com.ewing.busi.system.service.SysUserService;
+import com.ewing.busi.seller.model.Seller;
+import com.ewing.busi.seller.service.SellerService;
 import com.ewing.core.app.action.base.ActionException;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;
@@ -23,10 +23,10 @@ import com.ewing.core.servlet.CaptchaServlet;
  * 系统登陆
  * 
  */
-public class LoginAction extends BaseAction {
-    private static Logger logger = Logger.getLogger(LoginAction.class);
+public class SellerLoginAction extends BaseAction {
+    private static Logger logger = Logger.getLogger(SellerLoginAction.class);
     @Resource
-    private SysUserService sysUserService;
+    private SellerService sellerService;
     private static final String LOGIN_PAGE = "/admin/login.html";
    
     /**
@@ -52,11 +52,11 @@ public class LoginAction extends BaseAction {
             if (!CaptchaServlet.validate(request, checkCode)) {
                 responseData = ResponseUtils.fail("登陆失败！请输入正确的验证码");
             } else {
-                List<SysUser> userList = sysUserService.findUser(userName);
+                List<Seller> userList = sellerService.findUser(userName);
                 if (userList.isEmpty()) {
                     responseData = ResponseUtils.fail("登陆失败！不存在该用户名称");
                 } else {
-                    SysUser sysUser = userList.get(0);
+                    Seller sysUser = userList.get(0);
                     if (sysUser.getPassword().equals(password.trim())) {
                         responseData = ResponseUtils.success("登陆成功！");
                         UserInfo userInfo = new UserInfo();
