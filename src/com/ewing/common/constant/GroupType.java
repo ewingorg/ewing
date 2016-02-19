@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ewing.constant;
+package com.ewing.common.constant;
 
 /**
  * 組分类，对应Web_group.type

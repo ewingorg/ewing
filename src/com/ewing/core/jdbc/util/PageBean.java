@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ewing.util.PageUtil;
+
 public class PageBean<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static int DEFAULT_PAGE_SIZE = 30;
+    private static int DEFAULT_PAGE_SIZE = PageUtil.DEFAULT_PAGE_SIZE;
     private int pageSize = DEFAULT_PAGE_SIZE;
-    private long start;
+    private Integer page;
     private List<T> result;
     private int totalPageCount;
     private String pageUrl;
@@ -22,10 +24,10 @@ public class PageBean<T> implements Serializable {
         this.pageUrl = pageUrl;
     }
 
-    public PageBean(long start, int totalCount, int pageSize, List<T> data) {
-        this.start = start;
+    public PageBean(Integer page, Integer totalCount, Integer pageSize, List<T> data) {
+        this.page = page == null ? 1 : page;
         this.totalPageCount = totalCount;
-        this.pageSize = pageSize;
+        this.pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : pageSize;
         this.result = data;
     }
 
@@ -56,8 +58,12 @@ public class PageBean<T> implements Serializable {
         this.result = data;
     }
 
+    public Integer getPage() {
+        return page;
+    }
+
     public long getCurrentPageNo() {
-        return this.start / this.pageSize + 1L;
+        return this.page / this.pageSize + 1L;
     }
 
     public boolean hasPreviousPage() {

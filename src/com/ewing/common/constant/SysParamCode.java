@@ -1,4 +1,4 @@
-package com.ewing.constant;
+package com.ewing.common.constant;
 
 /**
  * @author tanson lam

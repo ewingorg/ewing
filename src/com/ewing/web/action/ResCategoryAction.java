@@ -14,7 +14,7 @@ import com.ewing.busi.category.model.WebCategory;
 import com.ewing.busi.category.service.ResCategoryService;
 import com.ewing.busi.resource.model.WebResource;
 import com.ewing.busi.system.model.SysParam;
-import com.ewing.constant.SysParamCode;
+import com.ewing.common.constant.SysParamCode;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;
 import com.ewing.core.app.action.base.ResponseUtils;

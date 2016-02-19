@@ -1,0 +1,143 @@
+<#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+<style>
+.ordertd {
+	width: 100%;
+}
+
+.ordertd_left {
+	float: left;
+	width: 50%;
+}
+
+.ordertd_right {
+	float: right;
+	width: 40%;
+	margin-right: 20px;
+}
+
+.ordertdclear {
+	clear: both
+}
+</style>
+
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN EXTRAS PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i> 订单信息
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="control-group">
+					<label class="control-label">订单编号:${orderComplex.orderInfo.bizId}</label>
+				</div>
+				<div class="control-group">
+					<label class="control-label">下单时间:${orderComplex.orderInfo.createTime}</label>
+				</div>
+				<div class="control-group">
+					<label class="control-label">订单状态:${orderComplex.orderInfo.getOrderStatusTanslate()}</label>
+				</div>
+				<div class="control-group">
+					<label class="control-label">订单备注:无</label>
+				</div>
+			</div>
+
+		</div>
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>买家信息
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="control-group">
+					<label class="control-label">客户名称：${orderComplex.orderInfo.customerName}</label>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">联系电话：${orderComplex.orderInfo.customerPhone}</label>
+				</div>
+			</div>
+		</div>
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>收货信息
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="control-group">
+					<label class="control-label">收货人：${orderComplex.orderInfo.receiver}</label>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">联系电话：${orderComplex.orderInfo.phone}</label>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">收货地址：${orderComplex.orderInfo.province}${orderComplex.orderInfo.city}${orderComplex.orderInfo.region}${orderComplex.orderInfo.address}</label>
+				</div>
+
+			</div>
+		</div>
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>订单详情
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<table class="table  table-bordered" id="orderTable"
+					style="width:100%;">
+					<thead>
+						<tr>
+							<th width="30%">商品</th>
+							<th>价格(元)</th>
+							<th>数量</th>
+							<th>总价(元)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#list orderComplex.orderDetailList as orderDetail >
+						<tr>
+							<td>
+								<div class="ordertd">
+									<div class="ordertd_left">
+										<img
+											src="${contextPath}${(orderDetail.resourceImageUrl)?if_exists}"
+											width="80%" height="80%" />
+									</div>
+									<div class="ordertd_right">
+										名称：${orderDetail.resourceName}</div>
+									<div class="ordertdclear"></div>
+									<!-- html注释：清除float产生浮动 -->
+								</div>
+							</td>
+							<td>${orderDetail.unitPrice}</td>
+							<td>${orderDetail.itemCount}</td>
+							<td>${orderDetail.totalPrice}</td> 
+						</tr>
+						</#list>
+					</tbody>
+				</table>
+				<div class="control-group" >
+					<label class="control-label">商品总费用：${orderComplex.orderInfo.productPrice}</label>
+				</div>
+				<div class="control-group">
+					<label class="control-label">运费：${orderComplex.orderInfo.cargoPrice}</label>
+				</div>
+				<div class="control-group">
+					<label class="control-label">订单总价：${orderComplex.orderInfo.totalPrice}</label>
+				</div>
+			</div>
+
+		</div>
+		<!-- END EXTRAS PORTLET-->
+	</div>
+</div>
+
+

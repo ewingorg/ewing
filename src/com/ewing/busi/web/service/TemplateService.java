@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ewing.busi.system.model.SysParam;
 import com.ewing.busi.web.model.WebTemplate;
-import com.ewing.constant.TemplateType;
+import com.ewing.common.constant.TemplateType;
 import com.ewing.core.app.constant.IsEff;
 import com.ewing.core.app.service.CacheModelService;
 import com.ewing.core.jdbc.BaseDao;

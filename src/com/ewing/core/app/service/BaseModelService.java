@@ -58,8 +58,8 @@ public class BaseModelService {
         return (T) baseDao.queryObject(sql, queryClass);
     }
 
-    public List noMappedObjectQuery(String sql) throws DaoException {
-        return baseDao.noMappedObjectQuery(sql);
+    public <T> List<T> noMappedObjectQuery(String sql, Class<T> beanClass) {
+        return baseDao.noMappedObjectQuery(sql,beanClass);
     }
 
     public String buildSQLWhere(Map map) {

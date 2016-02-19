@@ -13,7 +13,7 @@ import com.ewing.busi.resource.service.WebResourceService;
 import com.ewing.busi.system.model.SysParam;
 import com.ewing.busi.web.model.WebAttrConf;
 import com.ewing.busi.web.service.WebAttrConfService;
-import com.ewing.constant.AttrConstant;
+import com.ewing.common.constant.AttrConstant;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.util.StringUtil;
 

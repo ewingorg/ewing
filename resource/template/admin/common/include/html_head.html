@@ -39,9 +39,17 @@
 <!-- END GLOBAL MANDATORY STYLES -->
 
 <!-- BEGIN PAGE LEVEL STYLES -->
+
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/admin/media/css/datepicker.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/admin/media/css/timepicker.css" /> 
+
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/admin/media/css/datetimepicker.css" /> 
+
 <link href="${contextPath}/admin/media/css/jquery.gritter.css"
-	rel="stylesheet" type="text/css" />
-<link href="${contextPath}/admin/media/css/daterangepicker.css"
 	rel="stylesheet" type="text/css" />
 <link href="${contextPath}/admin/media/css/fullcalendar.css"
 	rel="stylesheet" type="text/css" />
@@ -110,6 +118,9 @@
 <script src="${contextPath}/admin/media/js/daterangepicker.js"
 	type="text/javascript"></script>
 
+<script src="${contextPath}/admin/media/js/bootstrap-datepicker.js"
+	type="text/javascript"></script>
+
 <script src="${contextPath}/admin/media/js/jquery.gritter.js"
 	type="text/javascript"></script>
 
@@ -163,7 +174,7 @@
 <script type="text/javascript"
 	src="${contextPath}/admin/media/js/DT_bootstrap.js"></script>
 <script>
-	jQuery(document).ready(function() { 
+	jQuery(document).ready(function() {
 		App.init(); // initlayout and core plugins
 
 		// Index.init();

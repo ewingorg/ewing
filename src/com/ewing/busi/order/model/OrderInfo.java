@@ -24,50 +24,29 @@ public class OrderInfo implements java.io.Serializable {
     private String region;
     private String address;
     private String phone;
-    private char iseff;
+    private String cargoName;
+    private String cargoNumber;
+    private String iseff;
     private Date createTime;
     private Date lastUpdate;
 
     public OrderInfo() {
     }
 
-    public OrderInfo(int customerId, int userId, String bizId, float productPrice,
-            float cargoPrice, float totalPrice, char status, String phone, char iseff,
-            Date createTime, Date lastUpdate) {
-        this.customerId = customerId;
-        this.userId = userId;
-        this.bizId = bizId;
-        this.productPrice = productPrice;
-        this.cargoPrice = cargoPrice;
-        this.totalPrice = totalPrice;
-        this.status = status;
-        this.phone = phone;
-        this.iseff = iseff;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
+    public String getCargoName() {
+        return cargoName;
     }
 
-    public OrderInfo(int customerId, int userId, String bizId, float productPrice,
-            float cargoPrice, float totalPrice, char status, String receiver, String postCode,
-            String province, String city, String region, String address, String phone, char iseff,
-            Date createTime, Date lastUpdate) {
-        this.customerId = customerId;
-        this.userId = userId;
-        this.bizId = bizId;
-        this.productPrice = productPrice;
-        this.cargoPrice = cargoPrice;
-        this.totalPrice = totalPrice;
-        this.status = status;
-        this.receiver = receiver;
-        this.postCode = postCode;
-        this.province = province;
-        this.city = city;
-        this.region = region;
-        this.address = address;
-        this.phone = phone;
-        this.iseff = iseff;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
+    public void setCargoName(String cargoName) {
+        this.cargoName = cargoName;
+    }
+
+    public String getCargoNumber() {
+        return cargoNumber;
+    }
+
+    public void setCargoNumber(String cargoNumber) {
+        this.cargoNumber = cargoNumber;
     }
 
     public Integer getId() {
@@ -190,11 +169,11 @@ public class OrderInfo implements java.io.Serializable {
         this.phone = phone;
     }
 
-    public char getIseff() {
+    public String getIseff() {
         return this.iseff;
     }
 
-    public void setIseff(char iseff) {
+    public void setIseff(String iseff) {
         this.iseff = iseff;
     }
 

@@ -1,0 +1,68 @@
+<#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+<script src="${contextPath}/ckeditor/ckeditor.js"></script>
+<script src="${contextPath}/ckeditor/adapters/jquery.js"></script>
+<style>
+#editable {
+	padding: 10px;
+	float: left;
+}
+</style>
+
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN EXTRAS PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>订单
+				</div>
+			</div>
+			<div class="portlet-body form">  
+			 	<div class="tabbable tabbable-custom boxless">
+
+							<ul class="nav nav-tabs" id="orderTab">
+
+								<li class="active"><a href="#tab_1" data-toggle="tab" id="orderWaitSendTab" data-value="1">待发货</a></li>
+
+								<li><a class="" href="#tab_2"   id="orderWaitPayedTab" data-value="0">待付款</a></li>
+
+							 	<li><a class="" href="#tab_3"   id="orderSendedTab"  data-value="2">已发货</a></li>
+								 
+								<li><a class="" href="#tab_4"   id="orderRefundTab"  data-value="3">退款中</a></li>
+								
+								<li><a class="" href="#tab_5"   id="orderDoneTab" data-value="4">已完成</a></li>
+								
+								<li><a class="" href="#tab_6"   id="orderCloseTab" data-value="5">已关闭</a></li>
+							</ul>
+  
+							<div class="tab-content"> 
+								<div class="tab-pane active" id="orderListDiv">
+									<#include "admin/order/orderlist.html">
+			 					</div> 
+			 				</div>
+			 				 
+	 				</div> 
+			 				
+			</div>
+		</div>
+		<!-- END EXTRAS PORTLET-->
+	</div>
+</div>
+ <script>
+	jQuery(document).ready(function() {
+		//订单状态 0:待付款 1:待发货 2:待收货 3:退款中 4:已完成 5:已关闭 
+		$('#orderTab').find('a').bind("click", function(e) {   
+			var status = $(this).attr('data-value'); 
+			 e.preventDefault(); 
+			 $(this).tab('show'); 
+			 $('#status').val(status); 
+			 mainFrame.addArea('${contextPath}/Admin-Order-queryOrderList.action','orderListDiv','orderSearchForm');  
+			  
+		} ); 
+	});
+	 
+</script>
+ 	
+

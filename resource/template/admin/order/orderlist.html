@@ -1,0 +1,163 @@
+<#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html"> <#include
+"admin/common/include/pagination.html">
+<style>
+.ordertd {
+	width: 100%;
+}
+
+.ordertd_left {
+	float: left;
+	width: 50%;
+}
+
+.ordertd_right {
+	float: right;
+	width: 40%;
+	margin-right: 20px;
+}
+
+.ordertdclear {
+	clear: both
+}
+</style>
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box blue">
+
+			<div class="portlet-body form">
+				<form id="orderSearchForm" class="orderSearchForm">
+					<input type="hidden" name="status" id="status"
+						value="${(status)?if_exists}" />
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="dataTables_filter" id="sample_1_filter">
+								<label>下单时间: 	
+								<div class="input-append date date-picker" 
+								   data-date-viewmode="years">
+      								 <input class="m-wrap m-ctrl-medium date-picker" name="startDate" id="startDate"
+      								  readonly size="16" type="text" value="${(startDate)?if_exists}" /><span class="add-on"><i class="icon-calendar"></i></span>
+		
+								</div>
+									至
+								<div class="input-append date date-picker"     data-date-viewmode="years">
+									       <input class="m-wrap m-ctrl-medium date-picker"   name="endDate" id="endDate"
+									       readonly size="16" type="text" value="${(endDate)?if_exists}" /><span class="add-on"><i class="icon-calendar"></i></span>
+		
+								</div>
+								</label>
+							</div>
+						</div>
+						 
+					</div>
+
+				</form>
+
+				<div class="alert alert-error " id="errTip" style="display: none;"></div>
+				<div class="alert alert-success " id="sucTip" style="display: none;"></div>
+				<div class="tab-pane active" id="tab_1">
+					<div class="portlet-body">
+						<div class="clearfix">
+							<button id="order_query_btn" class="btn blue">
+								<i class="icon-search"></i>&nbsp;&nbsp;查询
+							</button>
+							<button id="order_reset_btn" class="btn blue">
+								<i class="icon-refresh"></i>&nbsp;&nbsp;重置
+							</button>
+						</div>
+						<br>
+						<form action="${_contextPath}/Admin-Order-queryOrderList.action"
+							id="QueryForm">
+							<table class="table  table-bordered" id="orderTable">
+								<thead>
+									<tr>
+										<th width="30%">订单信息</th>
+										<th>买家信息</th>
+										<th>收货信息</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<#list orderPageBean.result as complex >
+									<tr>
+										<td colspan="4"><span>订单号:${complex.orderInfo.bizId}
+												下单时间：${complex.orderInfo.createTime} </span><span
+											style="float: right;">合计：${complex.orderInfo.totalPrice}</span>
+										</td>
+									</tr>
+									<#list complex.orderDetailList as orderDetail >
+									<tr>
+										<td>
+											<div class="ordertd">
+												<div class="ordertd_left">
+													<img
+														src="${contextPath}${(orderDetail.resourceImageUrl)?if_exists}"
+														width="100%" height="100%" />
+												</div>
+												<div class="ordertd_right">
+													名称：${orderDetail.resourceName} <br>
+													单价:￥${orderDetail.unitPrice}<br>
+													数量:${orderDetail.itemCount}<br>
+													总价:￥${orderDetail.totalPrice}
+												</div>
+												<div class="ordertdclear"></div>
+												<!-- html注释：清除float产生浮动 -->
+											</div>
+										</td> <#if orderDetail_index = 0>
+										<td rowspan="${complex.orderDetailList?size}"
+											style="vertical-align: middle;">${complex.orderInfo.customerName}</td>
+										<td rowspan="${complex.orderDetailList?size}"
+											style="vertical-align: middle;">${complex.orderInfo.receiver}
+											${complex.orderInfo.phone}
+											${complex.orderInfo.province}${complex.orderInfo.city}${complex.orderInfo.region}${complex.orderInfo.address}
+										</td>
+										<td rowspan="${complex.orderDetailList?size}"
+											style="vertical-align: middle;"><a href='#' name="orderdetaillink" value="${complex.orderInfo.id}">订单详情</a> <br>联系买家 <br>修改价格
+										</td> </#if>
+									</tr>
+									</#list> </#list>
+								</tbody>
+							</table>
+						</form>
+						<@areaapagination searchFormId='orderSearchForm'
+						pBean=orderPageBean areaId='orderListDiv'/>
+					</div>
+				</div>
+
+			</div>
+			<!-- END EXAMPLE TABLE PORTLET-->
+		</div>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function() {
+		
+		$('.date-picker').datepicker({
+			  format: 'yyyy-mm-dd',
+		        weekStart: 1,
+		        autoclose: true,
+		        todayBtn: 'linked',
+		        language: 'zh-CN'
+		});
+		
+		tableAction.init({
+			tableId : 'orderTable',
+			queryUrl : '${contextPath}/Admin-Order-queryOrderList.action',
+			queryBtnId : 'order_query_btn',
+			searchFormId : 'orderSearchForm',
+			areaId : "orderListDiv"
+		});
+		
+		$('#order_reset_btn').bind("click", function() {  
+			 $('#startDate').val('');
+			 $('#endDate').val('');
+		}); 
+		
+		$("a[name='orderdetaillink']").bind("click", function() {
+			var id = $(this).attr("value");
+			window.open('${contextPath}/Admin-Order-orderDetail.action?orderId='+id); 
+		});
+	});
+</script>

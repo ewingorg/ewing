@@ -2,6 +2,8 @@ package com.ewing.busi.order.dto;
 
 import java.util.Date;
 
+import com.ewing.core.jdbc.annotation.Column;
+
 /**
  * 订单详情
  * 
@@ -10,21 +12,45 @@ import java.util.Date;
  * 
  */
 public class OrderDetailDto {
+    @Column(fieldName = "id")
     private Integer id;
+    @Column(fieldName = "order_id")
     private int orderId;
+    @Column(fieldName = "customer_id")
     private int customerId;
+    @Column(fieldName = "biz_id")
     private String bizId;
     private int userId;
+    @Column(fieldName = "resource_id")
     private int resourceId;
+    @Column(fieldName = "resource_name")
     private String resourceName;
+    @Column(fieldName = "resource_image_url")
+    private String resourceImageUrl;
+    @Column(fieldName = "item_count")
     private int itemCount;
+    @Column(fieldName = "unit_price")
     private int unitPrice;
+    @Column(fieldName = "cargo_price")
     private float cargoPrice;
+    @Column(fieldName = "total_price")
     private float totalPrice;
-    private char status;
-    private char iseff;
+    @Column(fieldName = "status")
+    private String status;
+    @Column(fieldName = "iseff")
+    private String iseff;
+    @Column(fieldName = "create_time")
     private Date createTime;
+    @Column(fieldName = "last_update")
     private Date lastUpdate;
+
+    public String getResourceImageUrl() {
+        return resourceImageUrl;
+    }
+
+    public void setResourceImageUrl(String resourceImageUrl) {
+        this.resourceImageUrl = resourceImageUrl;
+    }
 
     public Integer getId() {
         return id;
@@ -114,19 +140,19 @@ public class OrderDetailDto {
         this.totalPrice = totalPrice;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public char getIseff() {
+    public String getIseff() {
         return iseff;
     }
 
-    public void setIseff(char iseff) {
+    public void setIseff(String iseff) {
         this.iseff = iseff;
     }
 

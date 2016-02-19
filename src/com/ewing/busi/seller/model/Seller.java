@@ -18,7 +18,7 @@ public class Seller implements java.io.Serializable {
     private String addr;
     private String zipcode;
     private String email;
-    private Character iseff;
+    private String iseff;
     private Date createTime;
     private Date lastUpdate;
 
@@ -32,22 +32,7 @@ public class Seller implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-    public Seller(String userName, Integer depId, String password, Character sex, String phone,
-            String addr, String zipcode, String email, Character iseff, Date createTime,
-            Date lastUpdate) {
-        this.userName = userName;
-        this.depId = depId;
-        this.password = password;
-        this.sex = sex;
-        this.phone = phone;
-        this.addr = addr;
-        this.zipcode = zipcode;
-        this.email = email;
-        this.iseff = iseff;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
-    }
-
+    
     public Integer getId() {
         return this.id;
     }
@@ -120,11 +105,11 @@ public class Seller implements java.io.Serializable {
         this.email = email;
     }
 
-    public Character getIseff() {
+    public String getIseff() {
         return this.iseff;
     }
 
-    public void setIseff(Character iseff) {
+    public void setIseff(String iseff) {
         this.iseff = iseff;
     }
 

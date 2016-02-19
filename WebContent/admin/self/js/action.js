@@ -1,8 +1,11 @@
 var tableAction = {
 
-	bindQueryAction : function(queryBtnId, queryUrl, searchFormId) {
-		$('#' + queryBtnId).bind('click', function() {
-			mainFrame.addContainer(queryUrl, searchFormId);
+	bindQueryAction : function(queryBtnId, queryUrl, searchFormId,areaId) {
+		$('#' + queryBtnId).bind('click', function() {  
+			if (areaId != '' && areaId) 
+				mainFrame.addArea(queryUrl,areaId,searchFormId);
+			else
+				mainFrame.addContainer(queryUrl, searchFormId);
 		});
 	},
 
@@ -156,7 +159,7 @@ tableAction.init = function(opt) {
 
 	if (option.queryBtnId && option.queryUrl && option.searchFormId)
 		tableAction.bindQueryAction(option.queryBtnId, option.queryUrl,
-				option.searchFormId);
+				option.searchFormId,option.areaId);
 
 	if (option.deleteBtnId && option.tableId && option.deleteUrl
 			&& option.queryUrl)

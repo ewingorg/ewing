@@ -19,32 +19,15 @@ public class OrderDetail implements java.io.Serializable {
     private int unitPrice;
     private float cargoPrice;
     private float totalPrice;
-    private char status;
-    private char iseff;
+    private String status;
+    private String iseff;
     private Date createTime;
     private Date lastUpdate;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int orderId, int customerId, String bizId, int userId, int resourceId,
-            int itemCount, int unitPrice, float cargoPrice, float totalPrice, char status,
-            char iseff, Date createTime, Date lastUpdate) {
-        this.orderId = orderId;
-        this.customerId = customerId;
-        this.bizId = bizId;
-        this.userId = userId;
-        this.resourceId = resourceId;
-        this.itemCount = itemCount;
-        this.unitPrice = unitPrice;
-        this.cargoPrice = cargoPrice;
-        this.totalPrice = totalPrice;
-        this.status = status;
-        this.iseff = iseff;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
-    }
-
+    
     public Integer getId() {
         return this.id;
     }
@@ -125,19 +108,19 @@ public class OrderDetail implements java.io.Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return this.status;
     }
 
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public char getIseff() {
+    public String getIseff() {
         return this.iseff;
     }
 
-    public void setIseff(char iseff) {
+    public void setIseff(String iseff) {
         this.iseff = iseff;
     }
 

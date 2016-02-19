@@ -17,7 +17,7 @@ public class SellerShop implements java.io.Serializable {
     private String email;
     private String phone;
     private String addr;
-    private Character iseff;
+    private String iseff;
     private Date createTime;
     private Date lastUpdate;
 
@@ -34,20 +34,7 @@ public class SellerShop implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-    public SellerShop(String userId, String shopName, String shopIcon, String shopDesc,
-            String email, String phone, String addr, Character iseff, Date createTime,
-            Date lastUpdate) {
-        this.userId = userId;
-        this.shopName = shopName;
-        this.shopIcon = shopIcon;
-        this.shopDesc = shopDesc;
-        this.email = email;
-        this.phone = phone;
-        this.addr = addr;
-        this.iseff = iseff;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
-    }
+    
 
     public Integer getId() {
         return this.id;
@@ -113,11 +100,11 @@ public class SellerShop implements java.io.Serializable {
         this.addr = addr;
     }
 
-    public Character getIseff() {
+    public String getIseff() {
         return this.iseff;
     }
 
-    public void setIseff(Character iseff) {
+    public void setIseff(String iseff) {
         this.iseff = iseff;
     }
 

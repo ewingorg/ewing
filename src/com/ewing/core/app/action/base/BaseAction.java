@@ -70,7 +70,6 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -79,9 +78,10 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
         this.response = response;
         this.response.setContentType("text/html;charset=UTF-8");
     }
-    
+
     /**
      * 获取登陆用户ID
+     * 
      * @return
      * @throws SessionException
      */
@@ -94,12 +94,12 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
      * 
      * @throws ActionException
      */
-    public <T> PageBean pageQuery(Class<T> entityClass) throws ActionException {
+    public <T> PageBean<T> pageQuery(Class<T> entityClass) throws ActionException {
         if (entityClass == null)
             throw new ActionException("entityClass must be defined in Action");
         String page = request.getParameter("page");
         String pageSize = request.getParameter("pageSize");
-        PageBean pageBean = baseModelService.pageQuery(bulidConditionSql(), bulidOrderBySql(),
+        PageBean<T> pageBean = baseModelService.pageQuery(bulidConditionSql(), bulidOrderBySql(),
                 Integer.valueOf(pageSize), Integer.valueOf(page), entityClass);
         request.setAttribute("pageBean", pageBean);
         return pageBean;
@@ -128,20 +128,6 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
     }
 
     /**
-     * dao查询
-     * 
-     * @throws ActionException
-     * @throws DaoException
-     */
-    public List noMappedObjectQuery() throws ActionException, DaoException {
-        String sql = request.getParameter("sql");
-        List resultList = baseModelService.noMappedObjectQuery(sql);
-        request.setAttribute("resultList", resultList);
-        return resultList;
-
-    }
-
-    /**
      * dao缓存查询
      * 
      * @throws ActionException
@@ -150,7 +136,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
     public <T> List<T> queryByCache(Class<T> entityClass) throws ActionException, DaoException {
         if (entityClass == null)
             throw new ActionException("entityClass must be defined in Action");
-        List resultList = cacheModelService.find(condition, entityClass);
+        List<T> resultList = cacheModelService.find(condition, entityClass);
         request.setAttribute("resultList", resultList);
         return resultList;
 
@@ -256,10 +242,9 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
                     f.set(entityBean, value);
                 } else if (fieldType.equals("java.lang.Integer") || fieldType.equals("int")) {
                     f.set(entityBean, Integer.valueOf(value));
-                } else if(fieldType.equals("java.lang.Float") || fieldType.equals("float")){
+                } else if (fieldType.equals("java.lang.Float") || fieldType.equals("float")) {
                     f.set(entityBean, Float.valueOf(value));
-                } 
-                else if (fieldType.equals("java.util.Date")) {
+                } else if (fieldType.equals("java.util.Date")) {
                     if (value.length() == 10) {
                         f.set(entityBean, DataFormat.stringToDate(value, DataFormat.DATE_FORMAT));
                     } else if (value.length() == 19) {
@@ -407,6 +392,17 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
         if (dataModel != null)
             dataModel.put("includejsp", (T) template);
         render(container, dataModel);
+    }
+
+    /**
+     * 使用模板渲染,并且选择加载头部css和js
+     * 
+     * @param template
+     * @param dataModel
+     */
+    public <T> void renderWithHead(String template, Map dataModel) {
+        dataModel.put("hl", true);
+        render(template, dataModel);
     }
 
     /**

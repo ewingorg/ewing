@@ -20,50 +20,14 @@ public class OrderRefund implements java.io.Serializable {
     private int reason;
     private Integer cargoNumber;
     private float refundMoney;
-    private char status;
-    private char iseff;
+    private String status;
+    private String iseff;
     private Date createTime;
     private Date lastUpdate;
 
     public OrderRefund() {
     }
-
-    public OrderRefund(int orderId, int orderDetailId, char type, int customerId, int userId,
-            int resourceId, int reasonType, int reason, float refundMoney, char status, char iseff,
-            Date createTime, Date lastUpdate) {
-        this.orderId = orderId;
-        this.orderDetailId = orderDetailId;
-        this.type = type;
-        this.customerId = customerId;
-        this.userId = userId;
-        this.resourceId = resourceId;
-        this.reasonType = reasonType;
-        this.reason = reason;
-        this.refundMoney = refundMoney;
-        this.status = status;
-        this.iseff = iseff;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
-    }
-
-    public OrderRefund(int orderId, int orderDetailId, char type, int customerId, int userId,
-            int resourceId, int reasonType, int reason, Integer cargoNumber, float refundMoney,
-            char status, char iseff, Date createTime, Date lastUpdate) {
-        this.orderId = orderId;
-        this.orderDetailId = orderDetailId;
-        this.type = type;
-        this.customerId = customerId;
-        this.userId = userId;
-        this.resourceId = resourceId;
-        this.reasonType = reasonType;
-        this.reason = reason;
-        this.cargoNumber = cargoNumber;
-        this.refundMoney = refundMoney;
-        this.status = status;
-        this.iseff = iseff;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
-    }
+ 
 
     public Integer getId() {
         return this.id;
@@ -153,19 +117,19 @@ public class OrderRefund implements java.io.Serializable {
         this.refundMoney = refundMoney;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return this.status;
     }
 
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public char getIseff() {
+    public String getIseff() {
         return this.iseff;
     }
 
-    public void setIseff(char iseff) {
+    public void setIseff(String iseff) {
         this.iseff = iseff;
     }
 

@@ -20,7 +20,7 @@ import com.ewing.busi.web.model.WebTemplate;
 import com.ewing.busi.web.service.GroupService;
 import com.ewing.busi.web.service.RelResService;
 import com.ewing.busi.web.service.TemplateService;
-import com.ewing.constant.SysParamCode;
+import com.ewing.common.constant.SysParamCode;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;
 import com.ewing.core.app.action.base.ResponseUtils;
