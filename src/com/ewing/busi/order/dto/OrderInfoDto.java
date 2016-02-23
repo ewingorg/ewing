@@ -59,6 +59,85 @@ public class OrderInfoDto {
     private Date createTime;
     @Column(fieldName = "last_update")
     private Date lastUpdate;
+    /**
+     * 是否需要物流
+     */
+    @Column(fieldName = "need_cargo")
+    private Integer needCargo;
+
+    /**
+     * 修改后运费
+     */
+    @Column(fieldName = "modify_cargo_price")
+    private float modifyCargoPrice;
+    /**
+     * 修改后的总价格
+     */
+    @Column(fieldName = "modify_total_price")
+    private float modifyTotalPrice;
+    /**
+     * 付款时间
+     */
+    @Column(fieldName = "pay_time")
+    private Date payTime;
+    /**
+     * 付款时间
+     */
+    @Column(fieldName = "cargo_time")
+    private Date cargoTime;
+    /**
+     * 确定收货时间
+     */
+    @Column(fieldName = "confirm_cargo_time")
+    private Date confirmCargoTime;
+
+    public Integer getNeedCargo() {
+        return needCargo;
+    }
+
+    public void setNeedCargo(Integer needCargo) {
+        this.needCargo = needCargo;
+    }
+
+    public float getModifyCargoPrice() {
+        return modifyCargoPrice;
+    }
+
+    public void setModifyCargoPrice(float modifyCargoPrice) {
+        this.modifyCargoPrice = modifyCargoPrice;
+    }
+
+    public float getModifyTotalPrice() {
+        return modifyTotalPrice;
+    }
+
+    public void setModifyTotalPrice(float modifyTotalPrice) {
+        this.modifyTotalPrice = modifyTotalPrice;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+
+    public Date getCargoTime() {
+        return cargoTime;
+    }
+
+    public void setCargoTime(Date cargoTime) {
+        this.cargoTime = cargoTime;
+    }
+
+    public Date getConfirmCargoTime() {
+        return confirmCargoTime;
+    }
+
+    public void setConfirmCargoTime(Date confirmCargoTime) {
+        this.confirmCargoTime = confirmCargoTime;
+    }
 
     public String getCustomerPhone() {
         return customerPhone;
@@ -245,7 +324,7 @@ public class OrderInfoDto {
     }
 
     public String getOrderStatusTanslate() {
-        return OrderStatus.fromStatus(status).getMessage(); 
+        return OrderStatus.fromStatus(status).getMessage();
     }
 
 }

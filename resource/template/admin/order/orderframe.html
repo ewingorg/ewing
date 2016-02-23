@@ -53,8 +53,8 @@
  <script>
 	jQuery(document).ready(function() {
 		//订单状态 0:待付款 1:待发货 2:待收货 3:退款中 4:已完成 5:已关闭 
-		$('#orderTab').find('a').bind("click", function(e) {   
-			var status = $(this).attr('data-value'); 
+		$('#orderTab').find('a').bind("click", function(e) {  
+			var status = $(this).attr('data-value');  
 			 e.preventDefault(); 
 			 $(this).tab('show'); 
 			 $('#status').val(status); 

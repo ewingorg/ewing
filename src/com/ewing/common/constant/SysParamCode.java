@@ -26,4 +26,8 @@ public class SysParamCode {
      * 是否需要
      */
     public final static String NEED_TYPE = "NEED_TYPE"; 
+    /**
+     * 物流公司列表
+     */
+    public final static String CARGO_LIST="CARGO_LIST";
 }

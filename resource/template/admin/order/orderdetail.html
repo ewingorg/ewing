@@ -2,6 +2,7 @@
 "admin/common/include/sysparam.html"> <#include
 "admin/common/include/pagination.html">
 <style>
+ 
 .ordertd {
 	width: 100%;
 }
@@ -35,15 +36,23 @@
 				<div class="control-group">
 					<label class="control-label">订单编号:${orderComplex.orderInfo.bizId}</label>
 				</div>
-				<div class="control-group">
-					<label class="control-label">下单时间:${orderComplex.orderInfo.createTime}</label>
-				</div>
+				
 				<div class="control-group">
 					<label class="control-label">订单状态:${orderComplex.orderInfo.getOrderStatusTanslate()}</label>
 				</div>
 				<div class="control-group">
+					<label class="control-label">下单时间:${orderComplex.orderInfo.createTime}</label>
+				</div>
+				<div class="control-group">
+					<label class="control-label">付款时间:${orderComplex.orderInfo.payTime}</label>
+				</div>
+				<div class="control-group">
+					<label class="control-label">发货时间:${orderComplex.orderInfo.cargoTime}</label>
+				</div>
+				<div class="control-group">
 					<label class="control-label">订单备注:无</label>
 				</div>
+				
 			</div>
 
 		</div>
@@ -91,14 +100,14 @@
 				</div>
 			</div>
 			<div class="portlet-body form">
-				<table class="table  table-bordered" id="orderTable"
-					style="width:100%;">
+				<table class="table  table-bordered orderTable" id="orderTable"
+					style="width: 60%;">
 					<thead>
 						<tr>
-							<th width="30%">商品</th>
-							<th>价格(元)</th>
-							<th>数量</th>
-							<th>总价(元)</th>
+							<th width="30%" style="text-align:center;">商品</th>
+							<th style="text-align:center;">价格(元)</th>
+							<th style="text-align:center;">数量</th>
+							<th style="text-align:center;">总价(元)</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -117,22 +126,31 @@
 									<!-- html注释：清除float产生浮动 -->
 								</div>
 							</td>
-							<td>${orderDetail.unitPrice}</td>
-							<td>${orderDetail.itemCount}</td>
-							<td>${orderDetail.totalPrice}</td> 
+							<td style="text-align:center;">${orderDetail.unitPrice}</td>
+							<td style="text-align:center;">${orderDetail.itemCount}</td>
+							<td style="text-align:center;">${orderDetail.totalPrice}</td>
 						</tr>
 						</#list>
+
 					</tbody>
 				</table>
-				<div class="control-group" >
-					<label class="control-label">商品总费用：${orderComplex.orderInfo.productPrice}</label>
-				</div>
-				<div class="control-group">
-					<label class="control-label">运费：${orderComplex.orderInfo.cargoPrice}</label>
-				</div>
-				<div class="control-group">
-					<label class="control-label">订单总价：${orderComplex.orderInfo.totalPrice}</label>
-				</div>
+				<table class="table " id="orderTable" border="0"
+					style="width: 60%;">
+					<tbody>
+						<tr>
+							<td style="text-align: right;border: none;">
+								商品总费用：${orderComplex.orderInfo.productPrice}</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;border: none;">
+								运费：${orderComplex.orderInfo.cargoPrice}</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;border: none;">
+								订单总价：${orderComplex.orderInfo.totalPrice}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 
 		</div>

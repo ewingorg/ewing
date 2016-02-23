@@ -1,10 +1,12 @@
 package com.ewing.busi.order.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.axis.utils.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.ewing.busi.order.dao.OrderDao;
@@ -13,6 +15,11 @@ import com.ewing.busi.order.dto.OrderDetailDto;
 import com.ewing.busi.order.dto.OrderInfoComplex;
 import com.ewing.busi.order.dto.OrderInfoDto;
 import com.ewing.busi.order.dto.OrderQueryReq;
+import com.ewing.busi.order.model.OrderInfo;
+import com.ewing.common.constant.NeedStatus;
+import com.ewing.common.constant.OrderStatus;
+import com.ewing.common.exception.OrderException;
+import com.ewing.core.jdbc.BaseDao;
 import com.ewing.core.jdbc.util.PageBean;
 
 @Repository("orderService")
@@ -20,15 +27,58 @@ public class OrderService {
     @Resource
     private OrderDao orderDao;
     @Resource
+    private BaseDao baseDao;
+    @Resource
     private OrderDetailDao orderDetailDao;
-    
+
     /**
-     * 查找订单
+     * 查询
+     * 
      * @param userId
      * @param orderId
      * @return
      */
-    public OrderInfoComplex findOneOrder(Integer userId, Integer orderId) {
+    public OrderInfo findOneOrder(Integer userId, Integer orderId) {
+        return orderDao.findOne(userId, orderId);
+    }
+
+    /**
+     * 更新订单为已经发货
+     * 
+     * @param userId
+     * @param orderId
+     * @param needCargo
+     * @param cargoName
+     * @param cargoNumber
+     * @throws OrderException
+     */
+    public void update2Send(Integer userId, Integer orderId, Integer needCargo, String cargoName,
+            String cargoNumber) throws OrderException {
+        OrderInfo orderInfo = orderDao.findOne(userId, orderId);
+        if (orderInfo == null)
+            throw new OrderException("没有找到匹配的订单");
+
+        if (NeedStatus.NEED.getStatus().equals(needCargo)) {
+            if (StringUtils.isEmpty(cargoNumber) || StringUtils.isEmpty(cargoName))
+                throw new OrderException("物流相关信息不能为空！");
+
+        }
+        orderInfo.setStatus(OrderStatus.WAIT_RECEIVE.getStatus());
+        orderInfo.setCargoTime(new Date());
+        orderInfo.setCargoName(cargoName == null ? "" : cargoName);
+        orderInfo.setCargoNumber(cargoNumber == null ? "" : cargoNumber);
+        orderInfo.setNeedCargo(needCargo);
+        baseDao.update(orderInfo);
+    }
+
+    /**
+     * 查找订单
+     * 
+     * @param userId
+     * @param orderId
+     * @return
+     */
+    public OrderInfoComplex findOneComplexOrder(Integer userId, Integer orderId) {
         OrderInfoDto orderInfo = orderDao.findOneMoreInfo(userId, orderId);
         List<OrderDetailDto> orderDetailList = orderDetailDao
                 .findDetailList(new Integer[] { orderInfo.getId() });

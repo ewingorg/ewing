@@ -15,6 +15,24 @@
 		</select>
 </#macro>
 
+
+<#macro radio paramCode value item> 
+ 		<#list paramCode as code> 
+				&nbsp;<label class="radio "> <input type="radio"
+						 <#if item ?? >
+				 			${item}
+			 			</#if> 
+			 			 value="${code.paramValue}" 
+			 	 	 <#if value ='' >
+			 	       <#if code_index = 0> checked</#if>
+			 	 	 </#if> 
+				 <#if value =  code.paramValue>
+				 	checked
+				 </#if> /> ${code.paramName}
+				 </label>
+			</#list>  
+</#macro>
+
 <#macro translate paramCode value> 
 			<#list paramCode as code>  
 				 <#if value =  code.paramValue>

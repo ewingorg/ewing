@@ -39,9 +39,13 @@ var tableAction = {
 		
 		var _errZoneId= errZoneId && errZoneId!=''? errZoneId:'errtip'; 
 		$("#" + saveBtnId).bind("click", function() { 
-			if ($.isFunction(beforeSaveFn))
-				beforeSaveFn();
-			var valResult = AI.Validator.validForm(formId, 1, _errZoneId);
+			if ($.isFunction(beforeSaveFn)){
+				var ret = beforeSaveFn(); 
+				if(ret==false){   
+					return;
+				}
+			} 
+			var valResult = AI.Validator.validForm(formId, 1, _errZoneId); 
 			if (!valResult)
 				return;
 			var param = $("#" + formId).serialize();

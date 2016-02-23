@@ -16,7 +16,7 @@ public class OrderInfo implements java.io.Serializable {
     private float productPrice;
     private float cargoPrice;
     private float totalPrice;
-    private char status;
+    private String status;
     private String receiver;
     private String postCode;
     private String province;
@@ -24,11 +24,89 @@ public class OrderInfo implements java.io.Serializable {
     private String region;
     private String address;
     private String phone;
+    /**
+     * 是否需要物流
+     */
+    private Integer needCargo;
+    /**
+     * 物流公司名称
+     */
     private String cargoName;
-    private String cargoNumber;
+    /**
+     * 物流编号
+     */
+    private String cargoNumber; 
+    /**
+     * 修改后运费
+     */
+    private float modifyCargoPrice;
+    /**
+     * 修改后的总价格
+     */
+    private float modifyTotalPrice;
+    /**
+     * 付款时间
+     */
+    private Date payTime;
+    /**
+     * 付款时间
+     */
+    private Date cargoTime;
+    /**
+     * 确定收货时间
+     */
+    private Date confirmCargoTime;
     private String iseff;
     private Date createTime;
     private Date lastUpdate;
+
+    public Integer getNeedCargo() {
+        return needCargo;
+    }
+
+    public void setNeedCargo(Integer needCargo) {
+        this.needCargo = needCargo;
+    }
+
+    public float getModifyCargoPrice() {
+        return modifyCargoPrice;
+    }
+
+    public void setModifyCargoPrice(float modifyCargoPrice) {
+        this.modifyCargoPrice = modifyCargoPrice;
+    }
+
+    public float getModifyTotalPrice() {
+        return modifyTotalPrice;
+    }
+
+    public void setModifyTotalPrice(float modifyTotalPrice) {
+        this.modifyTotalPrice = modifyTotalPrice;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+
+    public Date getCargoTime() {
+        return cargoTime;
+    }
+
+    public void setCargoTime(Date cargoTime) {
+        this.cargoTime = cargoTime;
+    }
+
+    public Date getConfirmCargoTime() {
+        return confirmCargoTime;
+    }
+
+    public void setConfirmCargoTime(Date confirmCargoTime) {
+        this.confirmCargoTime = confirmCargoTime;
+    }
 
     public OrderInfo() {
     }
@@ -105,11 +183,11 @@ public class OrderInfo implements java.io.Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return this.status;
     }
 
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

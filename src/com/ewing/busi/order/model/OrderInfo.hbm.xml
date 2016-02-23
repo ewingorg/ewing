@@ -100,5 +100,12 @@
         <property name="lastUpdate" type="timestamp">
             <column name="last_update" length="19" not-null="true" />
         </property>
+        
+        <property name="payTime" type="timestamp">
+            <column name="pay_time" length="19"  />
+        </property>
+         <property name="cargoTime" type="timestamp">
+            <column name="cargo_time" length="19"  />
+        </property>
     </class>
 </hibernate-mapping>

@@ -1,0 +1,86 @@
+<#include "admin/common/include/sysparam.html">
+ 
+
+<div id="navModel" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header green">
+
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true"></button>
+		<h4 id="myModalLabel">
+			<strong>物流信息</strong>
+		</h4>
+	</div>
+	<div class="alert alert-error " id="errtip" style="display: none;"></div>
+
+	<div class="modal-body" style="max-height: 550px;">
+		<!-- BEGIN FORM-->
+		<form action="${contextPath}/Admin-Order-update2Send.action"
+			id="orderSendForm" class="form-horizontal" method="post">
+			<input type="hidden" name="orderId" value="${orderId}" />
+			
+			<div class="control-group">
+				<label class="control-label">是否需要物流</label>
+				<div class="controls">  
+					 <@radio paramCode=needType
+					value=(orderInfo.needCargo)?if_exists item='name="needCargo"'/>
+				</div> 
+			</div>
+			<div class="control-group">
+				<label class="control-label">物流公司</label>
+				<div class="controls"><@select paramCode=cargoList
+					value=(orderInfo.cargoNumber)?if_exists item=' name="cargoValue" 
+					 '/></div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">物流编号</label>
+				<div class="controls">
+					<input type="text" name="cargoNumber" id="cargoNumber" class="m-wrap medium"
+						value="${(orderInfo.cargoNumber)?if_exists}" />
+				</div>
+			</div> 
+			<div class="modal-footer">
+				<button type="button" id="ordersend_save_btn" class="btn green">保存</button>
+				<button class="btn " data-dismiss="modal" aria-hidden="true">关闭</button>
+			</div>
+		</form>
+		<!-- END FORM-->
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function() {
+		  $("input[name='needCargo']").bind('click',function(){
+			var checkValue = $(this).val();
+			$('#cargoNumber').val('');
+			$("select[name='cargoValue']").val('');
+			if(checkValue == 0 ){ 
+				$('#cargoNumber').attr('disabled','disabled');
+				$("select[name='cargoValue']").attr('disabled','disabled');
+			}else{
+				$('#cargoNumber').removeAttr('disabled');
+				$("select[name='cargoValue']").removeAttr('disabled'); 
+			}
+		});  
+		tableAction.initSaveAction({
+			formId : 'orderSendForm', 
+			saveUrl : '${contextPath}/Admin-Order-update2Send.action',
+			saveBtnId : 'ordersend_save_btn',
+			 beforeSaveFn:function(){
+				var needCargo = $("input[name='needCargo']:checked").val();
+				var cargoValue = $("select[name='cargoValue']").val();
+				var cargoNumber = $("#cargoNumber").val();
+			 	if(needCargo ==0 )
+			 		return true;
+				if(!cargoNumber || !cargoValue){
+					$("#errtip").show();
+					$("#errtip").html('请正确填写表单！'); 
+					return false;
+				} 
+			}, 
+			afterSaveFn: function(){
+				 mainFrame.addArea('${contextPath}/Admin-Order-queryOrderList.action','orderListDiv','orderSearchForm');  
+			}
+		});
+	});
+</script>
