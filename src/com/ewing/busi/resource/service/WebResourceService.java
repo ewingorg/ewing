@@ -16,6 +16,9 @@ import com.ewing.busi.resource.dao.WebResourceDao;
 import com.ewing.busi.resource.dto.WebResourceDto;
 import com.ewing.busi.resource.model.WebResource;
 import com.ewing.busi.web.service.WebAttrConfService;
+import com.ewing.common.constant.OnlineStatus;
+import com.ewing.common.exception.WebResourceException;
+import com.ewing.core.app.constant.IsEff;
 import com.ewing.core.app.service.BaseModelService;
 import com.ewing.core.jdbc.BaseDao;
 import com.ewing.core.jdbc.util.PageBean;
@@ -40,7 +43,44 @@ public class WebResourceService {
     private BaseModelService baseModelService;
 
     public boolean editResource(WebResource resource) {
-        baseDao.update(resource);  
+        baseDao.update(resource);
+        return true;
+    }
+
+    /**
+     * 资源下架
+     * 
+     * @param userId
+     * @param resourceId
+     * @return
+     * @throws WebResourceException
+     */
+    public boolean offlineResource(Integer userId, Integer resourceId) throws WebResourceException {
+        WebResource webResource = findOne(userId, resourceId);
+        if (webResource == null) {
+            throw new WebResourceException("没有找到对应的资源");
+        }
+        webResource.setIsOnline(OnlineStatus.OFFLINE.getValue());
+        baseDao.update(webResource);
+        return true;
+    }
+
+    /**
+     * 删除资源
+     * 
+     * @param userId
+     * @param resourceId
+     * @return
+     * @throws WebResourceException
+     */
+    public boolean deleteResource(Integer userId, Integer resourceId) throws WebResourceException {
+        WebResource webResource = findOne(userId, resourceId);
+        if (webResource == null) {
+            throw new WebResourceException("没有找到对应的资源");
+        }
+        webResource.setIsOnline(OnlineStatus.OFFLINE.getValue());
+        webResource.setIseff(IsEff.INEFFECTIVE);
+        baseDao.update(webResource);
         return true;
     }
 
@@ -97,9 +137,9 @@ public class WebResourceService {
      * @param resource
      * @param attrList
      * @return
-     */ 
-    public boolean saveResource(WebResource resource ) {
-        baseDao.save(resource); 
+     */
+    public boolean saveResource(WebResource resource) {
+        baseDao.save(resource);
         return true;
     }
 }

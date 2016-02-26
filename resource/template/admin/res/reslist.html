@@ -76,12 +76,12 @@
 										<th>ID</th>
 										<th>分类</th>
 										<th>名称</th>
-										<th>图片</th>
-										<th>成本</th>
+										<th>图片</th> 
 										<th>价格</th>
 										<th>库存</th>
 										<th>显示</th>
 										<th>上下架</th>
+										<th>更新时间</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -96,15 +96,17 @@
 										<td><img
 											src="${contextPath}${(resource.imageUrl)?if_exists}"
 											width="80" height="80" /></td>
-								    	<td>${resource.cost}</td>
+								    	 
 										<td>${resource.price}</td>
 										<td>${resource.stockNum}</td>
 										<td><@translate paramCode=resHotType
 											value=(resource.isHot)?if_exists /></td>
 										<td><@translate paramCode=resOnlineType
 											value=(resource.isOnline)?if_exists /></td>
-										<td><a href='#' name="edit_action" value="${resource.id}"><i
-												class="icon-edit"></i></a></td>
+										<td>${resource.lastUpdate}</td>
+										<td><a href='#' name="edit_action" value="${resource.id}">编辑商品</a><br>
+										<a href='#' name="offline_action" value="${resource.id}">下架商品</a><br>
+										<a href='#' name="delete_action" value="${resource.id}">删除商品</a></td>
 									<tr></#list>
 								</tbody>
 							</table>
@@ -121,9 +123,10 @@
 
 <script>
 	jQuery(document).ready(function() {
+		var queryUrl = '${contextPath}/Admin-Res-show.action';
 		tableAction.init({
 			tableId : 'resTable',
-			queryUrl : '${contextPath}/Admin-Res-show.action',
+			queryUrl : queryUrl,
 			deleteUrl : '${contextPath}/Admin-Res-delete.action',
 			editUrl : '${contextPath}/Admin-Res-showEditForm.action',
 			queryBtnId : 'res_query_btn',
@@ -138,6 +141,36 @@
 		$("#chooseCategoryBtn").bind("click", function() {
 			var url = '${contextPath}/Admin-ResCategory-selectCategory.action?categoryId=_QUERY_n_eq_category_id&categoryName=categoryName';
 			common.popHtml(url, 'navModel');
+		});
+		
+		$("a[name='offline_action']").bind('click', function() {
+			var resourceId = $(this).attr('value');
+			var _errZoneId= errZoneId && errZoneId!=''? errZoneId:'errtip';
+			var offlineUrl = '${contextPath}/Admin-Res-offline.action?resourceId='+resourceId;
+			common.alert({
+				content : '是否下架选中项？',
+				showAction : true,
+				actionContent : '删除',
+				actionFn : function() { 
+					ajax.syncJsonRequest({
+						url : url,
+						success : function(data) {
+							if (!data || !data.success) {
+								$('#'+_errZoneId).html(data.retinfo);
+								$('#'+_errZoneId).show();
+							}
+							if (data.success) {
+								common.alert({
+									content : data.retinfo,
+									closeFn : function() {
+										 mainFrame.addContainer(queryUrl); 
+									}
+								});
+							}
+						}
+					});
+				}
+			});
 		});
 	});
 </script>

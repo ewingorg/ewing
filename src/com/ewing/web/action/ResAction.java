@@ -94,7 +94,7 @@ public class ResAction extends BaseAction {
                         Integer.valueOf(id));
                 dataModel.put("webResource", webResource);
                 dataModel.put("resourceId", webResource.getId());
-                if ( webResource.getCategoryId() != null) { 
+                if (webResource.getCategoryId() != null) {
                     WebCategory webCategory = resCategoryService.findOne(getLoginUserId(),
                             webResource.getCategoryId());
                     if (webCategory != null) {
@@ -109,7 +109,7 @@ public class ResAction extends BaseAction {
             dataModel.put("resOnlineType",
                     sysParamService.getSysParam(SysParamCode.RES_ONLINE_TYPE));
             dataModel.put("needType", sysParamService.getSysParam(SysParamCode.NEED_TYPE));
-           
+
             render(EDIT_FORM, dataModel);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -126,7 +126,6 @@ public class ResAction extends BaseAction {
             WebResource webResource = new WebResource();
             this.buildPageData(webResource);
             webResource.setUserId(getLoginUserId());
-          
 
             if (!StringUtils.isEmpty(id)) {
                 webResource.setId(Integer.valueOf(id));
@@ -167,24 +166,39 @@ public class ResAction extends BaseAction {
     }
 
     /**
-     * 删除导航栏
+     * 下架资源
      */
-    public void delete() {
+    public void offline() {
         ResponseData responseData = null;
         try {
-            String selectItems = request.getParameter("selectItems");
-            if (selectItems.isEmpty()) {
+            Integer resourceId = getIntegerParameter("resourceId");
+            if (resourceId == null) {
                 responseData = ResponseUtils.fail("没有选中的数据！");
                 this.outResult(responseData);
                 return;
             }
-            String[] selectArr = selectItems.split(",");
-            for (String id : selectArr) {
-                WebResource webResource = webResourceService.findOne(getLoginUserId(),
-                        Integer.valueOf(id));
-                if (webResource != null)
-                    baseModelService.delete(webResource);
+            webResourceService.offlineResource(getLoginUserId(), resourceId);
+            responseData = ResponseUtils.success("下架成功！");
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            responseData = ResponseUtils.fail("下架失败！");
+        }
+        this.outResult(responseData);
+    }
+
+    /**
+     * 删除资源
+     */
+    public void delete() {
+        ResponseData responseData = null;
+        try {
+            Integer resourceId = getIntegerParameter("resourceId");
+            if (resourceId == null) {
+                responseData = ResponseUtils.fail("没有选中的数据！");
+                this.outResult(responseData);
+                return;
             }
+            webResourceService.deleteResource(getLoginUserId(), resourceId);
             responseData = ResponseUtils.success("删除成功！");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

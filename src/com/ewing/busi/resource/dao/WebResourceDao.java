@@ -41,7 +41,7 @@ public class WebResourceDao {
      * @param page
      * @return
      */
-    public PageBean pageQueryResource(Integer userId, String condition, String order,
+    public PageBean<WebResource> pageQueryResource(Integer userId, String condition, String order,
             Integer pageSize, Integer page) {
         condition = condition + " and user_id=" + userId + " and iseff='" + IsEff.EFFECTIVE + "'";
         return baseDao.pageQuery(condition, order, pageSize, page, WebResource.class);
