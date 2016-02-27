@@ -1,8 +1,6 @@
 package com.ewing.web.action;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,17 +12,16 @@ import org.apache.log4j.Logger;
 import com.ewing.busi.category.model.WebCategory;
 import com.ewing.busi.category.service.ResCategoryService;
 import com.ewing.busi.resource.model.WebResource;
-import com.ewing.busi.resource.model.WebResourceAttr;
 import com.ewing.busi.resource.service.WebResourceScreenService;
 import com.ewing.busi.resource.service.WebResourceService;
 import com.ewing.busi.system.model.SysParam;
 import com.ewing.busi.web.service.TemplateService;
-import com.ewing.common.constant.AttrConstant;
 import com.ewing.common.constant.SysParamCode;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;
 import com.ewing.core.app.action.base.ResponseUtils;
 import com.ewing.core.jdbc.util.PageBean;
+import com.ewing.util.BeanCopy;
 
 /**
  * 网站资源展示类
@@ -122,13 +119,15 @@ public class ResAction extends BaseAction {
     public void save() {
         ResponseData responseData = null;
         try {
-            String id = request.getParameter("id");
+            Integer resourceId = getIntegerParameter("id");
             WebResource webResource = new WebResource();
             this.buildPageData(webResource);
             webResource.setUserId(getLoginUserId());
 
-            if (!StringUtils.isEmpty(id)) {
-                webResource.setId(Integer.valueOf(id));
+            if (resourceId!=null) {
+                WebResource oldWebResource = webResourceService.findById(resourceId); 
+                webResource.setId(resourceId);
+                webResource.setLongDesc(oldWebResource.getLongDesc());
                 webResourceService.editResource(webResource);
             } else {
                 webResourceService.saveResource(webResource);
@@ -148,8 +147,8 @@ public class ResAction extends BaseAction {
     public void saveResLongDesc() {
         ResponseData responseData = null;
         try {
-            Integer resourceId = getIntegerParameter("resourceId");
-            String longDesc = getUTFParameter("longDesc");
+            Integer resourceId = getIntegerParameter("resourceId"); 
+            String longDesc  = request.getParameter("longDesc");
             WebResource webResource = webResourceService.findById(resourceId);
             if (StringUtils.isEmpty(longDesc) || webResource == null) {
                 responseData = ResponseUtils.fail("保存失败！");

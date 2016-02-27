@@ -27,7 +27,6 @@ import com.ewing.core.app.service.CacheModelService;
 import com.ewing.core.factory.SysParamFactory;
 import com.ewing.core.jdbc.DaoException;
 import com.ewing.core.jdbc.util.PageBean;
-import com.ewing.core.json.JsonUtil;
 import com.ewing.core.template.FreeMarkerTool;
 import com.ewing.util.DataFormat;
 import com.ewing.util.StringUtil;
@@ -340,7 +339,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
         if (responseData == null)
             throw new IllegalArgumentException("responseData should not be null");
         try {
-            String json = JsonUtil.tranBean2String(responseData).toString();
+            String json = gson.toJson(responseData);
             logger.debug(json);
             response.getWriter().write(json);
         } catch (IOException e) {
@@ -469,7 +468,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
         return url.indexOf("?") > -1 ? url : url + "?aqwertyu=123";
     }
 
-    public String getUTFParameter(String key) {
+  /*  public String getUTFParameter(String key) {
         String value = request.getParameter(key);
         if (StringUtil.isEmpty(value) || (value != null && value.equals("undefined")))
             return null;
@@ -480,7 +479,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
         }
         return null;
     }
-
+*/
     public Integer getIntegerParameter(String key) {
         String value = request.getParameter(key);
         if (StringUtil.isEmpty(value) || (value != null && value.equals("undefined")))
