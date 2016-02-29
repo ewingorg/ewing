@@ -52,6 +52,7 @@ public class MainAction extends BaseAction {
 		dataModel.put("menuList", menuList);
 		dataModel.put("firstTopmenuId",
 				firstTopmenu != null ? firstTopmenu.getId() : 0);
+		
 		renderWithHead(page, dataModel);
 
 	}

@@ -57,7 +57,7 @@
 					<div class="control-group">
 						<label class="control-label">图片<span class="required">*</span></label>
 						<div class="controls">
-							<#if bean?? && webResource.imageUrl ?? > <img
+							<#if webResource?? && webResource.imageUrl ?? > <img
 								src="${contextPath}${(webResource.imageUrl)?if_exists}" width="180"
 								height="180" id="imgShow" /> <#else> <img
 								src="${contextPath}/common/image/default-pic.png" width="180"

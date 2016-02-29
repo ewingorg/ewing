@@ -21,7 +21,6 @@ import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;
 import com.ewing.core.app.action.base.ResponseUtils;
 import com.ewing.core.jdbc.util.PageBean;
-import com.ewing.util.BeanCopy;
 
 /**
  * 网站资源展示类

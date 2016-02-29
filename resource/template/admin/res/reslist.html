@@ -145,15 +145,45 @@
 		
 		$("a[name='offline_action']").bind('click', function() {
 			var resourceId = $(this).attr('value');
-			var _errZoneId= errZoneId && errZoneId!=''? errZoneId:'errtip';
+			var _errZoneId=  'errtip';
 			var offlineUrl = '${contextPath}/Admin-Res-offline.action?resourceId='+resourceId;
 			common.alert({
 				content : '是否下架选中项？',
 				showAction : true,
-				actionContent : '删除',
+				actionContent : '确定',
 				actionFn : function() { 
 					ajax.syncJsonRequest({
-						url : url,
+						url : offlineUrl,
+						success : function(data) {
+							if (!data || !data.success) {
+								$('#'+_errZoneId).html(data.retinfo);
+								$('#'+_errZoneId).show();
+							}
+							if (data.success) {
+								common.alert({
+									content : data.retinfo,
+									closeFn : function() {
+										 mainFrame.addContainer(queryUrl); 
+									}
+								});
+							}
+						}
+					});
+				}
+			});
+		});
+		
+		$("a[name='delete_action']").bind('click', function() {
+			var resourceId = $(this).attr('value');
+			var _errZoneId=  'errtip';
+			var offlineUrl = '${contextPath}/Admin-Res-delete.action?resourceId='+resourceId;
+			common.alert({
+				content : '是否删除选中项？',
+				showAction : true,
+				actionContent : '确定',
+				actionFn : function() { 
+					ajax.syncJsonRequest({
+						url : offlineUrl,
 						success : function(data) {
 							if (!data || !data.success) {
 								$('#'+_errZoneId).html(data.retinfo);

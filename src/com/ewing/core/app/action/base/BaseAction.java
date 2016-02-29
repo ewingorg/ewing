@@ -400,7 +400,11 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
      * @param dataModel
      */
     public <T> void renderWithHead(String template, Map dataModel) {
-        dataModel.put("hl", true);
+        String hl = request.getParameter("hl");
+        if (hl != null && !Boolean.valueOf(hl))
+            dataModel.put("hl", false);
+        else
+            dataModel.put("hl", true);
         render(template, dataModel);
     }
 
@@ -468,18 +472,11 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
         return url.indexOf("?") > -1 ? url : url + "?aqwertyu=123";
     }
 
-  /*  public String getUTFParameter(String key) {
-        String value = request.getParameter(key);
-        if (StringUtil.isEmpty(value) || (value != null && value.equals("undefined")))
-            return null;
-        try {
-            return StringUtil.iso2Utf8(value);
-        } catch (UnsupportedEncodingException e) {
-            logger.error(e);
-        }
-        return null;
-    }
-*/
+    /*
+     * public String getUTFParameter(String key) { String value = request.getParameter(key); if (StringUtil.isEmpty(value) || (value != null
+     * && value.equals("undefined"))) return null; try { return StringUtil.iso2Utf8(value); } catch (UnsupportedEncodingException e) {
+     * logger.error(e); } return null; }
+     */
     public Integer getIntegerParameter(String key) {
         String value = request.getParameter(key);
         if (StringUtil.isEmpty(value) || (value != null && value.equals("undefined")))
