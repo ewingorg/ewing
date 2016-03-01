@@ -8,8 +8,8 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="userId" type="string">
-            <column name="user_id" length="50" not-null="true">
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id" not-null="true">
                 <comment>&#201;&#204;&#181;&#234;&#181;&#196;&#180;&#180;&#189;&#168;&#213;&#223;ID</comment>
             </column>
         </property>

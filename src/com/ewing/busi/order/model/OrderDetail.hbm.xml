@@ -28,6 +28,11 @@
                 <comment>&#201;&#204;&#187;&#167;&#211;&#195;&#187;&#167;ID</comment>
             </column>
         </property>
+        <property name="priceId" type="int">
+            <column name="price_id" not-null="true">
+                <comment>&#215;&#202;&#212;&#180;id&#163;&#172;&#177;&#237;web_resource&#214;&#247;&#188;&#252;</comment>
+            </column>
+        </property> 
         <property name="resourceId" type="int">
             <column name="resource_id" not-null="true">
                 <comment>&#215;&#202;&#212;&#180;id&#163;&#172;&#177;&#237;web_resource&#214;&#247;&#188;&#252;</comment>

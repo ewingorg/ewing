@@ -1,0 +1,139 @@
+ <#include "admin/common/include/html_head.html"> <#include
+"admin/common/include/sysparam.html">
+ 
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN EXTRAS PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>商铺设置
+				</div>
+			</div>
+			<div class="portlet-body form">  
+			 	 <div class="alert alert-error " id="errtip" style="display: none;"></div>
+ 				<form action="${contextPath}/Admin-Shop-save.action" id="shopEditForm"
+									class="form-horizontal" method="post" onSubmit="return false;">
+				<!-- BEGIN FORM--> 
+					<input type="hidden" name="id" value="${(shop.id)?if_exists}" /> 
+					<#if shop?? >
+					<div class="control-group">
+						<label class="control-label">商铺地址</label>
+						<div class="controls">
+							 ${shopUrl}
+						</div>
+					</div>
+					 </#if>
+					<div class="control-group">
+						<label class="control-label">商铺名称<span class="required">*</span></label>
+						<div class="controls">
+							<input class="m-wrap long span4" name="shopName" require="true" datatype="require|limit"
+								type="text" min="1" max="50" msg="商铺名称不能为空"
+								value="${(shop.shopName)?if_exists}" />
+						</div>
+					</div>
+					 
+					<div class="control-group">
+						<label class="control-label">商品图标<span class="required">*</span></label>
+						<div class="controls">
+							<#if shop?? && shop.shopIcon ?? > <img
+								src="${contextPath}${(shop.shopIcon)?if_exists}" width="180"
+								height="180" id="imgShow" /> <#else> <img
+								src="${contextPath}/common/image/default-pic.png" width="180"
+								height="180" id="imgShow" /> </#if>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"></label>
+						<div class="controls">
+							<span class="btn  fileinput-button"> <i
+								class="icon-plus icon-white"></i> <span>选择文件...</span> <input
+								type="file" id="upfile1" name="upfile1" />
+							</span> <input type="hidden" 
+							 datatype="require"  require="true" msg="图片不能为空" id="shopIcon" name="shopIcon" value="${(shop.shopIcon)?if_exists}" /> <a
+								class="btn start" onclick="uploadNavPic();"> <i
+								class="icon-upload icon-white"></i> <span>上传</span>
+							</a> <br> <span class="alert alert-error" id="upfile1_error_tip"
+								style="display: none;"></span>
+							<div class="alert alert-success" id="upfile1_detail"
+								style="display: none;">
+								<div class="fileName">
+									文件名称:<span></span>
+								</div>
+								<div class="fileSize">
+									文件大小:<span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">商铺描述<span class="required">*</span></label>
+						<div class="controls">
+							<textarea class="span6  m-wrap" rows="2" id="shopDesc"
+								name="shopDesc" require="true" datatype="require|limit" type="text" min="1"
+								max="50" msg="商铺描述不能为空|简单描述不能超过200个字符">${(shop.shopDesc)?if_exists}</textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">email<span class="required">*</span></label>
+						<div class="controls">
+							<input class="m-wrap medium" name="email"  require="true" datatype="require|email|limit" type="text" min="1"
+								max="100" msg="email不能为空|请填写正确的email"
+								value="${(shop.email)?if_exists}" />
+						</div>
+					</div>
+					 <div class="control-group">
+						<label class="control-label">电话<span class="required">*</span></label>
+						<div class="controls">
+							<input class="m-wrap medium" name="email"  require="true" datatype="require|limit" type="text" min="1"
+								max="20" msg="电话不能为空"
+								value="${(shop.email)?if_exists}" />
+						</div>
+					</div>
+				    <div class="control-group">
+						<label class="control-label">地址<span class="required">*</span></label>
+						<div class="controls">
+							<input class="m-wrap medium" name="addr"  require="true" datatype="require|limit" type="text" min="1"
+								max="200" msg="地址不能为空"
+								value="${(shop.addr)?if_exists}" />
+						</div>
+					</div>
+				 
+					<div class="form-actions">
+						<button type="button" id="shop_save_btn" class="btn green">保存</button>		 
+					</div>
+			</form>			
+			 				
+			</div>
+		</div>
+		<!-- END EXTRAS PORTLET-->
+	</div>
+</div>
+ 
+	
+<script>
+	$(document).ready(function() { 
+		
+		tableAction.initSaveAction({
+			formId : 'shopEditForm',
+			saveUrl : '${contextPath}/Admin-Shop-save.action',
+			saveBtnId : 'shop_save_btn',  
+			queryUrl : '${contextPath}/Admin-Shop-show.action', 
+		});  
+	});
+	
+	 
+	function uploadNavPic() {
+		ajax.upload({
+			fileEleId : 'upfile1',
+			filePathId : 'shopIcon',
+			successFn : function(data) {
+				var isImg = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/
+						.test(data.result.webfilePath);
+				if (isImg)
+					$('#imgShow').attr("src", data.result.webfilePath);
+			}
+		})
+	}
+</script>
+

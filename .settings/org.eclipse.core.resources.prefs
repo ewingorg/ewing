@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//resource/config/properties/system.properties=UTF-8
 encoding//resource/template=UTF-8
 encoding//resource/template/admin=UTF-8
 encoding//resource/template/admin/attr/dynamicform.html=UTF-8

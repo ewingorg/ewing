@@ -16,6 +16,7 @@ public class OrderCart implements java.io.Serializable {
     private int itemCount;
     private float unitPrice;
     private float totalPrice;
+    private int priceId;
     private String iseff;
     private Date createTime;
     private Date lastUpdate;
@@ -23,6 +24,14 @@ public class OrderCart implements java.io.Serializable {
     public OrderCart() {
     }
  
+    public int getPriceId() {
+        return priceId;
+    }
+
+    public void setPriceId(int priceId) {
+        this.priceId = priceId;
+    }
+
     public Integer getId() {
         return this.id;
     }

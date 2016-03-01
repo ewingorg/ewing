@@ -21,8 +21,19 @@ public class OrderDetail implements java.io.Serializable {
     private float totalPrice;
     private String status;
     private String iseff;
+    private int priceId;
     private Date createTime;
     private Date lastUpdate;
+
+    public int getPriceId() {
+        return priceId;
+    }
+
+
+    public void setPriceId(int priceId) {
+        this.priceId = priceId;
+    }
+
 
     public OrderDetail() {
     }

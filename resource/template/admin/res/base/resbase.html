@@ -183,7 +183,7 @@
 </form>				
 <script>
 	$(document).ready(function() {
-		 initAttr();
+	 
 		$("#res_return_btn").bind("click", function() {
 			var url = '${contextPath}/Admin-Res-show.action';
 			mainFrame.addContainer(url);
@@ -193,14 +193,6 @@
 		$("#chooseCategoryBtn").bind("click", function() {
 			var url = '${contextPath}/Admin-ResCategory-selectCategory.action?categoryId=categoryId&categoryName=categoryName';
 			common.popHtml(url, 'navModel');
-		});
-		
-		$("[name='templateId']").bind("change", function() {
-			  var templateId = $(this).val();
-			  if(templateId =='')
-				  return;  
-			  var url = '${contextPath}/Admin-AttrConf-showDynamicForm.action?templateId='+templateId;
-			  common.writeHtml(url,'attrDiv');
 		});
 		 
 		
@@ -215,14 +207,7 @@
 		});  
 	});
 	
-	function initAttr(){ 
-		  var templateId = $("[name='templateId']").val();
-		  var resourceId = $("[name='id']").val(); 
-		  if(templateId =='' || resourceId == '')
-			  return;  
-		  var url = '${contextPath}/Admin-AttrConf-showDynamicForm.action?templateId='+templateId+"&resourceId="+resourceId;
-		  common.writeHtml(url,'attrDiv'); 
-	}
+	 
 	
 	function uploadNavPic() {
 		ajax.upload({

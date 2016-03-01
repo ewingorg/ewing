@@ -31,6 +31,5 @@ public class SellerService {
         if (StringUtils.isEmpty(userName))
             throw new IllegalArgumentException("userName should not be null");
         return sellerDao.findUser(userName);
-    }
-
+    } 
 }

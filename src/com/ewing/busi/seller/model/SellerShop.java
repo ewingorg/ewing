@@ -10,7 +10,7 @@ import java.util.Date;
 public class SellerShop implements java.io.Serializable {
 
     private Integer id;
-    private String userId;
+    private Integer userId;
     private String shopName;
     private String shopIcon;
     private String shopDesc;
@@ -24,18 +24,6 @@ public class SellerShop implements java.io.Serializable {
     public SellerShop() {
     }
 
-    public SellerShop(String userId, String shopName, String shopIcon, String shopDesc,
-            Date createTime, Date lastUpdate) {
-        this.userId = userId;
-        this.shopName = shopName;
-        this.shopIcon = shopIcon;
-        this.shopDesc = shopDesc;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
-    }
-
-    
-
     public Integer getId() {
         return this.id;
     }
@@ -44,11 +32,11 @@ public class SellerShop implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

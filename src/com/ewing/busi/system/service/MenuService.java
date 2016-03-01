@@ -37,7 +37,7 @@ public class MenuService {
 	public List<TreeObject> queryModuleTree(UserInfo userInfo)
 			throws DaoException {
 		List<SysMenu> menuList = cacheModelService.find(
-				" iseff='1' order by sort", SysMenu.class);
+				" iseff='1' order by parentid,sort", SysMenu.class);
 		List<TreeObject> moduleList = new ArrayList<TreeObject>();
 		for (int i = 0; i < menuList.size(); i++) {
 			SysMenu sysMenu = (SysMenu) menuList.get(i);
