@@ -9,6 +9,9 @@
 			<column name="id" />
 			<generator class="identity" />
 		</id>
+		 <property name="templatePackageId" type="java.lang.Integer">
+			<column name="template_package_id" not-null="true" />
+		</property>
 		<property name="name" type="java.lang.String">
 			<column name="name" length="50" not-null="true" />
 		</property>

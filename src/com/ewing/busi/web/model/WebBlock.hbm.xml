@@ -12,6 +12,12 @@
 		<property name="parentId" type="java.lang.Integer">
 			<column name="parent_id" not-null="true" />
 		</property>
+		<property name="userId" type="java.lang.Integer">
+			<column name="user_id" not-null="true" />
+		</property>
+		<property name="shopId" type="java.lang.Integer">
+			<column name="shop_id" not-null="true" />
+		</property>
 		<property name="groupType" type="java.lang.String">
 			<column name="group_type" length="2" not-null="true" />
 		</property>

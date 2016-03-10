@@ -14,6 +14,7 @@ import com.ewing.busi.category.service.ResCategoryService;
 import com.ewing.busi.resource.model.WebResource;
 import com.ewing.busi.resource.service.WebResourceScreenService;
 import com.ewing.busi.resource.service.WebResourceService;
+import com.ewing.busi.seller.service.SellerShopService;
 import com.ewing.busi.system.model.SysParam;
 import com.ewing.busi.web.service.TemplateService;
 import com.ewing.common.constant.SysParamCode;
@@ -41,6 +42,8 @@ public class ResAction extends BaseAction {
     private WebResourceScreenService webResourceScreenService;
     @Resource
     private ResCategoryService resCategoryService;
+    @Resource
+    private SellerShopService sellerShopService;
 
     /**
      * 查詢列表
@@ -122,9 +125,9 @@ public class ResAction extends BaseAction {
             WebResource webResource = new WebResource();
             this.buildPageData(webResource);
             webResource.setUserId(getLoginUserId());
-
-            if (resourceId!=null) {
-                WebResource oldWebResource = webResourceService.findById(resourceId); 
+            webResource.setShopId(sellerShopService.checkAndReturnShopId(getLoginUserId()));
+            if (resourceId != null) {
+                WebResource oldWebResource = webResourceService.findById(resourceId);
                 webResource.setId(resourceId);
                 webResource.setLongDesc(oldWebResource.getLongDesc());
                 webResourceService.editResource(webResource);
@@ -146,8 +149,8 @@ public class ResAction extends BaseAction {
     public void saveResLongDesc() {
         ResponseData responseData = null;
         try {
-            Integer resourceId = getIntegerParameter("resourceId"); 
-            String longDesc  = request.getParameter("longDesc");
+            Integer resourceId = getIntegerParameter("resourceId");
+            String longDesc = request.getParameter("longDesc");
             WebResource webResource = webResourceService.findById(resourceId);
             if (StringUtils.isEmpty(longDesc) || webResource == null) {
                 responseData = ResponseUtils.fail("保存失败！");

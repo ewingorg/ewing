@@ -1749,7 +1749,7 @@ table {
   line-height: 20px;
   text-align: left;
   vertical-align: top;
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #AAAAAA;
 }
 
 .table th {
@@ -1770,7 +1770,7 @@ table {
 }
 
 .table tbody + tbody {
-  border-top: 2px solid #dddddd;
+  border-top: 2px solid #AAAAAA;
 }
 
 .table-condensed th,
@@ -1779,7 +1779,7 @@ table {
 }
 
 .table-bordered {
-  border: 1px solid #dddddd;
+  border: 1px solid #AAAAAA;
   border-collapse: separate;
   *border-collapse: collapse;
   border-left: 0;
@@ -1790,7 +1790,7 @@ table {
 
 .table-bordered th,
 .table-bordered td {
-  border-left: 1px solid #dddddd;
+  border-left: 1px solid #AAAAAA;
 }
 
 .table-bordered caption + thead tr:first-child th,
@@ -3743,7 +3743,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .nav-tabs > li > a:hover {
-  border-color: #eeeeee #eeeeee #dddddd;
+  border-color: #eeeeee #eeeeee #AAAAAA;
 }
 
 .nav-tabs > .active > a,
@@ -3971,7 +3971,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .tabs-left > .nav-tabs > li > a:hover {
-  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+  border-color: #eeeeee #AAAAAA #eeeeee #eeeeee;
 }
 
 .tabs-left > .nav-tabs .active > a,
@@ -3994,7 +3994,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .tabs-right > .nav-tabs > li > a:hover {
-  border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+  border-color: #eeeeee #eeeeee #eeeeee #AAAAAA;
 }
 
 .tabs-right > .nav-tabs .active > a,
@@ -4610,7 +4610,7 @@ input[type="submit"].btn.btn-mini {
   line-height: 38px;
   text-decoration: none;
   background-color: #ffffff;
-  border: 1px solid #dddddd;
+  border: 1px solid #AAAAAA;
   border-left-width: 0;
 }
 

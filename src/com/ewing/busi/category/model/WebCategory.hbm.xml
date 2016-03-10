@@ -21,6 +21,9 @@
 		<property name="level" type="java.lang.String">
 			<column name="level" length="1" not-null="true" />
 		</property>
+		<property name="shopId" type="java.lang.Integer">
+			<column name="shop_id" not-null="true" />
+		</property>
 		<property name="parentid" type="java.lang.Integer">
 			<column name="parentid" not-null="true" />
 		</property>

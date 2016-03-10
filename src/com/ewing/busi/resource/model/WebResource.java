@@ -11,6 +11,7 @@ public class WebResource implements java.io.Serializable {
 
     private Integer id;
     private Integer userId;
+    private Integer shopId;
     private String name;
     private Integer templateId;
     private Integer categoryId;
@@ -41,16 +42,19 @@ public class WebResource implements java.io.Serializable {
     public WebResource() {
     }
 
-    public WebResource(String name, String imageUrl, String shortDesc, String longDesc,
-            String iseff, Date createTime, Date lastUpdate) {
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.shortDesc = shortDesc;
-        this.longDesc = longDesc;
-        this.iseff = iseff;
-        this.createTime = createTime;
-        this.lastUpdate = lastUpdate;
+   
+
+    public Integer getShopId() {
+        return shopId;
     }
+
+
+
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+
 
     public Integer getIsHot() {
         return isHot;

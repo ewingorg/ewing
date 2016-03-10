@@ -318,7 +318,7 @@ Landscape phone to portrait tablet
   ul.page-sidebar-menu > li.open > a,
   ul.page-sidebar-menu > li > a:hover {
     color: #666666 !important;
-    background-color: #dddddd !important;
+    background-color: #AAAAAA !important;
   }
   ul.page-sidebar-menu > li.open > a {
     border-bottom-color: transparent !important;
@@ -336,7 +336,7 @@ Landscape phone to portrait tablet
   ul.page-sidebar-menu ul.sub-menu > li.active > a,
   ul.page-sidebar-menu ul.sub-menu > li > a:hover {
     color: #666666 !important;
-    background: #dddddd !important; 
+    background: #AAAAAA !important; 
   }
 
   .page-sidebar .sidebar-search input {

@@ -15,6 +15,8 @@ import java.sql.Timestamp;
 public class WebBlock {
 
 	private Timestamp createTime;
+	private Integer userId;
+	private Integer shopId;
 	private String groupKey;
 	private Integer id;
 	private String imageUrl;
@@ -28,7 +30,23 @@ public class WebBlock {
 	private String tempalte;
 	private String shortDesc;
 	
-	public String getShortDesc() {
+	public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getShortDesc() {
 		return shortDesc;
 	}
 

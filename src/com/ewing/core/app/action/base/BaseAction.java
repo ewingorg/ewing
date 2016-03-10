@@ -57,6 +57,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
     public FreeMarkerConfigurer freeMarkerConfigurer;
     @Resource
     public SysParamService sysParamService;
+  
 
     protected final static Gson gson = new Gson();
 

@@ -9,7 +9,7 @@ Pricing table
 }
 
 .pricing-table:hover {
-  border-color: #4b8df8;
+  border-color: #AAAAAA;
 }
 
 .pricing-table h3 {
@@ -108,7 +108,7 @@ Pricing table
 }
 
 .pricing-table.selected {
-  background-color: #4b8df8;
+  background-color: #AAAAAA;
 }
 
 .pricing-table.selected:hover {
@@ -138,7 +138,7 @@ Pricing table(Alternative)
 }
 
 .pricing-table2:hover {
-  border-color: #4b8df8;
+  border-color: #AAAAAA;
 }
 
 .pricing-table2 h3 {
@@ -237,7 +237,7 @@ Pricing table(Alternative)
 }
 
 .pricing-table2.selected {
-  background-color: #4b8df8;
+  background-color: #AAAAAA;
 }
 
 .pricing-table2.selected .rate {

@@ -52,7 +52,10 @@ ul, menu, dir {
 							allowtransparency="yes" style=""></iframe>
 					</div>
 					<div id="flyTip"
-						style="display: none; absolute; background-color: #FFFFFF; filter: alpha(opacity = 50); -moz-opacity: 0.5; -khtml-opacity: 0.5; opacity: 0.5;">
+						style="display: none;position: absolute; background-color: #FFFFFF; filter: alpha(opacity = 50); -moz-opacity: 0.5; -khtml-opacity: 0.5; opacity: 0.5;">
+					</div>
+					<div id="flyAppTip"
+						style="display: none;position: absolute; background-color: gray; filter: alpha(opacity = 50); -moz-opacity: 0.5; -khtml-opacity: 0.5; opacity: 0.5;">
 					</div>
 					<div class="span4">
 						<div class="first_container">
@@ -86,40 +89,73 @@ ul, menu, dir {
 			saveBtnId : 'shop_save_btn',
 			queryUrl : '${contextPath}/Admin-Shop-show.action',
 		});
-		var isFlyTipShow = 0;
+	 
 
-		$("#minAppDiv").mouseenter(function(e) {
-			var minApp = document.getElementById('minApp');
-			var offsetLeft = minApp.offsetLeft;
-			var offsetTop = minApp.offsetTop;
-			var offsetWidth = minApp.offsetWidth;
-			var offsetHeight = minApp.offsetHeight;
-
-			if (isFlyTipShow == 1)
-				return false;
-			var flyTip = $('#flyTip');
-			flyTip.css("top", offsetTop);
-			flyTip.css("left", offsetLeft);
-			flyTip.css("width", offsetWidth);
-			flyTip.css("height", offsetHeight);
-			flyTip.show();
-			isFlyTipShow = 1;
+		$("#minAppDiv").mouseenter(function(e) {   
+			flyTip($('#minApp')); 
 		});
 
-		$("#flyTip").mouseleave(function(e) {
-			if (isFlyTipShow == 0)
-				return false;
+		$("#flyTip").mouseleave(function(e) { 
 			var flyTip = $('#flyTip');
-			flyTip.hide();
-			isFlyTipShow = 0;
+			 flyTip.hide(); 
 		});
 
 		$('#preview_btn').bind("click", function() { 
-			 window.open('${shopUrl}');
+			var aa = $('#minApp').contents().find('.templateKey').each(function(e){
+				$(this).mouseenter(function(e) {   
+					flyAppTip($(this)); 
+				}); 
+				
+			}); 
+			//var aa = = $(window.frames["iframeName"].document).find(".templateKey").html();
+		//	 window.open('${shopUrl}');
 		});
-		  
+		$("#flyAppTip").mouseleave(function(e) { 
+			var flyTip = $('#flyAppTip');
+			 flyTip.hide(); 
+		});
 	});
 
+	function flyTip(object){ 
+		
+		 var offset =object.offset();
+		console.log('top:'+offset.top);
+		
+		var offsetLeft = offset.left;
+		var offsetTop = offset.top;
+		var offsetWidth = object.css('width');
+		var offsetHeight = object.css('height');
+ 		console.log(object[0].tagName+":"+offsetLeft+","+offsetTop+","+offsetWidth+","+offsetHeight);
+		var flyTip = $('#flyTip');
+		flyTip.css("top", offsetTop);
+		flyTip.css("left", offsetLeft);
+		flyTip.css("width", offsetWidth);
+		flyTip.css("height", offsetHeight);
+		flyTip.show();
+		
+	}
+	
+	function flyAppTip(object){ 
+		var minApp = $('#minApp');
+		var minAppOffset = minApp.offset();
+		
+		 var offset =object.offset();
+		console.log('top:'+offset.top);
+		
+		var offsetLeft = offset.left+minAppOffset.left;
+		var offsetTop = offset.top+minAppOffset.top;
+		var offsetWidth = object.css('width') ;
+		var offsetHeight = object.css('height') ;
+		console.log(object[0].tagName+":"+offsetLeft+","+offsetTop+","+offsetWidth+","+offsetHeight);
+		var flyTip = $('#flyAppTip');
+		flyTip.css("top", offsetTop);
+		flyTip.css("left", offsetLeft);
+		flyTip.css("width", offsetWidth);
+		flyTip.css("height", offsetHeight);
+		flyTip.show();
+		
+	}
+	 
 	function uploadNavPic() {
 		ajax.upload({
 			fileEleId : 'upfile1',

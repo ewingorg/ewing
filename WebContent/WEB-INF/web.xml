@@ -27,9 +27,9 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	 <filter>
+	<filter>
 		<filter-name>EncodingFilter</filter-name>
-		<filter-class>com.ewing.web.filter.EncodingFilter</filter-class>
+		<filter-class>com.ewing.core.app.filter.EncodingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>

@@ -19,10 +19,20 @@ public class WebTemplate implements java.io.Serializable {
 	private String iseff;
 	private Timestamp createTime;
 	private String templateType;
+	private Integer templatePackageId;
+	
 	@IgnoreField
 	private String groupKeysTranslate;
 
-	public String getGroupKeysTranslate() {
+	public Integer getTemplatePackageId() {
+        return templatePackageId;
+    }
+
+    public void setTemplatePackageId(Integer templatePackageId) {
+        this.templatePackageId = templatePackageId;
+    }
+
+    public String getGroupKeysTranslate() {
 		return groupKeysTranslate;
 	}
 

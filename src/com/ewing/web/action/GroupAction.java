@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.ewing.busi.system.model.SysParam;
 import com.ewing.busi.web.model.WebBlock;
-import com.ewing.busi.web.model.WebGroup;
+import com.ewing.busi.web.model.WebTemplateGroupkey;
 import com.ewing.common.constant.GroupType;
 import com.ewing.common.constant.SysParamCode;
 import com.ewing.core.app.action.base.BaseAction;
@@ -43,7 +43,7 @@ public class GroupAction extends BaseAction {
 					: Integer.valueOf(pageSizeStr);
 			String condition = bulidConditionSql();
 			PageBean pageBean = baseModelService.pageQuery(condition,
-					bulidOrderBySql(), pageSize, page, WebGroup.class);
+					bulidOrderBySql(), pageSize, page, WebTemplateGroupkey.class);
 			List<SysParam> iseffCode = sysParamService
 					.getSysParam(SysParamCode.ISEFF);
 			List<SysParam> groupType = sysParamService
@@ -66,7 +66,7 @@ public class GroupAction extends BaseAction {
 		try {
 			String id = request.getParameter("id");
 			if (!StringUtils.isEmpty(id)) {
-				WebGroup webGroup = findOne(Integer.valueOf(id), WebGroup.class);
+				WebTemplateGroupkey webGroup = findOne(Integer.valueOf(id), WebTemplateGroupkey.class);
 				dataModel.put("bean", webGroup);
 			}
 			List<SysParam> iseffCode = sysParamService
@@ -88,7 +88,7 @@ public class GroupAction extends BaseAction {
 		ResponseData responseData = null;
 		try {
 			String id = request.getParameter("id");
-			WebGroup webGroup = new WebGroup();
+			WebTemplateGroupkey webGroup = new WebTemplateGroupkey();
 			this.buildPageData(webGroup);
 
 			if (!StringUtils.isEmpty(id)) {
@@ -119,8 +119,8 @@ public class GroupAction extends BaseAction {
 			}
 			String[] selectArr = selectItems.split(",");
 			for (String id : selectArr) {
-				WebGroup webGroup = baseModelService.findOne(
-						Integer.valueOf(id), WebGroup.class);
+				WebTemplateGroupkey webGroup = baseModelService.findOne(
+						Integer.valueOf(id), WebTemplateGroupkey.class);
 				if (webGroup != null)
 					baseModelService.delete(webGroup);
 			}

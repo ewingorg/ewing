@@ -57,7 +57,7 @@ select:focus {
 
 .btn.blue-stripe
 {
-	border-left: 3px solid #4d90fe;
+	border-left: 3px solid #AAAAAA;
 }
 
 .btn.purple-stripe
@@ -102,7 +102,7 @@ select:focus {
 {
   color: white;  
   text-shadow: none;	
-  background-color: #4d90fe;
+  background-color: #AAAAAA;
 }
 .btn.blue:hover, 
 .btn.blue:focus, 
@@ -110,7 +110,7 @@ select:focus {
 .btn.blue.active,
 .btn.blue[disabled],
 .btn.blue.disabled {  
-  background-color: #0362fd !important;
+  background-color: #AAAAAA !important;
   color: #fff !important;
 }
 

@@ -1,4 +1,4 @@
-package com.ewing.web.action.filter;
+package com.ewing.core.app.filter;
 
 import java.io.IOException;
 

@@ -212,15 +212,15 @@ Timeline UI Base
 
 /* Blue */
 .timeline li.timeline-blue .timeline-body:after {
-	border-right-color: #4b8df8;
+	border-right-color: #AAAAAA;
 }
 
 .timeline li.timeline-blue .timeline-body {
-	 background: #4b8df8;
+	 background: #AAAAAA;
 }
 
 .timeline li.timeline-blue .timeline-time span.time {
-	 color: #4b8df8; 
+	 color: #AAAAAA; 
 }
 
 /* Purple */
@@ -296,7 +296,7 @@ Timeline UI Base
 
 	.timeline li.timeline-blue .timeline-body:after {
 		border-right-color: transparent;
-		border-bottom-color: #4b8df8;
+		border-bottom-color: #AAAAAA;
 	}
 
 	.timeline li.timeline-green .timeline-body:after {

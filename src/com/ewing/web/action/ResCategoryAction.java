@@ -13,6 +13,7 @@ import com.ewing.busi.category.dto.ResCategoryTreeDto;
 import com.ewing.busi.category.model.WebCategory;
 import com.ewing.busi.category.service.ResCategoryService;
 import com.ewing.busi.resource.model.WebResource;
+import com.ewing.busi.seller.service.SellerShopService;
 import com.ewing.busi.system.model.SysParam;
 import com.ewing.common.constant.SysParamCode;
 import com.ewing.core.app.action.base.BaseAction;
@@ -34,6 +35,8 @@ public class ResCategoryAction extends BaseAction {
     private static final String SELECT_FORM = "/admin/rescategory/selectcategory.html";
     @Resource
     private ResCategoryService resCategoryService;
+    @Resource
+    public SellerShopService sellerShopService;
 
     /**
      * 获取分类的树结构
@@ -132,6 +135,7 @@ public class ResCategoryAction extends BaseAction {
             WebCategory webCatagory = new WebCategory();
             this.buildPageData(webCatagory);
             webCatagory.setUserId(getLoginUserId());
+            webCatagory.setShopId(sellerShopService.checkAndReturnShopId(getLoginUserId()));
             if (!StringUtils.isEmpty(id)) {
                 webCatagory.setId(Integer.valueOf(id));
                 baseModelService.update(webCatagory);

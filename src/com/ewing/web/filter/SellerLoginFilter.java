@@ -45,7 +45,7 @@ public class SellerLoginFilter implements Filter {
             try {
                 userInfo = SessionControl.getUserInfo(request);
             } catch (SessionException e) {
-                logger.error("fail to get user session!", e);
+                //logger.error("fail to get user session!", e);
             }
             if (userInfo == null) {
                 response.sendRedirect(loginPage + "?outsession=0");

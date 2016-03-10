@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
 import com.ewing.busi.system.model.SysParam;
-import com.ewing.busi.web.model.WebGroup;
+import com.ewing.busi.web.model.WebTemplateGroupkey;
 import com.ewing.busi.web.model.WebTemplate;
 import com.ewing.common.constant.GroupType;
 import com.ewing.core.app.constant.IsEff;
@@ -65,7 +65,7 @@ public class GroupService {
 		if (groupKeySet.isEmpty())
 			return templateList;
 		
-		Map<String, WebGroup> groupKeyMap = findWebGroupByName(groupKeySet
+		Map<String, WebTemplateGroupkey> groupKeyMap = findWebGroupByName(groupKeySet
 				.toArray(new String[groupKeySet.size()]));
 		StringBuffer translate = new StringBuffer();
 
@@ -91,13 +91,13 @@ public class GroupService {
 	 * @param groupKey
 	 * @return
 	 */
-	public Map<String, WebGroup> findWebGroupByName(String[] groupKey) {
-		Map<String, WebGroup> map = new HashMap<String, WebGroup>();
-		List<WebGroup> list = baseDao.find(
+	public Map<String, WebTemplateGroupkey> findWebGroupByName(String[] groupKey) {
+		Map<String, WebTemplateGroupkey> map = new HashMap<String, WebTemplateGroupkey>();
+		List<WebTemplateGroupkey> list = baseDao.find(
 				"groupKey in (" + SqlUtil.array2InCondition(groupKey)
 						+ ") and iseff=" + IsEff.EFFECTIVE + " order by id",
-				WebGroup.class);
-		for (WebGroup webGroup : list) {
+				WebTemplateGroupkey.class);
+		for (WebTemplateGroupkey webGroup : list) {
 			map.put(webGroup.getGroupKey(), webGroup);
 		}
 		return map;
@@ -108,11 +108,11 @@ public class GroupService {
 	 */
 	public List<SysParam> getGroupParamList(GroupType groupType)
 			throws DaoException {
-		List<WebGroup> grouplist = baseDao.find(
+		List<WebTemplateGroupkey> grouplist = baseDao.find(
 				"groupType='" + groupType.getCode() + "' and iseff="
-						+ IsEff.EFFECTIVE + " order by id", WebGroup.class);
+						+ IsEff.EFFECTIVE + " order by id", WebTemplateGroupkey.class);
 		List<SysParam> sysParamList = new ArrayList<SysParam>();
-		for (WebGroup g : grouplist) {
+		for (WebTemplateGroupkey g : grouplist) {
 			SysParam p = new SysParam();
 			p.setParamValue(g.getGroupKey());
 			p.setParamName(g.getName());
@@ -126,10 +126,10 @@ public class GroupService {
 	 * 获取所有分组列表，并封装到{@link #SysParam}对象列表返回。
 	 */
 	public List<SysParam> getGroupParamList() throws DaoException {
-		List<WebGroup> grouplist = baseDao.find("iseff=" + IsEff.EFFECTIVE
-				+ " order by id", WebGroup.class);
+		List<WebTemplateGroupkey> grouplist = baseDao.find("iseff=" + IsEff.EFFECTIVE
+				+ " order by id", WebTemplateGroupkey.class);
 		List<SysParam> sysParamList = new ArrayList<SysParam>();
-		for (WebGroup g : grouplist) {
+		for (WebTemplateGroupkey g : grouplist) {
 			SysParam p = new SysParam();
 			p.setParamValue(g.getGroupKey());
 			p.setParamName(g.getName());

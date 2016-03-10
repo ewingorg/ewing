@@ -5,7 +5,7 @@ Blue theme
 Reset and overrides  
 ***/
 body {
- /*  background-color: #4b8df8 !important; */
+ /*  background-color: #AAAAAA !important; */
 }
 /***
 Page header
@@ -29,10 +29,10 @@ Page header
 Page sidebar
 ***/
 .page-sidebar {
- /*  background-color: #4b8df8; */ 
+ /*  background-color: #AAAAAA; */ 
 }
 ul.page-sidebar-menu > li > a {
-  border-top: 1px solid #1c95dc !important;
+  border-top: 1px solid #AAAAAA !important;
  /*  color: #ffffff !important; */
 }
 ul.page-sidebar-menu > li:last-child > a {
@@ -44,10 +44,10 @@ ul.page-sidebar-menu > li a i {
 ul.page-sidebar-menu > li.open > a,
 ul.page-sidebar-menu > li > a:hover,
 ul.page-sidebar-menu > li:hover > a {
-  background:  #4b8df8;
+  background:  #AAAAAA;
 }
 ul.page-sidebar-menu > li.active > a {
-  background: #4d90fe !important;
+  background: #AAAAAA !important;
   border-top-color: transparent !important;
   color: #ffffff;
 }
@@ -107,7 +107,7 @@ ul.page-sidebar-menu > li.active > a .arrow.open:before {
   color: #51b1e9 !important;
 }
 .page-sidebar .sidebar-search input {
-  background-color: #4b8df8 !important;
+  background-color: #AAAAAA !important;
   color: #bfbfbf !important;
 }
 .page-sidebar .sidebar-search .input-box {
@@ -125,14 +125,14 @@ Sidebar toggler
 }
 /* search box bg color on expanded */
 .page-sidebar-closed .page-sidebar .sidebar-search.open {
-  background-color: #4b8df8 !important;
+  background-color: #AAAAAA !important;
 }
 .page-sidebar-closed .page-sidebar .sidebar-search.open .remove {
   background-image: url("../../img/sidebar-search-close-blue.png");
 }
 /* sub menu bg color on hover menu item */
 .page-sidebar-closed ul.page-sidebar-menu > li:hover .sub-menu {
-  background-color: #4b8df8;
+  background-color: #AAAAAA;
 }
 /***
 Horizontal Menu(new in v1.2)
@@ -244,7 +244,7 @@ Gritter Notifications
     background-color: #125e8b !important;
   }
   .page-boxed .page-container {
-    background-color: #4b8df8;
+    background-color: #AAAAAA;
     border-left: 1px solid #1c98e1;
     border-bottom: 1px solid #1c98e1;
   }

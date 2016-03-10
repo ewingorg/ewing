@@ -10,106 +10,116 @@ import com.ewing.core.app.anno.IgnoreField;
 
 public class WebCategory implements java.io.Serializable {
 
-	// Fields
+    // Fields
 
-	private Integer id;
+    private Integer id;
 
-	private Integer userId;
+    private Integer userId;
 
-	private String name;
+    private Integer shopId;
 
-	private String level;
+    private String name;
 
-	private Integer parentid;
+    private String level;
 
-	private String iseff;
+    private Integer parentid;
 
-	private Timestamp createTime;
+    private String iseff;
 
-	private Timestamp lastUpdate;
+    private Timestamp createTime;
 
-	private Integer sort;
-	@IgnoreField
-	private String parentName;
+    private Timestamp lastUpdate;
 
-	public Integer getUserId() {
-		return userId;
-	}
+    private Integer sort;
+    @IgnoreField
+    private String parentName;
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public Integer getShopId() {
+        return shopId;
+    }
 
-	public String getParentName() {
-		return parentName;
-	}
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
 
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public String getParentName() {
+        return parentName;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getLevel() {
-		return level;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setLevel(String level) {
-		this.level = level;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Integer getParentid() {
-		return parentid;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setParentid(Integer parentid) {
-		this.parentid = parentid;
-	}
+    public String getLevel() {
+        return level;
+    }
 
-	public String getIseff() {
-		return iseff;
-	}
+    public void setLevel(String level) {
+        this.level = level;
+    }
 
-	public void setIseff(String iseff) {
-		this.iseff = iseff;
-	}
+    public Integer getParentid() {
+        return parentid;
+    }
 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
+    }
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
+    public String getIseff() {
+        return iseff;
+    }
 
-	public Timestamp getLastUpdate() {
-		return lastUpdate;
-	}
+    public void setIseff(String iseff) {
+        this.iseff = iseff;
+    }
 
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
 
-	public Integer getSort() {
-		return sort;
-	}
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
 
 }

@@ -15,7 +15,7 @@ import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.ewing.busi.system.model.SysParam;
-import com.ewing.busi.web.model.WebGroup;
+import com.ewing.busi.web.model.WebTemplateGroupkey;
 import com.ewing.busi.web.model.WebTemplate;
 import com.ewing.busi.web.service.GroupService;
 import com.ewing.busi.web.service.RelResService;

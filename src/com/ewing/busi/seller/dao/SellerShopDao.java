@@ -28,7 +28,7 @@ public class SellerShopDao {
      * @return
      * @throws DaoException
      */
-    public SellerShop findSellerShop(Integer userId) throws DaoException {
+    public SellerShop findSellerShop(Integer userId) {
         return baseDao.findOne(" user_id='" + userId + "' and iseff='" + IsEff.EFFECTIVE + "'",
                 SellerShop.class);
     }
