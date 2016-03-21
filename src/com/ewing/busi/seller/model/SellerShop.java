@@ -17,11 +17,20 @@ public class SellerShop implements java.io.Serializable {
     private String email;
     private String phone;
     private String addr;
+    private Integer templatePackageId;
     private String iseff;
     private Date createTime;
     private Date lastUpdate;
 
     public SellerShop() {
+    }
+
+    public Integer getTemplatePackageId() {
+        return templatePackageId;
+    }
+
+    public void setTemplatePackageId(Integer templatePackageId) {
+        this.templatePackageId = templatePackageId;
     }
 
     public Integer getId() {

@@ -1,6 +1,7 @@
 package com.ewing.web.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,6 +11,8 @@ import org.apache.log4j.Logger;
 
 import com.ewing.busi.seller.model.SellerShop;
 import com.ewing.busi.seller.service.SellerShopService;
+import com.ewing.busi.system.model.SysParam;
+import com.ewing.busi.web.service.WebTemplatePackageService;
 import com.ewing.common.constant.SystemProperty;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;
@@ -28,14 +31,16 @@ public class ShopDecorateAction extends BaseAction {
     private static final String EDIT_FORM = "/admin/shop/decorate.html";
     @Resource
     private SellerShopService sellerShopService;
- 
+    @Resource
+    private WebTemplatePackageService webTemplatePackageService;
+
     /**
      * 查詢列表
      */
     public void show() {
         try {
             Map<String, Object> dataModel = new HashMap<String, Object>();
-            SellerShop sellerShop = sellerShopService.findSellerShop(getLoginUserId());
+            SellerShop sellerShop = sellerShopService.findSellerShop(getLoginUserId()); 
             dataModel.put("shop", sellerShop);
             dataModel.put("shopUrl",
                     SystemProperty.SHOPDOAMIN + "?userId=" + sellerShop.getUserId());

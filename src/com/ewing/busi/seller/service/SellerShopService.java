@@ -42,4 +42,18 @@ public class SellerShopService {
             return sellerShop.getId();
         throw new ShopException("请先创建商店");
     }
+
+    /**
+     * 检查是否已经创建商店，如果已经创建则返回当前商店使用的模板ID
+     * 
+     * @param userId
+     * @return
+     * @throws ShopException
+     */
+    public Integer checkAndReturnTemplatePackageId(Integer userId) throws ShopException {
+        SellerShop sellerShop = findSellerShop(userId);
+        if (sellerShop != null && sellerShop.getTemplatePackageId() != null)
+            return sellerShop.getTemplatePackageId();
+        throw new ShopException("请先创建商店或者选择模板包");
+    }
 }

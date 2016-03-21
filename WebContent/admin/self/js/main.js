@@ -20,10 +20,10 @@ mainFrame.addContainer = function(htmlhref) {
  * @param searchFormId
  *            搜索表单id
  */
-mainFrame.addContainer = function(htmlhref, searchFormId) {
+mainFrame.addContainer = function(htmlhref, searchFormId) { 
 	var param = '';
 	if (searchFormId && searchFormId != '')
-		param = $("#" + searchFormId).serialize();
+		param = $("#" + searchFormId).serialize(); 
 	var containerId = $('#main-container').attr('id');
 	var container;
 	if (!containerId) {
@@ -34,12 +34,20 @@ mainFrame.addContainer = function(htmlhref, searchFormId) {
 	ajax.asyncHtmlRequest({
 		url : htmlhref,
 		param : param,
-		success : function(data) {
-			if(data)
-			container.html(data);
+		success : function(data) {  
+			mainFrame.renderHtml(data,container);
 		}
 	});
 };
+
+mainFrame.renderHtml=function(data,container){
+	if(data){
+	    if(data.indexOf('loginBtn')>-1)
+	    	window.location='Admin-SellerLogin-toLogin.action';
+		else 
+			container.html(data);
+	}
+}
 
 /**
  * 在指定区域中显示内容
@@ -60,8 +68,7 @@ mainFrame.addArea = function(htmlhref, areaId, searchFormId) {
 		url : htmlhref,
 		param : param,
 		success : function(data) {
-			if(data)
-			container.html(data);
+			mainFrame.renderHtml(data,container);
 		}
 	});
 };

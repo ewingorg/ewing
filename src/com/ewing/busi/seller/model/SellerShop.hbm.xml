@@ -13,6 +13,12 @@
                 <comment>&#201;&#204;&#181;&#234;&#181;&#196;&#180;&#180;&#189;&#168;&#213;&#223;ID</comment>
             </column>
         </property>
+            <property name="templatePackageId" type="java.lang.Integer">
+            <column name="template_package_id" >
+                <comment>&#201;&#204;&#181;&#234;&#181;&#196;&#180;&#180;&#189;&#168;&#213;&#223;ID</comment>
+            </column>
+        </property>
+        
         <property name="shopName" type="string">
             <column name="shop_name" length="200" not-null="true">
                 <comment>&#201;&#204;&#181;&#234;&#195;&#251;&#179;&#198;</comment>

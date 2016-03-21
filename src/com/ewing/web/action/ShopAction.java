@@ -1,6 +1,7 @@
 package com.ewing.web.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,6 +11,8 @@ import org.apache.log4j.Logger;
 
 import com.ewing.busi.seller.model.SellerShop;
 import com.ewing.busi.seller.service.SellerShopService;
+import com.ewing.busi.system.model.SysParam;
+import com.ewing.busi.web.service.WebTemplatePackageService;
 import com.ewing.common.constant.SystemProperty;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;
@@ -28,14 +31,17 @@ public class ShopAction extends BaseAction {
     private static final String EDIT_FORM = "/admin/shop/setting.html";
     @Resource
     private SellerShopService sellerShopService;
- 
+    @Resource
+    private WebTemplatePackageService webTemplatePackageService;
     /**
-     * 查詢列表
+     * 查詢
      */
     public void show() {
         try {
             Map<String, Object> dataModel = new HashMap<String, Object>();
             SellerShop sellerShop = sellerShopService.findSellerShop(getLoginUserId());
+            List<SysParam> templePacks = webTemplatePackageService.querySelectTemplatePack();
+            dataModel.put("templePacks", templePacks);
             dataModel.put("shop", sellerShop);
             dataModel.put("shopUrl",
                     SystemProperty.SHOPDOAMIN + "?userId=" + sellerShop.getUserId());
@@ -46,21 +52,18 @@ public class ShopAction extends BaseAction {
     }
 
     /**
-     * 保存导航栏
+     * 保存
      */
     public void save() {
         ResponseData responseData = null;
         try {
-            String id = request.getParameter("id");
             SellerShop sellerShop = new SellerShop();
             this.buildPageData(sellerShop);
             SellerShop oldSellerShop = sellerShopService.findSellerShop(getLoginUserId());
-            if (oldSellerShop != null && !oldSellerShop.getId().equals(id))
-                throw new Exception("错误的商铺ID");
             sellerShop.setUserId(getLoginUserId());
             sellerShop.setIseff(IsEff.EFFECTIVE);
-            if (!StringUtils.isEmpty(id)) {
-                sellerShop.setId(Integer.valueOf(id));
+            if (oldSellerShop != null) {
+                sellerShop.setId(oldSellerShop.getId());
                 baseModelService.update(sellerShop);
             } else {
                 baseModelService.save(sellerShop);
