@@ -30,4 +30,9 @@ public class SysParamCode {
      * 物流公司列表
      */
     public final static String CARGO_LIST="CARGO_LIST";
+    
+    /**
+     * 分类配置链接类型
+     */
+    public final static String BLOCK_LINK_TYPE="BLOCK_LINK_TYPE";
 }

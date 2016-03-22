@@ -40,11 +40,11 @@ public class ShopAction extends BaseAction {
         try {
             Map<String, Object> dataModel = new HashMap<String, Object>();
             SellerShop sellerShop = sellerShopService.findSellerShop(getLoginUserId());
-            List<SysParam> templePacks = webTemplatePackageService.querySelectTemplatePack();
-            dataModel.put("templePacks", templePacks);
+            List<SysParam> templatePacks = webTemplatePackageService.querySelectTemplatePack();
+            dataModel.put("templatePacks", templatePacks);
             dataModel.put("shop", sellerShop);
             dataModel.put("shopUrl",
-                    SystemProperty.SHOPDOAMIN + "?userId=" + sellerShop.getUserId());
+                    SystemProperty.SHOPDOAMIN + "?shopId=" + sellerShop.getId());
             render(EDIT_FORM, dataModel);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

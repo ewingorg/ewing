@@ -77,10 +77,12 @@ public class NavAction extends BaseAction {
                 dataModel.put("bean", webCategory);
             }
             List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
+            List<SysParam> blockLinkType = sysParamService.getSysParam(SysParamCode.BLOCK_LINK_TYPE);
             List<SysParam> groupCode = groupService.getGroupParamList(
                     sellerShopService.checkAndReturnTemplatePackageId(getLoginUserId()),
                     GroupType.NAV);
             dataModel.put("iseffCode", iseffCode);
+            dataModel.put("blockLinkType", blockLinkType);
             dataModel.put("groupKeyCode", groupCode);
             render(EDIT_FORM, dataModel);
         } catch (Exception e) {
@@ -100,6 +102,7 @@ public class NavAction extends BaseAction {
             webBlock.setParentId(0);
             webBlock.setGroupType(GroupType.NAV.getCode().toString());
             webBlock.setUserId(getLoginUserId());
+            webBlock.setShopId(sellerShopService.checkAndReturnShopId(getLoginUserId()));
             if (!StringUtils.isEmpty(id)) {
                 webBlock.setId(Integer.valueOf(id));
                 baseModelService.update(webBlock);

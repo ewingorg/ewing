@@ -55,10 +55,10 @@
 							<button id="banner_del_btn" class="btn blue">
 								<i class="icon-trash"></i>&nbsp;&nbsp;删除
 							</button>
-							<button id="banner_bindres_btn" class="btn blue">
+						<!-- 	<button id="banner_bindres_btn" class="btn blue">
 								<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;绑定资源
 							</button>
-
+ -->
 						</div>
 						<br>
 						<form action="${_contextPath}/Admin-Banner-show.action"
@@ -73,7 +73,7 @@
 										<th>名称</th>
 										<th>链接</th>
 										<th>图标</th>
-										<th>模板</th>
+									 
 										<th>排位</th>
 										<th>是否有效</th>
 										<th>操作</th>
@@ -87,8 +87,7 @@
 										<td>${nav.groupKey}</td>
 										<td>${nav.name}</td>
 										<td>${nav.linkUrl}</td>
-										<td>${nav.imageUrl}</td>
-										<td>${nav.template}</td>
+										<td>${nav.imageUrl}</td> 
 										<td>${nav.rank}</td>
 										<td><@translate paramCode=iseffCode
 											value=(nav.iseff)?if_exists /></td>
@@ -126,7 +125,7 @@
 									searchFormId : 'bannerSearchForm'
 								});
 
-						//绑定资源按钮事件
+						/* //绑定资源按钮事件
 						$('#banner_bindres_btn')
 								.bind(
 										'click',
@@ -142,6 +141,6 @@
 											var url = '${contextPath}/Admin-Banner-showResList.action?categoryId='
 													+ selectItems;
 											mainFrame.addContainer(url);
-										});
+										}); */
 					});
 </script>

@@ -21,6 +21,9 @@
 		<property name="groupType" type="java.lang.String">
 			<column name="group_type" length="2" not-null="true" />
 		</property>
+		<property name="linkType" type="java.lang.String">
+			<column name="link_type" length="2" not-null="true" />
+		</property>
 		<property name="groupKey" type="java.lang.String">
 			<column name="group_key" length="50" not-null="true" />
 		</property>

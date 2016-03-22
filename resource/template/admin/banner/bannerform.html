@@ -77,19 +77,27 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label">外链接&nbsp;&nbsp;</label>
+						<label class="control-label">链接类型&nbsp;&nbsp;</label>
 						<div class="controls">
-							<input name="linkUrl" type="text" class="span3 m-wrap"
-								value="${(bean.linkUrl)?if_exists}" />
+							<@select paramCode=blockLinkType
+							value=(bean.linkType)?if_exists item=' name="linkType" require="true"
+							datatype="require" msg="链接类型不能为空"'/>
 						</div>
 					</div>
 					<div class="control-group">
+						<label class="control-label">外链接&nbsp;&nbsp;</label>
+						<div class="controls"> 
+								<textarea class="span6  m-wrap" rows="2" id="linkUrl"
+								name="linkUrl">${(bean.linkUrl)?if_exists}</textarea>
+						</div>
+					</div>
+					<!-- <div class="control-group">
 						<label class="control-label">模板&nbsp;&nbsp;</label>
 						<div class="controls">
 							<input name="template" type="text" class="span3 m-wrap"
 								value="${(bean.template)?if_exists}" />
 						</div>
-					</div>
+					</div> -->
 					<div class="control-group">
 						<label class="control-label">排位&nbsp;&nbsp;</label>
 						<div class="controls">

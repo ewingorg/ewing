@@ -1,11 +1,11 @@
 package com.ewing.busi.web.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.ewing.busi.system.model.SysParam;
+import org.springframework.stereotype.Repository;
+
 import com.ewing.busi.web.model.WebTemplateGroupkey;
 import com.ewing.common.constant.GroupType;
 import com.ewing.core.app.constant.IsEff;
@@ -19,6 +19,7 @@ import com.ewing.core.jdbc.DaoException;
  * @createDate 2016年3月14日
  * 
  */
+@Repository("groupDao")
 public class GroupDao {
     @Resource
     private BaseDao baseDao;

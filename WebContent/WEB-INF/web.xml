@@ -116,7 +116,7 @@
 		<url-pattern>/CaptchaImg</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>/Admin-SellerLogin-toLogin.action</welcome-file>
+		<welcome-file>Admin-SellerLogin-toLogin.action</welcome-file>
 	</welcome-file-list>
 
 	<!-- 系统初始化servlet -->
