@@ -9,7 +9,7 @@ import com.ewing.core.jdbc.util.PageBean;
 public interface BaseDao {
     public void delete(Object entity);
 
-    public void executeSql(String sql);
+    public int executeSql(String sql);
 
     public <T> List<T> find(String queryString, Class<T> entityClass);
 

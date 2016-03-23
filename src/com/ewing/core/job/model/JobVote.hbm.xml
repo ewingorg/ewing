@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-2-16 11:51:44 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ewing.core.job.model.JobVote" table="job_vote" catalog="ewing">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="cluster" type="string">
+            <column name="cluster" length="50" not-null="true">
+                <comment>&#188;&#175;&#200;&#186;&#215;&#233;&#195;&#251;&#179;&#198;</comment>
+            </column>
+        </property>
+        <property name="node" type="string">
+            <column name="node" length="50" not-null="true">
+                <comment>&#189;&#218;&#181;&#227;&#195;&#251;&#179;&#198;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="java.lang.Long">
+            <column name="create_time" not-null="true">
+                <comment>&#180;&#180;&#189;&#168;&#202;&#177;&#188;&#228;</comment>
+            </column>
+        </property>
+        <property name="updateTime" type="java.lang.Long">
+            <column name="update_time">
+                <comment>&#184;&#252;&#208;&#194;&#202;&#177;&#188;&#228;</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

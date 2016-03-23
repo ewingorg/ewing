@@ -82,22 +82,21 @@ public class HibernateDaoImpl extends HibernateDaoSupport implements BaseDao {
     }
 
     @Override
-    public void executeSql(String sql) {
+    public int executeSql(String sql) {
         Session session = null;
         Connection conn = null;
         Statement stmt = null;
         try {
             session = this.getSession();
             conn = session.connection();
-            stmt = conn.createStatement();
-            boolean ret = stmt.execute(sql);
-            logger.info("executeSql sql:" + sql + "");
-            logger.info("executeSql result:" + ret + "");
+            stmt = conn.createStatement(); 
+            return stmt.executeUpdate(sql); 
         } catch (Exception e) {
             logger.error("fail to execute sql:" + sql, e);
         } finally {
             this.releaseSession(session);
         }
+        return 0;
     }
 
     @Override

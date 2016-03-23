@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Properties;
 
+import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -37,6 +39,8 @@ public class PropertyUtil {
 
         try {
             String value = props.getProperty(key);
+            if (StringUtils.isEmpty(value))
+                return null;
             return new String(value.getBytes("ISO8859-1"), "UTF-8");
         } catch (Exception e) {
             logger.error("fail to get property for " + key, e);
@@ -44,9 +48,7 @@ public class PropertyUtil {
         }
     }
 
-    public static void main(String[] args) {
-        String hosts = PropertyUtil.getProperty("redis.host");
-        System.out.println(hosts);
+    public static Enumeration<?> getAllProperties() {
+        return props.propertyNames();
     }
-
 }

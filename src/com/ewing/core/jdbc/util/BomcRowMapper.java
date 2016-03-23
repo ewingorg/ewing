@@ -10,10 +10,9 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.ewing.core.jdbc.annotation.Column;
-import com.ewing.core.log.LogHelper;
 
 public class BomcRowMapper<T> implements RowMapper {
-	private static final Logger log = LogHelper.getLog(BomcRowMapper.class);
+	private static final Logger log = Logger.getLogger(BomcRowMapper.class);
 	private Class<T> gt;
 
 	public BomcRowMapper(Class<T> gt) {

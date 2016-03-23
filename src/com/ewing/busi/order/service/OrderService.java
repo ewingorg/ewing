@@ -1,5 +1,7 @@
 package com.ewing.busi.order.service;
 
+import static com.ewing.logger.LoggerManager.ordercheckjoblogger;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,7 @@ import com.ewing.busi.order.dto.OrderInfoComplex;
 import com.ewing.busi.order.dto.OrderInfoDto;
 import com.ewing.busi.order.dto.OrderQueryReq;
 import com.ewing.busi.order.model.OrderInfo;
+import com.ewing.busi.resource.dao.WebResourceDao;
 import com.ewing.common.constant.NeedStatus;
 import com.ewing.common.constant.OrderStatus;
 import com.ewing.common.exception.OrderException;
@@ -30,6 +33,8 @@ public class OrderService {
     private BaseDao baseDao;
     @Resource
     private OrderDetailDao orderDetailDao;
+    @Resource
+    private WebResourceDao webResourceDao;
 
     /**
      * 查询
@@ -130,5 +135,37 @@ public class OrderService {
         }
         return new PageBean<OrderInfoComplex>(orderPageBean.getPage(),
                 orderPageBean.getTotalCount(), orderPageBean.getPageSize(), complexList);
+    }
+
+    /**
+     * 处理已经超时的订单信息
+     * 
+     * @param maxTimeOut
+     * @return
+     * @throws Exception
+     */
+    public void processTimeOutOrder(Integer maxTimeOut) throws Exception {
+        // 1.查询超时没有付款的记录
+        List<OrderInfo> orderInfoList = orderDao.findTimeOutOrder(maxTimeOut);
+        ordercheckjoblogger.info("timeout orderInfo size:" + orderInfoList.size());
+        for (OrderInfo orderInfo : orderInfoList) {
+            ordercheckjoblogger.info("process orderInfo id[" + orderInfo.getId() + "]");
+            try {
+                List<OrderDetailDto> orderDetailList = orderDetailDao.findDetailList(orderInfo
+                        .getId());
+                if (orderDetailList.isEmpty())
+                    continue;
+                // 2.把待付款的订单更改为“关闭”状态
+                orderDao.updateTimeOutOrder2Close(orderInfo.getId());
+                // 3.恢复商品的库存数
+                for (OrderDetailDto orderDetail : orderDetailList) {
+                    webResourceDao.recoverStockNum(orderDetail.getResourceId(),
+                            orderDetail.getItemCount());
+                }
+            } catch (Exception e) {
+                throw new Exception("error in process order[" + orderInfo.getId() + "]", e);
+            }
+
+        }
     }
 }

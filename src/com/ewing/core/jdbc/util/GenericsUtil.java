@@ -13,10 +13,9 @@ import org.apache.tools.ant.util.DateUtils;
 
 import com.ewing.core.jdbc.annotation.Column;
 import com.ewing.core.jdbc.annotation.Table;
-import com.ewing.core.log.LogHelper;
 
 public class GenericsUtil {
-	private static final Logger log = LogHelper.getLog(GenericsUtil.class);
+    private static final Logger log = Logger.getLogger(GenericsUtil.class);
 
 	public static Class getSuperClassGenricType(Class clazz) {
 		return getSuperClassGenricType(clazz, 0);

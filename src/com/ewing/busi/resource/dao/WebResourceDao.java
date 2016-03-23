@@ -34,6 +34,7 @@ public class WebResourceDao {
 
     /**
      * 分页查询资源
+     * 
      * @param userId
      * @param condition
      * @param order
@@ -46,6 +47,18 @@ public class WebResourceDao {
         condition = condition + " and user_id=" + userId + " and iseff='" + IsEff.EFFECTIVE + "'";
         return baseDao.pageQuery(condition, order, pageSize, page, WebResource.class);
 
+    }
+
+    /**
+     * 恢复资源的库存量
+     * 
+     * @param resourceId
+     * @param num
+     */
+    public void recoverStockNum(Integer resourceId, Integer num) {
+        String updateOrderDetail = "update web_resource set stock_num=stock_num+" + num
+                + " where id=" + resourceId;
+        baseDao.executeSql(updateOrderDetail);
     }
 
 }

@@ -33,11 +33,30 @@ public class OrderDetailDao {
     public List<OrderDetailDto> findDetailList(Integer[] orderIds) {
         String sql = "select d.*,r.name as resource_name,r.image_url as resource_image_url from order_detail d "
                 + " inner join web_resource r on d.resource_id=r.id where d.order_id in "
-                + "("+SqlUtil.array2InCondition(orderIds)+")"
+                + "("
+                + SqlUtil.array2InCondition(orderIds)
+                + ")"
+                + " and d.iseff='"
+                + IsEff.EFFECTIVE
+                + "' and r.iseff='" + IsEff.EFFECTIVE + "' order by d.id,d.order_id";
+        return baseDao.noMappedObjectQuery(sql, OrderDetailDto.class);
+    }
+
+    /**
+     * 查询订单所有的详情订单
+     * 
+     * @param orderId
+     * @return
+     */
+    public List<OrderDetailDto> findDetailList(Integer orderId) {
+        String sql = "select d.*,r.name as resource_name,r.image_url as resource_image_url from order_detail d "
+                + " inner join web_resource r on d.resource_id=r.id where d.order_id = "
+                + orderId
                 + " and d.iseff='"
                 + IsEff.EFFECTIVE
                 + "' and r.iseff='"
-                + IsEff.EFFECTIVE + "' order by d.id,d.order_id";
+                + IsEff.EFFECTIVE
+                + "' order by d.id,d.order_id";
         return baseDao.noMappedObjectQuery(sql, OrderDetailDto.class);
     }
 }

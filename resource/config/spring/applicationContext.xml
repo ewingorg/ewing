@@ -48,6 +48,8 @@
 			<list>
 				<value>classpath:com/ewing/busi/*/model/*.hbm.xml</value>
 				<value>classpath:com/web/model/*.hbm.xml</value> 
+				<value>classpath:com/ewing/core/job/model/*.hbm.xml</value> 
+				
 			</list> 
 		</property>
 	</bean>
