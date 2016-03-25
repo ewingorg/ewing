@@ -11,16 +11,23 @@ import javax.annotation.Resource;
 import org.apache.axis.utils.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import com.ewing.busi.express.service.ExpressApiService;
 import com.ewing.busi.order.dao.OrderDao;
 import com.ewing.busi.order.dao.OrderDetailDao;
+import com.ewing.busi.order.dto.ExpressRespDto;
 import com.ewing.busi.order.dto.OrderDetailDto;
 import com.ewing.busi.order.dto.OrderInfoComplex;
 import com.ewing.busi.order.dto.OrderInfoDto;
 import com.ewing.busi.order.dto.OrderQueryReq;
+import com.ewing.busi.order.helper.OrderHelper;
 import com.ewing.busi.order.model.OrderInfo;
 import com.ewing.busi.resource.dao.WebResourceDao;
+import com.ewing.busi.system.model.SysParam;
+import com.ewing.busi.system.service.SysParamService;
+import com.ewing.common.constant.CargoStatus;
 import com.ewing.common.constant.NeedStatus;
 import com.ewing.common.constant.OrderStatus;
+import com.ewing.common.constant.SysParamCode;
 import com.ewing.common.exception.OrderException;
 import com.ewing.core.jdbc.BaseDao;
 import com.ewing.core.jdbc.util.PageBean;
@@ -35,6 +42,8 @@ public class OrderService {
     private OrderDetailDao orderDetailDao;
     @Resource
     private WebResourceDao webResourceDao;
+    @Resource
+    private SysParamService sysParamService;
 
     /**
      * 查询
@@ -167,5 +176,27 @@ public class OrderService {
             }
 
         }
+    }
+
+    /**
+     * 查询订单的物流情况
+     * 
+     * @param userId
+     * @param orderId
+     * @return
+     */
+    public ExpressRespDto queryCargoInfo(Integer userId, Integer orderId) {
+
+        ExpressApiService expressApiService = new ExpressApiService();
+        OrderInfo order = findOneOrder(userId, orderId);
+        if (order == null || StringUtils.isEmpty(order.getCargoName())
+                || StringUtils.isEmpty(order.getCargoNumber()))
+            return new ExpressRespDto(CargoStatus.NODATA.message);
+
+        SysParam sysParam = sysParamService.findByRootCodeAndParamName(SysParamCode.CARGO_LIST,
+                order.getCargoName());
+        String com = null != sysParam ? sysParam.getParamValue() : null;
+        return new ExpressRespDto(OrderHelper.toAddress(order), expressApiService.request(com,
+                order.getCargoNumber()));
     }
 }

@@ -35,4 +35,5 @@ public class SysParamCode {
      * 分类配置链接类型
      */
     public final static String BLOCK_LINK_TYPE="BLOCK_LINK_TYPE";
+     
 }

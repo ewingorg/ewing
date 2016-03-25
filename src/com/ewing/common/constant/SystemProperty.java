@@ -11,7 +11,16 @@ import com.ewing.util.PropertyUtil;
  */
 public class SystemProperty {
     /**
+     * 免登
+     */
+    public final static String LOGIN_DEBUG = PropertyUtil.getProperty("login.debug");
+    public final static String LOGIN_SELLERID = PropertyUtil.getProperty("login.sellerId");
+    /**
      * 商鋪域名
      */
     public final static String SHOPDOAMIN = PropertyUtil.getProperty("shop.domain");
+
+    /** 快递查询接口调用的appid **/
+    public final static String EXPRESS_APPID = PropertyUtil.getProperty("express_appid");
+
 }

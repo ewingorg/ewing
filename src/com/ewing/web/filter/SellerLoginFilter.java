@@ -15,15 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.axis.utils.StringUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
+import com.ewing.common.constant.SystemProperty;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.bean.UserInfo;
 import com.ewing.core.app.control.SessionControl;
 import com.ewing.core.app.control.SessionException;
+import com.ewing.util.PropertyUtil;
 
 public class SellerLoginFilter implements Filter {
     private static Logger logger = Logger.getLogger(SellerLoginFilter.class);
+    private static final Boolean loginDebug = Boolean.valueOf(PropertyUtil.getProperty(
+            SystemProperty.LOGIN_DEBUG, "false"));
+    private static final Integer loginSellerId = Integer.valueOf(PropertyUtil
+            .getProperty(SystemProperty.LOGIN_SELLERID));
     private FilterConfig filterConfig = null;
     private String toLogin = null;
     private List<String> ignoreUrl;
@@ -41,7 +48,7 @@ public class SellerLoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResposne;
         String contextPath = request.getContextPath();
         String loginPage = contextPath + "/" + toLogin;
-        String reqUrl = request.getRequestURL().toString(); 
+        String reqUrl = request.getRequestURL().toString();
         if (!isIgnoreUrl(reqUrl)) {
             UserInfo userInfo = null;
             try {
@@ -49,8 +56,11 @@ public class SellerLoginFilter implements Filter {
             } catch (SessionException e) {
                 // logger.error("fail to get user session!", e);
             }
-            if (userInfo == null) { 
-                    response.sendRedirect(loginPage + "?outsession=0");
+            if (loginDebug && userInfo == null)
+                userInfo = setdebugUserLogin(request);
+
+            if (userInfo == null) {
+                response.sendRedirect(loginPage + "?outsession=0");
                 return;
             }
         }
@@ -64,6 +74,17 @@ public class SellerLoginFilter implements Filter {
             }
         }
         return false;
+    }
+
+    private UserInfo setdebugUserLogin(HttpServletRequest request) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(loginSellerId);
+        try {
+            SessionControl.setUserInfo(request, userInfo);
+        } catch (SessionException e) {
+            e.printStackTrace();
+        }
+        return userInfo;
     }
 
     @Override

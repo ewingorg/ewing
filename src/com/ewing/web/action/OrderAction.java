@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.ewing.busi.order.dto.ExpressRespDto;
 import com.ewing.busi.order.dto.OrderInfoComplex;
 import com.ewing.busi.order.dto.OrderQueryReq;
 import com.ewing.busi.order.service.OrderService;
@@ -100,7 +101,10 @@ public class OrderAction extends BaseAction {
         try {
             OrderInfoComplex orderComplex = orderService.findOneComplexOrder(getLoginUserId(),
                     orderId);
+            ExpressRespDto expressRespDto = orderService.queryCargoInfo(getLoginUserId(),
+                    orderId); 
             dataModel.put("orderComplex", orderComplex);
+            dataModel.put("expressResp", expressRespDto);
             renderWithHead(ORDER_DETAIL, dataModel);
         } catch (SessionException e) {
             logger.error(e.getMessage(), e);
@@ -142,8 +146,7 @@ public class OrderAction extends BaseAction {
                 cargoName = cargoParam.getParamName();
             }
 
-            orderService.update2Send(getLoginUserId(), orderId, needCargo,
-                    cargoName, cargoNumber);
+            orderService.update2Send(getLoginUserId(), orderId, needCargo, cargoName, cargoNumber);
             responseData = ResponseUtils.success("保存成功！");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

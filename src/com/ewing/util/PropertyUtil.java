@@ -48,6 +48,18 @@ public class PropertyUtil {
         }
     }
 
+    public static String getProperty(String key, String defaultValue) {
+        try {
+            String value = props.getProperty(key);
+            if (StringUtils.isEmpty(value))
+                return defaultValue;
+            return new String(value.getBytes("ISO8859-1"), "UTF-8");
+        } catch (Exception e) {
+            logger.error("fail to get property for " + key, e);
+            return null;
+        }
+    }
+
     public static Enumeration<?> getAllProperties() {
         return props.propertyNames();
     }
