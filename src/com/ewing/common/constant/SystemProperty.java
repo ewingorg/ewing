@@ -13,8 +13,11 @@ public class SystemProperty {
     /**
      * 免登
      */
-    public final static String LOGIN_DEBUG = PropertyUtil.getProperty("login.debug");
-    public final static String LOGIN_SELLERID = PropertyUtil.getProperty("login.sellerId");
+    public final static Boolean LOGIN_DEBUG = Boolean.valueOf(PropertyUtil.getProperty(
+            "login.debug", "false"));
+
+    public final static Integer LOGIN_SELLERID = Integer.valueOf(PropertyUtil
+            .getProperty("login.sellerId"));
     /**
      * 商鋪域名
      */
