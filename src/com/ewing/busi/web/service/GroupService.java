@@ -12,10 +12,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
 import com.ewing.busi.system.model.SysParam;
+import com.ewing.busi.web.contant.GroupType;
 import com.ewing.busi.web.dao.GroupDao;
 import com.ewing.busi.web.model.WebTemplate;
 import com.ewing.busi.web.model.WebTemplateGroupkey;
-import com.ewing.common.constant.GroupType;
 import com.ewing.core.app.constant.IsEff;
 import com.ewing.core.jdbc.BaseDao;
 import com.ewing.core.jdbc.DaoException;

@@ -8,11 +8,11 @@ import javax.annotation.Resource;
 import org.apache.axis.utils.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import com.ewing.busi.order.contant.OrderStatus;
 import com.ewing.busi.order.dto.OrderDetailDto;
 import com.ewing.busi.order.dto.OrderInfoDto;
 import com.ewing.busi.order.dto.OrderQueryReq;
 import com.ewing.busi.order.model.OrderInfo;
-import com.ewing.common.constant.OrderStatus;
 import com.ewing.core.app.constant.IsEff;
 import com.ewing.core.jdbc.BaseDao;
 import com.ewing.core.jdbc.util.PageBean;
@@ -88,9 +88,13 @@ public class OrderDao {
         if (!StringUtils.isEmpty(orderQueryReq.getCargoNumber())) {
             sql += " and o.cargo_number = '" + orderQueryReq.getCargoNumber() + "'";
         }
+        
         if (!StringUtils.isEmpty(orderQueryReq.getStatus())) {
-            sql += " and o.status = '" + orderQueryReq.getStatus() + "'";
+          //  sql += " and o.status = '" + orderQueryReq.getStatus() + "'";
+            sql += " and exists (select id from order_detail detail where order_id=o.id and detail.iseff='"
+                    + IsEff.EFFECTIVE + "' and detail.status='" + orderQueryReq.getStatus() + "')";
         }
+        
         if (!StringUtils.isEmpty(orderQueryReq.getCustomerName())) {
             sql += " and c.name like '%" + orderQueryReq.getCustomerName() + "%'";
         }

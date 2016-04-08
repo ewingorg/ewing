@@ -1,19 +1,19 @@
-<!-- ¶¨Òåµ¥Ò³·ÖÒ³
-searchFormId£º²éÑ¯Ìõ¼þform id.
-pBean:·µ»Ø½á¹û¼¯ 
+<!-- ï¿½ï¿½ï¿½åµ¥Ò³ï¿½ï¿½Ò³
+searchFormIdï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½form id.
+pBean:ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ 
  -->
 <#macro pagination searchFormId pBean>
 <div class="pagination pagination-right">
    <#if pBean.totalPageCount gte 1>
 	<ul>
-	 	<#if pBean.currentPageNo = '1'>  
+	 	<#if pBean.page = '1'>  
 			<li class="disabled"><a href="#">&laquo;</a> 
 		<#else> 
-			<li><a href="#" onclick="mainFrame.addContainer('${pBean.pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${searchFormId}')">&laquo;</a>
+			<li><a href="#" onclick="mainFrame.addContainer('${pBean.pageUrl}&page=${pBean.page-1}&pageSize=${pBean.pageSize}','${searchFormId}')">&laquo;</a>
 		</#if> 
 		<#list 1..pBean.totalPageCount as i> 
 			<#if (10 >= i) >
-				<#if pBean.currentPageNo = i>  
+				<#if pBean.page = i>  
 					<li class="active">
 				<#else>  
 					<li>
@@ -23,11 +23,11 @@ pBean:·µ»Ø½á¹û¼¯
 				</li> 
 			</#if>
 		</#list>   
-		<#if pBean.totalPageCount == pBean.currentPageNo>  
+		<#if pBean.totalPageCount == pBean.page>  
 			<li class="disabled"><a href="#">&raquo;</a></li>
 		<#else>  
 			<li><a
-				href="#" onclick="mainFrame.addContainer('${pBean.pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${searchFormId}')">&raquo;</a>
+				href="#" onclick="mainFrame.addContainer('${pBean.pageUrl}&page=${pBean.page+1}&pageSize=${pBean.pageSize}','${searchFormId}')">&raquo;</a>
 			</li>
 		</#if>  
 	</ul>
@@ -35,24 +35,24 @@ pBean:·µ»Ø½á¹û¼¯
 </div>
 </#macro>
 
-<!-- ¶¨Òå¾Ö²¿·ÖÒ³
-searchFormId£º²éÑ¯Ìõ¼þform id.
-pBean:·µ»Ø½á¹û¼¯
-areaId:ÏÔÊ¾·ÖÒ³µÄÇøÓòid,Ò»°ãÖ¸¶¨div id. 
+<!-- ï¿½ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Ò³
+searchFormIdï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½form id.
+pBean:ï¿½ï¿½ï¿½Ø½ï¿½ï¿½
+areaId:ï¿½ï¿½Ê¾ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id,Ò»ï¿½ï¿½Ö¸ï¿½ï¿½div id. 
  -->
 
  <#macro areaapagination searchFormId pBean areaId>
 <div class="pagination pagination-right">
    <#if pBean.totalPageCount gte 1>
 	<ul>
-	 	<#if pBean.currentPageNo = '1'>  
+	 	<#if pBean.page = '1'>  
 			<li class="disabled"><a href="#">&laquo;</a> 
 		<#else> 
-			<li><a href="#" onclick="mainFrame.addArea('${pBean.pageUrl}&page=${pBean.currentPageNo-1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&laquo;</a>
+			<li><a href="#" onclick="mainFrame.addArea('${pBean.pageUrl}&page=${pBean.page-1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&laquo;</a>
 		</#if> 
 		<#list 1..pBean.totalPageCount as i> 
 			<#if (10 >= i) >
-				<#if pBean.currentPageNo = i>  
+				<#if pBean.page = i>  
 					<li class="active">
 				<#else>  
 					<li>
@@ -62,11 +62,11 @@ areaId:ÏÔÊ¾·ÖÒ³µÄÇøÓòid,Ò»°ãÖ¸¶¨div id.
 				</li> 
 			</#if>
 		</#list>   
-		<#if pBean.totalPageCount == pBean.currentPageNo>  
+		<#if pBean.totalPageCount == pBean.page>  
 			<li class="disabled"><a href="#">&raquo;</a></li>
 		<#else>  
 			<li><a
-				href="#" onclick="mainFrame.addArea('${pBean.pageUrl}&page=${pBean.currentPageNo+1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&raquo;</a>
+				href="#" onclick="mainFrame.addArea('${pBean.pageUrl}&page=${pBean.page+1}&pageSize=${pBean.pageSize}','${areaId}','${searchFormId}')">&raquo;</a>
 			</li>
 		</#if>  
 	</ul>

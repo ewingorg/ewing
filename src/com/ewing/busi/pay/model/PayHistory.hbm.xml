@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-7 9:57:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ewing.busi.pay.model.PayHistory" table="pay_history" catalog="ewing">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="bizId" type="string">
+            <column name="biz_id" length="50" not-null="true">
+                <comment>&#210;&#181;&#206;&#241;&#193;&#247;&#203;&#174;</comment>
+            </column>
+        </property>
+        <property name="busiType" type="string">
+            <column name="busi_type" not-null="true">
+                <comment>&#210;&#181;&#206;&#241;&#192;&#224;&#208;&#205; 1:&#182;&#169;&#181;&#165; 2:&#205;&#203;&#191;&#238;</comment>
+            </column>
+        </property>
+        <property name="busiId" type="int">
+            <column name="busi_id" not-null="true">
+                <comment>
+                &#210;&#181;&#206;&#241;ID,&#177;&#237;order_info&#214;&#247;&#188;&#252;,&#205;&#203;&#187;&#245;&#206;&#170;order_refund&#214;&#247;&#188;&#252;</comment>
+            </column>
+        </property>
+        <property name="payWay" type="string">
+            <column name="pay_way" length="1" not-null="true">
+                <comment>&#214;&#167;&#184;&#182;&#183;&#189;&#202;&#189; 0:&#206;&#162;&#208;&#197; 1:&#214;&#167;&#184;&#182;&#177;&#166;</comment>
+            </column>
+        </property>
+         <property name="userId" type="int">
+            <column name="user_id" not-null="true">
+                <comment>&#207;&#251;&#183;&#209;&#213;&#223;ID</comment>
+            </column>
+        </property>
+        <property name="customerId" type="int">
+            <column name="customer_id" not-null="true">
+                <comment>&#207;&#251;&#183;&#209;&#213;&#223;ID</comment>
+            </column>
+        </property>
+        <property name="payFee" type="float">
+            <column name="pay_fee" precision="9" not-null="true">
+                <comment>&#189;&#187;&#210;&#215;&#183;&#209;&#211;&#195;</comment>
+            </column>
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="1" not-null="true">
+                <comment>&#189;&#187;&#210;&#215;&#215;&#180;&#204;&#172; 0:&#183;&#162;&#198;&#240; 1:&#179;&#201;&#185;&#166; 2:&#202;&#167;&#176;&#220;</comment>
+            </column>
+        </property>
+        <property name="comment" type="string">
+            <column name="comment" length="50" not-null="true">
+                <comment>&#177;&#184;&#215;&#162;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

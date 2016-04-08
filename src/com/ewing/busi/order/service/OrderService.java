@@ -12,21 +12,23 @@ import org.apache.axis.utils.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.ewing.busi.express.service.ExpressApiService;
+import com.ewing.busi.order.contant.OrderStatus;
 import com.ewing.busi.order.dao.OrderDao;
 import com.ewing.busi.order.dao.OrderDetailDao;
+import com.ewing.busi.order.dao.OrderRefundDao;
 import com.ewing.busi.order.dto.ExpressRespDto;
 import com.ewing.busi.order.dto.OrderDetailDto;
 import com.ewing.busi.order.dto.OrderInfoComplex;
 import com.ewing.busi.order.dto.OrderInfoDto;
 import com.ewing.busi.order.dto.OrderQueryReq;
 import com.ewing.busi.order.helper.OrderHelper;
+import com.ewing.busi.order.model.OrderDetail;
 import com.ewing.busi.order.model.OrderInfo;
 import com.ewing.busi.resource.dao.WebResourceDao;
 import com.ewing.busi.system.model.SysParam;
 import com.ewing.busi.system.service.SysParamService;
 import com.ewing.common.constant.CargoStatus;
 import com.ewing.common.constant.NeedStatus;
-import com.ewing.common.constant.OrderStatus;
 import com.ewing.common.constant.SysParamCode;
 import com.ewing.common.exception.OrderException;
 import com.ewing.core.jdbc.BaseDao;
@@ -44,6 +46,8 @@ public class OrderService {
     private WebResourceDao webResourceDao;
     @Resource
     private SysParamService sysParamService;
+    @Resource
+    private OrderRefundDao orderRefundDao;
 
     /**
      * 查询
@@ -75,14 +79,26 @@ public class OrderService {
         if (NeedStatus.NEED.getStatus().equals(needCargo)) {
             if (StringUtils.isEmpty(cargoNumber) || StringUtils.isEmpty(cargoName))
                 throw new OrderException("物流相关信息不能为空！");
-
         }
+        if (!OrderStatus.WAIT_SEND.getStatus().equals(orderInfo.getStatus())) {
+            throw new OrderException("订单不是等待发货状态！");
+        }
+        // 更新订单的状态为等待收货，记录物流公司、物流编号
         orderInfo.setStatus(OrderStatus.WAIT_RECEIVE.getStatus());
         orderInfo.setCargoTime(new Date());
         orderInfo.setCargoName(cargoName == null ? "" : cargoName);
         orderInfo.setCargoNumber(cargoNumber == null ? "" : cargoNumber);
         orderInfo.setNeedCargo(needCargo);
         baseDao.update(orderInfo);
+
+        // 更新订单详情的状态为等待收货，过滤状态不是等待发货的订单详情
+        List<OrderDetail> detailList = orderDetailDao.findDetailList(orderId);
+        for (OrderDetail orderDetail : detailList) {
+            if (OrderStatus.WAIT_SEND.getStatus().equals(orderDetail.getStatus())) {
+                orderDetail.setStatus(OrderStatus.WAIT_RECEIVE.getStatus());
+                baseDao.update(orderDetail);
+            }
+        }
     }
 
     /**
@@ -95,7 +111,7 @@ public class OrderService {
     public OrderInfoComplex findOneComplexOrder(Integer userId, Integer orderId) {
         OrderInfoDto orderInfo = orderDao.findOneMoreInfo(userId, orderId);
         List<OrderDetailDto> orderDetailList = orderDetailDao
-                .findDetailList(new Integer[] { orderInfo.getId() });
+                .findDetailDtoList(new Integer[] { orderInfo.getId() });
         OrderInfoComplex orderInfoComplex = new OrderInfoComplex();
         orderInfoComplex.setOrderInfo(orderInfo);
         List<OrderDetailDto> detailList = new ArrayList<OrderDetailDto>();
@@ -126,16 +142,20 @@ public class OrderService {
             orderIds.add(orderInfo.getId());
         }
         // 查找订单详情
-        List<OrderDetailDto> orderDetailList = orderDetailDao.findDetailList(orderIds
+        List<OrderDetailDto> orderDetailList = orderDetailDao.findDetailDtoList(orderIds
                 .toArray(new Integer[orderIds.size()]));
+
         // 重新组装每张订单，以及归属的订单详情
         List<OrderInfoComplex> complexList = new ArrayList<OrderInfoComplex>();
         for (OrderInfoDto orderInfo : orderList) {
             OrderInfoComplex orderInfoComplex = new OrderInfoComplex();
             orderInfoComplex.setOrderInfo(orderInfo);
             List<OrderDetailDto> detailList = new ArrayList<OrderDetailDto>();
+            // 匹配对应的订单详情，以及如果指定订单状态则继续匹配
             for (OrderDetailDto detailDto : orderDetailList) {
-                if (detailDto.getOrderId() == orderInfo.getId()) {
+                if (detailDto.getOrderId() == orderInfo.getId()
+                        && (!StringUtils.isEmpty(orderQueryReq.getStatus()))
+                        && orderQueryReq.getStatus().equals(detailDto.getStatus())) {
                     detailList.add(detailDto);
                 }
             }
@@ -160,7 +180,7 @@ public class OrderService {
         for (OrderInfo orderInfo : orderInfoList) {
             ordercheckjoblogger.info("process orderInfo id[" + orderInfo.getId() + "]");
             try {
-                List<OrderDetailDto> orderDetailList = orderDetailDao.findDetailList(orderInfo
+                List<OrderDetailDto> orderDetailList = orderDetailDao.findDetailDtoList(orderInfo
                         .getId());
                 if (orderDetailList.isEmpty())
                     continue;
@@ -174,7 +194,6 @@ public class OrderService {
             } catch (Exception e) {
                 throw new Exception("error in process order[" + orderInfo.getId() + "]", e);
             }
-
         }
     }
 
@@ -185,7 +204,7 @@ public class OrderService {
      * @param orderId
      * @return
      */
-    public ExpressRespDto queryCargoInfo(Integer userId, Integer orderId) {
+    public ExpressRespDto queryOrderCargoInfo(Integer userId, Integer orderId) {
 
         ExpressApiService expressApiService = new ExpressApiService();
         OrderInfo order = findOneOrder(userId, orderId);

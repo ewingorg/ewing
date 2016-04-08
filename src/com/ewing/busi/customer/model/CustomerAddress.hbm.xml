@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-2-2 17:07:58 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ewing.busi.customer.model.CustomerAddress" table="customer_address" catalog="ewing">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="customerId" type="int">
+            <column name="customer_id" not-null="true">
+            </column>
+        </property>
+        <property name="receiver" type="string">
+            <column name="receiver" length="10">
+            </column>
+        </property>
+        <property name="province" type="string">
+            <column name="province" length="50">
+            </column>
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="50">
+            </column>
+        </property>
+        <property name="region" type="string">
+            <column name="region" length="50">
+            </column>
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="200">
+            </column>
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="50" not-null="true">
+            </column>
+        </property>
+        <property name="postCode" type="string">
+            <column name="post_code" length="15">
+            </column>
+        </property>
+        <property name="isDefault" type="string">
+            <column name="is_default" length="1">
+            </column>
+        </property>
+        <property name="iseff" type="string">
+            <column name="iseff" length="1">
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

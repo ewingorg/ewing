@@ -2,7 +2,7 @@ package com.ewing.busi.order.dto;
 
 import java.util.Date;
 
-import com.ewing.common.constant.OrderStatus;
+import com.ewing.busi.order.contant.OrderStatus;
 import com.ewing.core.jdbc.annotation.Column;
 
 /**

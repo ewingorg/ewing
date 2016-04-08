@@ -8,6 +8,11 @@
             <column name="id" />
             <generator class="identity" />
         </id>
+         <property name="bizId" type="java.lang.String">
+            <column name="biz_id" not-null="true">
+                <comment>&#182;&#169;&#181;&#165;ID,&#177;&#237;order&#214;&#247;&#188;&#252;</comment>
+            </column>
+        </property>
         <property name="orderId" type="int">
             <column name="order_id" not-null="true">
                 <comment>&#182;&#169;&#181;&#165;ID,&#177;&#237;order&#214;&#247;&#188;&#252;</comment>
@@ -48,7 +53,12 @@
                 <comment>&#205;&#203;&#187;&#245;&#203;&#181;&#195;&#247;</comment>
             </column>
         </property>
-        <property name="cargoNumber" type="java.lang.Integer">
+          <property name="cargoName" type="java.lang.String">
+            <column name="cargo_name">
+                <comment>&#206;&#239;&#193;&#247;&#186;&#197;</comment>
+            </column>
+        </property>
+        <property name="cargoNumber" type="java.lang.String">
             <column name="cargo_number">
                 <comment>&#206;&#239;&#193;&#247;&#186;&#197;</comment>
             </column>

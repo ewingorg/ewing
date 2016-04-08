@@ -119,7 +119,7 @@
 			</div>
 			<div class="portlet-body form">
 				<table class="table  table-bordered orderTable" id="orderTable"
-					style="width: 60%;">
+					style="width: 100%;">
 					<thead>
 						<tr>
 							<th width="30%" style="text-align:center;">商品</th>
@@ -153,7 +153,7 @@
 					</tbody>
 				</table>
 				<table class="table " id="orderTable" border="0"
-					style="width: 60%;">
+					style="width: 100%;">
 					<tbody>
 						<tr>
 							<td style="text-align: right;border: none;">
@@ -172,8 +172,20 @@
 			</div>
 
 		</div>
+		
+		<div class="modal-footer">
+			 <button type="button" id="orderdetail_return_btn" class="btn green">返回</button>
+		</div>
 		<!-- END EXTRAS PORTLET-->
 	</div>
 </div>
 
+<script>
+
+$("#orderdetail_return_btn").bind("click", function() {
+	var id = $(this).attr("value");
+	mainFrame.addContainer('Admin-Order-show.action');
+	 
+});
+</script>
 

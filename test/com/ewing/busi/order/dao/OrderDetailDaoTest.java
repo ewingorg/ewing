@@ -11,7 +11,7 @@ public class OrderDetailDaoTest {
     @Test
     public void findDetailList() throws Exception {
         OrderDetailDao orderDetailDao = (OrderDetailDao) SpringCtx.getByBeanName("orderDetailDao");
-        List<OrderDetailDto> list = orderDetailDao.findDetailList(new Integer[] { 1 });
-        System.out.println(list);
+      /*  List<OrderDetailDto> list = orderDetailDao.findDetailList(new Integer[] { 1 });
+        System.out.println(list);*/
     }
 }

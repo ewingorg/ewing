@@ -1,4 +1,4 @@
-package com.ewing.common.constant;
+package com.ewing.busi.order.contant;
 
 /**
  * 订单状态

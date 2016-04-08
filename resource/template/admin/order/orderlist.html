@@ -100,6 +100,9 @@
 													单价:￥${orderDetail.unitPrice}<br>
 													数量:${orderDetail.itemCount}<br>
 													总价:￥${orderDetail.totalPrice}
+													<#if orderDetail.status = '3'>
+														<br><a href='#' name="orderrefundlink" value="${orderDetail.id}" style="color: red;">客户退货</a>
+													</#if>
 												</div>
 												<div class="ordertdclear"></div>
 												<!-- html注释：清除float产生浮动 -->
@@ -112,11 +115,13 @@
 											${complex.orderInfo.phone}
 											${complex.orderInfo.province}${complex.orderInfo.city}${complex.orderInfo.region}${complex.orderInfo.address}
 										</td>
+										
 										<td rowspan="${complex.orderDetailList?size}"
 											style="vertical-align: middle;"><a href='#' name="orderdetaillink" value="${complex.orderInfo.id}">订单详情</a> 
 											<#if complex.orderInfo.status = '1'>
-											<br><a href='#' name="ordersendlink" value="${complex.orderInfo.id}">发货</a>
+												<br><a href='#' name="ordersendlink" value="${complex.orderInfo.id}">发货</a>
 											</#if>
+											
 										</td> </#if>
 									</tr>
 									</#list> </#list>
@@ -162,7 +167,8 @@
 		
 		$("a[name='orderdetaillink']").bind("click", function() {
 			var id = $(this).attr("value");
-			window.open('${contextPath}/Admin-Order-orderDetail.action?orderId='+id); 
+			mainFrame.addContainer('${contextPath}/Admin-Order-orderDetail.action?orderId='+id);
+			//window.open('${contextPath}/Admin-Order-orderDetail.action?orderId='+id); 
 		});
 		
 	    $("a[name='ordersendlink']").bind("click", function() {
@@ -170,6 +176,11 @@
 			var url = '${contextPath}/Admin-Order-showSendForm.action?orderId='+id;
 			common.popHtml(url, 'navModel');
 		}); 
-		
+	    
+	    $("a[name='orderrefundlink']").bind("click", function() {
+			var id = $(this).attr("value");
+			var url = '${contextPath}/Admin-OrderRefund-showRefundForm.action?orderDetailId='+id;
+			mainFrame.addContainer(url);
+		});  
 	});
 </script>

@@ -22,15 +22,8 @@
 							data-toggle="dropdown">
 							个人中心 <span class="caret"></span>
 						</button>
-						<ul class="dropdown-menu">
-							<li><a href="#" onclick="user.goPersonalHome()"><i
-									class="icon-home"></i>&nbsp;&nbsp;我的主页</a></li>
-							<!-- <li><a href="javascript:alert(1);artical.showEditWay();">
-									<i class="icon-pencil"></i>&nbsp;&nbsp;添加文章
-							</a></li> -->
-							<li class="divider"></li>
-							<li><a href="#"><i class="icon-user"></i>&nbsp;&nbsp;账号设置</a></li>
-							<li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退出登录</a></li>
+						<ul class="dropdown-menu"> 
+							<li><a href="${contextPath}/Admin-SellerLogin-userLogOut.action">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退出登录</a></li>
 						</ul>
 					</div>
 					<#else> <a href="register.jsp" role="button" class="btn red">注册</a>

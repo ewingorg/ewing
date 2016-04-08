@@ -10,15 +10,17 @@ import java.util.Date;
 public class OrderRefund implements java.io.Serializable {
 
     private Integer id;
+    private String bizId;
     private int orderId;
     private int orderDetailId;
-    private char type;
+    private String type;
     private int customerId;
     private int userId;
     private int resourceId;
     private int reasonType;
     private int reason;
-    private Integer cargoNumber;
+    private String cargoName;
+    private String cargoNumber;
     private float refundMoney;
     private String status;
     private String iseff;
@@ -27,7 +29,22 @@ public class OrderRefund implements java.io.Serializable {
 
     public OrderRefund() {
     }
- 
+
+    public String getCargoName() {
+        return cargoName;
+    }
+
+    public void setCargoName(String cargoName) {
+        this.cargoName = cargoName;
+    }
+
+    public String getBizId() {
+        return bizId;
+    }
+
+    public void setBizId(String bizId) {
+        this.bizId = bizId;
+    }
 
     public Integer getId() {
         return this.id;
@@ -53,11 +70,11 @@ public class OrderRefund implements java.io.Serializable {
         this.orderDetailId = orderDetailId;
     }
 
-    public char getType() {
+    public String getType() {
         return this.type;
     }
 
-    public void setType(char type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -101,11 +118,11 @@ public class OrderRefund implements java.io.Serializable {
         this.reason = reason;
     }
 
-    public Integer getCargoNumber() {
+    public String getCargoNumber() {
         return this.cargoNumber;
     }
 
-    public void setCargoNumber(Integer cargoNumber) {
+    public void setCargoNumber(String cargoNumber) {
         this.cargoNumber = cargoNumber;
     }
 

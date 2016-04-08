@@ -18,8 +18,8 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.ewing.busi.system.model.SysParam;
+import com.ewing.busi.web.contant.GroupType;
 import com.ewing.busi.web.model.WebBlock;
-import com.ewing.common.constant.GroupType;
 import com.ewing.common.constant.SysParamCode;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;

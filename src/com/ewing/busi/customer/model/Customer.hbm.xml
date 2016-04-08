@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-2-2 16:23:43 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ewing.busi.customer.model.Customer" table="customer" catalog="ewing">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="100" not-null="true">
+            </column>
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="100">
+            </column>
+        </property>
+        <property name="headIcon" type="string">
+            <column name="head_icon" length="300">
+            </column>
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="50">
+            </column>
+        </property>
+        <property name="sex" type="string">
+            <column name="sex" length="1" not-null="true">
+            </column>
+        </property>
+        <property name="iseff" type="string">
+            <column name="iseff" length="1" not-null="true">
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

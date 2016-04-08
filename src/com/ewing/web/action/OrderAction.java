@@ -9,20 +9,19 @@ import javax.annotation.Resource;
 import org.apache.axis.utils.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.ewing.busi.order.contant.OrderStatus;
 import com.ewing.busi.order.dto.ExpressRespDto;
 import com.ewing.busi.order.dto.OrderInfoComplex;
 import com.ewing.busi.order.dto.OrderQueryReq;
+import com.ewing.busi.order.model.OrderRefund;
+import com.ewing.busi.order.service.OrderRefundService;
 import com.ewing.busi.order.service.OrderService;
 import com.ewing.busi.system.model.SysParam;
-import com.ewing.busi.web.model.WebBlock;
-import com.ewing.common.constant.GroupType;
-import com.ewing.common.constant.OrderStatus;
 import com.ewing.common.constant.SysParamCode;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;
 import com.ewing.core.app.action.base.ResponseUtils;
 import com.ewing.core.app.control.SessionException;
-import com.ewing.core.jdbc.DaoException;
 import com.ewing.core.jdbc.util.PageBean;
 
 /**
@@ -36,6 +35,7 @@ public class OrderAction extends BaseAction {
     private static Logger logger = Logger.getLogger(OrderAction.class);
     @Resource
     private OrderService orderService;
+
     private static final String LIST_PAGE = "/admin/order/orderlist.html";
     private static final String ORDER_DETAIL = "/admin/order/orderdetail.html";
     private static final String ORDER_FRAME_PAGE = "/admin/order/orderframe.html";
@@ -101,11 +101,11 @@ public class OrderAction extends BaseAction {
         try {
             OrderInfoComplex orderComplex = orderService.findOneComplexOrder(getLoginUserId(),
                     orderId);
-            ExpressRespDto expressRespDto = orderService.queryCargoInfo(getLoginUserId(),
-                    orderId); 
+            ExpressRespDto expressRespDto = orderService.queryOrderCargoInfo(getLoginUserId(),
+                    orderId);
             dataModel.put("orderComplex", orderComplex);
             dataModel.put("expressResp", expressRespDto);
-            renderWithHead(ORDER_DETAIL, dataModel);
+            render(ORDER_DETAIL, dataModel);
         } catch (SessionException e) {
             logger.error(e.getMessage(), e);
         }

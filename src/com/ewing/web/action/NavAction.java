@@ -11,9 +11,9 @@ import org.apache.log4j.Logger;
 
 import com.ewing.busi.seller.service.SellerShopService;
 import com.ewing.busi.system.model.SysParam;
+import com.ewing.busi.web.contant.GroupType;
 import com.ewing.busi.web.model.WebBlock;
 import com.ewing.busi.web.service.GroupService;
-import com.ewing.common.constant.GroupType;
 import com.ewing.common.constant.SysParamCode;
 import com.ewing.core.app.action.base.BaseAction;
 import com.ewing.core.app.action.base.ResponseData;

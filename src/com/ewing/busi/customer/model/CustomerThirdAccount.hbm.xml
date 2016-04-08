@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-2-2 16:23:43 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ewing.busi.customer.model.CustomerThirdAccount" table="customer_third_account" catalog="ewing">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="customerId" type="int">
+            <column name="customer_id" not-null="true">
+            </column>
+        </property>
+        <property name="thirdPlatform" type="int">
+            <column name="third_platform" not-null="true">
+            </column>
+        </property>
+        <property name="userId" type="string">
+            <column name="user_id" length="100" not-null="true">
+            </column>
+        </property>
+        <property name="nickName" type="string">
+            <column name="nick_name">
+            </column>
+        </property>
+        <property name="headIcon" type="string">
+            <column name="head_icon" length="300">
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

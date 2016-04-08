@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-5 16:57:32 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ewing.busi.order.model.OrderProcessHistory" table="order_process_history" catalog="ewing">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="bizId" type="string">
+            <column name="biz_id" length="50" not-null="true">
+                <comment>&#193;&#247;&#203;&#174;&#186;&#197;</comment>
+            </column>
+        </property>
+        <property name="busiType" type="int">
+            <column name="busi_type" not-null="true">
+                <comment>&#210;&#181;&#206;&#241;&#192;&#224;&#208;&#205; 1:&#182;&#169;&#181;&#165; 2:&#205;&#203;&#191;&#238;</comment>
+            </column>
+        </property>
+        <property name="busiId" type="int">
+            <column name="busi_id" not-null="true">
+                <comment>&#210;&#181;&#206;&#241;ID,&#177;&#237;order&#214;&#247;&#188;&#252;</comment>
+            </column>
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="1" not-null="true">
+                <comment>&#205;&#203;&#191;&#238;&#192;&#224;&#208;&#205; 0:&#205;&#203;&#187;&#245;&#205;&#203;&#191;&#238; 1:&#189;&#246;&#205;&#203;&#191;&#238;</comment>
+            </column>
+        </property>
+        <property name="customerId" type="int">
+            <column name="customer_id" not-null="true">
+                <comment>&#207;&#251;&#183;&#209;&#213;&#223;ID</comment>
+            </column>
+        </property>
+        <property name="userId" type="int">
+            <column name="user_id" not-null="true">
+                <comment>&#201;&#204;&#187;&#167;&#211;&#195;&#187;&#167;ID</comment>
+            </column>
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="1" not-null="true">
+                <comment>&#193;&#247;&#179;&#204;&#215;&#180;&#204;&#172;</comment>
+            </column>
+        </property>
+        <property name="statusString" type="string">
+            <column name="status_string" length="50" not-null="true">
+                <comment>&#193;&#247;&#179;&#204;&#195;&#251;&#179;&#198;</comment>
+            </column>
+        </property>
+        <property name="comment" type="string">
+            <column name="comment" length="50" not-null="true">
+                <comment>&#177;&#184;&#215;&#162;</comment>
+            </column>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
