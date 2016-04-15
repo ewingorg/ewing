@@ -8,7 +8,7 @@ public class SysParamCode {
     /**
      * 是否生效
      */
-    public final static String ISEFF = "IS_EFF"; 
+    public final static String ISEFF = "IS_EFF";
     /**
      * 资源是否上架
      */
@@ -25,15 +25,19 @@ public class SysParamCode {
     /**
      * 是否需要
      */
-    public final static String NEED_TYPE = "NEED_TYPE"; 
+    public final static String NEED_TYPE = "NEED_TYPE";
     /**
      * 物流公司列表
      */
-    public final static String CARGO_LIST="CARGO_LIST";
-    
+    public final static String CARGO_LIST = "CARGO_LIST";
+
     /**
      * 分类配置链接类型
      */
-    public final static String BLOCK_LINK_TYPE="BLOCK_LINK_TYPE";
-     
+    public final static String BLOCK_LINK_TYPE = "BLOCK_LINK_TYPE";
+    /**
+     * 集分宝退款原因
+     */
+    public final static String REFUND_REASON_LIST = "REFUND_REASON_LIST";
+
 }

@@ -101,7 +101,7 @@
 													数量:${orderDetail.itemCount}<br>
 													总价:￥${orderDetail.totalPrice}
 													<#if orderDetail.status = '3'>
-														<br><a href='#' name="orderrefundlink" value="${orderDetail.id}" style="color: red;">客户退货</a>
+														<br><a href='#' name="orderrefundlink" value="${orderDetail.id}" style="color: red;t">客户申请退货</a>
 													</#if>
 												</div>
 												<div class="ordertdclear"></div>
@@ -123,6 +123,7 @@
 											</#if>
 											
 										</td> </#if>
+										
 									</tr>
 									</#list> </#list>
 								</tbody>

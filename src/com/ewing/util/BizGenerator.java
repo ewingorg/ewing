@@ -10,7 +10,6 @@ import java.util.UUID;
  * 
  */
 public class BizGenerator {
-
     /**
      * 生成业务流水号
      * 
@@ -19,11 +18,11 @@ public class BizGenerator {
     public static String generateBizNum() {
         String a = (String.valueOf(System.currentTimeMillis()));
         String d = (String.valueOf(Math.random())).substring(2, 10);
-        return a + d;
+        return "EWING-" + a + d;
     }
-    
-    public static String generateUUID(){    
-        String uuid = UUID.randomUUID().toString().trim().replaceAll("-", "");    
-        return uuid;    
+
+    public static String generateUUID() {
+        String uuid = UUID.randomUUID().toString().trim().replaceAll("-", "");
+        return uuid;
     }
 }

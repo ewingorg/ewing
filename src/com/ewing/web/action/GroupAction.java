@@ -45,9 +45,9 @@ public class GroupAction extends BaseAction {
 			PageBean pageBean = baseModelService.pageQuery(condition,
 					bulidOrderBySql(), pageSize, page, WebTemplateGroupkey.class);
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			List<SysParam> groupType = sysParamService
-					.getSysParam(SysParamCode.GROUP_TYPE);
+					.getSysParamByRoot(SysParamCode.GROUP_TYPE);
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("groupType", groupType);
 			pageBean.setPageUrl(getPaginationUrl("/Admin-Group-show.action"));
@@ -70,9 +70,9 @@ public class GroupAction extends BaseAction {
 				dataModel.put("bean", webGroup);
 			}
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			List<SysParam> groupType = sysParamService
-					.getSysParam(SysParamCode.GROUP_TYPE);
+					.getSysParamByRoot(SysParamCode.GROUP_TYPE);
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("groupType", groupType);
 			render(EDIT_FORM, dataModel);

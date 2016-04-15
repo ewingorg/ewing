@@ -10,11 +10,13 @@ import javax.annotation.Resource;
 
 import org.apache.axis.utils.StringUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ewing.busi.express.service.ExpressApiService;
 import com.ewing.busi.order.contant.OrderStatus;
 import com.ewing.busi.order.dao.OrderDao;
 import com.ewing.busi.order.dao.OrderDetailDao;
+import com.ewing.busi.order.dao.OrderProcessHistoryDao;
 import com.ewing.busi.order.dao.OrderRefundDao;
 import com.ewing.busi.order.dto.ExpressRespDto;
 import com.ewing.busi.order.dto.OrderDetailDto;
@@ -48,6 +50,8 @@ public class OrderService {
     private SysParamService sysParamService;
     @Resource
     private OrderRefundDao orderRefundDao;
+    @Resource
+    private OrderProcessHistoryDao orderProcessHistoryDao;
 
     /**
      * 查询
@@ -70,6 +74,7 @@ public class OrderService {
      * @param cargoNumber
      * @throws OrderException
      */
+    @Transactional(rollbackFor = Exception.class)
     public void update2Send(Integer userId, Integer orderId, Integer needCargo, String cargoName,
             String cargoNumber) throws OrderException {
         OrderInfo orderInfo = orderDao.findOne(userId, orderId);
@@ -99,6 +104,8 @@ public class OrderService {
                 baseDao.update(orderDetail);
             }
         }
+
+        orderProcessHistoryDao.addOrderHistory(orderInfo, OrderStatus.WAIT_RECEIVE);
     }
 
     /**

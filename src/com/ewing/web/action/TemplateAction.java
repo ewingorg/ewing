@@ -65,7 +65,7 @@ public class TemplateAction extends BaseAction {
 			groupService.translateGroupName(
 					(List<WebTemplate>) pageBean.getResult(), false);
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			List<SysParam> groupCode = groupService.getGroupParamList();
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("groupKeyCode", groupCode);
@@ -92,7 +92,7 @@ public class TemplateAction extends BaseAction {
 				dataModel.put("bean", webTemplate);
 			}
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			List<SysParam> groupCode = groupService.getGroupParamList();
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("groupKeyCode", groupCode);

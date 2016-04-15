@@ -93,7 +93,7 @@ public class ResCategoryAction extends BaseAction {
                 webResource.setParentName(parentNode.getName());
                 dataModel.put("bean", webResource);
             }
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
             dataModel.put("iseffCode", iseffCode);
             render(EDIT_FORM, dataModel);
         } catch (Exception e) {
@@ -117,7 +117,7 @@ public class ResCategoryAction extends BaseAction {
                 newNode.setParentName(parentNode.getName());
                 dataModel.put("bean", newNode);
             }
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
             dataModel.put("iseffCode", iseffCode);
             render(EDIT_FORM, dataModel);
         } catch (Exception e) {

@@ -51,7 +51,7 @@ public class RelResAction extends BaseAction {
 			PageBean pageBean = baseModelService.pageQuery(condition,
 					bulidOrderBySql(), pageSize, page, WebRelResource.class);
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
 			pageBean.setPageUrl(getPaginationUrl("/Admin-RelRes-show.action"));
 			dataModel.put("pageBean", pageBean); 
@@ -75,7 +75,7 @@ public class RelResAction extends BaseAction {
 				dataModel.put("bean", relResource);
 			}
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
 			render(EDIT_FORM, dataModel);
 		} catch (Exception e) {

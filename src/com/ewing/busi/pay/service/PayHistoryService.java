@@ -9,6 +9,7 @@ import com.ewing.busi.order.dao.OrderDetailDao;
 import com.ewing.busi.order.model.OrderDetail;
 import com.ewing.busi.pay.contant.PayBusiType;
 import com.ewing.busi.pay.contant.PayStatus;
+import com.ewing.busi.pay.contant.PayWay;
 import com.ewing.busi.pay.model.PayHistory;
 import com.ewing.common.exception.OrderException;
 import com.ewing.core.jdbc.BaseDao;
@@ -36,7 +37,7 @@ public class PayHistoryService {
      * @return
      * @throws OrderException
      */
-    public Boolean addRefundHistory(Integer userId, Integer orderDetailId, String payWay)
+    public Boolean addRefundHistory(Integer userId, Integer orderDetailId, PayWay payWay)
             throws OrderException {
         OrderDetail orderInfo = orderDetailDao.findDetail(userId, orderDetailId);
         if (orderInfo == null)
@@ -47,7 +48,7 @@ public class PayHistoryService {
         payHistory.setBusiId(orderInfo.getId());
         payHistory.setPayFee(orderInfo.getTotalPrice());
         payHistory.setStatus(PayStatus.INIT.getValue());
-        payHistory.setPayWay(payWay);
+        payHistory.setPayWay(payWay.getValue());
         payHistory.setCustomerId(orderInfo.getCustomerId());
         payHistory.setUserId(orderInfo.getUserId());
         baseDao.save(payHistory);

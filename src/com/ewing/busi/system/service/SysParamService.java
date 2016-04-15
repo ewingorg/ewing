@@ -23,9 +23,15 @@ public class SysParamService {
     private SysParamDao sysParamDao;
 
     @Cacheable(cacheName = "cacheManager")
-    public List<SysParam> getSysParam(String rootCode) {
+    public List<SysParam> getSysParamByRoot(String rootCode) {
         return baseDao.find("root_code='" + rootCode + "' and iseff=" + IsEff.EFFECTIVE
                 + " order by seq", SysParam.class);
+    }
+
+    @Cacheable(cacheName = "cacheManager")
+    public SysParam getSysParam(String paramCode) {
+        return baseDao.findOne("param_code='" + paramCode + "' and iseff=" + IsEff.EFFECTIVE,
+                SysParam.class);
     }
 
     @Cacheable(cacheName = "cacheManager")
@@ -45,7 +51,7 @@ public class SysParamService {
     public SysParam getByValue(String rootCode, String value) throws SysParamException {
         if (StringUtils.isEmpty(rootCode) || StringUtils.isEmpty(value))
             throw new SysParamException("没有匹配的系统参数");
-        List<SysParam> params = getSysParam(rootCode);
+        List<SysParam> params = getSysParamByRoot(rootCode);
         for (SysParam sysParam : params) {
             if (sysParam.getParamValue().equals(value)) {
                 return sysParam;

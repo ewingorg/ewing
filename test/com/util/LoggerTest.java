@@ -12,8 +12,9 @@ public class LoggerTest {
     private static Logger logger = Logger.getLogger(BaseAction.class);
     @Test
     public void test1() {
-        ORDERCHECKJOB.info(1111);
-        ORDERCHECKJOB.error(2222);
+        /*ORDERCHECKJOB.info(1111);
+        ORDERCHECKJOB.error(2222);*/
         logger.info(1111);
+        logger.error(222);
     }
 }

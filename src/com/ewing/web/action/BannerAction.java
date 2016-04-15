@@ -57,7 +57,7 @@ public class BannerAction extends BaseAction {
                     + bulidConditionSql();
             PageBean pageBean = baseModelService.pageQuery(condition, bulidOrderBySql(), pageSize,
                     page, WebBlock.class);
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
             List<SysParam> groupCode = groupService.getGroupParamList(
                     sellerShopService.checkAndReturnTemplatePackageId(getLoginUserId()),
                     GroupType.BANNER);
@@ -83,8 +83,8 @@ public class BannerAction extends BaseAction {
                 WebBlock webCategory = findOne(Integer.valueOf(id), WebBlock.class);
                 dataModel.put("bean", webCategory);
             }
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
-            List<SysParam> blockLinkType = sysParamService.getSysParam(SysParamCode.BLOCK_LINK_TYPE);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
+            List<SysParam> blockLinkType = sysParamService.getSysParamByRoot(SysParamCode.BLOCK_LINK_TYPE);
             List<SysParam> groupCode = groupService.getGroupParamList(
                     sellerShopService.checkAndReturnTemplatePackageId(getLoginUserId()),
                     GroupType.BANNER);
@@ -115,7 +115,7 @@ public class BannerAction extends BaseAction {
                     pageSize, page);
             PageBean unbindPageBean = relResService.listNotRelResourceByCategory(categoryId, null,
                     pageSize, page);
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
             dataModel.put("iseffCode", iseffCode);
             dataModel.put("categoryId", categoryId);
             bindPageBean
@@ -148,7 +148,7 @@ public class BannerAction extends BaseAction {
                     .valueOf(categoryIdStr);
             PageBean bindPageBean = relResService.listRelResourceByCategory(categoryId,
                     resourceName, pageSize, page);
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
             dataModel.put("iseffCode", iseffCode);
             dataModel.put("categoryId", categoryId);
             bindPageBean
@@ -177,7 +177,7 @@ public class BannerAction extends BaseAction {
                     .valueOf(categoryIdStr);
             PageBean unbindPageBean = relResService.listNotRelResourceByCategory(categoryId,
                     resourceName, pageSize, page);
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
             dataModel.put("iseffCode", iseffCode);
             dataModel.put("categoryId", categoryId);
             unbindPageBean

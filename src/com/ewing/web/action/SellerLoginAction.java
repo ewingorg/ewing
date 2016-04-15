@@ -85,7 +85,7 @@ public class SellerLoginAction extends BaseAction {
     public void userLogOut() throws ActionException {
         try {
             SessionControl.removeUserInfo(request);
-            response.sendRedirect(request.getContextPath() + "/Admin-SellerLogin-toLogin.action");
+            response.sendRedirect(request.getContextPath() + "/tologin.action");
         } catch (Exception e) {
             logger.error(e, e);
         }

@@ -13,7 +13,7 @@
                 <comment>&#193;&#247;&#203;&#174;&#186;&#197;</comment>
             </column>
         </property>
-        <property name="busiType" type="int">
+        <property name="busiType" type="string">
             <column name="busi_type" not-null="true">
                 <comment>&#210;&#181;&#206;&#241;&#192;&#224;&#208;&#205; 1:&#182;&#169;&#181;&#165; 2:&#205;&#203;&#191;&#238;</comment>
             </column>

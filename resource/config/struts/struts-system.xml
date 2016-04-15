@@ -10,6 +10,15 @@
 		<action name="Admin-*-*" method="{2}" class="com.ewing.web.action.{1}Action" />
 	</package>
 	 
+	<package name="login" extends="struts-default"> 
+		<action name="login" method="userLogin" class="com.ewing.web.action.SellerLoginAction" />  
+		<action name="tologin" method="toLogin" class="com.ewing.web.action.SellerLoginAction" />
+		<action name="logout" method="userLogOut" class="com.ewing.web.action.SellerLoginAction" />
+	</package>
+	
+	<package name="menu" extends="struts-default"> 
+		<action name="main" method="show" class="com.ewing.web.action.MainAction" />   
+	</package>
 	
 	<package name="file" extends="struts-default">
 		<action name="fileAction" class="com.ewing.web.action.FileAction"

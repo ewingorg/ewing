@@ -2,6 +2,9 @@ package com.ewing.busi.order.dto;
 
 import java.util.Date;
 
+import com.ewing.busi.order.contant.RefundStatus;
+import com.ewing.busi.order.contant.RefundType;
+
 /**
  * 类/接口注释
  * 
@@ -14,12 +17,14 @@ public class OrderRefundDto {
     private String bizId;
     private int orderId;
     private int orderDetailId;
-    private char type;
+    private String type;
+    private String typeStr;
     private int customerId;
     private String customerName;
     private int userId;
     private int resourceId;
-    private int reasonType;
+    private String reasonType;
+    private String reasonTypeStr;
     private int reason;
     private String cargoName;
     private String cargoNumber;
@@ -29,6 +34,29 @@ public class OrderRefundDto {
     private String iseff;
     private Date createTime;
     private Date lastUpdate;
+
+    public String getTypeStr() {
+        return typeStr;
+    }
+
+    public void setTypeStr(String typeStr) {
+        this.typeStr = typeStr;
+    }
+
+    public String getReasonTypeStr() {
+        return reasonTypeStr;
+    }
+
+    public void setReasonTypeStr(String reasonTypeStr) {
+        this.reasonTypeStr = reasonTypeStr;
+    }
+
+    public void translate() {
+        if (status != null)
+            statusStr = RefundStatus.getMsg(status);
+        if (type != null)
+            typeStr = RefundType.getMsg(type);
+    }
 
     public Integer getId() {
         return id;
@@ -62,11 +90,11 @@ public class OrderRefundDto {
         this.orderDetailId = orderDetailId;
     }
 
-    public char getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(char type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -102,11 +130,11 @@ public class OrderRefundDto {
         this.resourceId = resourceId;
     }
 
-    public int getReasonType() {
+    public String getReasonType() {
         return reasonType;
     }
 
-    public void setReasonType(int reasonType) {
+    public void setReasonType(String reasonType) {
         this.reasonType = reasonType;
     }
 

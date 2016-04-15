@@ -5,22 +5,26 @@ import javax.annotation.Resource;
 import org.apache.axis.utils.StringUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ewing.busi.customer.dao.CustomerDao;
 import com.ewing.busi.customer.model.Customer;
 import com.ewing.busi.express.service.ExpressApiService;
 import com.ewing.busi.order.contant.RefundStatus;
 import com.ewing.busi.order.contant.RefundType;
+import com.ewing.busi.order.dao.OrderProcessHistoryDao;
 import com.ewing.busi.order.dao.OrderRefundDao;
 import com.ewing.busi.order.dto.ExpressRespDto;
 import com.ewing.busi.order.dto.OrderRefundDto;
 import com.ewing.busi.order.model.OrderRefund;
+import com.ewing.busi.pay.contant.PayWay;
 import com.ewing.busi.pay.service.PayHistoryService;
 import com.ewing.busi.system.model.SysParam;
 import com.ewing.busi.system.service.SysParamService;
 import com.ewing.common.constant.CargoStatus;
 import com.ewing.common.constant.SysParamCode;
 import com.ewing.common.exception.OrderException;
+import com.ewing.common.exception.SysParamException;
 import com.ewing.core.jdbc.BaseDao;
 
 /**
@@ -42,14 +46,18 @@ public class OrderRefundService {
     private PayHistoryService payHistoryService;
     @Resource
     private BaseDao baseDao;
+    @Resource
+    private OrderProcessHistoryDao orderProcessHistoryDao;
 
     /**
      * 查找退款
      * 
      * @param orderDetailId
      * @return
+     * @throws SysParamException
      */
-    public OrderRefundDto findRefund(Integer userId, Integer orderDetailId) {
+    public OrderRefundDto findRefund(Integer userId, Integer orderDetailId)
+            throws SysParamException {
         OrderRefund orderRefund = orderRefundDao.findRefund(userId, orderDetailId);
         if (orderRefund == null)
             return null;
@@ -59,9 +67,13 @@ public class OrderRefundService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        SysParam reasonParam = sysParamService.getByValue(SysParamCode.REFUND_REASON_LIST,
+                orderRefund.getReasonType());
         Customer customer = customerDao.findUserById(orderRefund.getUserId());
         orderRefundDto.setCustomerName(customer.getName());
         orderRefundDto.setStatusStr(RefundStatus.getMsg(orderRefund.getStatus()));
+        orderRefundDto.setReasonTypeStr(reasonParam.getParamName());
+        orderRefundDto.translate();
         return orderRefundDto;
     }
 
@@ -93,16 +105,18 @@ public class OrderRefundService {
      * @return
      * @throws OrderException
      */
+    @Transactional(rollbackFor = Exception.class)
     public Boolean sellerArgeeRefund(Integer userId, Integer orderDetailId) throws OrderException {
         OrderRefund orderRefund = orderRefundDao.findRefund(userId, orderDetailId);
         if (orderRefund == null)
             return false;
         // 如是是仅退款的则直接返回钱给用户
         if (orderRefund.getType() == RefundType.MONEY.getValue()) {
-            payHistoryService.addRefundHistory(userId, orderRefund.getOrderId(), null);
+            payHistoryService.addRefundHistory(userId, orderRefund.getOrderId(), PayWay.WEIXIN);
         }
         orderRefund.setStatus(RefundStatus.CONFIRMED.getValue());
-        baseDao.save(orderRefund);
+        baseDao.update(orderRefund);
+        orderProcessHistoryDao.addRefundHistory(orderRefund, RefundStatus.CONFIRMED);
         return true;
     }
 
@@ -114,12 +128,14 @@ public class OrderRefundService {
      * @return
      * @throws OrderException
      */
+    @Transactional(rollbackFor = Exception.class)
     public Boolean sellerReceiveGood(Integer userId, Integer orderDetailId) throws OrderException {
         OrderRefund orderRefund = orderRefundDao.findRefund(userId, orderDetailId);
         if (orderRefund == null)
             return false;
         orderRefund.setStatus(RefundStatus.RECEIVED.getValue());
-        baseDao.save(orderRefund);
+        baseDao.update(orderRefund);
+        orderProcessHistoryDao.addRefundHistory(orderRefund, RefundStatus.RECEIVED);
         return true;
     }
 
@@ -131,13 +147,15 @@ public class OrderRefundService {
      * @return
      * @throws OrderException
      */
+    @Transactional(rollbackFor = Exception.class)
     public Boolean sellerRefund(Integer userId, Integer orderDetailId) throws OrderException {
         OrderRefund orderRefund = orderRefundDao.findRefund(userId, orderDetailId);
         if (orderRefund == null)
             return false;
         orderRefund.setStatus(RefundStatus.FINISHED.getValue());
-        payHistoryService.addRefundHistory(userId, orderRefund.getOrderId(), null);
-        baseDao.save(orderRefund);
+        baseDao.update(orderRefund);
+        payHistoryService.addRefundHistory(userId, orderRefund.getOrderId(), PayWay.WEIXIN);
+        orderProcessHistoryDao.addRefundHistory(orderRefund, RefundStatus.FINISHED);
         return true;
     }
 }

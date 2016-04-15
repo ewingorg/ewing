@@ -50,7 +50,7 @@ public class NavAction extends BaseAction {
             String condition = "groupType ='" + GroupType.NAV.getCode() + "'" + bulidConditionSql();
             PageBean pageBean = baseModelService.pageQuery(condition, bulidOrderBySql(), pageSize,
                     page, WebBlock.class);
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
             List<SysParam> groupCode = groupService.getGroupParamList(
                     sellerShopService.checkAndReturnTemplatePackageId(getLoginUserId()),
                     GroupType.NAV);
@@ -76,8 +76,8 @@ public class NavAction extends BaseAction {
                 WebBlock webCategory = findOne(Integer.valueOf(id), WebBlock.class);
                 dataModel.put("bean", webCategory);
             }
-            List<SysParam> iseffCode = sysParamService.getSysParam(SysParamCode.ISEFF);
-            List<SysParam> blockLinkType = sysParamService.getSysParam(SysParamCode.BLOCK_LINK_TYPE);
+            List<SysParam> iseffCode = sysParamService.getSysParamByRoot(SysParamCode.ISEFF);
+            List<SysParam> blockLinkType = sysParamService.getSysParamByRoot(SysParamCode.BLOCK_LINK_TYPE);
             List<SysParam> groupCode = groupService.getGroupParamList(
                     sellerShopService.checkAndReturnTemplatePackageId(getLoginUserId()),
                     GroupType.NAV);

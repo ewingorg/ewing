@@ -16,14 +16,17 @@
 			</div>
 			<div class="portlet-body form">
 				<div class="control-group">
-					<label class="control-label">退款类型:${orderRefund.type}</label>
+					<label class="control-label">退款流程：${(orderRefund.statusStr)?if_exists}</label>
+				</div>
+				<div class="control-group">
+					<label class="control-label">退款类型：${(orderRefund.typeStr)?if_exists}</label>
 				</div>
 				
 				<div class="control-group">
-					<label class="control-label">退款原因:${orderRefund.reasonType}</label>
+					<label class="control-label">退款原因：${(orderRefund.reasonTypeStr)?if_exists}</label>
 				</div>
 				<div class="control-group">
-					<label class="control-label">详细说明:${orderRefund.reason}</label>
+					<label class="control-label">详细说明：${(orderRefund.reason)?if_exists}</label>
 				</div> 
 			</div>
 
@@ -36,11 +39,11 @@
 			</div>
 			<div class="portlet-body form">
 				<div class="control-group">
-					<label class="control-label">客户名称：${customer.name}</label>
+					<label class="control-label">客户名称：${(customer.name)?if_exists}</label>
 				</div>
 
 				<div class="control-group">
-					<label class="control-label">联系电话：${customer.phone}</label>
+					<label class="control-label">联系电话：${(customer.phone)?if_exists}</label>
 				</div>
 			</div>
 		</div>
@@ -48,12 +51,12 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="icon-reorder"></i>物流信息：${orderRefund.cargoName} ${orderRefund.cargoNumber}
+					<i class="icon-reorder"></i>物流信息：${(orderRefund.cargoName)?if_exists} ${(orderRefund.cargoNumber)?if_exists}
 				</div>
 			</div>
 			<div class="portlet-body form">
 				<div class="control-group">
-					<label class="control-label">状态：${expressResp.statusStr}</label>
+					<label class="control-label">状态：${(expressResp.statusStr)?if_exists}</label>
 				</div>
 				<#list expressResp.data as data >
 				<div class="control-group">
@@ -64,14 +67,15 @@
 		</div> 
 		 
 		<div class="modal-footer">
-		  
-		     <#if orderRefund.status='1'>
-		    	 <button type="button" id="refund_confirm_btn" class="btn green">同意客户退货</button>
-		     </#if>
-	         <#if orderRefund.status='4' || orderRefund.status='5'>
-		    	 <button type="button" id="refund_finished_btn" class="btn green">同意退货</button>
-		     </#if>
-			 <button type="button" id="orderdetail_return_btn" class="btn green">返回</button>
+		  	 <#if orderRefund??>
+			     <#if orderRefund.status='1'>
+			    	 <button type="button" id="refund_confirm_btn" class="btn green">同意客户退货</button>
+			     </#if>
+		         <#if orderRefund.status='4' || orderRefund.status='5'>
+			    	 <button type="button" id="refund_finished_btn" class="btn green">同意退货</button>
+			     </#if>
+	         </#if>
+			 <button type="button" id="orderdetail_return_btn" class="btn  ">返回</button>
 		</div>
 		<!-- END EXTRAS PORTLET-->
 	</div>
@@ -81,7 +85,7 @@
 jQuery(document).ready(function() { 
 var _errZoneId ="errTip";
 var orderDetailId = '${(orderRefund.orderDetailId)?if_exists}';
-var queryUrl = '${contextPath}/Admin-OrderRefund-sellerArgeeRefund.action?orderDetailId='+orderDetailId;  
+var queryUrl = '${contextPath}/Admin-OrderRefund-showRefundForm.action?orderDetailId='+orderDetailId;  
 $("#refund_confirm_btn").bind("click", function() {
 	common.alert({
 			content : '是否同意客户退货？',
@@ -137,6 +141,12 @@ $("#refund_finished_btn").bind("click", function() {
 			}
 		}); 
 	});
+ 
+$("#orderdetail_return_btn").bind("click", function() {
+	var id = $(this).attr("value");
+	mainFrame.addContainer('Admin-Order-show.action');
+	 
+});
  
 });
 </script>

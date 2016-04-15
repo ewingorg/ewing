@@ -11,9 +11,8 @@ public class OrderProcessHistory implements java.io.Serializable {
 
     private Integer id;
     private String bizId;
-    private int busiType;
+    private String busiType;
     private int busiId;
-    private String type;
     private int customerId;
     private int userId;
     private String status;
@@ -24,8 +23,6 @@ public class OrderProcessHistory implements java.io.Serializable {
 
     public OrderProcessHistory() {
     }
-
-   
 
     public Integer getId() {
         return this.id;
@@ -43,11 +40,11 @@ public class OrderProcessHistory implements java.io.Serializable {
         this.bizId = bizId;
     }
 
-    public int getBusiType() {
+    public String getBusiType() {
         return this.busiType;
     }
 
-    public void setBusiType(int busiType) {
+    public void setBusiType(String busiType) {
         this.busiType = busiType;
     }
 
@@ -57,14 +54,6 @@ public class OrderProcessHistory implements java.io.Serializable {
 
     public void setBusiId(int busiId) {
         this.busiId = busiId;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public int getCustomerId() {

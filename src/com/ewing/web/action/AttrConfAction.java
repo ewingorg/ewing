@@ -62,7 +62,7 @@ public class AttrConfAction extends BaseAction {
 				if (StringUtil.isEmpty(webAttrConf.getParamCode()))
 					continue;
 				String paramCode = webAttrConf.getParamCode();
-				List<SysParam> param = sysParamService.getSysParam(paramCode);
+				List<SysParam> param = sysParamService.getSysParamByRoot(paramCode);
 				webAttrConf.setParamCodeList(param);
 
 			}

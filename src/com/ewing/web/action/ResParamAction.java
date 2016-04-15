@@ -74,7 +74,7 @@ public class ResParamAction extends BaseAction {
 				dataModel.put("resParamBean", webResourceParam);
 			}
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("categoryParams", categoryParams);
 			render(EDIT_FORM, dataModel);

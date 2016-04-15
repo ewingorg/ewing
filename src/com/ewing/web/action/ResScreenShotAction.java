@@ -47,7 +47,7 @@ public class ResScreenShotAction extends BaseAction {
 					WebResourceScreenshot.class);
 			pageBean.setPageUrl(getPaginationUrl("/Admin-ResScreenShot-show.action"));
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
 			dataModel.put("resScreenPageBean", pageBean);
 			render(LIST_PAGE, dataModel);
@@ -70,7 +70,7 @@ public class ResScreenShotAction extends BaseAction {
 			}
 			dataModel.put("resourceId", getIntegerParameter("resourceId"));
 			List<SysParam> iseffCode = sysParamService
-					.getSysParam(SysParamCode.ISEFF);
+					.getSysParamByRoot(SysParamCode.ISEFF);
 			dataModel.put("iseffCode", iseffCode);
 			render(EDIT_FORM, dataModel);
 		} catch (Exception e) {

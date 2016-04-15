@@ -59,7 +59,7 @@ public class OrderAction extends BaseAction {
             pageBean.setPageUrl(getPaginationUrl("/Admin-Order-queryOrderList.action"));
             dataModel.put("orderPageBean", pageBean);
             dataModel.put("status", OrderStatus.WAIT_SEND.getStatus());
-            dataModel.put("iseffCode", sysParamService.getSysParam(SysParamCode.ISEFF));
+            dataModel.put("iseffCode", sysParamService.getSysParamByRoot(SysParamCode.ISEFF));
             render(ORDER_FRAME_PAGE, dataModel);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -85,7 +85,7 @@ public class OrderAction extends BaseAction {
                     orderQueryReq);
             pageBean.setPageUrl(getPaginationUrl("/Admin-Order-queryOrderList.action"));
             dataModel.put("orderPageBean", pageBean);
-            dataModel.put("iseffCode", sysParamService.getSysParam(SysParamCode.ISEFF));
+            dataModel.put("iseffCode", sysParamService.getSysParamByRoot(SysParamCode.ISEFF));
             render(LIST_PAGE, dataModel);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -118,8 +118,8 @@ public class OrderAction extends BaseAction {
         Map<String, Object> dataModel = new HashMap<String, Object>();
         try {
             String orderId = request.getParameter("orderId");
-            List<SysParam> cargoList = sysParamService.getSysParam(SysParamCode.CARGO_LIST);
-            List<SysParam> needType = sysParamService.getSysParam(SysParamCode.NEED_TYPE);
+            List<SysParam> cargoList = sysParamService.getSysParamByRoot(SysParamCode.CARGO_LIST);
+            List<SysParam> needType = sysParamService.getSysParamByRoot(SysParamCode.NEED_TYPE);
             dataModel.put("cargoList", cargoList);
             dataModel.put("needType", needType);
             dataModel.put("orderId", orderId);

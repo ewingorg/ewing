@@ -60,7 +60,7 @@
 			<props>
 				<!-- 当你使用mysql的时候，jbpm使用的是org.hibernate.dialect.MySQLInnoDBDialect -->
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
 				<prop key="net.sf.ehcache.configurationResourceName">conf/ehcache.xml</prop>

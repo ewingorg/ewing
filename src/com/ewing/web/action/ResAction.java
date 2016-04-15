@@ -62,10 +62,10 @@ public class ResAction extends BaseAction {
             pageBean.setPageUrl(getPaginationUrl("/Admin-Res-show.action"));
             dataModel.put("pageBean", pageBean);
 
-            dataModel.put("iseffCode", sysParamService.getSysParam(SysParamCode.ISEFF));
-            dataModel.put("resHotType", sysParamService.getSysParam(SysParamCode.RES_HOT_TYPE));
+            dataModel.put("iseffCode", sysParamService.getSysParamByRoot(SysParamCode.ISEFF));
+            dataModel.put("resHotType", sysParamService.getSysParamByRoot(SysParamCode.RES_HOT_TYPE));
             dataModel.put("resOnlineType",
-                    sysParamService.getSysParam(SysParamCode.RES_ONLINE_TYPE));
+                    sysParamService.getSysParamByRoot(SysParamCode.RES_ONLINE_TYPE));
 
             if (request.getParameter("_QUERY_n_eq_category_id") != null) {
                 Integer queryCategory = getIntegerParameter("_QUERY_n_eq_category_id");
@@ -102,12 +102,12 @@ public class ResAction extends BaseAction {
                 }
             }
             List<SysParam> templateType = templateService.getResTemplates();
-            dataModel.put("resHotType", sysParamService.getSysParam(SysParamCode.RES_HOT_TYPE));
+            dataModel.put("resHotType", sysParamService.getSysParamByRoot(SysParamCode.RES_HOT_TYPE));
             dataModel.put("templateType", templateType);
-            dataModel.put("iseffCode", sysParamService.getSysParam(SysParamCode.ISEFF));
+            dataModel.put("iseffCode", sysParamService.getSysParamByRoot(SysParamCode.ISEFF));
             dataModel.put("resOnlineType",
-                    sysParamService.getSysParam(SysParamCode.RES_ONLINE_TYPE));
-            dataModel.put("needType", sysParamService.getSysParam(SysParamCode.NEED_TYPE));
+                    sysParamService.getSysParamByRoot(SysParamCode.RES_ONLINE_TYPE));
+            dataModel.put("needType", sysParamService.getSysParamByRoot(SysParamCode.NEED_TYPE));
 
             render(EDIT_FORM, dataModel);
         } catch (Exception e) {
