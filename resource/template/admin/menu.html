@@ -7,16 +7,18 @@
 		   <#if menu.level = '2'>
 		   
 		     <#if levelId!=0 && levelId != menu.parentId>
-			 <li class="notactive" ><a href="#" style="background: #EEEEEE;"></a></li>
+			 <li class="notactive" ><a href="#" style=" "></a></li>
 		    </#if>
 		      <#assign levelId=menu.parentId> 
-        		<li class="notactive" onclick="mainFrame.clickMenu(this);"  parentMenuId="${menu.parentId}"
+        		<li  
+        			class="notactive" 
+        		 onclick="mainFrame.clickMenu(this);"  parentMenuId="${menu.parentId}"
         		 >
        			<a href="#"
         			<#if menu.hrefTarget ?? >
         			onclick="mainFrame.addContainer('${menu.hrefTarget}');"
         			</#if> > 
-        			<i class="${menu.iconCls}"></i> 
+        			<!-- <i class="${menu.iconCls}"></i>  -->
         			<span class="title">${menu.text}</span> <span
 				class="selected"></span></a>
 			 

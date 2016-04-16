@@ -21,11 +21,12 @@ public class OrderRefundDto {
     private String typeStr;
     private int customerId;
     private String customerName;
+    private String customerPhone;
     private int userId;
     private int resourceId;
     private String reasonType;
     private String reasonTypeStr;
-    private int reason;
+    private String reason;
     private String cargoName;
     private String cargoNumber;
     private float refundMoney;
@@ -34,6 +35,25 @@ public class OrderRefundDto {
     private String iseff;
     private Date createTime;
     private Date lastUpdate;
+    private String rejectReason;
+    
+    
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
+    }
 
     public String getTypeStr() {
         return typeStr;
@@ -138,11 +158,11 @@ public class OrderRefundDto {
         this.reasonType = reasonType;
     }
 
-    public int getReason() {
+    public String getReason() {
         return reason;
     }
 
-    public void setReason(int reason) {
+    public void setReason(String reason) {
         this.reason = reason;
     }
 

@@ -15,7 +15,8 @@ import com.ewing.core.job.Job;
 public class OrderCheckTimeOutJob extends Job {
 
     private OrderService orderService = (OrderService) SpringCtx.getByBeanName("orderService");
-    private final Integer maxTimeOut = 24 * 60 * 3600;
+    private final Integer maxNoPayTimeOut = 24 * 60 * 3600;
+    private final Integer maxNoConfirmTimeOut = 15 * 24 * 60 * 3600;
 
     public OrderCheckTimeOutJob() {
         super.needLog = false;
@@ -29,7 +30,8 @@ public class OrderCheckTimeOutJob extends Job {
     @Override
     public void execute() {
         try {
-            orderService.processTimeOutOrder(maxTimeOut);
+            orderService.processTimeOutOrder(maxNoPayTimeOut);
+            orderService.processNoconfirmOrder(maxNoConfirmTimeOut);
         } catch (Exception e) {
             ordercheckjoblogger.error(e.getMessage(), e);
         }

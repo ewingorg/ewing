@@ -32,6 +32,19 @@ public class OrderDao {
     private OrderDetailDao orderDetailDao;
 
     /**
+     * 查询需要商户处理的订单数
+     * 
+     * @param userId
+     * @return
+     */
+    public Integer countWaitProOrder(Integer userId) {
+        List<OrderInfo> list = baseDao.find("  user_id=" + userId + " and iseff='"
+                + IsEff.EFFECTIVE + "' and status in ('" + OrderStatus.WAIT_SEND.getStatus()
+                + "','" + OrderStatus.REFUNDING.getStatus() + "')", OrderInfo.class);
+        return list.size();
+    }
+
+    /**
      * 查找订单
      * 
      * @param userId
@@ -88,13 +101,13 @@ public class OrderDao {
         if (!StringUtils.isEmpty(orderQueryReq.getCargoNumber())) {
             sql += " and o.cargo_number = '" + orderQueryReq.getCargoNumber() + "'";
         }
-        
+
         if (!StringUtils.isEmpty(orderQueryReq.getStatus())) {
-          //  sql += " and o.status = '" + orderQueryReq.getStatus() + "'";
+            // sql += " and o.status = '" + orderQueryReq.getStatus() + "'";
             sql += " and exists (select id from order_detail detail where order_id=o.id and detail.iseff='"
                     + IsEff.EFFECTIVE + "' and detail.status='" + orderQueryReq.getStatus() + "')";
         }
-        
+
         if (!StringUtils.isEmpty(orderQueryReq.getCustomerName())) {
             sql += " and c.name like '%" + orderQueryReq.getCustomerName() + "%'";
         }
@@ -126,6 +139,19 @@ public class OrderDao {
     }
 
     /**
+     * 更新没有用户确定收货的订单的状态为关闭
+     * 
+     * @param orderId
+     * @return
+     */
+    public Integer updateNoConfirmOrder2Close(Integer orderId) {
+        String updateOrder = "update order_info set status='" + OrderStatus.CLOSE.getStatus()
+                + "' where id=" + orderId + " and status='" + OrderStatus.WAIT_RECEIVE.getStatus()
+                + "'";
+        return baseDao.executeSql(updateOrder);
+    }
+
+    /**
      * 查询超时的订单
      * 
      * @param maxTimeOut
@@ -138,6 +164,22 @@ public class OrderDao {
         String minTime = DataFormat.DateToString(cal.getTime(), DataFormat.DATETIME_FORMAT);
         String querySql = "status='" + OrderStatus.WAIT_PAY.getStatus() + "' and create_time <= '"
                 + minTime + "'";
+        return baseDao.find(querySql, OrderInfo.class);
+    }
+
+    /**
+     * 查询用户没有确认收货的订单
+     * 
+     * @param maxTimeOut
+     * @return
+     */
+    public List<OrderInfo> findNoConfirmOrder(Integer maxTimeOut) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MILLISECOND, -maxTimeOut);
+        cal.getTime();
+        String minTime = DataFormat.DateToString(cal.getTime(), DataFormat.DATETIME_FORMAT);
+        String querySql = "status='" + OrderStatus.WAIT_RECEIVE.getStatus()
+                + "' and create_time <= '" + minTime + "'";
         return baseDao.find(querySql, OrderInfo.class);
     }
 }

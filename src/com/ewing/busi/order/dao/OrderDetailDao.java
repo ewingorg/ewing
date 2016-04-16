@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
 
+import com.ewing.busi.order.contant.OrderStatus;
 import com.ewing.busi.order.dto.OrderDetailDto;
 import com.ewing.busi.order.model.OrderDetail;
 import com.ewing.busi.order.model.OrderInfo;
@@ -84,4 +85,29 @@ public class OrderDetailDao {
         return baseDao.find(sql, OrderDetail.class);
     }
 
+    /**
+     * 更新超时的订单的状态为关闭
+     * 
+     * @param orderId
+     * @return
+     */
+    public Integer updateTimeOutOrder2Close(Integer orderId) {
+        String updateOrder = "update order_detail set status='" + OrderStatus.CLOSE.getStatus()
+                + "' where order_id=" + orderId + " and status='" + OrderStatus.WAIT_PAY.getStatus()
+                + "'";
+        return baseDao.executeSql(updateOrder);
+    }
+    
+    /**
+     * 更新没有用户确定收货的订单的状态为关闭
+     * 
+     * @param orderId
+     * @return
+     */
+    public Integer updateNoConfirmOrder2Close(Integer orderId) {
+        String updateOrder = "update order_detail set status='" + OrderStatus.CLOSE.getStatus()
+                + "' where order_id=" + orderId + " and status='" + OrderStatus.WAIT_RECEIVE.getStatus()
+                + "'";
+        return baseDao.executeSql(updateOrder);
+    }
 }

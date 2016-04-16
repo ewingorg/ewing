@@ -39,11 +39,11 @@
 			</div>
 			<div class="portlet-body form">
 				<div class="control-group">
-					<label class="control-label">客户名称：${(customer.name)?if_exists}</label>
+					<label class="control-label">客户名称：${(orderRefund.customerName)?if_exists}</label>
 				</div>
 
 				<div class="control-group">
-					<label class="control-label">联系电话：${(customer.phone)?if_exists}</label>
+					<label class="control-label">联系电话：${(orderRefund.customerPhone)?if_exists}</label>
 				</div>
 			</div>
 		</div>
@@ -65,14 +65,32 @@
 			    </#list> 
 			</div>
 		</div> 
-		 
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>退款审核
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="control-group">
+					<label class="control-label">拒绝原因：</label>
+						<div class="controls">
+							<textarea class="span6  m-wrap" rows="3" 
+								name="rejectReason" id="rejectReason"  >${(orderRefund.rejectReason)?if_exists}</textarea>
+						</div>
+				</div>
+			 
+			</div>
+		</div> 
 		<div class="modal-footer">
 		  	 <#if orderRefund??>
 			     <#if orderRefund.status='1'>
-			    	 <button type="button" id="refund_confirm_btn" class="btn green">同意客户退货</button>
+			    	 <button type="button" id="refund_confirm_btn" class="btn green">同意客户退款</button>
+			    	 <button type="button" id="refund_reject_btn" class="btn red">拒绝退款</button>
 			     </#if>
-		         <#if orderRefund.status='4' || orderRefund.status='5'>
-			    	 <button type="button" id="refund_finished_btn" class="btn green">同意退货</button>
+		         <#if orderRefund.status='3' || orderRefund.status='4'>
+			    	 <button type="button" id="refund_finished_btn" class="btn green">同意退款</button>
+			    	 <button type="button" id="refund_reject_btn" class="btn red">拒绝退款</button>
 			     </#if>
 	         </#if>
 			 <button type="button" id="orderdetail_return_btn" class="btn  ">返回</button>
@@ -86,6 +104,43 @@ jQuery(document).ready(function() {
 var _errZoneId ="errTip";
 var orderDetailId = '${(orderRefund.orderDetailId)?if_exists}';
 var queryUrl = '${contextPath}/Admin-OrderRefund-showRefundForm.action?orderDetailId='+orderDetailId;  
+
+
+$("#refund_reject_btn").bind("click", function() {
+	var rejectReason = $('#rejectReason').val(); 
+	if(!rejectReason){
+		common.alert({
+			content : '拒绝原因不能为空！' 
+		});
+		return;
+	}
+	common.alert({
+			content : '是否拒绝客户退款？',
+			showAction : true,
+			actionContent : '确定',
+			actionFn : function() {
+				var url = '${contextPath}/Admin-OrderRefund-sellerRejectRefund.action?orderDetailId='+orderDetailId+"&rejectReason="+rejectReason; 
+				ajax.syncJsonRequest({
+					url : url,
+					success : function(data) {
+						if (!data || !data.success) {
+							$('#'+_errZoneId).html(data.retinfo);
+							$('#'+_errZoneId).show();
+						}
+						if (data.success) {
+							common.alert({
+								content : data.retinfo,
+								closeFn : function() {
+									 mainFrame.addContainer(queryUrl); 
+								}
+							});
+						}
+					}
+				});
+			}
+		}); 
+	});
+
 $("#refund_confirm_btn").bind("click", function() {
 	common.alert({
 			content : '是否同意客户退货？',

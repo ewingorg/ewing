@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 
+import com.ewing.busi.order.contant.RefundStatus;
 import com.ewing.busi.order.dto.ExpressRespDto;
 import com.ewing.busi.order.dto.OrderRefundDto;
+import com.ewing.busi.order.model.OrderRefund;
 import com.ewing.busi.order.service.OrderRefundService;
 import com.ewing.busi.order.service.OrderService;
 import com.ewing.core.app.action.base.BaseAction;
@@ -51,13 +53,35 @@ public class OrderRefundAction extends BaseAction {
     }
 
     /**
-     * 商户同意退款
+     * 商户同意客户退款
      */
     public void sellerArgeeRefund() {
         ResponseData responseData = null;
         try {
             Integer orderDetailId = getIntegerParameter("orderDetailId");
-            orderRefundService.sellerArgeeRefund(getLoginUserId(), orderDetailId);
+            OrderRefundDto orderRefundDto = orderRefundService.findRefund(getLoginUserId(),
+                    orderDetailId);
+            if (RefundStatus.WAIT_CONFIRM.getValue().equals(orderRefundDto.getStatus()))
+                orderRefundService.sellerArgeeRefund(getLoginUserId(), orderDetailId);
+            else if (RefundStatus.WAIT_RECEIVED.getValue().equals(orderRefundDto.getStatus()))
+                orderRefundService.sellerRefund(getLoginUserId(), orderDetailId);
+            responseData = ResponseUtils.success("保存成功！");
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            responseData = ResponseUtils.fail("保存失败！");
+        }
+        this.outResult(responseData);
+    }
+
+    /**
+     * 商户拒绝退款
+     */
+    public void sellerRejectRefund() {
+        ResponseData responseData = null;
+        try {
+            Integer orderDetailId = getIntegerParameter("orderDetailId");
+            String rejectReason = getUTFParameter("rejectReason");
+            orderRefundService.sellerRejectRefund(getLoginUserId(), orderDetailId, rejectReason);
             responseData = ResponseUtils.success("保存成功！");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -82,21 +106,4 @@ public class OrderRefundAction extends BaseAction {
         }
         this.outResult(responseData);
     }
-
-    /**
-     * 商户确认退款
-     */
-    public void sellerRefund() {
-        ResponseData responseData = null;
-        try {
-            Integer orderDetailId = getIntegerParameter("orderDetailId");
-            orderRefundService.sellerArgeeRefund(getLoginUserId(), orderDetailId);
-            responseData = ResponseUtils.success("保存成功！");
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            responseData = ResponseUtils.fail("保存失败！");
-        }
-        this.outResult(responseData);
-    }
-
 }

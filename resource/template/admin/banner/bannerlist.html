@@ -46,16 +46,16 @@
 				<div class="tab-pane active" id="tab_1">
 					<div class="portlet-body">
 						<div class="clearfix">
-							<button id="banner_query_btn" class="btn blue">
+							<button id="banner_query_btn" class="btn red">
 								<i class="icon-search"></i>&nbsp;&nbsp;查询
 							</button>
-							<button id="banner_add_btn" class="btn blue">
+							<button id="banner_add_btn" class="btn red">
 								<i class="icon-plus"></i>&nbsp;&nbsp;新增
 							</button>
-							<button id="banner_del_btn" class="btn blue">
+							<button id="banner_del_btn" class="btn red">
 								<i class="icon-trash"></i>&nbsp;&nbsp;删除
 							</button>
-						<!-- 	<button id="banner_bindres_btn" class="btn blue">
+						<!-- 	<button id="banner_bindres_btn" class="btn red">
 								<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;绑定资源
 							</button>
  -->
@@ -87,7 +87,8 @@
 										<td>${nav.groupKey}</td>
 										<td>${nav.name}</td>
 										<td>${nav.linkUrl}</td>
-										<td>${nav.imageUrl}</td> 
+									 	 <td> <img src="${contextPath}${(nav.imageUrl)?if_exists}"
+														width="100%" height="100%" /> </td> 
 										<td>${nav.rank}</td>
 										<td><@translate paramCode=iseffCode
 											value=(nav.iseff)?if_exists /></td>

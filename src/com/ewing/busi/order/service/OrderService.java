@@ -160,9 +160,12 @@ public class OrderService {
             List<OrderDetailDto> detailList = new ArrayList<OrderDetailDto>();
             // 匹配对应的订单详情，以及如果指定订单状态则继续匹配
             for (OrderDetailDto detailDto : orderDetailList) {
-                if (detailDto.getOrderId() == orderInfo.getId()
-                        && (!StringUtils.isEmpty(orderQueryReq.getStatus()))
-                        && orderQueryReq.getStatus().equals(detailDto.getStatus())) {
+
+                if (!StringUtils.isEmpty(orderQueryReq.getStatus())
+                        && !orderQueryReq.getStatus().equals(detailDto.getStatus())) {
+                    continue;
+                }
+                if (detailDto.getOrderId() == orderInfo.getId()) {
                     detailList.add(detailDto);
                 }
             }
@@ -191,17 +194,53 @@ public class OrderService {
                         .getId());
                 if (orderDetailList.isEmpty())
                     continue;
-                // 2.把待付款的订单更改为“关闭”状态
-                orderDao.updateTimeOutOrder2Close(orderInfo.getId());
-                // 3.恢复商品的库存数
-                for (OrderDetailDto orderDetail : orderDetailList) {
-                    webResourceDao.recoverStockNum(orderDetail.getResourceId(),
-                            orderDetail.getItemCount());
-                }
+                closeTimeOutOrder(orderInfo.getId(), orderDetailList);
             } catch (Exception e) {
                 throw new Exception("error in process order[" + orderInfo.getId() + "]", e);
             }
         }
+    }
+
+    /**
+     * 处理已经发货，但是用户没有确认收货的订单
+     * 
+     * @param maxTimeOut
+     * @throws Exception
+     */
+    public void processNoconfirmOrder(Integer maxTimeOut) throws Exception {
+        // 1.查询超时没有付款的记录
+        List<OrderInfo> orderInfoList = orderDao.findNoConfirmOrder(maxTimeOut);
+        ordercheckjoblogger.info("No confirmOrder orderInfo size:" + orderInfoList.size());
+        for (OrderInfo orderInfo : orderInfoList) {
+            ordercheckjoblogger.info("process orderInfo id[" + orderInfo.getId() + "]");
+            try {
+                List<OrderDetailDto> orderDetailList = orderDetailDao.findDetailDtoList(orderInfo
+                        .getId());
+                if (orderDetailList.isEmpty())
+                    continue;
+                closeTimeNoConfirmOrder(orderInfo.getId());
+            } catch (Exception e) {
+                throw new Exception("error in process order[" + orderInfo.getId() + "]", e);
+            }
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    private void closeTimeOutOrder(Integer orderId, List<OrderDetailDto> orderDetailList) {
+        // 1.把待付款的订单更改为“关闭”状态
+        orderDao.updateTimeOutOrder2Close(orderId);
+        orderDetailDao.updateTimeOutOrder2Close(orderId);
+        // 2.恢复商品的库存数
+        for (OrderDetailDto orderDetail : orderDetailList) {
+            webResourceDao.recoverStockNum(orderDetail.getResourceId(), orderDetail.getItemCount());
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    private void closeTimeNoConfirmOrder(Integer orderId) {
+        // 1.把待付款的订单更改为“关闭”状态
+        orderDao.updateTimeOutOrder2Close(orderId);
+        orderDetailDao.updateTimeOutOrder2Close(orderId);
     }
 
     /**

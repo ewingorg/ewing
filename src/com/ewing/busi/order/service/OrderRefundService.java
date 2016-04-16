@@ -71,6 +71,8 @@ public class OrderRefundService {
                 orderRefund.getReasonType());
         Customer customer = customerDao.findUserById(orderRefund.getUserId());
         orderRefundDto.setCustomerName(customer.getName());
+        orderRefundDto.setCustomerPhone(customer.getPhone());
+        orderRefundDto.setTypeStr(RefundType.getMsg(orderRefund.getType()));
         orderRefundDto.setStatusStr(RefundStatus.getMsg(orderRefund.getStatus()));
         orderRefundDto.setReasonTypeStr(reasonParam.getParamName());
         orderRefundDto.translate();
@@ -156,6 +158,26 @@ public class OrderRefundService {
         baseDao.update(orderRefund);
         payHistoryService.addRefundHistory(userId, orderRefund.getOrderId(), PayWay.WEIXIN);
         orderProcessHistoryDao.addRefundHistory(orderRefund, RefundStatus.FINISHED);
+        return true;
+    }
+
+    /**
+     * 商户拒绝退款
+     * 
+     * @param userId
+     * @param orderDetailId
+     * @return
+     * @throws OrderException
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean sellerRejectRefund(Integer userId, Integer orderDetailId, String rejectReason)
+            throws OrderException {
+        OrderRefund orderRefund = orderRefundDao.findRefund(userId, orderDetailId);
+        if (orderRefund == null)
+            return false;
+        orderRefund.setStatus(RefundStatus.REJECT.getValue());
+        orderRefund.setRejectReason(rejectReason);
+        baseDao.update(orderRefund);
         return true;
     }
 }

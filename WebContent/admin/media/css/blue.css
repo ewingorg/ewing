@@ -32,8 +32,8 @@ Page sidebar
  /*  background-color: #AAAAAA; */ 
 }
 ul.page-sidebar-menu > li > a {
-  border-top: 1px solid #AAAAAA !important;
- /*  color: #ffffff !important; */
+ /* border-top: 1px solid #AAAAAA !important;
+   color: #ffffff !important; */
 }
 ul.page-sidebar-menu > li:last-child > a {
   border-bottom: 1px solid transparent !important;
@@ -44,15 +44,15 @@ ul.page-sidebar-menu > li a i {
 ul.page-sidebar-menu > li.open > a,
 ul.page-sidebar-menu > li > a:hover,
 ul.page-sidebar-menu > li:hover > a {
-  background:  #AAAAAA;
+ /* background:  #AAAAAA;*/
 }
 ul.page-sidebar-menu > li.active > a {
-  background: #AAAAAA !important;
+  background: #3e3e3e !important;
   border-top-color: transparent !important;
   color: #ffffff;
 }
 ul.page-sidebar-menu > li.active > a i {
-  color: #ffffff;
+  color: #3e3e3e;
 }
 ul.page-sidebar-menu > li > ul.sub-menu > li:first-child > a {
   border-top: 0px !important;

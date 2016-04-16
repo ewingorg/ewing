@@ -100,9 +100,10 @@ select:focus {
 
 .btn.blue   
 {
-  color: white;  
+  /*color: white; */ 
+  font-weight:400;
   text-shadow: none;	
-  background-color: #AAAAAA;
+  /*background-color: #AAAAAA;*/   
 }
 .btn.blue:hover, 
 .btn.blue:focus, 
@@ -110,8 +111,8 @@ select:focus {
 .btn.blue.active,
 .btn.blue[disabled],
 .btn.blue.disabled {  
-  background-color: #AAAAAA !important;
-  color: #fff !important;
+  /*background-color: #AAAAAA !important;
+  color: #fff !important;*/
 }
 
 /*  Green */

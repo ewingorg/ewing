@@ -35,15 +35,15 @@
 		<filter-class>com.ewing.web.filter.SellerLoginFilter</filter-class> 
 		<init-param>
 			<param-name>toLogin</param-name>
-			<param-value>Admin-SellerLogin-toLogin.action</param-value>
+			<param-value>tologin.action</param-value>
 		</init-param>
 		<init-param>
 			<param-name>userLogin</param-name>
-			<param-value>Admin-SellerLogin-userLogin.action</param-value>
+			<param-value>login.action</param-value>
 		</init-param>
 		<init-param>
 			<param-name>userLogOut</param-name>
-			<param-value>Admin-SellerLogin-userLogOut.action</param-value>
+			<param-value>logout.action</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

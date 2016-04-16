@@ -28,6 +28,15 @@ public class OrderRefund implements java.io.Serializable {
     private String iseff;
     private Date createTime;
     private Date lastUpdate;
+    private String rejectReason;
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
+    }
 
     public OrderRefund() {
     }

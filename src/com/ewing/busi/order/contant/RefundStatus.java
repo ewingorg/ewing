@@ -22,7 +22,9 @@ public enum RefundStatus {
 
     FINISHED("5", "已经退款"),
 
-    CANCELED("6", "用户取消");
+    CANCELED("6", "用户取消"),
+    
+    REJECT("7", "拒绝退款");
 
     private String value;
     private String msg;

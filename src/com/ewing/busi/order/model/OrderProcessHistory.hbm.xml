@@ -23,11 +23,7 @@
                 <comment>&#210;&#181;&#206;&#241;ID,&#177;&#237;order&#214;&#247;&#188;&#252;</comment>
             </column>
         </property>
-        <property name="type" type="string">
-            <column name="type" length="1" not-null="true">
-                <comment>&#205;&#203;&#191;&#238;&#192;&#224;&#208;&#205; 0:&#205;&#203;&#187;&#245;&#205;&#203;&#191;&#238; 1:&#189;&#246;&#205;&#203;&#191;&#238;</comment>
-            </column>
-        </property>
+     
         <property name="customerId" type="int">
             <column name="customer_id" not-null="true">
                 <comment>&#207;&#251;&#183;&#209;&#213;&#223;ID</comment>
@@ -49,7 +45,7 @@
             </column>
         </property>
         <property name="comment" type="string">
-            <column name="comment" length="50" not-null="true">
+            <column name="comment" length="50"  >
                 <comment>&#177;&#184;&#215;&#162;</comment>
             </column>
         </property>
